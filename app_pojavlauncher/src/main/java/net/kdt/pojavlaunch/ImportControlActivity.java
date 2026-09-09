@@ -37,6 +37,8 @@ public class ImportControlActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        net.kdt.pojavlaunch.KollegenTheme.applyWindow(getWindow());
+        net.kdt.pojavlaunch.KollegenTheme.applyTree(findViewById(android.R.id.content));
         if(Tools.checkStorageInteractive(this)) {
             Tools.initStorageConstants(getApplicationContext());
         }else {

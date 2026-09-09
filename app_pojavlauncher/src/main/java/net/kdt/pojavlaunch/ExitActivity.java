@@ -19,6 +19,7 @@ public class ExitActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        net.kdt.pojavlaunch.KollegenTheme.applyWindow(getWindow());
         int code = -1;
         boolean isSignal = false;
         Bundle extras = getIntent().getExtras();

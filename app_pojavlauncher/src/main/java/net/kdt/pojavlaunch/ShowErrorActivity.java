@@ -21,6 +21,7 @@ public class ShowErrorActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        net.kdt.pojavlaunch.KollegenTheme.applyWindow(getWindow());
         Intent intent = getIntent();
         if(intent == null) {
             finish();

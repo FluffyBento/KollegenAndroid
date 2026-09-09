@@ -14,6 +14,8 @@ public class FatalErrorActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		net.kdt.pojavlaunch.KollegenTheme.applyWindow(getWindow());
+		net.kdt.pojavlaunch.KollegenTheme.applyTree(findViewById(android.R.id.content));
 		
 		Bundle extras = getIntent().getExtras();
 		if(extras == null) {
