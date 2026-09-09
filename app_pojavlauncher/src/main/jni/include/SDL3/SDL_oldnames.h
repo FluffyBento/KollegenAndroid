@@ -1,43 +1,16 @@
-/*
-  Simple DirectMedia Layer
-  Copyright (C) 1997-2026 Sam Lantinga <slouken@libsdl.org>
 
-  This software is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this software.
 
-  Permission is granted to anyone to use this software for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely, subject to the following restrictions:
 
-  1. The origin of this software must not be misrepresented; you must not
-     claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original software.
-  3. This notice may not be removed or altered from any source distribution.
-*/
-
-/*
- * Definitions to ease transition from SDL2 code
- */
 
 #ifndef SDL_oldnames_h_
 #define SDL_oldnames_h_
 
 #include <SDL3/SDL_platform_defines.h>
 
-/* The new function names are recommended, but if you want to have the
- * old names available while you are in the process of migrating code
- * to SDL3, you can define `SDL_ENABLE_OLD_NAMES` in your project.
- *
- * You can use https://github.com/libsdl-org/SDL/blob/main/build-scripts/rename_symbols.py to mass rename the symbols defined here in your codebase:
- *  rename_symbols.py --all-symbols source_code_path
- */
+
 #ifdef SDL_ENABLE_OLD_NAMES
 
-/* ##SDL_atomic.h */
+
 #define SDL_AtomicAdd SDL_AddAtomicInt
 #define SDL_AtomicCAS SDL_CompareAndSwapAtomicInt
 #define SDL_AtomicCASPtr SDL_CompareAndSwapAtomicPointer
@@ -50,7 +23,7 @@
 #define SDL_AtomicUnlock SDL_UnlockSpinlock
 #define SDL_atomic_t SDL_AtomicInt
 
-/* ##SDL_audio.h */
+
 #define AUDIO_F32 SDL_AUDIO_F32LE
 #define AUDIO_F32LSB SDL_AUDIO_F32LE
 #define AUDIO_F32MSB SDL_AUDIO_F32BE
@@ -76,11 +49,11 @@
 #define SDL_MixAudioFormat SDL_MixAudio
 #define SDL_NewAudioStream SDL_CreateAudioStream
 
-/* ##SDL_cpuinfo.h */
+
 #define SDL_GetCPUCount SDL_GetNumLogicalCPUCores
 #define SDL_SIMDGetAlignment SDL_GetSIMDAlignment
 
-/* ##SDL_endian.h */
+
 #define SDL_SwapBE16 SDL_Swap16BE
 #define SDL_SwapBE32 SDL_Swap32BE
 #define SDL_SwapBE64 SDL_Swap64BE
@@ -88,7 +61,7 @@
 #define SDL_SwapLE32 SDL_Swap32LE
 #define SDL_SwapLE64 SDL_Swap64LE
 
-/* ##SDL_events.h */
+
 #define SDL_APP_DIDENTERBACKGROUND SDL_EVENT_DID_ENTER_BACKGROUND
 #define SDL_APP_DIDENTERFOREGROUND SDL_EVENT_DID_ENTER_FOREGROUND
 #define SDL_APP_LOWMEMORY SDL_EVENT_LOW_MEMORY
@@ -172,7 +145,7 @@
 #define SDL_WINDOWEVENT_SIZE_CHANGED SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED
 #define SDL_eventaction SDL_EventAction
 
-/* ##SDL_gamecontroller.h */
+
 #define SDL_CONTROLLER_AXIS_INVALID SDL_GAMEPAD_AXIS_INVALID
 #define SDL_CONTROLLER_AXIS_LEFTX SDL_GAMEPAD_AXIS_LEFTX
 #define SDL_CONTROLLER_AXIS_LEFTY SDL_GAMEPAD_AXIS_LEFTY
@@ -272,10 +245,10 @@
 #define SDL_INIT_GAMECONTROLLER SDL_INIT_GAMEPAD
 #define SDL_IsGameController SDL_IsGamepad
 
-/* ##SDL_guid.h */
+
 #define SDL_GUIDFromString SDL_StringToGUID
 
-/* ##SDL_haptic.h */
+
 #define SDL_HapticClose SDL_CloseHaptic
 #define SDL_HapticDestroyEffect SDL_DestroyHapticEffect
 #define SDL_HapticGetEffectStatus SDL_GetHapticEffectStatus
@@ -301,7 +274,7 @@
 #define SDL_JoystickIsHaptic SDL_IsJoystickHaptic
 #define SDL_MouseIsHaptic SDL_IsMouseHaptic
 
-/* ##SDL_hints.h */
+
 #define SDL_DelHintCallback SDL_RemoveHintCallback
 #define SDL_HINT_ALLOW_TOPMOST SDL_HINT_WINDOW_ALLOW_TOPMOST
 #define SDL_HINT_DIRECTINPUT_ENABLED SDL_HINT_JOYSTICK_DIRECTINPUT
@@ -314,7 +287,7 @@
 #define SDL_HINT_LINUX_JOYSTICK_CLASSIC SDL_HINT_JOYSTICK_LINUX_CLASSIC
 #define SDL_HINT_LINUX_JOYSTICK_DEADZONES SDL_HINT_JOYSTICK_LINUX_DEADZONES
 
-/* ##SDL_joystick.h */
+
 #define SDL_JOYSTICK_TYPE_GAMECONTROLLER SDL_JOYSTICK_TYPE_GAMEPAD
 #define SDL_JoystickAttachVirtualEx SDL_AttachVirtualJoystick
 #define SDL_JoystickClose SDL_CloseJoystick
@@ -356,11 +329,11 @@
 #define SDL_JoystickSetVirtualHat SDL_SetJoystickVirtualHat
 #define SDL_JoystickUpdate SDL_UpdateJoysticks
 
-/* ##SDL_keyboard.h */
+
 #define SDL_IsScreenKeyboardShown SDL_ScreenKeyboardShown
 #define SDL_IsTextInputActive SDL_TextInputActive
 
-/* ##SDL_keycode.h */
+
 #define KMOD_ALT SDL_KMOD_ALT
 #define KMOD_CAPS SDL_KMOD_CAPS
 #define KMOD_CTRL SDL_KMOD_CTRL
@@ -417,7 +390,7 @@
 #define SDLK_y SDLK_Y
 #define SDLK_z SDLK_Z
 
-/* ##SDL_log.h */
+
 #define SDL_LogGetOutputFunction SDL_GetLogOutputFunction
 #define SDL_LogGetPriority SDL_GetLogPriority
 #define SDL_LogResetPriorities SDL_ResetLogPriorities
@@ -426,10 +399,10 @@
 #define SDL_LogSetPriority SDL_SetLogPriority
 #define SDL_NUM_LOG_PRIORITIES SDL_LOG_PRIORITY_COUNT
 
-/* ##SDL_messagebox.h */
+
 #define SDL_MESSAGEBOX_COLOR_MAX SDL_MESSAGEBOX_COLOR_COUNT
 
-/* ##SDL_mouse.h */
+
 #define SDL_BUTTON SDL_BUTTON_MASK
 #define SDL_FreeCursor SDL_DestroyCursor
 #define SDL_NUM_SYSTEM_CURSORS SDL_SYSTEM_CURSOR_COUNT
@@ -452,7 +425,7 @@
 #define SDL_SYSTEM_CURSOR_WINDOW_TOPLEFT SDL_SYSTEM_CURSOR_NW_RESIZE
 #define SDL_SYSTEM_CURSOR_WINDOW_TOPRIGHT SDL_SYSTEM_CURSOR_NE_RESIZE
 
-/* ##SDL_mutex.h */
+
 #define SDL_CondBroadcast SDL_BroadcastCondition
 #define SDL_CondSignal SDL_SignalCondition
 #define SDL_CondWait SDL_WaitCondition
@@ -465,12 +438,12 @@
 #define SDL_SemWait SDL_WaitSemaphore
 #define SDL_SemWaitTimeout SDL_WaitSemaphoreTimeout
 
-/* ##SDL_mutex.h */
+
 #define SDL_cond SDL_Condition
 #define SDL_mutex SDL_Mutex
 #define SDL_sem SDL_Semaphore
 
-/* ##SDL_pixels.h */
+
 #define SDL_AllocFormat SDL_GetPixelFormatDetails
 #define SDL_AllocPalette SDL_CreatePalette
 #define SDL_Colour SDL_Color
@@ -484,7 +457,7 @@
 #define SDL_PIXELFORMAT_RGB888 SDL_PIXELFORMAT_XRGB8888
 #define SDL_PixelFormatEnumToMasks SDL_GetMasksForPixelFormat
 
-/* ##SDL_rect.h */
+
 #define SDL_EncloseFPoints SDL_GetRectEnclosingPointsFloat
 #define SDL_EnclosePoints SDL_GetRectEnclosingPoints
 #define SDL_FRectEmpty SDL_RectEmptyFloat
@@ -501,7 +474,7 @@
 #define SDL_UnionFRect SDL_GetRectUnionFloat
 #define SDL_UnionRect SDL_GetRectUnion
 
-/* ##SDL_render.h */
+
 #define SDL_GetRendererOutputSize SDL_GetCurrentRenderOutputSize
 #define SDL_RenderCopy SDL_RenderTexture
 #define SDL_RenderCopyEx SDL_RenderTextureRotated
@@ -541,7 +514,7 @@
 #define SDL_ScaleModeLinear SDL_SCALEMODE_LINEAR
 #define SDL_ScaleModeNearest SDL_SCALEMODE_NEAREST
 
-/* ##SDL_rwops.h */
+
 #define RW_SEEK_CUR SDL_IO_SEEK_CUR
 #define RW_SEEK_END SDL_IO_SEEK_END
 #define RW_SEEK_SET SDL_IO_SEEK_SET
@@ -568,7 +541,7 @@
 #define SDL_WriteLE32 SDL_WriteU32LE
 #define SDL_WriteLE64 SDL_WriteU64LE
 
-/* ##SDL_scancode.h */
+
 #define SDL_NUM_SCANCODES SDL_SCANCODE_COUNT
 #define SDL_SCANCODE_AUDIOFASTFORWARD SDL_SCANCODE_MEDIA_FAST_FORWARD
 #define SDL_SCANCODE_AUDIOMUTE SDL_SCANCODE_MUTE
@@ -580,7 +553,7 @@
 #define SDL_SCANCODE_EJECT SDL_SCANCODE_MEDIA_EJECT
 #define SDL_SCANCODE_MEDIASELECT SDL_SCANCODE_MEDIA_SELECT
 
-/* ##SDL_sensor.h */
+
 #define SDL_SensorClose SDL_CloseSensor
 #define SDL_SensorFromInstanceID SDL_GetSensorFromID
 #define SDL_SensorGetData SDL_GetSensorData
@@ -591,7 +564,7 @@
 #define SDL_SensorOpen SDL_OpenSensor
 #define SDL_SensorUpdate SDL_UpdateSensors
 
-/* ##SDL_stdinc.h */
+
 #define SDL_FALSE false
 #define SDL_TABLESIZE SDL_arraysize
 #define SDL_TRUE true
@@ -600,7 +573,7 @@
 #define SDL_size_mul_overflow SDL_size_mul_check_overflow
 #define SDL_strtokr SDL_strtok_r
 
-/* ##SDL_surface.h */
+
 #define SDL_BlitScaled SDL_BlitSurfaceScaled
 #define SDL_ConvertSurfaceFormat SDL_ConvertSurface
 #define SDL_FillRect SDL_FillSurfaceRect
@@ -621,7 +594,7 @@
 #define SDL_UpperBlit SDL_BlitSurface
 #define SDL_UpperBlitScaled SDL_BlitSurfaceScaled
 
-/* ##SDL_system.h */
+
 #define SDL_AndroidBackButton SDL_SendAndroidBackButton
 #define SDL_AndroidGetActivity SDL_GetAndroidActivity
 #define SDL_AndroidGetExternalStoragePath SDL_GetAndroidExternalStoragePath
@@ -645,21 +618,21 @@
 #define SDL_iPhoneSetAnimationCallback SDL_SetiOSAnimationCallback
 #define SDL_iPhoneSetEventPump SDL_SetiOSEventPump
 
-/* ##SDL_thread.h */
+
 #define SDL_SetThreadPriority SDL_SetCurrentThreadPriority
 #define SDL_TLSCleanup SDL_CleanupTLS
 #define SDL_TLSGet SDL_GetTLS
 #define SDL_TLSSet SDL_SetTLS
 #define SDL_threadID SDL_ThreadID
 
-/* ##SDL_timer.h */
+
 #define SDL_GetTicks64 SDL_GetTicks
 
-/* ##SDL_version.h */
+
 #define SDL_COMPILEDVERSION SDL_VERSION
 #define SDL_PATCHLEVEL SDL_MICRO_VERSION
 
-/* ##SDL_video.h */
+
 #define SDL_GL_DeleteContext SDL_GL_DestroyContext
 #define SDL_GLattr SDL_GLAttr
 #define SDL_GLcontextFlag SDL_GLContextFlag
@@ -680,7 +653,7 @@
 
 #elif !defined(SDL_DISABLE_OLD_NAMES)
 
-/* ##SDL_atomic.h */
+
 #define SDL_AtomicAdd SDL_AtomicAdd_renamed_SDL_AddAtomicInt
 #define SDL_AtomicCAS SDL_AtomicCAS_renamed_SDL_CompareAndSwapAtomicInt
 #define SDL_AtomicCASPtr SDL_AtomicCASPtr_renamed_SDL_CompareAndSwapAtomicPointer
@@ -693,7 +666,7 @@
 #define SDL_AtomicUnlock SDL_AtomicUnlock_renamed_SDL_UnlockSpinlock
 #define SDL_atomic_t SDL_atomic_t_renamed_SDL_AtomicInt
 
-/* ##SDL_audio.h */
+
 #define AUDIO_F32 AUDIO_F32_renamed_SDL_AUDIO_F32LE
 #define AUDIO_F32LSB AUDIO_F32LSB_renamed_SDL_AUDIO_F32LE
 #define AUDIO_F32MSB AUDIO_F32MSB_renamed_SDL_AUDIO_F32BE
@@ -719,11 +692,11 @@
 #define SDL_MixAudioFormat SDL_MixAudioFormat_renamed_SDL_MixAudio
 #define SDL_NewAudioStream SDL_NewAudioStream_renamed_SDL_CreateAudioStream
 
-/* ##SDL_cpuinfo.h */
+
 #define SDL_GetCPUCount SDL_GetCPUCount_renamed_SDL_GetNumLogicalCPUCores
 #define SDL_SIMDGetAlignment SDL_SIMDGetAlignment_renamed_SDL_GetSIMDAlignment
 
-/* ##SDL_endian.h */
+
 #define SDL_SwapBE16 SDL_SwapBE16_renamed_SDL_Swap16BE
 #define SDL_SwapBE32 SDL_SwapBE32_renamed_SDL_Swap32BE
 #define SDL_SwapBE64 SDL_SwapBE64_renamed_SDL_Swap64BE
@@ -731,7 +704,7 @@
 #define SDL_SwapLE32 SDL_SwapLE32_renamed_SDL_Swap32LE
 #define SDL_SwapLE64 SDL_SwapLE64_renamed_SDL_Swap64LE
 
-/* ##SDL_events.h */
+
 #define SDL_APP_DIDENTERBACKGROUND SDL_APP_DIDENTERBACKGROUND_renamed_SDL_EVENT_DID_ENTER_BACKGROUND
 #define SDL_APP_DIDENTERFOREGROUND SDL_APP_DIDENTERFOREGROUND_renamed_SDL_EVENT_DID_ENTER_FOREGROUND
 #define SDL_APP_LOWMEMORY SDL_APP_LOWMEMORY_renamed_SDL_EVENT_LOW_MEMORY
@@ -816,7 +789,7 @@
 #define SDL_WINDOWEVENT_SIZE_CHANGED SDL_WINDOWEVENT_SIZE_CHANGED_renamed_SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED
 #define SDL_eventaction SDL_eventaction_renamed_SDL_EventAction
 
-/* ##SDL_gamecontroller.h */
+
 #define SDL_CONTROLLER_AXIS_INVALID SDL_CONTROLLER_AXIS_INVALID_renamed_SDL_GAMEPAD_AXIS_INVALID
 #define SDL_CONTROLLER_AXIS_LEFTX SDL_CONTROLLER_AXIS_LEFTX_renamed_SDL_GAMEPAD_AXIS_LEFTX
 #define SDL_CONTROLLER_AXIS_LEFTY SDL_CONTROLLER_AXIS_LEFTY_renamed_SDL_GAMEPAD_AXIS_LEFTY
@@ -918,10 +891,10 @@
 #define SDL_INIT_GAMECONTROLLER SDL_INIT_GAMECONTROLLER_renamed_SDL_INIT_GAMEPAD
 #define SDL_IsGameController SDL_IsGameController_renamed_SDL_IsGamepad
 
-/* ##SDL_guid.h */
+
 #define SDL_GUIDFromString SDL_GUIDFromString_renamed_SDL_StringToGUID
 
-/* ##SDL_haptic.h */
+
 #define SDL_HapticClose SDL_HapticClose_renamed_SDL_CloseHaptic
 #define SDL_HapticDestroyEffect SDL_HapticDestroyEffect_renamed_SDL_DestroyHapticEffect
 #define SDL_HapticGetEffectStatus SDL_HapticGetEffectStatus_renamed_SDL_GetHapticEffectStatus
@@ -947,7 +920,7 @@
 #define SDL_JoystickIsHaptic SDL_JoystickIsHaptic_renamed_SDL_IsJoystickHaptic
 #define SDL_MouseIsHaptic SDL_MouseIsHaptic_renamed_SDL_IsMouseHaptic
 
-/* ##SDL_hints.h */
+
 #define SDL_DelHintCallback SDL_DelHintCallback_renamed_SDL_RemoveHintCallback
 #define SDL_HINT_ACCELEROMETER_AS_JOYSTICK SDL_HINT_ACCELEROMETER_AS_JOYSTICK_deprecated_use_SDL_GamepadHasSensor_and_SDL_SetGamepadSensorEnabled
 #define SDL_HINT_ALLOW_TOPMOST SDL_HINT_ALLOW_TOPMOST_renamed_SDL_HINT_WINDOW_ALLOW_TOPMOST
@@ -963,7 +936,7 @@
 #define SDL_HINT_RENDER_SCALE_QUALITY SDL_HINT_RENDER_SCALE_QUALITY_deprecated_use_SDL_SetTextureScaleMode_with_SDL_SCALEMODE_NEAREST
 #define SDL_HINT_WINDOWS_FORCE_MUTEX_CRITICAL_SECTIONS SDL_HINT_WINDOWS_FORCE_MUTEX_CRITICAL_SECTIONS_deprecated_remove_this_line
 
-/* ##SDL_joystick.h */
+
 #define SDL_JOYSTICK_TYPE_GAMECONTROLLER SDL_JOYSTICK_TYPE_GAMECONTROLLER_renamed_SDL_JOYSTICK_TYPE_GAMEPAD
 #define SDL_JoystickAttachVirtualEx SDL_JoystickAttachVirtualEx_renamed_SDL_AttachVirtualJoystick
 #define SDL_JoystickClose SDL_JoystickClose_renamed_SDL_CloseJoystick
@@ -1006,11 +979,11 @@
 #define SDL_JoystickUpdate SDL_JoystickUpdate_renamed_SDL_UpdateJoysticks
 #define SDL_NumJoysticks SDL_NumJoysticks_deprecated_use_SDL_GetJoysticks
 
-/* ##SDL_keyboard.h */
+
 #define SDL_IsScreenKeyboardShown SDL_IsScreenKeyboardShown_renamed_SDL_ScreenKeyboardShown
 #define SDL_IsTextInputActive SDL_IsTextInputActive_renamed_SDL_TextInputActive
 
-/* ##SDL_keycode.h */
+
 #define KMOD_ALT KMOD_ALT_renamed_SDL_KMOD_ALT
 #define KMOD_CAPS KMOD_CAPS_renamed_SDL_KMOD_CAPS
 #define KMOD_CTRL KMOD_CTRL_renamed_SDL_KMOD_CTRL
@@ -1067,7 +1040,7 @@
 #define SDLK_y SDLK_y_renamed_SDLK_Y
 #define SDLK_z SDLK_z_renamed_SDLK_Z
 
-/* ##SDL_log.h */
+
 #define SDL_LogGetOutputFunction SDL_LogGetOutputFunction_renamed_SDL_GetLogOutputFunction
 #define SDL_LogGetPriority SDL_LogGetPriority_renamed_SDL_GetLogPriority
 #define SDL_LogResetPriorities SDL_LogResetPriorities_renamed_SDL_ResetLogPriorities
@@ -1076,10 +1049,10 @@
 #define SDL_LogSetPriority SDL_LogSetPriority_renamed_SDL_SetLogPriority
 #define SDL_NUM_LOG_PRIORITIES SDL_NUM_LOG_PRIORITIES_renamed_SDL_LOG_PRIORITY_COUNT
 
-/* ##SDL_messagebox.h */
+
 #define SDL_MESSAGEBOX_COLOR_MAX SDL_MESSAGEBOX_COLOR_MAX_renamed_SDL_MESSAGEBOX_COLOR_COUNT
 
-/* ##SDL_mouse.h */
+
 #define SDL_BUTTON SDL_BUTTON_renamed_SDL_BUTTON_MASK
 #define SDL_FreeCursor SDL_FreeCursor_renamed_SDL_DestroyCursor
 #define SDL_NUM_SYSTEM_CURSORS SDL_NUM_SYSTEM_CURSORS_renamed_SDL_SYSTEM_CURSOR_COUNT
@@ -1102,7 +1075,7 @@
 #define SDL_SYSTEM_CURSOR_WINDOW_TOPLEFT SDL_SYSTEM_CURSOR_WINDOW_TOPLEFT_renamed_SDL_SYSTEM_CURSOR_NW_RESIZE
 #define SDL_SYSTEM_CURSOR_WINDOW_TOPRIGHT SDL_SYSTEM_CURSOR_WINDOW_TOPRIGHT_renamed_SDL_SYSTEM_CURSOR_NE_RESIZE
 
-/* ##SDL_mutex.h */
+
 #define SDL_CondBroadcast SDL_CondBroadcast_renamed_SDL_BroadcastCondition
 #define SDL_CondSignal SDL_CondSignal_renamed_SDL_SignalCondition
 #define SDL_CondWait SDL_CondWait_renamed_SDL_WaitCondition
@@ -1115,12 +1088,12 @@
 #define SDL_SemWait SDL_SemWait_renamed_SDL_WaitSemaphore
 #define SDL_SemWaitTimeout SDL_SemWaitTimeout_renamed_SDL_WaitSemaphoreTimeout
 
-/* ##SDL_mutex.h */
+
 #define SDL_cond SDL_cond_renamed_SDL_Condition
 #define SDL_mutex SDL_mutex_renamed_SDL_Mutex
 #define SDL_sem SDL_sem_renamed_SDL_Semaphore
 
-/* ##SDL_pixels.h */
+
 #define SDL_AllocFormat SDL_AllocFormat_renamed_SDL_GetPixelFormatDetails
 #define SDL_AllocPalette SDL_AllocPalette_renamed_SDL_CreatePalette
 #define SDL_Colour SDL_Colour_renamed_SDL_Color
@@ -1134,7 +1107,7 @@
 #define SDL_PIXELFORMAT_RGB888 SDL_PIXELFORMAT_RGB888_renamed_SDL_PIXELFORMAT_XRGB8888
 #define SDL_PixelFormatEnumToMasks SDL_PixelFormatEnumToMasks_renamed_SDL_GetMasksForPixelFormat
 
-/* ##SDL_rect.h */
+
 #define SDL_EncloseFPoints SDL_EncloseFPoints_renamed_SDL_GetRectEnclosingPointsFloat
 #define SDL_EnclosePoints SDL_EnclosePoints_renamed_SDL_GetRectEnclosingPoints
 #define SDL_FRectEmpty SDL_FRectEmpty_renamed_SDL_RectEmptyFloat
@@ -1151,7 +1124,7 @@
 #define SDL_UnionFRect SDL_UnionFRect_renamed_SDL_GetRectUnionFloat
 #define SDL_UnionRect SDL_UnionRect_renamed_SDL_GetRectUnion
 
-/* ##SDL_render.h */
+
 #define SDL_GetRendererOutputSize SDL_GetRendererOutputSize_renamed_SDL_GetCurrentRenderOutputSize
 #define SDL_RENDERER_ACCELERATED SDL_RENDERER_ACCELERATED_deprecated_remove_this_line
 #define SDL_RENDERER_PRESENTVSYNC SDL_RENDERER_PRESENTVSYNC_deprecated_use_SDL_SetRenderVSync
@@ -1193,7 +1166,7 @@
 #define SDL_ScaleModeLinear SDL_ScaleModeLinear_renamed_SDL_SCALEMODE_LINEAR
 #define SDL_ScaleModeNearest SDL_ScaleModeNearest_renamed_SDL_SCALEMODE_NEAREST
 
-/* ##SDL_rwops.h */
+
 #define RW_SEEK_CUR RW_SEEK_CUR_renamed_SDL_IO_SEEK_CUR
 #define RW_SEEK_END RW_SEEK_END_renamed_SDL_IO_SEEK_END
 #define RW_SEEK_SET RW_SEEK_SET_renamed_SDL_IO_SEEK_SET
@@ -1220,7 +1193,7 @@
 #define SDL_WriteLE32 SDL_WriteLE32_renamed_SDL_WriteU32LE
 #define SDL_WriteLE64 SDL_WriteLE64_renamed_SDL_WriteU64LE
 
-/* ##SDL_scancode.h */
+
 #define SDL_NUM_SCANCODES SDL_NUM_SCANCODES_renamed_SDL_SCANCODE_COUNT
 #define SDL_SCANCODE_AUDIOFASTFORWARD SDL_SCANCODE_AUDIOFASTFORWARD_renamed_SDL_SCANCODE_MEDIA_FAST_FORWARD
 #define SDL_SCANCODE_AUDIOMUTE SDL_SCANCODE_AUDIOMUTE_renamed_SDL_SCANCODE_MUTE
@@ -1232,7 +1205,7 @@
 #define SDL_SCANCODE_EJECT SDL_SCANCODE_EJECT_renamed_SDL_SCANCODE_MEDIA_EJECT
 #define SDL_SCANCODE_MEDIASELECT SDL_SCANCODE_MEDIASELECT_renamed_SDL_SCANCODE_MEDIA_SELECT
 
-/* ##SDL_sensor.h */
+
 #define SDL_SensorClose SDL_SensorClose_renamed_SDL_CloseSensor
 #define SDL_SensorFromInstanceID SDL_SensorFromInstanceID_renamed_SDL_GetSensorFromID
 #define SDL_SensorGetData SDL_SensorGetData_renamed_SDL_GetSensorData
@@ -1243,7 +1216,7 @@
 #define SDL_SensorOpen SDL_SensorOpen_renamed_SDL_OpenSensor
 #define SDL_SensorUpdate SDL_SensorUpdate_renamed_SDL_UpdateSensors
 
-/* ##SDL_stdinc.h */
+
 #define SDL_FALSE SDL_FALSE_renamed_false
 #define SDL_TABLESIZE SDL_TABLESIZE_renamed_SDL_arraysize
 #define SDL_TRUE SDL_TRUE_renamed_true
@@ -1252,7 +1225,7 @@
 #define SDL_size_mul_overflow SDL_size_mul_overflow_renamed_SDL_size_mul_check_overflow
 #define SDL_strtokr SDL_strtokr_renamed_SDL_strtok_r
 
-/* ##SDL_surface.h */
+
 #define SDL_BlitScaled SDL_BlitScaled_renamed_SDL_BlitSurfaceScaled
 #define SDL_ConvertSurfaceFormat SDL_ConvertSurfaceFormat_renamed_SDL_ConvertSurface
 #define SDL_FillRect SDL_FillRect_renamed_SDL_FillSurfaceRect
@@ -1273,7 +1246,7 @@
 #define SDL_UpperBlit SDL_UpperBlit_renamed_SDL_BlitSurface
 #define SDL_UpperBlitScaled SDL_UpperBlitScaled_renamed_SDL_BlitSurfaceScaled
 
-/* ##SDL_system.h */
+
 #define SDL_AndroidBackButton SDL_AndroidBackButton_renamed_SDL_SendAndroidBackButton
 #define SDL_AndroidGetActivity SDL_AndroidGetActivity_renamed_SDL_GetAndroidActivity
 #define SDL_AndroidGetExternalStoragePath SDL_AndroidGetExternalStoragePath_renamed_SDL_GetAndroidExternalStoragePath
@@ -1297,7 +1270,7 @@
 #define SDL_iPhoneSetAnimationCallback SDL_iPhoneSetAnimationCallback_renamed_SDL_iOSSetAnimationCallback
 #define SDL_iPhoneSetEventPump SDL_iPhoneSetEventPump_renamed_SDL_iOSSetEventPump
 
-/* ##SDL_thread.h */
+
 #define SDL_SetThreadPriority SDL_SetThreadPriority_renamed_SDL_SetCurrentThreadPriority
 #define SDL_SetWindowInputFocus SDL_SetWindowInputFocus_deprecated_use_SDL_RaiseWindow
 #define SDL_TLSCleanup SDL_TLSCleanup_renamed_SDL_CleanupTLS
@@ -1305,14 +1278,14 @@
 #define SDL_TLSSet SDL_TLSSet_renamed_SDL_SetTLS
 #define SDL_threadID SDL_threadID_renamed_SDL_ThreadID
 
-/* ##SDL_timer.h */
+
 #define SDL_GetTicks64 SDL_GetTicks64_renamed_SDL_GetTicks
 
-/* ##SDL_version.h */
+
 #define SDL_COMPILEDVERSION SDL_COMPILEDVERSION_renamed_SDL_VERSION
 #define SDL_PATCHLEVEL SDL_PATCHLEVEL_renamed_SDL_MICRO_VERSION
 
-/* ##SDL_video.h */
+
 #define SDL_GL_DeleteContext SDL_GL_DeleteContext_renamed_SDL_GL_DestroyContext
 #define SDL_GLattr SDL_GLattr_renamed_SDL_GLAttr
 #define SDL_GLcontextFlag SDL_GLcontextFlag_renamed_SDL_GLContextFlag
@@ -1334,6 +1307,6 @@
 #define SDL_WINDOW_SHOWN SDL_WINDOW_SHOWN_deprecated_windows_are_shown_by_default
 #define SDL_WINDOW_SKIP_TASKBAR SDL_WINDOW_SKIP_TASKBAR_renamed_SDL_WINDOW_UTILITY
 
-#endif /* SDL_ENABLE_OLD_NAMES */
+#endif 
 
-#endif /* SDL_oldnames_h_ */
+#endif 

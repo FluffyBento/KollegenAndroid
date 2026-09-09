@@ -36,7 +36,7 @@ public class LWJGL3ifyUtils {
         List<LWJGL3ifyMod> supportedVersions = new ArrayList<>(), brokenVersions = new ArrayList<>();
         for (int i = 0; i < lwjgl3ifyModDetail.versionNames.length; i++) {
             String normalizedVersion = normalizeVersionName(lwjgl3ifyModDetail.versionNames[i], lwjgl3ifyModDetail.apiSource);
-//            boolean isSupportedVersion = Integer.parseInt(normalizedVersion.split("\\.")[0]) < 3;
+
 
             LWJGL3ifyMod version = new LWJGL3ifyMod(
                     normalizedVersion,
@@ -46,24 +46,18 @@ public class LWJGL3ifyUtils {
                     lwjgl3ifyModDetail.versionHashes[i],
                     lwjgl3ifyModDetail.dependencies[i]
             );
-            // It's fixed, probably.
-//            // LWJGL3ify 3.x uses SDL which needs to be fixed first
-//            (isSupportedVersion ? supportedVersions : brokenVersions).add(version);
+            
+
+
             supportedVersions.add(version);
 
         }
         return new LWJGL3ifyVersionList(supportedVersions, brokenVersions);
     }
 
-    /**
-     * @param jarName LWJGL3ify jar name, the same as Curseforge {@code versionNames} (ex. {@code 3.0.16}, {@code 2.1.18})
-     * @param source Either {@link Constants#SOURCE_MODRINTH} or {@link Constants#SOURCE_CURSEFORGE}
-     * @return Filled out {@link LWJGL3ifyMod} corresponding to version provided
-     * @throws IllegalArgumentException If LWJGL3ify version was not found in the source provided
-     * @throws IOException If provided source is not what was expected
-     */
+    
     public static LWJGL3ifyMod getLWJGL3ifyVersion(String jarName, ModpackApi source) throws IOException {
-        // This is a hack but it should work
+        
         String providedNormalizedVersion = normalizeVersionName(jarName, Constants.SOURCE_CURSEFORGE);
         ModDetail lwjgl3ifyModDetail = getLWJGL3ifyModDetail(source);
         for (int i = 0; i < lwjgl3ifyModDetail.versionNames.length; i++) {
@@ -82,9 +76,7 @@ public class LWJGL3ifyUtils {
         throw new IllegalArgumentException("Cannot find LWJGL3ify version "+providedNormalizedVersion+" from "+sourceName);
     }
 
-    /**
-     * @return Flat list of all dependencies needed by {@code lwjgl3ifyMod}.
-     */
+    
     public static List<LWJGL3ifyMod> collectDependencies(LWJGL3ifyMod lwjgl3ifyMod, ModpackApi modpackApi) {
         List<LWJGL3ifyMod> allDeps = new ArrayList<>();
         for (ModDetail.Dependencies dep : lwjgl3ifyMod.dependencies) {
@@ -100,7 +92,7 @@ public class LWJGL3ifyUtils {
                 );
 
                 allDeps.add(newMod);
-                // omg recursion!?!?!
+                
                 allDeps.addAll(collectDependencies(newMod, modpackApi));
             }
         }
@@ -109,9 +101,9 @@ public class LWJGL3ifyUtils {
 
     @NonNull
     private static String normalizeVersionName(String versionName, int apiSource) {
-        if (apiSource == Constants.SOURCE_MODRINTH) { // Ex. 3.0.16 - 1.7.10
+        if (apiSource == Constants.SOURCE_MODRINTH) { 
             versionName = versionName.replaceAll(" - .*", "");
-        }else if (apiSource == Constants.SOURCE_CURSEFORGE) { // Ex. lwjgl3ify-3.0.16.jar - 1.7.10
+        }else if (apiSource == Constants.SOURCE_CURSEFORGE) { 
             versionName = versionName.split("-")[1].replace(".jar", "");
         }else throw new IllegalArgumentException("LWJGL3ify is only available on Modrinth or Curseforge!");
         return versionName;
@@ -121,12 +113,12 @@ public class LWJGL3ifyUtils {
     private static ModDetail getModDetail(ModpackApi modpackApi, String id){
         ModDetail modDetail = null;
         try {
-            // Modrinth is more complete in this context. Curseforge is missing some releases.
+            
             if (id != null && !id.isEmpty()) {
                 modDetail = fetch(modpackApi, Constants.SOURCE_MODRINTH, id);
             }
             if (modDetail == null && id != null && !id.isEmpty()) {
-                Integer.parseInt(id); // Triggers exception, skipping call to CF if provided id isn't int
+                Integer.parseInt(id); 
                 modDetail = fetch(modpackApi, Constants.SOURCE_CURSEFORGE, id);
             }
         } catch (NumberFormatException ignored) {}
@@ -141,7 +133,7 @@ public class LWJGL3ifyUtils {
     @NonNull
     private static ModDetail getLWJGL3ifyModDetail(ModpackApi modpackApi) throws IOException {
         ModDetail lwjgl3ifyModDetail = getModDetail(modpackApi, "lwjgl3ify");
-        if (lwjgl3ifyModDetail == null) // Hardcoded ID is a bad idea, but it'll work well enough
+        if (lwjgl3ifyModDetail == null) 
             lwjgl3ifyModDetail = getModDetail(modpackApi, "998880");
         if (lwjgl3ifyModDetail == null) throw new IOException("Unable to fetch LWJGL3ify version list from Curseforge and Modrinth. " +
                 "Please check your internet connection and whether Modrinth and Curseforge are accessible.");
@@ -202,7 +194,7 @@ public class LWJGL3ifyUtils {
         } catch (IOException e) {
             throw new IOException("Failed to create folder " + modsDir.getAbsolutePath());
         }
-        // Copy downloaded cached mod jar
+        
         try (FileInputStream fis = new FileInputStream(modJar);
              FileOutputStream fos = new FileOutputStream(new File(modsDir, "lwjgl3ify-"+ versionName+".jar"))) {
             byte[] buffer = new byte[8192];
@@ -227,8 +219,8 @@ public class LWJGL3ifyUtils {
     public static String tryDownloadIcon(String iconUrl) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try (Base64OutputStream base64OutputStream = new Base64OutputStream(byteArrayOutputStream, Base64.DEFAULT)){
-            // Instead of appending and wasting memory with a StringBuilder, just write the prefix
-            // to the stream before the base64 icon data.
+            
+            
             byteArrayOutputStream.write("data:image/png;base64,".getBytes(StandardCharsets.US_ASCII));
             DownloadUtils.download(iconUrl, base64OutputStream);
             return new String(byteArrayOutputStream.toByteArray(), StandardCharsets.US_ASCII);
@@ -244,7 +236,7 @@ public class LWJGL3ifyUtils {
         return null;
     }
 
-    // TODO: Turn this into a generic ModItem class for general mods and refactor that crusty modpack naming scheme
+    
     public static class LWJGL3ifyMod {
         public final String versionName;
         public final String downloadUrl;
@@ -264,7 +256,7 @@ public class LWJGL3ifyUtils {
     }
     public static class LWJGL3ifyVersionList {
         public final List<LWJGL3ifyMod> supportedVersions;
-        public final List<LWJGL3ifyMod> brokenVersions; // SDL versions for now
+        public final List<LWJGL3ifyMod> brokenVersions; 
 
         public LWJGL3ifyVersionList(List<LWJGL3ifyMod> mSupportedVersions, List<LWJGL3ifyMod> mBrokenVersions) {
             this.supportedVersions = mSupportedVersions;

@@ -29,25 +29,22 @@
 #include "ctxbridges/osm_bridge.h"
 
 #define GLFW_CLIENT_API 0x22001
-/* Consider GLFW_NO_API as Vulkan API */
+
 #define GLFW_NO_API 0
 #define GLFW_OPENGL_API 0x30001
 
-// This means that the function is an external API and that it will be used
+
 #define EXTERNAL_API __attribute__((used))
-// This means that you are forced to have this function/variable for ABI compatibility
+
 #define ABI_COMPAT __attribute__((unused))
 
 
 struct PotatoBridge {
 
-    /* EGLContext */ void* eglContext;
-    /* EGLDisplay */ void* eglDisplay;
-    /* EGLSurface */ void* eglSurface;
-/*
-    void* eglSurfaceRead;
-    void* eglSurfaceDraw;
-*/
+     void* eglContext;
+     void* eglDisplay;
+     void* eglSurface;
+
 };
 EGLConfig config;
 struct PotatoBridge potatoBridge;
@@ -75,9 +72,9 @@ EXTERNAL_API void pojavTerminate() {
             potatoBridge.eglSurface = EGL_NO_SURFACE;
         } break;
 
-            //case RENDERER_VIRGL:
+            
         case RENDERER_VK_ZINK: {
-            // Nothing to do here
+            
         } break;
     }
 }
@@ -114,9 +111,9 @@ void* load_turnip_vulkan() {
             NULL,
             __builtin_return_address(0)
             );
-    // Load the hook so it's first to the symbol table and thus hooks
+    
     linker_ns_dlopen("liblinkerhook.so", RTLD_LOCAL | RTLD_NOW, vulkanLoaderNs);
-    // Grants the namespace access to system libs.
+    
     private_link_namespaces_all_libs(vulkanLoaderNs, get_escape_namespace());
     #if defined(__aarch64__) || defined(__x86_64__)
     #define VULKAN_LOADER_PATH "/system/lib64/libvulkan.so"
@@ -138,7 +135,7 @@ static void set_vulkan_ptr(void* ptr) {
 }
 
 void load_vulkan() {
-    if(android_get_device_api_level() >= 28) { // the loader does not support below that
+    if(android_get_device_api_level() >= 28) { 
 #ifdef ADRENO_POSSIBLE
         void* result = load_turnip_vulkan();
         if(result != NULL) {
@@ -155,12 +152,12 @@ void load_vulkan() {
 }
 
 int pojavInitOpenGL() {
-    // Only affects GL4ES as of now
+    
     const char *forceVsync = getenv("FORCE_VSYNC");
     if (strcmp(forceVsync, "true") == 0)
         pojav_environ->force_vsync = true;
 
-    // NOTE: Override for now.
+    
     const char *renderer = getenv("AMETHYST_RENDERER");
     if (strncmp("opengles", renderer, 8) == 0) {
         pojav_environ->config_renderer = RENDERER_GL4ES;
@@ -205,8 +202,8 @@ EXTERNAL_API void pojavSetWindowHint(int hint, int value) {
     switch (value) {
         case GLFW_NO_API:
             pojav_environ->config_renderer = RENDERER_VULKAN;
-            /* Nothing to do: initialization is handled in Java-side */
-            // pojavInitVulkan();
+            
+            
             break;
         case GLFW_OPENGL_API: {
             const char *renderer = getenv("AMETHYST_RENDERER");
@@ -215,8 +212,8 @@ EXTERNAL_API void pojavSetWindowHint(int hint, int value) {
             } else if (strcmp(renderer, "vulkan_zink") == 0) {
                 pojav_environ->config_renderer = RENDERER_VK_ZINK;
             }
-            /* Nothing to do: initialization is called in pojavCreateContext */
-            // pojavInitOpenGL();
+            
+            
             break;
         }
         default:
@@ -242,9 +239,9 @@ EXTERNAL_API void* pojavCreateContext(void* contextSrc) {
 }
 
 void* maybe_load_vulkan() {
-    // We use the env var because
-    // 1. it's easier to do that
-    // 2. it won't break if something will try to load vulkan and osmesa simultaneously
+    
+    
+    
     if(getenv("VULKAN_PTR") == NULL) load_vulkan();
     return (void*) strtoul(getenv("VULKAN_PTR"), NULL, 0x10);
 }

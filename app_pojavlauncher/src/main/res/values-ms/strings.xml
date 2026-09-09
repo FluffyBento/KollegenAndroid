@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">Nama pengguna</string>
     <string name="login_online_login_label">Log masuk</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Sentuh roda cog di bahagian tengah atas untuk membuka menu konteks ⚙\nKetik sebuah butang untuk menyesuaikannya: sunting, ubah saiz, alih keluar atau tukar ikatan kekuncinya."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">Akaun ini akan dihapus!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Pilih sebuah pemasang mod</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen telah ranap tanpa diduga</string>
     <string name="error_no_version">Tiada versi!</string>
     <string name="error_show_more">Tunjuk lebih banyak</string>
     <string name="error_show_less">Tunjuk lebih sedikit</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Kebenaran untuk membaca/menulis kepada storan diperlukan!</string>
     <string name="toast_optifine_success">Pemasangan berjaya</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Membersihkan fail cache</string>
     <string name="mcl_launch_downloading">Memuat turun %s</string>
     <string name="mcl_launch_downloading_progress">"Memuat turun %s (%.2f MB / %.2f MB)"</string>
@@ -60,7 +58,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alfa-lama</string>
     <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
     <string name="mcl_version_clone">Klon</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Sunting</string>
     <string name="global_error">Ralat</string>
     <string name="global_load">Muat</string>
@@ -76,12 +74,12 @@
     <string name="global_retry">Cuba Semula</string>
     <string name="global_default">Lalai</string>
     <string name="global_off">Tutup</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Aplikasi/Permainan keluar dengan kod %d, semak latestlog.txt untuk butiran lanjut.</string>
     <string name="mcn_signal_title">Aplikasi/Permainan dibatalkan oleh isyarat maut %d, semak latestlog.txt untuk mendapatkan butiran lanjut.</string>
     <string name="mcn_exit_confirm">Adakah anda mahu paksa tutup aplikasi?</string>
     <string name="mcn_check_fail_vulkan_support">Pemapar Zink (Vulkan) tidak disokong pada peranti ini!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Perbualan</string>
     <string name="control_debug">Nyahpepijat</string>
     <string name="control_primary">Utama</string>
@@ -98,22 +96,19 @@
     <string name="control_mouse">Tetikus</string>
     <string name="control_mouseoff">Tetikus: tutup</string>
     <string name="control_mouseon">Tetikus: buka </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Paksa tutup</string>
     <string name="control_viewout">Output log</string>
     <string name="control_adebug">Nyahpepijat Input</string>
     <string name="control_customkey">Hantar kod kunci tersuai</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Import Kawalan</string>
     <string name="import_control_invalid_file">Fail tidak sah atau rosak</string>
     <string name="import_control_import_button">import kawalan</string>
     <string name="import_control_verifying_file">Fail sedang disahkan, sila tunggu dan cuba lagi…</string>
     <string name="import_control_invalid_name">Nama tidak sah atau fail sudah wujud</string>
     <string name="import_control_done">Pengimportan selesai</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Boleh ditogol</string>
     <string name="customctrl_size">Saiz</string>
     <string name="customctrl_mapping">Pemetaan</string>

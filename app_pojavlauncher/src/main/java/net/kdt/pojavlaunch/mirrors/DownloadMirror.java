@@ -25,16 +25,7 @@ public class DownloadMirror {
             "https://bmclapi2.bangbang93.com/assets"
     };
 
-    /**
-     * Download a file with the current mirror. If the file is missing on the mirror,
-     * fall back to the official source.
-     * @param downloadClass Class of the download. Can either be DOWNLOAD_CLASS_LIBRARIES,
-     *                      DOWNLOAD_CLASS_METADATA or DOWNLOAD_CLASS_ASSETS
-     * @param urlInput The original (Mojang) URL for the download
-     * @param outputFile The output file for the download
-     * @param buffer The shared buffer
-     * @param monitor The download monitor.
-     */
+    
     public static void downloadFileMirrored(int downloadClass, String urlInput, File outputFile,
                                             @Nullable byte[] buffer, Tools.DownloaderFeedback monitor) throws IOException {
         try {
@@ -48,14 +39,7 @@ public class DownloadMirror {
         DownloadUtils.downloadFileMonitored(urlInput, outputFile, buffer, monitor);
     }
 
-    /**
-     * Download a file with the current mirror. If the file is missing on the mirror,
-     * fall back to the official source.
-     * @param downloadClass Class of the download. Can either be DOWNLOAD_CLASS_LIBRARIES,
-     *                      DOWNLOAD_CLASS_METADATA or DOWNLOAD_CLASS_ASSETS
-     * @param urlInput The original (Mojang) URL for the download
-     * @param outputFile The output file for the download
-     */
+    
     public static void downloadFileMirrored(int downloadClass, String urlInput, File outputFile) throws IOException {
         try {
             DownloadUtils.downloadFile(getMirrorMapping(downloadClass, urlInput),
@@ -68,14 +52,7 @@ public class DownloadMirror {
         DownloadUtils.downloadFile(urlInput, outputFile);
     }
 
-    /**
-     * Get the content length of a file on the current mirror. If the file is missing on the mirror,
-     * or the mirror does not give out the length, request the length from the original source
-     * @param downloadClass Class of the download. Can either be DOWNLOAD_CLASS_LIBRARIES,
-     *                      DOWNLOAD_CLASS_METADATA or DOWNLOAD_CLASS_ASSETS
-     * @param urlInput The original (Mojang) URL for the download
-     * @return the length of the file denoted by the URL in bytes, or -1 if not available
-     */
+    
     public static long getContentLengthMirrored(int downloadClass, String urlInput){
         try {
             long length = DownloadUtils.getContentLength(getMirrorMapping(downloadClass, urlInput));
@@ -86,19 +63,12 @@ public class DownloadMirror {
             } else {
                 return length;
             }
-        } catch (IOException ignored) { // If error happens, fallback to old file counter instead of size. This shouldn't really happen unless offline though.
+        } catch (IOException ignored) { 
             return -1L;
         }
     }
 
-    /**
-     * Download a file as a string from the current mirror. If the file does not exist on the mirror
-     * or the mirror returns an invalid string, request the file from the original source
-     * @param downloadClass Class of the download. Can either be DOWNLOAD_CLASS_LIBRARIES,
-     *                      DOWNLOAD_CLASS_METADATA or DOWNLOAD_CLASS_ASSETS
-     * @param urlInput The original (Mojang) URL for the download
-     * @return the contents of the downloaded file as a String.
-     */
+    
     public static String downloadStringMirrored(int downloadClass, String urlInput) throws IOException{
         String resultString = null;
         try {
@@ -114,10 +84,7 @@ public class DownloadMirror {
         return DownloadUtils.downloadString(urlInput);
     }
 
-    /**
-     * Check if the current download source is a mirror and not an official source.
-     * @return true if the source is a mirror, false otherwise
-     */
+    
     public static boolean isMirrored() {
         return !LauncherPreferences.PREF_DOWNLOAD_SOURCE.equals("default");
     }

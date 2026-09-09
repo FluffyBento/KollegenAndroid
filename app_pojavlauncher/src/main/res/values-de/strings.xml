@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">Benutzername</string>
     <string name="login_online_login_label">Anmelden</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Tippe auf das Zahnradsymbol oben in der Mitte, um das Kontextmenü zu öffnen ⚙.\nTippe auf eine Schaltfläche, um sie anzupassen: Bearbeiten, Größe ändern, Löschen oder die Tastenzuordnung ändern."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">Dieses Konto wird entfernt!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Wähle einen Mod-Installer</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen ist unerwartet abgestürzt</string>
     <string name="error_no_version">Keine Version!</string>
     <string name="error_show_more">Mehr anzeigen</string>
     <string name="error_show_less">Weniger anzeigen</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Die Lese-/Schreib-Berechtigung für den Speicher ist erforderlich!</string>
     <string name="toast_optifine_success">Installation erfolgreich</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Cache-Dateien bereinigen</string>
     <string name="mcl_launch_downloading">Lade %s herunter</string>
     <string name="mcl_launch_downloading_progress">"Lade %s herunter (%.2f MB / %.2f MB)"</string>
@@ -60,7 +58,7 @@
     <string name="mcl_setting_veroption_oldalpha">Old-Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-Beta</string>
     <string name="mcl_version_clone">Duplizieren</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Bearbeiten</string>
     <string name="global_error">Fehler</string>
     <string name="global_load">Laden</string>
@@ -76,12 +74,12 @@
     <string name="global_retry">Erneut versuchen</string>
     <string name="global_default">Standard</string>
     <string name="global_off">Aus</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Anwendung/Spiel wurde mit dem Code %d beendet. Für weitere Details, siehe latestlog.txt.</string>
     <string name="mcn_signal_title">Anwendung/Spiel wurde mit dem Fehlercode %d beendet. Für weitere Details, siehe latestlog.txt.</string>
     <string name="mcn_exit_confirm">Beenden wirklich erzwingen?</string>
     <string name="mcn_check_fail_vulkan_support">Der Zink-Renderer (Vulkan) wird auf diesem Gerät nicht unterstützt!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debuggen</string>
     <string name="control_primary">Pri</string>
@@ -98,22 +96,19 @@
     <string name="control_mouse">Maus</string>
     <string name="control_mouseoff">Maus: Aus</string>
     <string name="control_mouseon">Maus: An </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Erzwinge das Beenden</string>
     <string name="control_viewout">Protokoll-Ausgabe</string>
     <string name="control_adebug">Eingabe-Debugging</string>
     <string name="control_customkey">Selbstdefinierten Tastencode senden</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Steuerung importieren</string>
     <string name="import_control_invalid_file">Ungültige oder beschädigte Datei</string>
     <string name="import_control_import_button">Steuerung importieren</string>
     <string name="import_control_verifying_file">Datei wird verifiziert, bitte warten und erneut versuchen…</string>
     <string name="import_control_invalid_name">Ungültiger Dateiname oder Datei bereits vorhanden</string>
     <string name="import_control_done">Import abgeschlossen</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Umschaltbar</string>
     <string name="customctrl_size">Größe</string>
     <string name="customctrl_mapping">Zuordnung</string>

@@ -28,7 +28,7 @@ public final class CacheUtil_J8 {
     private static Object newCacheEntry(String host, String[] ips, long expiration)
             throws UnknownHostException, ClassNotFoundException, IllegalAccessException,
             InvocationTargetException, InstantiationException {
-        // InetAddress.CacheEntry has only one constructor
+        
         return getConstructorOfInetAddress$CacheEntry().newInstance(CacheUtilCommons.toInetAddressArray(host, ips), expiration);
     }
 
@@ -38,22 +38,22 @@ public final class CacheUtil_J8 {
         if (constructorOfInetAddress$CacheEntry != null) return constructorOfInetAddress$CacheEntry;
 
         synchronized (CacheUtilCommons.class) {
-            // double check
+            
             if (constructorOfInetAddress$CacheEntry != null) return constructorOfInetAddress$CacheEntry;
 
             final String className = "java.net.InetAddress$CacheEntry";
             final Class<?> clazz = Class.forName(className);
 
-            // InetAddress.CacheEntry has only one constructor:
-            // - for jdk 6, constructor signature is CacheEntry(Object address, long expiration)
-            // - for jdk 7/8, constructor signature is CacheEntry(InetAddress[] addresses, long expiration)
-            //
-            // code in jdk 6:
-            //   https://hg.openjdk.java.net/jdk6/jdk6/jdk/file/8deef18bb749/src/share/classes/java/net/InetAddress.java#l739
-            // code in jdk 7:
-            //   https://hg.openjdk.java.net/jdk7u/jdk7u/jdk/file/4dd5e486620d/src/share/classes/java/net/InetAddress.java#l742
-            // code in jdk 8:
-            //   https://hg.openjdk.java.net/jdk8u/jdk8u/jdk/file/45e4e636b757/src/share/classes/java/net/InetAddress.java#l748
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             final Constructor<?> constructor = clazz.getDeclaredConstructors()[0];
             constructor.setAccessible(true);
 
@@ -90,7 +90,7 @@ public final class CacheUtil_J8 {
             throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException {
         if (cacheMapFieldOfInetAddress$Cache == null) {
             synchronized (CacheUtil_J8.class) {
-                if (cacheMapFieldOfInetAddress$Cache == null) { // double check
+                if (cacheMapFieldOfInetAddress$Cache == null) { 
                     final Class<?> clazz = Class.forName("java.net.InetAddress$Cache");
                     final Field f = clazz.getDeclaredField("cache");
                     f.setAccessible(true);
@@ -119,7 +119,7 @@ public final class CacheUtil_J8 {
         if (ADDRESS_CACHE_AND_NEGATIVE_CACHE != null) return ADDRESS_CACHE_AND_NEGATIVE_CACHE;
 
         synchronized (CacheUtil_J8.class) {
-            // double check
+            
             if (ADDRESS_CACHE_AND_NEGATIVE_CACHE != null) return ADDRESS_CACHE_AND_NEGATIVE_CACHE;
 
             final Field cacheField = InetAddress.class.getDeclaredField("addressCache");

@@ -1,6 +1,6 @@
-//
-// Created by maks on 23.01.2025.
-//
+
+
+
 
 #include "native_hooks.h"
 #include <unistd.h>
@@ -9,8 +9,8 @@
 #define TAG __FILE_NAME__
 #include <log.h>
 
-// Hooks for chmod and fchmod that always return success.
-// This allows older Android versions to work with Java NIO zipfs inside of the Pojav folder.
+
+
 typedef int (*chmod_func)(const char*, mode_t);
 typedef int (*fchmod_func)(int, mode_t);
 

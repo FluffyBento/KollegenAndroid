@@ -31,7 +31,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
 
     public static final String TAG = "SearchModFragment";
     private View mOverlay;
-    private float mOverlayTopCache; // Padding cache reduce resource lookup
+    private float mOverlayTopCache; 
 
     private final RecyclerView.OnScrollListener mOverlayPositionListener = new RecyclerView.OnScrollListener() {
         @Override
@@ -66,7 +66,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        // You can only access resources after attaching to current context
+        
         mModItemAdapter = new ModItemAdapter(getResources(), modpackApi, this);
         ProgressKeeper.addTaskCountListener(mModItemAdapter);
         mOverlayTopCache = getResources().getDimension(R.dimen.fragment_padding_medium);
@@ -143,7 +143,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
                 .setView(R.layout.dialog_mod_filters)
                 .create();
 
-        // setup the view behavior
+        
         dialog.setOnShowListener(dialogInterface -> {
             TextView mSelectedVersion = dialog.findViewById(R.id.search_mod_selected_mc_version_textview);
             Button mSelectVersionButton = dialog.findViewById(R.id.search_mod_mc_version_button);
@@ -153,13 +153,13 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
             assert mSelectedVersion != null;
             assert mApplyButton != null;
 
-            // Setup the expendable list behavior
+            
             mSelectVersionButton.setOnClickListener(v -> VersionSelectorDialog.open(v.getContext(), true, (id, snapshot)-> mSelectedVersion.setText(id)));
 
-            // Apply visually all the current settings
+            
             mSelectedVersion.setText(mSearchFilters.mcVersion);
 
-            // Apply the new settings
+            
             mApplyButton.setOnClickListener(v -> {
                 mSearchFilters.mcVersion = mSelectedVersion.getText().toString();
                 searchMods(mSearchEditText.getText().toString());

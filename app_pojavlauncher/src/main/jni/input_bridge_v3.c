@@ -1,14 +1,4 @@
-/*
- * V3 input bridge implementation.
- *
- * Status:
- * - Active development
- * - Works with some bugs:
- *  + Modded versions gives broken stuff..
- *
- * 
- * - Implements glfwSetCursorPos() to handle grab camera pos correctly.
- */
+
  
 #include <assert.h>
 #include <dlfcn.h>
@@ -39,12 +29,12 @@ static void registerFunctions(JNIEnv *env);
 jint JNI_OnLoad(JavaVM* vm, __attribute__((unused)) void* reserved) {
     if (pojav_environ->dalvikJavaVMPtr == NULL) {
         LOGI("Saving DVM environ...");
-        //Save dalvik global JavaVM pointer
+        
         pojav_environ->dalvikJavaVMPtr = vm;
-        // Sets up the stuff that GLFW/JVM needs to communicate to Android
-        // These methods are called from GLFW/JVM and connect to Android-side impls
-        // These aren't separated out into a method because these can be ran so long as we are in Android-land
-        // so that means this library must be loaded at least once in Android-land
+        
+        
+        
+        
         JNIEnv *dvEnv;
         (*vm)->GetEnv(vm, (void**) &dvEnv, JNI_VERSION_1_4);
         pojav_environ->bridgeClazz = (*dvEnv)->NewGlobalRef(dvEnv,(*dvEnv) ->FindClass(dvEnv,"org/lwjgl/glfw/CallbackBridge"));
@@ -65,7 +55,7 @@ jint JNI_OnLoad(JavaVM* vm, __attribute__((unused)) void* reserved) {
     }
 
     if(pojav_environ->dalvikJavaVMPtr == vm) {
-        //perform in all DVM instances, not only during first ever set up
+        
         JNIEnv *env;
         (*vm)->GetEnv(vm, (void**) &env, JNI_VERSION_1_4);
         registerFunctions(env);
@@ -75,11 +65,11 @@ jint JNI_OnLoad(JavaVM* vm, __attribute__((unused)) void* reserved) {
     return JNI_VERSION_1_4;
 }
 
-// Sets up the stuff that Android needs to communicate to GLFW/JVM
-// These methods are called from Android and connect to GLFW/JVM-side impls
-// These are separated out into a method because GLFW loads much later than when we need to dlopen
-// pojavexec since it does more than just GLFW.
-// TODO: Add checks in case someone forgets to run this method. Probably see if pojav_environ->vmGlfwClass is null or not
+
+
+
+
+
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nativeInitializeGLFWNativeBridge(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz) {
     JNIEnv *vmEnv;
     (*pojav_environ->runtimeJavaVMPtr)->GetEnv(pojav_environ->runtimeJavaVMPtr, (void**) &vmEnv, JNI_VERSION_1_4);
@@ -121,8 +111,8 @@ void updateWindowSize(void* window) {
 
 void pojavPumpEvents(void* window) {
     if(pojav_environ->shouldUpdateMouse) {
-        // Floored because some anticheats (Hypixel) don't like the input being too accurate.
-        // Actual GLFW actually uses doubles so this is totally wrong on their end.
+        
+        
         pojav_environ->GLFW_invoke_CursorPos(window, floor(pojav_environ->cursorX),
                                              floor(pojav_environ->cursorY));
     }
@@ -161,10 +151,10 @@ void pojavPumpEvents(void* window) {
             index -= EVENT_WINDOW_SIZE;
     }
 
-    // The out target index is updated by the rewinder
+    
 }
 
-/** Prepare the library for sending out callbacks to all windows */
+
 void pojavStartPumping() {
     size_t counter = atomic_load_explicit(&pojav_environ->eventCounter, memory_order_acquire);
     size_t index = pojav_environ->outEventIndex;
@@ -173,35 +163,35 @@ void pojavStartPumping() {
     if (targetIndex >= EVENT_WINDOW_SIZE)
         targetIndex -= EVENT_WINDOW_SIZE;
 
-    // Only accessed by one unique thread, no need for atomic store
+    
     pojav_environ->inEventCount = counter;
     pojav_environ->outTargetIndex = targetIndex;
 
-    //PumpEvents is called for every window, so this logic should be there in order to correctly distribute events to all windows.
+    
     if((pojav_environ->cLastX != pojav_environ->cursorX || pojav_environ->cLastY != pojav_environ->cursorY) && pojav_environ->GLFW_invoke_CursorPos) {
         pojav_environ->cLastX = pojav_environ->cursorX;
         pojav_environ->cLastY = pojav_environ->cursorY;
         pojav_environ->shouldUpdateMouse = true;
     }
     if(pojav_environ->shouldUpdateMonitorSize) {
-        // Perform a monitor size update here to avoid doing it on every single window
+        
         updateMonitorSize(pojav_environ->savedWidth, pojav_environ->savedHeight);
-        // Mark the monitor size as consumed (since GLFW was made aware of it)
+        
         pojav_environ->monitorSizeConsumed = true;
     }
 }
 
-/** Prepare the library for the next round of new events */
+
 void pojavStopPumping() {
     pojav_environ->outEventIndex = pojav_environ->outTargetIndex;
 
-    // New events may have arrived while pumping, so remove only the difference before the start and end of execution
+    
     atomic_fetch_sub_explicit(&pojav_environ->eventCounter, pojav_environ->inEventCount, memory_order_acquire);
-    // Make sure the next frame won't send mouse or monitor updates if it's unnecessary
+    
     pojav_environ->shouldUpdateMouse = false;
-    // Only reset the update flag if the monitor size was consumed by pojavStartPumping. This
-    // will delay the update to next frame if it had occured between pojavStartPumping and pojavStopPumping,
-    // but it's better than not having it apply at all
+    
+    
+    
     if(pojav_environ->shouldUpdateMonitorSize && pojav_environ->monitorSizeConsumed) {
         pojav_environ->shouldUpdateMonitorSize = false;
         pojav_environ->monitorSizeConsumed = false;
@@ -364,13 +354,7 @@ jboolean critical_send_char_mods(jchar codepoint, jint mods) {
 jboolean noncritical_send_char_mods(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jchar codepoint, jint mods) {
     return critical_send_char_mods(codepoint, mods);
 }
-/*
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorEnter(JNIEnv* env, jclass clazz, jint entered) {
-    if (pojav_environ->GLFW_invoke_CursorEnter && pojav_environ->isInputReady) {
-        pojav_environ->GLFW_invoke_CursorEnter(pojav_environ->showingWindow, entered);
-    }
-}
-*/
+
 
 void critical_send_cursor_pos(jfloat x, jfloat y) {
 #ifdef DEBUG
@@ -392,10 +376,10 @@ void critical_send_cursor_pos(jfloat x, jfloat y) {
         }
 
         if (!pojav_environ->isUseStackQueueCall) {
-            // Truncated by int cast in LWJGLX
+            
             pojav_environ->GLFW_invoke_CursorPos((void*) pojav_environ->showingWindow, (double) (x), (double) (y));
         } else {
-            // Floored in pojavPumpEvents
+            
             pojav_environ->cursorX = x;
             pojav_environ->cursorY = y;
         }
@@ -441,15 +425,15 @@ void noncritical_send_mouse_button(__attribute__((unused)) JNIEnv* env, __attrib
 void critical_send_screen_size(jint width, jint height) {
     pojav_environ->savedWidth = width;
     pojav_environ->savedHeight = height;
-    // Even if there was call to pojavStartPumping that consumed the size, this call
-    // might happen right after it (or right before pojavStopPumping)
-    // So unmark the size as "consumed"
+    
+    
+    
     pojav_environ->monitorSizeConsumed = false;
     pojav_environ->shouldUpdateMonitorSize = true;
-    // Don't use the direct updates  for screen dimensions.
-    // This is done to ensure that we have predictable conditions to correctly call
-    // updateMonitorSize() and updateWindowSize() while on the render thread with an attached
-    // JNIEnv.
+    
+    
+    
+    
 }
 
 void noncritical_send_screen_size(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jint width, jint height) {
@@ -476,19 +460,19 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetShowingWindow(__attribut
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jint attrib, jint value) {
-    // Check for stack queue no longer necessary here as the JVM crash's origin is resolved
+    
     if (!pojav_environ->showingWindow) {
-        // If the window is not shown, there is nothing to do yet.
+        
         return;
     }
 
-    // We cannot use pojav_environ->runtimeJNIEnvPtr_JRE here because that environment is attached
-    // on the thread that loaded pojavexec (which is the thread that first references the GLFW class)
-    // But this method is only called from the Android UI thread
+    
+    
+    
 
-    // Technically the better solution would be to have a permanently attached env pointer stored
-    // in environ for the Android UI thread but this is the only place that uses it
-    // (very rarely, only in lifecycle callbacks) so i dont care
+    
+    
+    
 
     TRY_ATTACH_ENV(jvm_env, pojav_environ->runtimeJavaVMPtr, "nativeSetWindowAttrib failed: %i", return;);
 
@@ -498,7 +482,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(
             (jlong) pojav_environ->showingWindow, attrib, value
     );
 
-    // Attaching every time is annoying, so stick the attachment to the Android GUI thread around
+    
 }
 const static JNINativeMethod critical_fcns[] = {
         {"nativeSetUseInputStackQueue", "(Z)V", critical_set_stackqueue},
@@ -531,7 +515,7 @@ void dvm_testCriticalNative(void* arg0, void* arg1, void* arg2, void* arg3) {
     }else if (arg0 == 0 && arg1 == 0){
         criticalNativeAvailable = true;
     }else {
-        criticalNativeAvailable = false; // just to be safe
+        criticalNativeAvailable = false; 
     }
 }
 
@@ -581,8 +565,8 @@ Java_org_lwjgl_glfw_CallbackBridge_nativeCreateGamepadAxisBuffer(JNIEnv *env, jc
     return (*env)->NewDirectByteBuffer(env, &pojav_environ->gamepadState.axes, sizeof(pojav_environ->gamepadState.axes));
 }
 
-// HACK: Legacy4J has faulty detection that hardwires us to GLFW unless we init SDL ourselves.
-// This is a horribly made function that should really have more checks around it but meh.
+
+
 #include <SDL3/SDL.h>
 
 static inline void initSubsystem(void) {
@@ -593,6 +577,6 @@ static inline void initSubsystem(void) {
 }
 JNIEXPORT void JNICALL
 Java_net_kdt_pojavlaunch_Tools_00024SDL_initializeControllerSubsystems(JNIEnv *env, jclass clazz){
-    // Please ensure that you have already dlopen'ed SDL3 before calling this.
+    
     initSubsystem();
 }

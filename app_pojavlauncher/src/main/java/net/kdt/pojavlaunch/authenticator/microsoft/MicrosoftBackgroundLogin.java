@@ -33,8 +33,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
 
-/** Allow to perform a background login on a given account */
-// TODO handle connection errors !
+
+
 public class MicrosoftBackgroundLogin {
     private static final String authTokenUrl = "https://login.live.com/oauth20_token.srf";
     private static final String xblAuthUrl = "https://user.auth.xboxlive.com/user/authenticate";
@@ -55,7 +55,7 @@ public class MicrosoftBackgroundLogin {
         XSTS_ERRORS.put(2148916238L ,R.string.xerr_child);
     }
 
-    /* Fields used to fill the account  */
+    
     public String msRefreshToken;
     public String mcName;
     public String mcToken;
@@ -68,7 +68,7 @@ public class MicrosoftBackgroundLogin {
         mAuthCode = authCode;
     }
 
-    /** Performs a full login, calling back listeners appropriately  */
+    
     public void performLogin(@Nullable final ProgressListener progressListener,
                              @Nullable final DoneListener doneListener,
                              @Nullable final ErrorListener errorListener){
@@ -97,7 +97,7 @@ public class MicrosoftBackgroundLogin {
                 MinecraftAccount acc = MinecraftAccount.load(mcName);
                 if(acc == null) acc = new MinecraftAccount();
                 acc.xuid = xsts[0];
-                acc.clientToken = "0"; /* FIXME */
+                acc.clientToken = "0"; 
                 acc.accessToken = mcToken;
                 acc.username = mcName;
                 acc.profileId = mcUuid;
@@ -135,7 +135,7 @@ public class MicrosoftBackgroundLogin {
 
         Log.i("MicroAuth", formData);
 
-        //да пошла yf[eq1 она ваша джава 11
+        
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setRequestProperty("charset", "utf-8");
@@ -154,7 +154,7 @@ public class MicrosoftBackgroundLogin {
             conn.disconnect();
             Log.i("MicrosoftLogin","Acess Token = " + jo.getString("access_token"));
             return jo.getString("access_token");
-            //acquireXBLToken(jo.getString("access_token"));
+            
         }else{
             throw getResponseThrowable(conn);
         }
@@ -185,13 +185,13 @@ public class MicrosoftBackgroundLogin {
             conn.disconnect();
             Log.i("MicrosoftLogin","Xbl Token = "+jo.getString("Token"));
             return jo.getString("Token");
-            //acquireXsts(jo.getString("Token"));
+            
         }else{
             throw getResponseThrowable(conn);
         }
     }
 
-    /** @return [uhs, token]*/
+    
     private @NonNull String[] acquireXsts(String xblToken) throws IOException, JSONException {
         URL url = new URL(xstsAuthUrl);
 
@@ -221,7 +221,7 @@ public class MicrosoftBackgroundLogin {
             conn.disconnect();
             Log.i("MicrosoftLogin","Xbl Xsts = " + token + "; Uhs = " + uhs);
             return new String[]{uhs, token};
-            //acquireMinecraftToken(uhs,jo.getString("Token"));
+            
         }else if(conn.getResponseCode() == 401) {
             String responseContents = Tools.read(conn.getErrorStream());
             JSONObject jo = new JSONObject(responseContents);
@@ -257,7 +257,7 @@ public class MicrosoftBackgroundLogin {
             conn.disconnect();
             Log.i("MicrosoftLogin","MC token: "+jo.getString("access_token"));
             mcToken = jo.getString("access_token");
-            //checkMcProfile(jo.getString("access_token"));
+            
             return jo.getString("access_token");
         }else{
             throw getResponseThrowable(conn);
@@ -265,13 +265,13 @@ public class MicrosoftBackgroundLogin {
     }
 
     private void fetchOwnedItems(String mcAccessToken) throws IOException {
-        // We only need to do this if user does not have a profile/username yet
+        
         if (hasProfile) return;
         URL url = new URL(mcStoreUrl);
         String s = "";
 
-        // For some reason, minecraftservices APIs are significantly more unreliable
-        // Automatically retry because the user gets annoyed when they have to log in again
+        
+        
         for (int retryCount = 0; retryCount < 5; ++retryCount) {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Authorization", "Bearer " + mcAccessToken);
@@ -284,7 +284,7 @@ public class MicrosoftBackgroundLogin {
             } else if (retryCount == 4) {
                 throw getResponseThrowable(conn);
             }
-            try { Thread.sleep(500L * (1L << retryCount)); // 0.5s, 1s, 2s, 4s, 8s
+            try { Thread.sleep(500L * (1L << retryCount)); 
             } catch (InterruptedException ignored) {}
         }
         try {
@@ -299,7 +299,7 @@ public class MicrosoftBackgroundLogin {
             JSONArray entitlements = jsonSignature.getJSONArray("entitlements");
             for (int i = 0; i < entitlements.length(); ++i) {
                 switch (entitlements.getString(i)) {
-                    // These four are guaranteed to always be present because Java & Bedrock are 1 pack
+                    
                     case "product_minecraft":
                     case "game_minecraft":
                     case "product_minecraft_bedrock":
@@ -308,9 +308,9 @@ public class MicrosoftBackgroundLogin {
                         break;
                     case "product_game_pass_pc":
                     case "product_game_pass_ultimate":
-                        // TODO: Implement gamepass detection
+                        
                         break;
-                    // idk, pad the LoC or sm
+                    
                     case "product_dungeons":
                     case "game_dungeons":
                     case "product_legends":
@@ -330,8 +330,8 @@ public class MicrosoftBackgroundLogin {
     private void checkMcProfile(String mcAccessToken) throws IOException, JSONException {
         URL url = new URL(mcProfileUrl);
 
-        // For some reason, minecraftservices APIs are significantly more unreliable
-        // Automatically retry because the user gets annoyed when they have to log in again
+        
+        
         for (int retryCount = 0; retryCount < 5; ++retryCount) {
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setRequestProperty("Authorization", "Bearer " + mcAccessToken);
@@ -365,12 +365,12 @@ public class MicrosoftBackgroundLogin {
             } else if (retryCount == 4) {
                 throw getResponseThrowable(conn);
             }
-            try { Thread.sleep(500L * (1L << retryCount)); // 0.5s, 1s, 2s, 4s, 8s
+            try { Thread.sleep(500L * (1L << retryCount)); 
             } catch (InterruptedException ignored) {}
         }
     }
 
-    /** Wrapper to ease notifying the listener */
+    
     private void notifyProgress(@Nullable ProgressListener listener, int step){
         if(listener != null){
             Tools.runOnUiThread(() -> listener.onLoginProgress(step));
@@ -379,7 +379,7 @@ public class MicrosoftBackgroundLogin {
     }
 
 
-    /** Set common properties for the connection. Given that all requests are POST, interactivity is always enabled */
+    
     private static void setCommonProperties(HttpURLConnection conn, String formData) {
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
@@ -395,10 +395,7 @@ public class MicrosoftBackgroundLogin {
         conn.setDoOutput(true);
     }
 
-    /**
-     * @param data A series a strings: key1, value1, key2, value2...
-     * @return the data converted as a form string for a POST request
-     */
+    
     private static String convertToFormData(String... data) throws UnsupportedEncodingException {
         StringBuilder builder = new StringBuilder();
         for(int i=0; i<data.length; i+=2){

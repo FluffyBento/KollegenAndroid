@@ -25,10 +25,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.utils.interfaces.SimpleSeekBarListener;
 
-/**
- * Side dialog for quick settings that you can change in game
- * The implementation has to take action on some preference changes
- */
+
 public abstract class QuickSettingSideDialog extends com.kdt.SideDialogView {
 
     private SharedPreferences.Editor mEditor;
@@ -62,7 +59,7 @@ public abstract class QuickSettingSideDialog extends com.kdt.SideDialogView {
     }
 
     private void bindLayout() {
-        // Bind layout elements
+        
         mGyroSwitch = mDialogContent.findViewById(R.id.checkboxGyro);
         mGyroXSwitch = mDialogContent.findViewById(R.id.checkboxGyroX);
         mGyroYSwitch = mDialogContent.findViewById(R.id.checkboxGyroY);
@@ -242,9 +239,9 @@ public abstract class QuickSettingSideDialog extends com.kdt.SideDialogView {
         });
     }
 
-    /** Resets all settings to their original values */
+    
     public void cancel() {
-        // Reset all settings if we were editing
+        
         if(isDisplaying()) {
             PREF_ENABLE_GYRO = mOriginalGyroEnabled;
             PREF_GYRO_INVERT_X = mOriginalGyroXEnabled;
@@ -265,14 +262,10 @@ public abstract class QuickSettingSideDialog extends com.kdt.SideDialogView {
         disappear(true);
     }
 
-    /** Called when the resolution is changed. Use {@link LauncherPreferences#PREF_SCALE_FACTOR} */
+    
     public abstract void onResolutionChanged();
 
-    /** Called when the gyro state is changed.
-     * Use {@link LauncherPreferences#PREF_ENABLE_GYRO}
-     * Use {@link LauncherPreferences#PREF_GYRO_INVERT_X}
-     * Use {@link LauncherPreferences#PREF_GYRO_INVERT_Y}
-     */
+    
     public abstract void onGyroStateChanged();
 
 }

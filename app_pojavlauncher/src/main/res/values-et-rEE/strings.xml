@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Logi sisse</string>
-    <!-- Hint -->
-    <!-- Warnings -->
-    <!-- AlertDialog title -->
-    <!-- Error messages -->
+    
+    
+    
+    
     <string name="error_no_version">Versioon puudub!</string>
     <string name="error_show_more">Kuva rohkem</string>
     <string name="error_show_less">Kuva vähem</string>
-    <!-- Toast messages -->
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
+    
     <string name="mcl_tab_wiki">Viki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_downloading">%s allalaadimine</string>
     <string name="mcl_options">Valikud</string>
     <string name="mcl_option_customcontrol">Kohandatud juhtnupud</string>
@@ -35,7 +33,7 @@
     <string name="mcl_setting_veroption_oldalpha">Vana alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Vana beeta</string>
     <string name="mcl_version_clone">Klooni</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Muuda</string>
     <string name="global_error">Viga</string>
     <string name="global_load">Laadi</string>
@@ -49,8 +47,8 @@
     <string name="global_waiting">Ootamine</string>
     <string name="global_retry">Proovi uuesti</string>
     <string name="global_default">Vaikimisi</string>
-    <!-- MainActivity: strings -->
-    <!-- MainActivity: Control buttons -->
+    
+    
     <string name="control_chat">Vestlus</string>
     <string name="control_debug">Silur</string>
     <string name="control_primary">Vasak</string>
@@ -61,16 +59,13 @@
     <string name="control_mouse">Hiir</string>
     <string name="control_mouseoff">Hiir: väljas</string>
     <string name="control_mouseon">Hiir: sees</string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Sundsulge</string>
     <string name="control_viewout">Logiväljund</string>
     <string name="control_adebug">Sisendite silumine</string>
     <string name="control_customkey">Saada kohandatud klahvikood</string>
-    <!-- ImportControlActivity Strings -->
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
+    
     <string name="customctrl_toggle">Lülitatav</string>
     <string name="customctrl_size">Suurus</string>
     <string name="customctrl_mapping">Kaardistamine</string>

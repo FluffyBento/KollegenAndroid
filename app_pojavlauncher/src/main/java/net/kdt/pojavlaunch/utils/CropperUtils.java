@@ -58,8 +58,8 @@ public class CropperUtils {
         bindViews(dialog, cropImageView);
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{
             dialog.dismiss();
-            // I chose 70 dp here because it resolves to 192x192 on my device
-            // (which has a typical screen density of 395 dpi)
+            
+            
             cropperListener.onCropped(cropImageView.crop((int) Tools.dpToPx(70)));
         });
         PojavApplication.sExecutorService.execute(()->{
@@ -74,13 +74,13 @@ public class CropperUtils {
         });
     }
 
-    // Fixes the chin that the dialog has on my huawei fon
+    
     private static void fixDialogHeight(AlertDialog dialog) {
         Window dialogWindow = dialog.getWindow();
         if(dialogWindow != null)
             dialogWindow.setLayout(
-                    WindowManager.LayoutParams.MATCH_PARENT, // width
-                    WindowManager.LayoutParams.WRAP_CONTENT  // height
+                    WindowManager.LayoutParams.MATCH_PARENT, 
+                    WindowManager.LayoutParams.WRAP_CONTENT  
             );
     }
 
@@ -111,13 +111,13 @@ public class CropperUtils {
                 cropBehaviour.setRegionDecoder(regionDecoder);
                 return cropBehaviour;
             }catch (IOException e) {
-                // Catch IOE here to detect the case when BitmapRegionDecoder does not support this image format.
-                // If it does not, we will just have to load the bitmap in full resolution using BitmapFactory.
+                
+                
                 Log.w("CropperUtils", "Failed to load image into BitmapRegionDecoder", e);
             }
         }
-        // We can safely re-open the stream here as ACTION_OPEN_DOCUMENT grants us long-term access
-        // to the file that we have picked.
+        
+        
         try (InputStream inputStream = contentResolver.openInputStream(selectedUri)) {
             if(inputStream == null) return null;
             Bitmap originalBitmap = BitmapFactory.decodeStream(inputStream);

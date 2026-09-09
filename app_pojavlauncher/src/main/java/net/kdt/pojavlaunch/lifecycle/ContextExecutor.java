@@ -12,11 +12,7 @@ public class ContextExecutor {
     private static WeakReference<Activity> sActivity;
 
 
-    /**
-     * Schedules a ContextExecutorTask to be executed. For more info on tasks, please read
-     * ContextExecutorTask.java
-     * @param contextExecutorTask the task to be executed
-     */
+    
     public static void execute(ContextExecutorTask contextExecutorTask) {
         Tools.runOnUiThread(()->executeOnUiThread(contextExecutorTask));
     }
@@ -35,34 +31,23 @@ public class ContextExecutor {
         }
     }
 
-    /**
-     * Set the Activity that this ContextExecutor will use for executing tasks
-     * @param activity the activity to be used
-     */
+    
     public static void setActivity(Activity activity) {
         sActivity = new WeakReference<>(activity);
     }
 
-    /**
-     * Clear the Activity previously set, so thet ContextExecutor won't use it to execute tasks.
-     */
+    
     public static void clearActivity() {
         if(sActivity != null)
             sActivity.clear();
     }
 
-    /**
-     * Set the Application that will be used to execute tasks if the Activity won't be available.
-     * @param application the application to use as the fallback
-     */
+    
     public static void setApplication(Application application) {
         sApplication = new WeakReference<>(application);
     }
 
-    /**
-     * Clear the Application previously set, so that ContextExecutor will notify the user of a critical error
-     * that is executing code after the application is ended by the system.
-     */
+    
     public static void clearApplication() {
         if(sApplication != null)
             sApplication.clear();

@@ -125,7 +125,7 @@
         app:layout_constraintTop_toTopOf="@+id/mc_version_spinner" />
 
 
-    <!-- This view is for cosmetic purpose only -->
+    
     <View
         android:id="@+id/_background_display_view"
         android:layout_width="match_parent"

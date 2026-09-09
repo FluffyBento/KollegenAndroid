@@ -30,7 +30,7 @@ public class LauncherMenuButton extends ExtendedButton {
     }
 
 
-    /** Set style stuff */
+    
     private void setSettings(){
         Resources resources = getContext().getResources();
 
@@ -41,7 +41,7 @@ public class LauncherMenuButton extends ExtendedButton {
 
         setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen._12ssp));
 
-        // Set drawable size
+        
         int[] sizes = getExtendedViewData().getSizeCompounds();
         sizes[0] = resources.getDimensionPixelSize(R.dimen._30sdp);
         getExtendedViewData().setSizeCompounds(sizes);

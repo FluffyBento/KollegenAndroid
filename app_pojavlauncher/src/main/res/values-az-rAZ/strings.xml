@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Daxil ol</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Bu hesab silinəcək!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Mod quraşdırıcısını seçin</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen gözlənilmədən çökdü</string>
     <string name="error_no_version">Versiya yoxdur!</string>
     <string name="error_show_more">Daha çox göstər</string>
     <string name="error_show_less">Daha az göstər</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Yaddaşı oxumaq/yazmaq icazəsi tələb olunur!</string>
     <string name="toast_optifine_success">Uğurlu quraşdırma</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Viki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Keş faylları təmizlənir</string>
     <string name="mcl_launch_downloading">Endirilir %s</string>
     <string name="mcl_launch_downloading_progress">"Endirilir %s (%.2f MB / %.2f MB)"</string>
@@ -46,7 +44,7 @@
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (bütün versiyalar, orta)</string>
     <string name="mcl_setting_veroption_release">Buraxın</string>
     <string name="mcl_version_clone">Klon</string>
-    <!-- Global strings -->
+    
     <string name="global_error">Xəta</string>
     <string name="global_clone">Klon</string>
     <string name="global_restart">Yenidən başlat</string>
@@ -55,31 +53,28 @@
     <string name="global_waiting">Gözləyin</string>
     <string name="global_retry">Yenidən cəhd et</string>
     <string name="global_default">Defolt</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Proqram/Oyun %d kodu ilə çıxdı, ətraflı məlumat üçün latestlog.txt-ə baxın.</string>
     <string name="mcn_exit_confirm">Zorla bağlamaq istədiyinizə əminsiniz?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) rendereri bu cihazda dəstəklənmir!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Söhbət</string>
     <string name="control_debug">Sazlama</string>
     <string name="control_thirdperson">3-cü</string>
     <string name="control_mouse">Siçan</string>
     <string name="control_mouseoff">Siçan: qeyri-aktiv</string>
     <string name="control_mouseon">Siçan: aktiv </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_adebug">Sazlama daxil et</string>
     <string name="control_customkey">Fərdi açar kodunu göndərin</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Kontrolları idxal et</string>
     <string name="import_control_invalid_file">Keçərsiz və ya zədələnmiş fayl</string>
     <string name="import_control_import_button">kontrolları idxal et</string>
     <string name="import_control_verifying_file">Fayl təsdiqlənir, gözləyin və yenidən cəhd edin…</string>
     <string name="import_control_invalid_name">Yanlış ad və ya fayl artıq mövcuddur</string>
     <string name="import_control_done">İdxal edildi</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_corner_radius">Künc radiusu</string>
     <string name="customctrl_stroke_width">Ştrix eni</string>
     <string name="customctrl_button_opacity">Düymənin qeyri-şəffaflığı</string>

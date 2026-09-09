@@ -1,15 +1,15 @@
-// SPDX-License-Identifier: MIT
-// Copyright (c) 2026 alexytomi
+
+
 
 #include <elf.h>
 
-// Arch specific helpers
+
 
 #if defined(__aarch64__) || defined(__x86_64__)
 #define BITNESS 64
 #define SEARCH_PATH "/system/lib64"
-// Do not use the full path, let it dynamically find the path
-// The /system/bin/linker64 file is NOT what we want.
+
+
 #define LINKER "linker64"
 
 #define ELF_EHDR Elf64_Ehdr
@@ -30,11 +30,11 @@
 #define ELF_DYN Elf32_Dyn
 #define ELF_SYM Elf32_Sym
 #else
-// Why are you in RISCV?? /j
+
 #error "Unsupported or unknown CPU architecture"
 #endif
 
-// Logging
+
 #include <android/log.h>
 
 #ifndef TAG
@@ -47,7 +47,7 @@
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__)
 #define LOGF(...) __android_log_print(ANDROID_LOG_FATAL, TAG, __VA_ARGS__)
 
-// General functions that am annoyed NDK doesn't provide
+
 
 #ifdef __cplusplus
 extern "C" {

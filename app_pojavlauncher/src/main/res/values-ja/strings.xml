@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">ユーザー名</string>
     <string name="login_online_login_label">ログイン</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">このアカウントが削除されます！</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Mod インストーラーを選択</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen が異常終了しました</string>
     <string name="error_no_version">バージョンがありません</string>
     <string name="error_show_more">詳細を表示</string>
     <string name="error_show_less">詳細を閉じる</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">ストレージへの読み書き権限が必要です</string>
     <string name="toast_optifine_success">インストールが完了しました</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">ウィキペディア</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">キャッシュファイルを消去中</string>
     <string name="mcl_launch_downloading">%s をダウンロード中</string>
     <string name="mcl_launch_downloading_progress">"%s (%.2f MB / %.2f MB) をダウンロードしています"</string>
@@ -54,7 +52,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alpha 版</string>
     <string name="mcl_setting_veroption_oldbeta">Beta 版</string>
     <string name="mcl_version_clone">複製</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">編集</string>
     <string name="global_error">エラー</string>
     <string name="global_load">読み込む</string>
@@ -70,12 +68,12 @@
     <string name="global_retry">再試行</string>
     <string name="global_default">デフォルト</string>
     <string name="global_off">オフ</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">アプリケーション/ゲームはコード %dで終了しました。詳細についてはlatestlog.txtをご確認ください</string>
     <string name="mcn_signal_title">アプリケーション/ゲームはコード %dで終了しました。詳細についてはlatestlog.txtをご確認ください。</string>
     <string name="mcn_exit_confirm">強制終了しますか？</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) レンダラーは、このデバイスでサポートされていません!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">チャット</string>
     <string name="control_debug">デバッグ</string>
     <string name="control_primary">左</string>
@@ -92,22 +90,19 @@
     <string name="control_mouse">カーソル</string>
     <string name="control_mouseoff">カーソル: OFF</string>
     <string name="control_mouseon">カーソル: ON </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">強制終了</string>
     <string name="control_viewout">ログ</string>
     <string name="control_adebug">入力デバッグ</string>
     <string name="control_customkey">カスタムキーコードを送信する</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">操作の読み込み</string>
     <string name="import_control_invalid_file">ファイルが無効または破損しています。</string>
     <string name="import_control_import_button">操作の読み込み</string>
     <string name="import_control_verifying_file">ファイルが検証されています。しばらくしてからもう一度お試し下さい。。。</string>
     <string name="import_control_invalid_name">無効な名前またはファイルがすでに存在します</string>
     <string name="import_control_done">読み込み完了</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">切り替え可能</string>
     <string name="customctrl_size">サイズ</string>
     <string name="customctrl_mapping">割り当て</string>

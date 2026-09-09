@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Iniciar sessió</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Aquesta conta sera eliminada!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Selecciona un mod per afegir</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen s’ha parat inesperadament</string>
     <string name="error_no_version">Cap versio!</string>
     <string name="error_show_more">Mostra més</string>
     <string name="error_show_less">Mostrar menys</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Es requireix el permis de llegir/escriure!</string>
     <string name="toast_optifine_success">Instalació completada</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
+    
+    
     <string name="mcl_launch_downloading_progress">"Descarregant %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_setting_title_use_surface_view">Utilitza la renderització de superfície alternativa</string>
     <string name="mcl_setting_subtitle_use_surface_view">Pot millorar el rendiment a escenaris lligats al GPU.</string>
@@ -38,28 +36,25 @@
     <string name="mcl_setting_subtitle_mousescale">Canvia la mida del cursor virtual.</string>
     <string name="mcl_setting_subtitle_javaargs">Vés amb compte, això podria provocar un bloqueig del joc si es modifica sense coneixement.</string>
     <string name="mcl_setting_category_renderer">Renderitzador</string>
-    <!-- Global strings -->
+    
     <string name="global_unpacking">S\'està desempaquetant %s</string>
     <string name="global_waiting">Espera</string>
     <string name="global_retry">Torna a provar</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Aplicació/Joc ha eixit amb codi %d, consulta el latestlog.txt per més detalls.</string>
     <string name="mcn_check_fail_vulkan_support">El renderitzador Zink (Vulkan) no està suportat a aquest dispositiu!</string>
-    <!-- MainActivity: Control buttons -->
-    <!-- MainActivity: Menu advanced controls -->
+    
+    
     <string name="control_viewout">Registra la sortida</string>
     <string name="control_adebug">PointerCapture Debug</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Importar controls</string>
     <string name="import_control_invalid_file">Fitxer corrupte o invàlid</string>
     <string name="import_control_import_button">Importar controls</string>
     <string name="import_control_verifying_file">El fitxer està sent verificat, si us plau espereu per tornar-ho a intentar…</string>
     <string name="import_control_invalid_name">Nom invàlid o el fitxer ja existeix</string>
     <string name="import_control_done">Importació completada</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_size">Mida</string>
     <string name="customctrl_corner_radius">Radi de cantó</string>
     <string name="customctrl_stroke_width">Ample de traç</string>

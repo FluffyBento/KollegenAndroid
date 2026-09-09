@@ -85,7 +85,7 @@ public class JREUtils {
         }
         dlopen(findInLdLibPath("libverify.so"));
         dlopen(findInLdLibPath("libjava.so"));
-        // dlopen(findInLdLibPath("libjsig.so"));
+        
         dlopen(findInLdLibPath("libnet.so"));
         dlopen(findInLdLibPath("libnio.so"));
         dlopen(findInLdLibPath("libawt.so"));
@@ -108,8 +108,8 @@ public class JREUtils {
             public void run() {
                 try {
                     if (logcatPb == null) {
-                        // No filtering by tag anymore as that relied on incorrect log levels set in log.h
-                        logcatPb = new ProcessBuilder().command("logcat", /* "-G", "1mb", */ "-v", "brief", "-s", "jrelog", "LIBGL", "NativeInput").redirectErrorStream(true);
+                        
+                        logcatPb = new ProcessBuilder().command("logcat",  "-v", "brief", "-s", "jrelog", "LIBGL", "NativeInput").redirectErrorStream(true);
                     }
 
                     Log.i("jrelog-logcat","Clearing logcat");
@@ -170,7 +170,7 @@ public class JREUtils {
                 .append("/vendor/").append(libName).append(":")
                 .append("/vendor/").append(libName).append("/hw:")
                 .append(NATIVE_LIB_DIR);
-        // FIXME: Freetype is shipped inside lwjgl. We should ship it outside and use lwjgl native jars instead.
+        
         String lwjglVer = Tools.sLwjglVersion == null ? "3.3.3" : Tools.sLwjglVersion;
         ldLibraryPath.append(String.format(":%s/lwjgl-%s-natives/%s", Tools.DIR_DATA, lwjglVer, archAsStringAndroid(getDeviceArchitecture())));
         LD_LIBRARY_PATH = ldLibraryPath.toString();
@@ -184,13 +184,13 @@ public class JREUtils {
         envMap.put("TMPDIR", Tools.DIR_CACHE.getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 
-        // Prevent OptiFine (and other error-reporting stuff in Minecraft) from balooning the log
+        
         envMap.put("LIBGL_NOERROR", "1");
 
-        // On certain GLES drivers, overloading default functions shader hack fails, so disable it
+        
         envMap.put("LIBGL_NOINTOVLHACK", "1");
 
-        // Fix white color on banner and sheep, since GL4ES 1.1.5
+        
         envMap.put("LIBGL_NORMALIZE", "1");
 
         if(PREF_DUMP_SHADERS)
@@ -201,7 +201,7 @@ public class JREUtils {
             envMap.put("POJAV_EMUI_ITERATOR_MITIGATE", "1");
 
 
-        // The OPEN GL version is changed according
+        
         envMap.put("LIBGL_ES", (String) ExtraCore.getValue(ExtraConstants.OPEN_GL_VERSION));
 
         envMap.put("FORCE_VSYNC", String.valueOf(LauncherPreferences.PREF_FORCE_VSYNC));
@@ -222,46 +222,41 @@ public class JREUtils {
             envMap.put("AMETHYST_RENDERER", LOCAL_RENDERER);
             if(LOCAL_RENDERER.equals("opengles3_ltw")) {
                 envMap.put("LIBGL_ES", "3");
-                envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
+                envMap.put("POJAVEXEC_EGL","libltw.so"); 
             }
             if(LOCAL_RENDERER.equals("opengles_mobileglues")){
                 envMap.put("MG_DIR_PATH", Tools.DIR_DATA + "/MobileGlues");
                 envMap.put("LIBGL_ES", "3");
                 envMap.put("POJAVEXEC_EGL","libmobileglues.so");
             }
-            /*
-                Set these to enable ANGLE on GL4ES
-                LIBGL_GLES=libGLESv2_angle.so
-                LIBGL_EGL=libEGL_angle.so
-                LD_PRELOAD=libGLESv2_angle:libEGL_angle.so
-            */
+            
             if(LOCAL_RENDERER.equals("opengles2")){
-                envMap.put("LIBGL_ES", "2"); // Krypton Wrapper crashes with 1
+                envMap.put("LIBGL_ES", "2"); 
                 if (Tools.useANGLE) {
                     envMap.put("LIBGL_GLES", "libGLESv2_angle.so");
                     envMap.put("LIBGL_EGL", "libEGL_angle.so");
                     envMap.put("POJAVEXEC_EGL", "libEGL_angle.so");
                 }
-                // Don't use with gl4es, they're both doing the same thing.
+                
                 Tools.useSFPEW = false;
             }
             if (LOCAL_RENDERER.equals("opengles_system_gles")) {
                 if (Tools.useANGLE) {
                     envMap.put("POJAVEXEC_EGL", "libEGL_angle.so");
                 }
-                // Not advised to be used with android GLES drivers for now.
-                // MobileGL(ues) adds GPU specific fixes which SFPEW needs.
+                
+                
                 Tools.useSFPEW = false;
             }
             if (LOCAL_RENDERER.equals("opengles3_desktopgl_zink_kopper")){
-                envMap.put("POJAVEXEC_EGL", "libEGL_mesa.so"); // Use Mesa EGL
-                if (Tools.shouldUseUBWC()) envMap.put("FD_DEV_FEATURES", "enable_tp_ubwc_flag_hint=1"); // Turnip fix for OneUI rendering issues
+                envMap.put("POJAVEXEC_EGL", "libEGL_mesa.so"); 
+                if (Tools.shouldUseUBWC()) envMap.put("FD_DEV_FEATURES", "enable_tp_ubwc_flag_hint=1"); 
             }
             if (LOCAL_RENDERER.toLowerCase().contains("zink")){
-                // This is sketch but it fixes a lot of things, if it causes problems we can just undo it.
+                
                 envMap.put("MESA_GL_VERSION_OVERRIDE","4.6COMPAT");
                 envMap.put("MESA_GLSL_VERSION_OVERRIDE","460");
-                // Don't use with Zink, it also does the same thing.
+                
                 Tools.useSFPEW = false;
             }
             if (Tools.useSFPEW) {
@@ -279,13 +274,13 @@ public class JREUtils {
             Log.i("glesDetect","GLES version detected: "+glesMajor);
 
             if (glesMajor < 3) {
-                //fallback to 2 since it's the minimum for the entire app
+                
                 envMap.put("LIBGL_ES","2");
             } else if (LOCAL_RENDERER.startsWith("opengles")) {
                 envMap.put("LIBGL_ES", LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
-                // TODO if can: other backends such as Vulkan.
-                // Sure, they should provide GLES 3 support.
+                
+                
                 envMap.put("LIBGL_ES", "3");
             }
         }
@@ -297,7 +292,7 @@ public class JREUtils {
         envMap.put("DALVIK_APPLICATION", Tools.jObjectToString(activity.getApplication()));
         envMap.put("DALVIK_JAVAVM", String.valueOf(Tools.getJavaVMPointer()));
 
-        readCustomEnv(envMap); // Must be last so it overrides anything the user sets for obvious reasons.
+        readCustomEnv(envMap); 
 
         for (Map.Entry<String, String> env : envMap.entrySet()) {
             Logger.appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
@@ -314,7 +309,7 @@ public class JREUtils {
         Log.d("DynamicLoader","Internal LD_LIBRARY_PATH: "+jvmLibraryPath+":"+LD_LIBRARY_PATH);
         setLdLibraryPath(jvmLibraryPath+":"+LD_LIBRARY_PATH);
 
-        // return ldLibraryPath;
+        
     }
 
     private static void readCustomEnv(Map<String, String> envMap) throws IOException {
@@ -323,7 +318,7 @@ public class JREUtils {
             BufferedReader reader = new BufferedReader(new FileReader(customEnvFile));
             String line;
             while ((line = reader.readLine()) != null) {
-                // Not use split() as only split first one
+                
                 int index = line.indexOf("=");
                 envMap.put(line.substring(0, index), line.substring(index + 1));
             }
@@ -338,11 +333,11 @@ public class JREUtils {
         setJavaEnvironment(activity, runtimeHome);
         final String graphicsLib = loadGraphicsLibrary();
 
-        // Has to run after SDL env vars are set
+        
         try {
-            // If using nothing (aka sys driver) then don't set this so SDL can auto find the
-            // native gles driver, because providing it ourselves is useless effort.
-            // This only matters for Angelica because Mojunk is never using SDL on non-Core
+            
+            
+            
             if (graphicsLib != null && !LOCAL_RENDERER.equals("opengles_system_gles"))
                 Os.setenv("SDL_OPENGL_LIBRARY", graphicsLib, true);
             if (Os.getenv("POJAVEXEC_EGL") != null && !LOCAL_RENDERER.equals("opengles_system_gles"))
@@ -353,7 +348,7 @@ public class JREUtils {
 
         List<String> userArgs = getJavaArgs(activity, runtimeHome, userArgsString);
 
-        //Remove arguments that can interfere with the good working of the launcher
+        
         purgeArg(userArgs,"-Xms");
         purgeArg(userArgs,"-Xmx");
         purgeArg(userArgs,"-d32");
@@ -363,28 +358,28 @@ public class JREUtils {
         purgeArg(userArgs, "-XX:+UseLargePagesInMetaspace");
         purgeArg(userArgs, "-XX:+UseLargePages");
         purgeArg(userArgs, "-Dorg.lwjgl.opengl.libname");
-        // Don't let the user specify a custom Freetype library (as the user is unlikely to specify a version compiled for Android)
+        
         purgeArg(userArgs, "-Dorg.lwjgl.freetype.libname");
-        // Overridden by us to specify the exact number of cores that the android system has
+        
         purgeArg(userArgs, "-XX:ActiveProcessorCount");
 
-        //Add automatically generated args
+        
         userArgs.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
         userArgs.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
         if(LOCAL_RENDERER != null) userArgs.add("-Dorg.lwjgl.opengl.libname=" + graphicsLib);
 
-        // Force LWJGL to use the Freetype library intended for it, instead of using the one
-        // that we ship with Java (since it may be older than what's needed)
+        
+        
         userArgs.add("-Dorg.lwjgl.freetype.libname="+ Tools.lwjglNativesDir +"/libfreetype.so");
-        // Our spirv-cross is compiled shared, so it gets named shared.
+        
         userArgs.add("-Dorg.lwjgl.spvc.libname=spirv-cross-c-shared");
 
-        // We don't have jemalloc for our LWJGL so set the allocator to system to avoid error logs
+        
         userArgs.add("-Dorg.lwjgl.system.allocator=system");
 
-        // Some phones are not using the right number of cores, fix that
+        
         userArgs.add("-XX:ActiveProcessorCount=" + java.lang.Runtime.getRuntime().availableProcessors());
-        // Adds/changes methods for compatibility
+        
         userArgs.add("-javaagent:"+new File(Tools.DIR_DATA,"MioLibPatcher/MioLibPatcher.jar").getAbsolutePath());
         userArgs.add("-Dmiolibpatcher.alc10=true");
 
@@ -396,7 +391,7 @@ public class JREUtils {
         JREUtils.setupExitMethod(activity.getApplication());
         JREUtils.initializeHooks();
         chdir(gameDirectory == null ? Tools.DIR_GAME_NEW : gameDirectory.getAbsolutePath());
-        userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
+        userArgs.add(0,"java"); 
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
         Logger.appendToLog("Java Exit code: " + exitCode);
@@ -410,12 +405,7 @@ public class JREUtils {
         Tools.fullyExit();
     }
 
-    /**
-     *  Gives an argument list filled with both the user args
-     *  and the auto-generated ones (eg. the window resolution).
-     * @param ctx The application context
-     * @return A list filled with args.
-     */
+    
     public static List<String> getJavaArgs(Context ctx, String runtimeHome, String userArgumentsString) {
         List<String> userArguments = parseJavaArguments(userArgumentsString);
         String resolvFile;
@@ -434,21 +424,21 @@ public class JREUtils {
                 "-Duser.timezone=" + TimeZone.getDefault().getID(),
 
                 "-Dorg.lwjgl.vulkan.libname=libvulkan.so",
-                //LWJGL 3 DEBUG FLAGS
-                //"-Dorg.lwjgl.util.Debug=true",
-                //"-Dorg.lwjgl.util.DebugFunctions=true",
-                //"-Dorg.lwjgl.util.DebugLoader=true",
-                // GLFW Stub width height
+                
+                
+                
+                
+                
                 "-Dglfwstub.windowWidth=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, LauncherPreferences.PREF_SCALE_FACTOR),
                 "-Dglfwstub.windowHeight=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, LauncherPreferences.PREF_SCALE_FACTOR),
                 "-Dglfwstub.initEgl=false",
                 "-Dext.net.resolvPath=" +resolvFile,
-                "-Dlog4j2.formatMsgNoLookups=true", //Log4j RCE mitigation
+                "-Dlog4j2.formatMsgNoLookups=true", 
 
                 "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
-                "-Dfml.earlyprogresswindow=false", //Forge 1.14+ workaround
+                "-Dfml.earlyprogresswindow=false", 
                 "-Dloader.disable_forked_guis=true",
-                "-Djdk.lang.Process.launchMechanism=FORK" // Default is POSIX_SPAWN which requires starting jspawnhelper, which doesn't work on Android
+                "-Djdk.lang.Process.launchMechanism=FORK" 
         ));
         if(LauncherPreferences.PREF_ARC_CAPES) {
             overridableArguments.add("-javaagent:"+new File(Tools.DIR_DATA,"arc_dns_injector/arc_dns_injector.jar").getAbsolutePath()+"=23.95.137.176");
@@ -469,29 +459,22 @@ public class JREUtils {
                 Log.i("ArgProcessor","Arg skipped: "+arg);
         }
 
-        //Add all the arguments
+        
         userArguments.addAll(additionalArguments);
         return userArguments;
     }
 
-    /**
-     * Parse and separate java arguments in a user friendly fashion
-     * It supports multi line and absence of spaces between arguments
-     * The function also supports auto-removal of improper arguments, although it may miss some.
-     *
-     * @param args The un-parsed argument list.
-     * @return Parsed args as an ArrayList
-     */
+    
     public static ArrayList<String> parseJavaArguments(String args){
         ArrayList<String> parsedArguments = new ArrayList<>(0);
         args = args.trim().replace(" ", "");
-        //For each prefixes, we separate args.
+        
         String[] separators = new String[]{"-XX:-","-XX:+", "-XX:","--", "-D", "-X", "-javaagent:", "-verbose"};
         for(String prefix : separators){
             while (true){
                 int start = args.indexOf(prefix);
                 if(start == -1) break;
-                //Get the end of the current argument by checking the nearest separator
+                
                 int end = -1;
                 for(String separator: separators){
                     int tempEnd = args.indexOf(separator, start + prefix.length());
@@ -502,19 +485,19 @@ public class JREUtils {
                     }
                     end = Math.min(end, tempEnd);
                 }
-                //Fallback
+                
                 if(end == -1) end = args.length();
 
-                //Extract it
+                
                 String parsedSubString = args.substring(start, end);
                 args = args.replace(parsedSubString, "");
 
-                //Check if two args aren't bundled together by mistake
+                
                 if(parsedSubString.indexOf('=') == parsedSubString.lastIndexOf('=')) {
                     int arraySize = parsedArguments.size();
                     if(arraySize > 0){
                         String lastString = parsedArguments.get(arraySize - 1);
-                        // Looking for list elements
+                        
                         if(lastString.charAt(lastString.length() - 1) == ',' ||
                                 parsedSubString.contains(",")){
                             parsedArguments.set(arraySize - 1, lastString + parsedSubString);
@@ -529,11 +512,7 @@ public class JREUtils {
         return parsedArguments;
     }
 
-    /**
-     * Open the render library in accordance to the settings.
-     * It will fallback if it fails to load the library.
-     * @return The name of the loaded library
-     */
+    
     public static String loadGraphicsLibrary(){
         if(LOCAL_RENDERER == null) return null;
         String renderLibrary;
@@ -546,13 +525,13 @@ public class JREUtils {
             case "opengles_mobileglues": renderLibrary = "libmobileglues.so"; break;
             case "opengles3_desktopgl_zink_kopper": renderLibrary = "libglxshim.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
-            case "opengles_system_gles" : return null; // Literally nothing, this is for system GLES.
+            case "opengles_system_gles" : return null; 
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles_mobileglues");
                 renderLibrary = "libmobileglues.so";
                 break;
         }
-        // Has to run before dlopening mobileglues
+        
         if(LOCAL_RENDERER.equals("opengles_mobileglues")){
             try {
                 Os.setenv("MG_DIR_PATH", Tools.DIR_DATA + "/MobileGlues", true);
@@ -569,19 +548,14 @@ public class JREUtils {
             dlopen(NATIVE_LIB_DIR + "/libmobileglues.so");
         }
 
-        // The final switch for using SFPEW.
+        
         if (Tools.useSFPEW) {
             renderLibrary = "libSimpleFPEWrapper.so";
         }
         return renderLibrary;
     }
 
-    /**
-     * Remove the argument from the list, if it exists
-     * If the argument exists multiple times, they will all be removed.
-     * @param argList The argument list to purge
-     * @param argStart The argument to purge from the list.
-     */
+    
     private static void purgeArg(List<String> argList, String argStart) {
         Iterator<String> args = argList.iterator();
         while(args.hasNext()) {
@@ -596,7 +570,7 @@ public class JREUtils {
     private static boolean hasExtension(String extensions, String name) {
         int start = extensions.indexOf(name);
         while (start >= 0) {
-            // check that we didn't find a prefix of a longer extension name
+            
             int end = start + name.length();
             if (end == extensions.length() || extensions.charAt(end) == ' ') {
                 return true;
@@ -616,8 +590,8 @@ public class JREUtils {
     public static native void releaseBridgeWindow();
     public static native void initializeHooks();
     public static native void setupExitMethod(Context context);
-    // Obtain AWT screen pixels to render on Android SurfaceView
-    public static native int[] renderAWTScreenFrame(/* Object canvas, int width, int height */);
+    
+    public static native int[] renderAWTScreenFrame();
     static {
         System.loadLibrary("exithook");
         System.loadLibrary("pojavexec");

@@ -36,7 +36,7 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
         List<JMinecraftVersionList.Version> betaList = new FilteredSubList<>(versionList, item -> item.type.equals("old_beta"));
         List<JMinecraftVersionList.Version> alphaList = new FilteredSubList<>(versionList, item -> item.type.equals("old_alpha"));
 
-        // Query installed versions
+        
         mInstalledVersions = new File(Tools.DIR_GAME_NEW + "/versions").list();
         if(mInstalledVersions != null)
             Arrays.sort(mInstalledVersions);

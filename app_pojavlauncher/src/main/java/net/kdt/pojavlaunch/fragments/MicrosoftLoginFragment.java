@@ -25,7 +25,7 @@ import net.kdt.pojavlaunch.extra.ExtraCore;
 public class MicrosoftLoginFragment extends Fragment {
     public static final String TAG = "MICROSOFT_LOGIN_FRAGMENT";
     private WebView mWebview;
-    // Technically the client is blank (or there is none) when the fragment is initialized
+    
     private boolean mBlankClient = true;
 
     @Override
@@ -37,9 +37,9 @@ public class MicrosoftLoginFragment extends Fragment {
         return mWebview;
     }
 
-    // WebView.restoreState() does not restore the WebSettings or the client, so set them there
-    // separately. Note that general state should not be altered here (aka no loading pages, no manipulating back/front lists),
-    // to avoid "undesirable side-effects"
+    
+    
+    
     @SuppressLint("SetJavaScriptEnabled")
     private void setWebViewSettings() {
         WebSettings settings = mWebview.getSettings();
@@ -66,8 +66,8 @@ public class MicrosoftLoginFragment extends Fragment {
         Log.i("MSAuthFragment","Restoring state...");
         if(mWebview.restoreState(savedInstanceState) == null) {
             Log.w("MSAuthFragment", "Failed to restore state, starting afresh");
-            // if, for some reason, we failed to restore our session,
-            // just start afresh
+            
+            
             startNewSession();
         }
     }
@@ -75,35 +75,35 @@ public class MicrosoftLoginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // If we have switched to a blank client and haven't fully gone though the lifecycle callbacks to restore it,
-        // restore it here.
+        
+        
         if(mBlankClient) mWebview.setWebViewClient(new WebViewTrackClient());
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        // Since the value cannot be null, just create a "blank" client. This is done to not let Android
-        // kill us if something happens after the state gets saved, when we can't do fragment transitions
+        
+        
         mWebview.setWebViewClient(new WebViewClient());
-        // For some dumb reason state is saved even when Android won't actually destroy the activity.
-        // Let the fragment know that the client is blank so that we can restore it in onStart()
-        // (it was the earliest lifecycle call actually invoked in this case)
+        
+        
+        
         mBlankClient = true;
         super.onSaveInstanceState(outState);
         mWebview.saveState(outState);
     }
 
-    /* Expose webview actions to others */
+    
     public boolean canGoBack(){ return mWebview.canGoBack();}
     public void goBack(){ mWebview.goBack();}
 
-    /** Client to track when to sent the data to the launcher */
+    
     class WebViewTrackClient extends WebViewClient {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if(url.startsWith("ms-xal-00000000402b5328")) {
-                // Should be captured by the activity to kill the fragment and get
+                
                 ExtraCore.setValue(ExtraConstants.MICROSOFT_LOGIN_TODO, Uri.parse(url));
                 Toast.makeText(view.getContext(), "Login started !", Toast.LENGTH_SHORT).show();
                 Tools.backToMainMenu(requireActivity());
@@ -111,7 +111,7 @@ public class MicrosoftLoginFragment extends Fragment {
                 return true;
             }
 
-            // Sometimes, the user just clicked cancel
+            
             if(url.contains("res=cancel")){
                 requireActivity().onBackPressed();
                 return true;

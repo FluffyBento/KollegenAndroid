@@ -58,14 +58,14 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
         return LauncherPreferences.PREF_DEFAULT_RUNTIME.equals(rt.name);
     }
 
-    @SuppressLint("NotifyDataSetChanged") //not a problem, given the typical size of the list
+    @SuppressLint("NotifyDataSetChanged") 
     public void setDefault(Runtime rt){
         LauncherPreferences.PREF_DEFAULT_RUNTIME = rt.name;
         LauncherPreferences.DEFAULT_PREF.edit().putString("defaultRuntime",LauncherPreferences.PREF_DEFAULT_RUNTIME).apply();
         notifyDataSetChanged();
     }
 
-    @SuppressLint("NotifyDataSetChanged") //not a problem, given the typical size of the list
+    @SuppressLint("NotifyDataSetChanged") 
     public void setIsEditing(boolean isEditing) {
         mIsDeleting = isEditing;
         notifyDataSetChanged();
@@ -103,7 +103,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
             setupOnClickListeners();
         }
 
-        @SuppressLint("NotifyDataSetChanged") // same as all the other ones
+        @SuppressLint("NotifyDataSetChanged") 
         private void setupOnClickListeners(){
             mSetDefaultButton.setOnClickListener(v -> {
                 if(mCurrentRuntime != null) {
@@ -158,7 +158,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
                 return;
             }
 
-            // Problematic runtime moment, force propose deletion
+            
             mDeleteButton.setVisibility(View.VISIBLE);
             if(runtime.versionString == null){
                 mFullJavaVersionTextView.setText(R.string.multirt_runtime_corrupt);
@@ -201,9 +201,9 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
                         Tools.showErrorRemote(e);
                     }
                     v.post(() -> {
-                        // Reset the listener for this button so SET DEFAULT actually sets default
+                        
                         setupOnClickListeners();
-                        // Update the UI so it knows it got installed
+                        
                         notifyDataSetChanged();
                         runtime.isDownloading = false;
                     });

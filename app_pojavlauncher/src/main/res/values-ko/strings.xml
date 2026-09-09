@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">사용자명</string>
     <string name="login_online_login_label">로그인</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"상단 중앙 톱니바퀴 아이콘을 탭하여 상황에 맞는 메뉴를 엽니다. ⚙\n버튼을 탭하여 키바인드를 편집, 크기 조정, 삭제, 사용자 지정합니다"</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">이 계정이 제거될 거예요!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">모드 설치기를 선택하세요</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen에 예기치 못한 충돌이 발생했어요</string>
     <string name="error_no_version">버전이 없습니다!</string>
     <string name="error_show_more">더 보기</string>
     <string name="error_show_less">간략히 보기</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">저장소에 대한 읽고 쓰기 권한이 필요합니다!</string>
     <string name="toast_optifine_success">설치 완료</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">위키</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">캐시 삭제</string>
     <string name="mcl_launch_downloading">%s 다운로드 중</string>
     <string name="mcl_launch_downloading_progress">"%s 다운로드 중 (%.2f MB / %.2fMB)"</string>
@@ -60,7 +58,7 @@
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_version_clone">복제</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">수정</string>
     <string name="global_error">오류</string>
     <string name="global_load">불러오기</string>
@@ -76,12 +74,12 @@
     <string name="global_retry">다시 시도</string>
     <string name="global_default">기본값</string>
     <string name="global_off">끔</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">애플리케이션/게임이 코드 %d와 함께 종료되었습니다, lastestlog.txt를 확인하여 추가 정보를 확인하세요.</string>
     <string name="mcn_signal_title">애플리케이션/게임이 %d로 인해 종료되었습니다, lastestlog.txt를 확인하여 추가 정보를 확인하세요.</string>
     <string name="mcn_exit_confirm">강제 종료하시겠습니까?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) 렌더러는 이 기기를 지원하지 않습니다!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">채팅</string>
     <string name="control_debug">디버그</string>
     <string name="control_primary">PRI</string>
@@ -98,22 +96,19 @@
     <string name="control_mouse">마우스</string>
     <string name="control_mouseoff">마우스: 끔</string>
     <string name="control_mouseon">마우스: 켬 </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">강제 종료</string>
     <string name="control_viewout">로그 확인</string>
     <string name="control_adebug">디버그 입력</string>
     <string name="control_customkey">사용자 지정 키 보내기</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">컨트롤 가져오기</string>
     <string name="import_control_invalid_file">잘못되거나 손상된 파일입니다</string>
     <string name="import_control_import_button">컨트롤 가져오기</string>
     <string name="import_control_verifying_file">파일을 확인하는 중, 나중에 다시 시도하세요...</string>
     <string name="import_control_invalid_name">이름이 잘못되었거나 파일이 이미 존재합니다</string>
     <string name="import_control_done">가져오기 완료</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">토글</string>
     <string name="customctrl_size">크기</string>
     <string name="customctrl_mapping">매핑</string>

@@ -39,10 +39,10 @@ public class ModpackInstaller {
             modpackName = modpackName.substring(0,255);
         }
 
-        // Build a new minecraft instance, folder first
+        
 
-        // Get the modpack file
-        File modpackFile = new File(Tools.DIR_CACHE, modpackName + ".cf"); // Cache File
+        
+        File modpackFile = new File(Tools.DIR_CACHE, modpackName + ".cf"); 
         ModLoader modLoaderInfo;
         try {
             byte[] downloadBuffer = new byte[8192];
@@ -53,11 +53,11 @@ public class ModpackInstaller {
                 return null;
             });
 
-            // Install the modpack
+            
             modLoaderInfo = installFunction.installModpack(modpackFile, new File(Tools.DIR_GAME_HOME, "custom_instances/"+modpackName));
 
         } finally {
-            //noinspection ResultOfMethodCallIgnored It's cache, who cares
+            
             modpackFile.delete();
             ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);
         }
@@ -65,7 +65,7 @@ public class ModpackInstaller {
             return null;
         }
 
-        // Create the instance
+        
         MinecraftProfile profile = new MinecraftProfile();
         profile.gameDir = "./custom_instances/" + modpackName;
         profile.name = modDetail.title;
@@ -81,7 +81,7 @@ public class ModpackInstaller {
 
     public static ModLoader importModpack(File modpackFile, int apiSource, InstallFunction installFunction) throws IOException, NoSuchAlgorithmException {
         ProgressLayout.setProgress(ProgressLayout.INSTALL_MODPACK, 1, R.string.import_modpack_start);
-        // modpackFile is deleted in LauncherActivity, no need to delete here.
+        
         if (modpackFile == null) throw new IOException("Can't open modpack file, try again?");
         String manifestFileName;
         switch (apiSource) {
@@ -94,11 +94,11 @@ public class ModpackInstaller {
             default:
                 throw new UnsupportedOperationException("Unknown API source: " + apiSource);
         }
-        // Read Manifest JSON
+        
         JsonObject manifestFile = JsonParser.parseString(Tools.read(ZipUtils.getEntryStream(
                     new ZipFile(modpackFile), manifestFileName))).getAsJsonObject();
 
-        // Parse the JSON to prepare for instance creation
+        
         ProgressLayout.setProgress(ProgressLayout.INSTALL_MODPACK, 1, R.string.import_modpack_json);
         String modpackName = "";
         String modpackVersion = "";
@@ -124,9 +124,9 @@ public class ModpackInstaller {
         }
         if(modpackName.isBlank() || modpackVersion.isBlank() || modpackMcVersion.isBlank()) throw new IOException("Corrupt Modpack manifest file.");
 
-        // Hash the ZIP File, can't use getSha1 cause progress bar
+        
         MessageDigest algorithm = MessageDigest.getInstance("SHA-1");
-        //noinspection IOStreamConstructor It will reccomend you use an API26 function like a dumb
+        
         DigestInputStream hashingStream = new DigestInputStream(new FileInputStream(modpackFile), algorithm);
         long fileSize = modpackFile.length();
         long readSize = 0;
@@ -150,11 +150,11 @@ public class ModpackInstaller {
         String profileFolderName = String.join(" ", modpackName, modpackVersion, "for", modpackMcVersion, hash);
         profileFolderName = profileFolderName.trim().replaceAll("[\\\\/:*?\"<>| \\t\\n]", "_");
 
-        // Install the actual pack into custom_instances
+        
         ModLoader modLoaderInfo = installFunction.installModpack(modpackFile, new File(Tools.DIR_GAME_HOME, "custom_instances/"+profileFolderName));
         ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);
 
-        // Create the instance (We don't have a picture guys)
+        
         MinecraftProfile profile = MinecraftProfile.getDefaultProfile();
         profile.gameDir = "./custom_instances/" + profileFolderName;
         profile.name = modpackName;

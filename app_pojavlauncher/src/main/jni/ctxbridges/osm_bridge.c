@@ -1,6 +1,6 @@
-//
-// Created by maks on 18.10.2023.
-//
+
+
+
 #include <malloc.h>
 #include <string.h>
 #include <environ/environ.h>
@@ -9,10 +9,10 @@
 #include <log.h>
 
 static __thread osm_render_window_t* currentBundle;
-// a tiny buffer for rendering when there's nowhere t render
+
 static char no_render_buffer[4];
 
-// Its not in a .h file because it is not supposed to be used outsife of this file.
+
 void setNativeWindowSwapInterval(struct ANativeWindow* nativeWindow, int swapInterval);
 
 bool osm_init() {
@@ -86,7 +86,7 @@ void osm_apply_current_ll() {
 
 void osm_make_current(osm_render_window_t* bundle) {
     if(bundle == NULL) {
-        //technically this does nothing as its not possible to unbind a context in OSMesa
+        
         OSMesaMakeCurrent_p(NULL, NULL, 0, 0, 0);
         currentBundle = NULL;
         return;
@@ -100,7 +100,7 @@ void osm_make_current(osm_render_window_t* bundle) {
         hasSetMainWindow = true;
     }
     if(bundle->nativeSurface == NULL) {
-        //prepare the buffer for our first render!
+        
         osm_swap_surfaces(bundle);
         if(hasSetMainWindow) pojav_environ->mainWindowBundle->state = STATE_RENDERER_ALIVE;
     }
@@ -120,7 +120,7 @@ void osm_swap_buffers() {
             osm_release_window();
 
     osm_apply_current_ll();
-    glFinish_p(); // this will force osmesa to write the last rendered image into the buffer
+    glFinish_p(); 
 
     if(currentBundle->nativeSurface != NULL && !currentBundle->disable_rendering)
         if(ANativeWindow_unlockAndPost(currentBundle->nativeSurface) != 0)

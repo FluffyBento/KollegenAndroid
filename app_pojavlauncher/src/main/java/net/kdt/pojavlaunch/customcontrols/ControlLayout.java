@@ -44,10 +44,10 @@ import java.util.List;
 
 public class ControlLayout extends FrameLayout {
 	protected CustomControls mLayout;
-	/* Accessible when inside the game by ControlInterface implementations, cached for perf. */
+	
 	private MinecraftGLSurface mGameSurface = null;
 
-	/* Cache to buttons for performance purposes */
+	
 	private List<ControlInterface> mButtons;
 	private boolean mModifiable = false;
 	private boolean mIsModified;
@@ -98,23 +98,23 @@ public class ControlLayout extends FrameLayout {
 		System.gc();
 		mapTable.clear();
 
-		// Cleanup buttons only when input layout is null
+		
 		if (controlLayout == null) return;
 
 		mLayout = controlLayout;
 		
 
-		// Joystick(s) first, to workaround the touch dispatch
+		
 		for(ControlJoystickData joystick : mLayout.mJoystickDataList){
 			addJoystickView(joystick);
 		}
 
-		//CONTROL BUTTON
+		
 		for (ControlData button : controlLayout.mControlDataList) {
 			addControlView(button);
 		}
 
-		//CONTROL DRAWER
+		
 		for(ControlDrawerData drawerData : controlLayout.mDrawerDataList){
 			ControlDrawer drawer = addDrawerView(drawerData);
 			if(mModifiable) drawer.areButtonsVisible = true;
@@ -124,10 +124,10 @@ public class ControlLayout extends FrameLayout {
 
 		setModified(sanitizedModified);
 		mButtons = null;
-		getButtonChildren(); // Force refresh
-	} // loadLayout
+		getButtonChildren(); 
+	} 
 
-	//CONTROL BUTTON
+	
 	public void addControlButton(ControlData controlButton) {
 		mLayout.mControlDataList.add(controlButton);
 		addControlView(controlButton);
@@ -146,7 +146,7 @@ public class ControlLayout extends FrameLayout {
 		setModified(true);
 	}
 
-	// CONTROL DRAWER
+	
 	public void addDrawer(ControlDrawerData drawerData){
 		mLayout.mDrawerDataList.add(drawerData);
 		addDrawerView();
@@ -166,7 +166,7 @@ public class ControlLayout extends FrameLayout {
 			view.setFocusableInTouchMode(false);
 		}
 		addView(view);
-		//CONTROL SUB BUTTON
+		
 		for (ControlData subButton : view.getDrawerData().buttonProperties) {
 			addSubView(view, subButton);
 		}
@@ -175,9 +175,9 @@ public class ControlLayout extends FrameLayout {
 		return view;
 	}
 
-	//CONTROL SUB-BUTTON
+	
 	public void addSubButton(ControlDrawer drawer, ControlData controlButton){
-		//Yep there isn't much here
+		
 		drawer.getDrawerData().buttonProperties.add(controlButton);
 		addSubView(drawer, drawer.getDrawerData().buttonProperties.get(drawer.getDrawerData().buttonProperties.size()-1 ));
 	}
@@ -200,7 +200,7 @@ public class ControlLayout extends FrameLayout {
 		setModified(true);
 	}
 
-	// JOYSTICK BUTTON
+	
 	public void addJoystickButton(ControlJoystickData data){
 		mLayout.mJoystickDataList.add(data);
 		addJoystickView(data);
@@ -225,8 +225,8 @@ public class ControlLayout extends FrameLayout {
 		}
 
 		System.gc();
-		//i wanna be sure that all the removed Views will be removed after a reload
-		//because if frames will slowly go down after many control changes it will be warm and bad
+		
+		
 	}
 
 	public void saveLayout(String path) throws Exception {
@@ -248,7 +248,7 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	public void setControlVisible(boolean isVisible) {
-		if (mModifiable) return; // Not using on custom controls activity
+		if (mModifiable) return; 
 
 		mControlVisible = isVisible;
 		for(ControlInterface button : getButtonChildren()){
@@ -262,7 +262,7 @@ public class ControlLayout extends FrameLayout {
 		}
 		mModifiable = isModifiable;
 		if(isModifiable){
-			// In edit mode, all controls have to be shown
+			
 			for(ControlInterface button : getButtonChildren()){
 				button.setVisible(true);
 			}
@@ -306,14 +306,11 @@ public class ControlLayout extends FrameLayout {
         }
     }
 
-    /**
-	 * Load the layout if needed, and pass down the burden of filling values
-	 * to the button at hand.
-	 */
+    
 	public void editControlButton(ControlInterface button){
 		if(mControlDialog == null){
-			// When the panel is null, it needs to inflate first.
-			// So inflate it, then process it on the next frame
+			
+			
 			mControlDialog = new EditControlSideDialog(getContext(), this);
 			post(() -> editControlButton(button));
 			return;
@@ -335,10 +332,10 @@ public class ControlLayout extends FrameLayout {
 		}
 		mHandleView.setControlButton(button);
 
-		//mHandleView.show();
+		
 	}
 
-	/** Swap the panel if the button position requires it */
+	
 	public void adaptPanelPosition(){
 		if(mControlDialog != null) mControlDialog.adaptPanelPosition();
 	}
@@ -346,15 +343,15 @@ public class ControlLayout extends FrameLayout {
 
 	final HashMap<View, ControlInterface> mapTable = new HashMap<>();
 
-	//While this is called onTouch, this should only be called from a ControlButton.
+	
 	public void onTouch(View v, MotionEvent ev) {
 		ControlInterface lastControlButton = mapTable.get(v);
 
-		// Map location to screen coordinates
+		
 		ev.offsetLocation(v.getX(), v.getY());
 
 
-		//Check if the action is cancelling, reset the lastControl button associated to the view
+		
 		if (ev.getActionMasked() == MotionEvent.ACTION_UP
 				|| ev.getActionMasked() == MotionEvent.ACTION_CANCEL
 				|| ev.getActionMasked() == MotionEvent.ACTION_POINTER_UP) {
@@ -366,7 +363,7 @@ public class ControlLayout extends FrameLayout {
 		if (ev.getActionMasked() != MotionEvent.ACTION_MOVE) return;
 
 
-		//Optimization pass to avoid looking at all children again
+		
 		if (lastControlButton != null) {
 			System.out.println("last control button check" + ev.getX() + "-" + ev.getY() + "-" + lastControlButton.getControlView().getX() + "-" + lastControlButton.getControlView().getY());
 			if (ev.getX() > lastControlButton.getControlView().getX()
@@ -377,11 +374,11 @@ public class ControlLayout extends FrameLayout {
 			}
 		}
 
-		//Release last keys
+		
 		if (lastControlButton != null) lastControlButton.sendKeyPresses(false);
 		mapTable.remove(v);
 
-		// Update the state of all swipeable buttons
+		
 		for (ControlInterface button : getButtonChildren()) {
 			if (!button.getProperties().isSwipeable) continue;
 
@@ -390,7 +387,7 @@ public class ControlLayout extends FrameLayout {
 					&& ev.getY() > button.getControlView().getY()
 					&& ev.getY() < button.getControlView().getY() + button.getControlView().getHeight()) {
 
-				//Press the new key
+				
 				if (!button.equals(lastControlButton)) {
 					button.sendKeyPresses(true);
 					mapTable.put(v, button);
@@ -409,7 +406,7 @@ public class ControlLayout extends FrameLayout {
 
 		InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
 
-		// When the input window cannot be hidden, it returns false
+		
 		if(!imm.hideSoftInputFromWindow(getWindowToken(), 0)){
 			if(mControlDialog.disappearLayer()){
 				mActionRow.setFollowedButton(null);
@@ -422,7 +419,7 @@ public class ControlLayout extends FrameLayout {
 	public void removeEditWindow() {
 		InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
 
-		// When the input window cannot be hidden, it returns false
+		
 		imm.hideSoftInputFromWindow(getWindowToken(), 0);
 		if(mControlDialog != null) {
 			mControlDialog.disappearColor();
@@ -457,7 +454,7 @@ public class ControlLayout extends FrameLayout {
 		if(mMenuListener != null) mMenuListener.onClickedMenu();
 	}
 
-	/** Cached getter for perf purposes */
+	
 	public MinecraftGLSurface getGameSurface(){
 		if(mGameSurface == null){
 			mGameSurface = findViewById(R.id.main_game_render_view);

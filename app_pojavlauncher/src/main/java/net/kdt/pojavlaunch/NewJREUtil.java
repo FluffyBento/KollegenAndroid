@@ -33,12 +33,12 @@ public class NewJREUtil {
         try {
             launcher_runtime_version = Tools.read(assetManager.open(internalRuntime.path+"/version"));
         }catch (IOException exc) {
-            //we don't have a runtime included!
-            //if we have one installed -> return true -> proceed (no updates but the current one should be functional)
-            //if we don't -> return false -> Cannot find compatible Java runtime
+            
+            
+            
             return installed_runtime_version != null;
         }
-        // this implicitly checks for null, so it will unpack the runtime even if we don't have one installed
+        
         if(!launcher_runtime_version.equals(installed_runtime_version))
             return unpackInternalRuntime(assetManager, internalRuntime, launcher_runtime_version);
         else return true;
@@ -76,9 +76,9 @@ public class NewJREUtil {
     }
 
 
-    /** @return true if everything is good, false otherwise.  */
+    
     public static boolean installNewJreIfNeeded(Activity activity, JMinecraftVersionList.Version versionInfo) {
-        //Now we have the reliable information to check if our runtime settings are good enough
+        
         if (versionInfo.javaVersion == null || versionInfo.javaVersion.component.equalsIgnoreCase("jre-legacy"))
             return true;
 
@@ -89,20 +89,20 @@ public class NewJREUtil {
         MinecraftProfile minecraftProfile = LauncherProfiles.getCurrentProfile();
         String profileRuntime = Tools.getSelectedRuntime(minecraftProfile);
         Runtime runtime = MultiRTUtils.read(profileRuntime);
-        // Partly trust the user with his own selection, if the game can even try to run in this case
+        
         if (runtime.javaVersion >= gameRequiredVersion) {
-            // Check whether the selection is an internal runtime
+            
             InternalRuntime internalRuntime = getInternalRuntime(runtime);
-            // If it is, check if updates are available from the APK file
+            
             if (internalRuntime != null) {
-                // Not calling showRuntimeFail on failure here because we did, technically, find the compatible runtime
+                
                 return checkInternalRuntime(assetManager, internalRuntime);
             }
             return true;
         }
 
-        // If the runtime version selected by the user is not appropriate for this version (which means the game won't run at all)
-        // automatically pick from either an already installed runtime, or a runtime packed with the launcher
+        
+        
         MathUtils.RankedValue<?> nearestInstalledRuntime = getNearestInstalledRuntime(gameRequiredVersion);
         MathUtils.RankedValue<?> nearestInternalRuntime = getNearestInternalRuntime(gameRequiredVersion);
 
@@ -110,19 +110,19 @@ public class NewJREUtil {
                 nearestInternalRuntime, nearestInstalledRuntime, (value)->value.rank
         );
 
-        // Check if the selected runtime actually exists in the APK, else download it
-        // If it isn't InternalRuntime then it wasn't in the apk in the first place!
+        
+        
         if (selectedRankedRuntime.value instanceof InternalRuntime)
             if (!checkInternalRuntime(assetManager, (InternalRuntime) selectedRankedRuntime.value)) {
-                if (nearestInstalledRuntime == null) // If this was non-null then it would be a valid runtime and we can leave it be
+                if (nearestInstalledRuntime == null) 
                     tryDownloadRuntime(activity, gameRequiredVersion);
-                // This means the internal runtime didn't extract so let's use installed instead
-                // This also refreshes it so after the runtime download, it can find the new runtime
+                
+                
                 selectedRankedRuntime = getNearestInstalledRuntime(gameRequiredVersion);
             }
 
 
-        // No possible selections
+        
         if(selectedRankedRuntime == null) {
             showRuntimeFail(activity, versionInfo);
             return false;
@@ -132,24 +132,24 @@ public class NewJREUtil {
         String appropriateRuntime;
         InternalRuntime internalRuntime;
 
-        // Perform checks on the picked runtime
+        
         if(selected instanceof Runtime) {
-            // If it's an already installed runtime, save its name and check if
-            // it's actually an internal one (just in case)
+            
+            
             Runtime selectedRuntime = (Runtime) selected;
             appropriateRuntime = selectedRuntime.name;
             internalRuntime = getInternalRuntime(selectedRuntime);
         } else if (selected instanceof InternalRuntime) {
-            // If it's an internal runtime, set it's name as the appropriate one.
+            
             internalRuntime = (InternalRuntime) selected;
             appropriateRuntime = internalRuntime.name;
         } else {
             throw new RuntimeException("Unexpected type of selected: "+selected.getClass().getName());
         }
 
-        // If it turns out the selected runtime is actually an internal one, attempt automatic installation or update
+        
         if(internalRuntime != null && !checkInternalRuntime(assetManager, internalRuntime)) {
-            // Not calling showRuntimeFail here because we did, technically, find the compatible runtime
+            
             return false;
         }
 
@@ -175,13 +175,11 @@ public class NewJREUtil {
     private static String getJreSource(int javaVersion, String arch){
         return String.format("https://github.com/AngelAuraMC/angelauramc-openjdk-build/releases/download/download_jre%1$s/jre%1$s-android-%2$s.tar.xz", javaVersion, arch);
     }
-    /**
-     * @return whether installation was successful or not
-     */
+    
     private static void tryDownloadRuntime(Context activity, int javaVersion){
         if (!isOnline(activity)) throw new RuntimeException(activity.getString(R.string.multirt_no_internet));
         String arch = archAsString(getDeviceArchitecture());
-        // Checks for using this method
+        
         if (!isJavaVersionAvailableForDownload(javaVersion)) throw new RuntimeException("This is not an available JRE version");
         if ((getDeviceArchitecture() == Architecture.ARCH_X86 && javaVersion >= 21)) throw new RuntimeException("x86 is not supported on Java"+javaVersion);
         try {

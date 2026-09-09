@@ -68,10 +68,7 @@
         tools:text="Feed the beast - Reforged is a machine and magic focused modpack, with no respect for the minimum requirements of minecraft. Very long text" />
 
 
-    <!--
-        When clicked for the first time, the view is extended with more information.
-        Inflating later is cheaper, hence the stub
-     -->
+    
     <ViewStub
         android:id="@+id/mod_limited_state_stub"
         android:layout_width="match_parent"

@@ -30,57 +30,39 @@ public class LWJGL3ifyInstallFragment extends ModVersionListFragment<LWJGL3ifyUt
         super(TAG);
     }
 
-    /**
-     * @return 
-     */
+    
     @Override
     public int getTitleText() {
         return R.string.select_lwjgl3ify_version;
     }
 
-    /**
-     * @return 
-     */
+    
     @Override
     public int getNoDataMsg() {
         return R.string.modloader_dl_failed_to_load_list;
     }
 
-    /**
-     * @return 
-     * @throws IOException
-     */
+    
     @Override
     public LWJGL3ifyUtils.LWJGL3ifyVersionList loadVersionList() throws IOException {
         return LWJGL3ifyUtils.getLWJGL3ifyVersionList(modpackApi);
     }
 
-    /**
-     * @param versionList 
-     * @param layoutInflater
-     * @return
-     */
+    
     @Override
     public ExpandableListAdapter createAdapter(LWJGL3ifyUtils.LWJGL3ifyVersionList versionList, LayoutInflater layoutInflater) {
         return new LWJGL3ifyVersionListAdapter(versionList, layoutInflater);
     }
 
-    /**
-     * @param selectedVersion 
-     * @param listenerProxy
-     * @return
-     */
+    
     @Override
     public Runnable createDownloadTask(Object selectedVersion, ModloaderListenerProxy listenerProxy) {
         return new LWJGL3ifyDownloadTask(listenerProxy, (LWJGL3ifyUtils.LWJGL3ifyMod) selectedVersion, requireActivity());
     }
 
-    /**
-     * @param context 
-     * @param downloadedFile
-     */
+    
     @Override
     public void onDownloadFinished(Context context, File downloadedFile) {
-        // Nothing to do.
+        
     }
 }

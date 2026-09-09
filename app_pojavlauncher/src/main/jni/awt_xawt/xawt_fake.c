@@ -1,6 +1,6 @@
 #include <jni.h>
 
-// java.awt.*
+
 JNIEXPORT void JNICALL
 Java_java_awt_AWTEvent_initIDs(JNIEnv *env, jclass cls)
 {
@@ -132,7 +132,7 @@ Java_java_awt_Window_initIDs
 {
 }
 
-// java.awt.event.*
+
 JNIEXPORT void JNICALL
 Java_java_awt_event_InputEvent_initIDs(JNIEnv *env, jclass cls)
 {
@@ -147,17 +147,17 @@ JNIEXPORT void JNICALL
 Java_java_awt_AWTEvent_nativeSetSource(JNIEnv *env, jobject self,
                                        jobject newSource)
 {
-    // Maybe implement this?
+    
 }
 
-// sun.awt.SunToolkit
+
 JNIEXPORT void JNICALL
 Java_sun_awt_SunToolkit_closeSplashScreen
   (JNIEnv *env, jclass cls)
 {
     
 }
-// sun.awt.UNIXToolkit
+
 JNIEXPORT jboolean JNICALL
 Java_sun_awt_UNIXToolkit_check_1gtk(JNIEnv *env, jclass klass, jint version) {
     return JNI_FALSE;
@@ -166,7 +166,7 @@ Java_sun_awt_UNIXToolkit_check_1gtk(JNIEnv *env, jclass klass, jint version) {
 JNIEXPORT jint JNICALL
 Java_sun_awt_UNIXToolkit_get_1gtk_1version(JNIEnv *env, jclass klass)
 {
-    // return GTK_ANY;
+    
     return (jint) 1;
 }
 

@@ -1,6 +1,6 @@
-//
-// Created by maks on 21.09.2022.
-//
+
+
+
 
 #ifndef POJAVLAUNCHER_OSMESA_LOADER_H
 #define POJAVLAUNCHER_OSMESA_LOADER_H
@@ -22,4 +22,4 @@ extern void (*glReadPixels_p) (GLint x, GLint y, GLsizei width, GLsizei height, 
 extern void* (*OSMesaGetProcAddress_p)(const char* funcName);
 
 bool dlsym_OSMesa();
-#endif //POJAVLAUNCHER_OSMESA_LOADER_H
+#endif 

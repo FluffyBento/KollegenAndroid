@@ -10,38 +10,25 @@ import net.kdt.pojavlaunch.modloaders.modpacks.api.ModLoader;
 
 import java.io.File;
 
-/**
- * This class is meant to track the availability of a modloader that is ready to be installed (as a result of modpack installation)
- * It is needed because having all  this logic spread over LauncherActivity would be clumsy, and I think that this is the best way to
- * ensure that the modloader installer will run, even if the user does not receive the notification or something else happens
- */
+
 public class ModloaderInstallTracker implements SharedPreferences.OnSharedPreferenceChangeListener {
     private final SharedPreferences mSharedPreferences;
     private final Activity mActivity;
 
-    /**
-     * Create a ModInstallTracker object. This must be done in the Activity's onCreate method.
-     * @param activity the host activity
-     */
+    
     public ModloaderInstallTracker(Activity activity) {
         mActivity = activity;
         mSharedPreferences = getPreferences(activity);
 
     }
 
-    /**
-     * Attach the ModloaderInstallTracker to the current Activity. Must be done in the Activity's
-     * onResume method
-     */
+    
     public void attach() {
         mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
         runCheck();
     }
 
-    /**
-     * Detach the ModloaderInstallTracker from the current Activity. Must be done in the Activity's
-     * onPause method
-     */
+    
     public void detach() {
         mSharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
@@ -72,13 +59,7 @@ public class ModloaderInstallTracker implements SharedPreferences.OnSharedPrefer
         return context.getSharedPreferences("modloader_info", Context.MODE_PRIVATE);
     }
 
-    /**
-     * Store the data necessary to start a ModLoader installation for the tracker to start the installer
-     * sometime.
-     * @param context the Context
-     * @param modLoader the ModLoader to store
-     * @param modInstallFile the installer jar to store
-     */
+    
     @SuppressLint("ApplySharedPref")
     public static void saveModLoader(Context context, ModLoader modLoader, File modInstallFile) {
         SharedPreferences.Editor editor = getPreferences(context).edit();

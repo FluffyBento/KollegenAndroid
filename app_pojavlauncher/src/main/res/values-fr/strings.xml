@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">Nom d’utilisateur</string>
     <string name="login_online_login_label">Se connecter</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Appuyez sur l'icône d'engrenage \"⚙\" pour ouvrir le menu contextuel\nAppuyez sur un bouton pour le personnaliser : modifier, redimensionner, supprimer ou changer son raccourci clavier."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">Ce compte sera retiré !</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Sélectionnez un installateur de mods</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen a cessé de fonctionner de façon inattendue</string>
     <string name="error_no_version">Aucune version !</string>
     <string name="error_show_more">Afficher plus</string>
     <string name="error_show_less">Afficher moins</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">L\'autorisation de lecture/écriture sur le stockage est requise !</string>
     <string name="toast_optifine_success">Installation réussie</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Nettoyage des fichiers cache</string>
     <string name="mcl_launch_downloading">Téléchargement de %s</string>
     <string name="mcl_launch_downloading_progress">"Téléchargement de %s (%.2f Mo / %.2f Mo)"</string>
@@ -59,7 +57,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Bêta</string>
     <string name="mcl_version_clone">Dupliquer</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Modifier</string>
     <string name="global_error">Erreur</string>
     <string name="global_load">Charger</string>
@@ -75,12 +73,12 @@
     <string name="global_retry">Réessayer</string>
     <string name="global_default">Par défaut</string>
     <string name="global_off">Désactivé</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">L\'Application/Jeu a quitté avec le code %d, vérifiez le fichier latestlog.txt pour plus de détails.</string>
     <string name="mcn_signal_title">L\'application/Le jeu s\'est fermé(e) avec le code %d, vérifiez le fichier latestlog.txt pour plus de détails.</string>
     <string name="mcn_exit_confirm">Voulez-vous vraiment forcer la fermeture ?</string>
     <string name="mcn_check_fail_vulkan_support">Le moteur de rendu Zink (Vulkan) n\'est pas pris en charge sur votre appareil !</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Tchat</string>
     <string name="control_debug">Débog.</string>
     <string name="control_primary">Pri</string>
@@ -97,22 +95,19 @@
     <string name="control_mouse">Souris</string>
     <string name="control_mouseoff">Souris : Non</string>
     <string name="control_mouseon">Souris : Oui </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Forcer la fermeture</string>
     <string name="control_viewout">Sortie du journal</string>
     <string name="control_adebug">Entrée de débogage</string>
     <string name="control_customkey">Envoyer une touche personnalisée</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Importer des contrôles</string>
     <string name="import_control_invalid_file">Fichier invalide ou corrompu</string>
     <string name="import_control_import_button">importation de contrôles</string>
     <string name="import_control_verifying_file">Le fichier est en cours de vérification, veuillez patienter et réessayer…</string>
     <string name="import_control_invalid_name">Nom ou fichier non valide déjà existant</string>
     <string name="import_control_done">Importation effectuée avec succès</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Basculable</string>
     <string name="customctrl_size">Taille</string>
     <string name="customctrl_background_color">Couleur d\'arrière-plan</string>

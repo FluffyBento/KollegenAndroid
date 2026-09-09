@@ -32,9 +32,9 @@ public class GLInfoUtils {
         }catch (NumberFormatException e) {
             Log.w("GLInfoUtils","Failed to parse GL version number, falling back to 2", e);
         }
-        // LTW depends on the ability to create a context with a major version of 3,
-        // and even if the string parse returns 3 while EGL can only create 2,
-        // it's still a noncompilant implementation
+        
+        
+        
         version = Math.min(version, contextGLVersion);
         return new GLInfo(vendor, renderer, version);
     }
@@ -57,8 +57,8 @@ public class GLInfoUtils {
     private static EGLContext tryMakeCurrent(EGLDisplay eglDisplay, EGLConfig config, EGLSurface surface, int majorVersion) {
         EGLContext context = tryCreateContext(eglDisplay, config, majorVersion);
         if(context == null) return null;
-        // Old Mali drivers are broken, and will actually let us create a context with GLES 3
-        // But won't let us make it current, which will break the check anyway...
+        
+        
         boolean makeCurrentResult = EGL14.eglMakeCurrent(eglDisplay, surface, surface, context);
         if(!makeCurrentResult) {
             Log.i("GLInfoUtils", "Failed to make context GL version "+majorVersion +" current");
@@ -69,7 +69,7 @@ public class GLInfoUtils {
     }
 
     private static boolean initAndQueryInfo() {
-        // This is here just to satisfy Android M which incorrectly null-checks it
+        
         int[] egl_version = new int[2];
         EGLDisplay eglDisplay = EGL14.eglGetDisplay(EGL14.EGL_DEFAULT_DISPLAY);
         if(eglDisplay == EGL14.EGL_NO_DISPLAY || !EGL14.eglInitialize(eglDisplay, egl_version, 0 , egl_version, 1)) return false;
@@ -91,7 +91,7 @@ public class GLInfoUtils {
             return false;
         }
 
-        // Create PBuffer surface as some devices might actually not support surfaceless.
+        
         int[] pbuffer_attributes = new int[] {
                 EGL14.EGL_WIDTH, 16,
                 EGL14.EGL_HEIGHT, 16,
@@ -112,7 +112,7 @@ public class GLInfoUtils {
             context = tryMakeCurrent(eglDisplay, config[0], surface, contextGLVersion);
         }
 
-        // Creation/currenting failed in both cases
+        
         if(context == null) {
             Log.e("GLInfoUtils", "Failed to create and make context current");
             EGL14.eglDestroySurface(eglDisplay, surface);
@@ -128,11 +128,7 @@ public class GLInfoUtils {
         return true;
     }
 
-    /**
-     * Get the information about the current OpenGL ES device, which consists of the vendor,
-     * the renderer and the major GLES version
-     * @return the info
-     */
+    
     public static GLInfo getGlInfo() {
         if(info != null) return info;
         Log.i("GLInfoUtils", "Querying graphics device info...");
@@ -156,10 +152,7 @@ public class GLInfoUtils {
             this.glesMajorVersion = glesMajorVersion;
         }
 
-        /**
-         * Check if this GLInfo belongs to a Qualcomm Adreno graphics adapter
-         * @return
-         */
+        
         public boolean isAdreno() {
             return renderer.contains("Adreno") && vendor.equals("Qualcomm");
         }

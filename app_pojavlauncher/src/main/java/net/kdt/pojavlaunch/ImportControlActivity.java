@@ -23,9 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * An activity dedicated to importing control files.
- */
+
 @SuppressWarnings("IOStreamConstructor")
 public class ImportControlActivity extends Activity {
 
@@ -42,7 +40,7 @@ public class ImportControlActivity extends Activity {
         if(Tools.checkStorageInteractive(this)) {
             Tools.initStorageConstants(getApplicationContext());
         }else {
-            // Return early, no initialization needed.
+            
             return;
         }
 
@@ -50,26 +48,21 @@ public class ImportControlActivity extends Activity {
         mEditText = findViewById(R.id.editText_import_control_file_name);
     }
 
-    /**
-     * Override the previous loaded intent
-     * @param intent the intent used to replace the old one.
-     */
+    
     @Override
     protected void onNewIntent(Intent intent) {
         if(intent != null) setIntent(intent);
         mHasIntentChanged = true;
     }
 
-    /**
-     * Update all over again if the intent changed.
-     */
+    
     @Override
     protected void onPostResume() {
         super.onPostResume();
         if(!Tools.checkStorageInteractive(this)) {
-            // Don't try to read the file as when this check fails, external storage paths
-            // are no longer valid (likely unmounted).
-            // checkStorageInteractive() will finish this activity for us.
+            
+            
+            
             return;
         }
         if(!mHasIntentChanged) return;
@@ -82,8 +75,8 @@ public class ImportControlActivity extends Activity {
         mEditText.setText(trimFileName(Tools.getFileName(this, mUriData)));
         mHasIntentChanged = false;
 
-        //Import and verify thread
-        //Kill the app if the file isn't valid.
+        
+        
         new Thread(() -> {
             importControlFile();
 
@@ -97,7 +90,7 @@ public class ImportControlActivity extends Activity {
             });
         }).start();
 
-        //Auto show the keyboard
+        
         Tools.MAIN_HANDLER.postDelayed(() -> {
             InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
             imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
@@ -105,13 +98,10 @@ public class ImportControlActivity extends Activity {
         }, 100);
     }
 
-    /**
-     * Start the import.
-     * @param view the view which called the function
-     */
+    
     public void startImport(View view) {
         String fileName = trimFileName(mEditText.getText().toString());
-        //Step 1 check for suffixes.
+        
         if(!isFileNameValid(fileName)){
             Toast.makeText(this, getText(R.string.import_control_invalid_name), Toast.LENGTH_SHORT).show();
             return;
@@ -126,9 +116,7 @@ public class ImportControlActivity extends Activity {
         finishAndRemoveTask();
     }
 
-    /**
-     * Copy a the file from the Intent data with a provided name into the controlmap folder.
-     */
+    
     private void importControlFile(){
         InputStream is;
         try {
@@ -143,11 +131,7 @@ public class ImportControlActivity extends Activity {
         }
     }
 
-    /**
-     * Tell if the clean version of the filename is valid.
-     * @param fileName the string to test
-     * @return whether the filename is valid
-     */
+    
     private static boolean isFileNameValid(String fileName){
         fileName = trimFileName(fileName);
 
@@ -155,11 +139,7 @@ public class ImportControlActivity extends Activity {
         return !FileUtils.exists(Tools.CTRLMAP_PATH + "/" + fileName + ".json");
     }
 
-    /**
-     * Remove or undesirable chars from the string
-     * @param fileName The string to trim
-     * @return The trimmed string
-     */
+    
     private static String trimFileName(String fileName){
         return fileName
                 .replace(".json", "")
@@ -169,9 +149,7 @@ public class ImportControlActivity extends Activity {
                 .trim();
     }
 
-    /**
-     * Tries to get an Uri from the various sources
-     */
+    
     private void getUriData(){
         mUriData = getIntent().getData();
         if(mUriData != null) return;
@@ -180,10 +158,7 @@ public class ImportControlActivity extends Activity {
         }catch (Exception ignored){}
     }
 
-    /**
-     * Verify if the control file is valid
-     * @return Whether the control file is valid
-     */
+    
     private static boolean verify(){
         try{
             String jsonLayoutData = Tools.read(Tools.CTRLMAP_PATH + "/TMP_IMPORT_FILE.json");

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:focusable="true">
 
-        <!-- Content description is set in ViewHolder -->
+        
         <ImageView
             android:id="@+id/controller_mapper_button"
             android:layout_width="55dp"
@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/spinner_arrow" />
-        <!-- Set in code -->
+        
         <TextView
             android:id="@+id/controller_mapper_keycode_label"
             android:layout_width="0dp"
@@ -105,7 +105,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/controller_mapper_plus_label2"/>
 
-        <!-- A single "plus" sign does not need translation -->
+        
         <TextView
             android:id="@+id/controller_mapper_plus_label1"
             android:layout_width="wrap_content"

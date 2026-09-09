@@ -60,9 +60,9 @@ public class InGameEventProcessor implements TouchEventProcessor {
 
     private void checkGestures() {
         mLeftClickGesture.inputEvent();
-        // Only register right click events if it's a fresh event stream, not one after a transition.
-        // This is done to avoid problems when people hold the button for just a bit too long after
-        // exiting a menu for example.
+        
+        
+        
         if(!mEventTransitioned) mRightClickGesture.inputEvent();
     }
 

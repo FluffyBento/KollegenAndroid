@@ -99,10 +99,10 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             float prevX = 0, prevY = 0;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                // MotionEvent reports input details from the touch screen
-                // and other input controls. In this case, you are only
-                // interested in events where the touch position changed.
-                // int index = event.getActionIndex();
+                
+                
+                
+                
                 int action = event.getActionMasked();
 
                 float x = event.getX();
@@ -116,7 +116,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                     sendScaledMousePosition(mouseX,mouseY);
                     AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
                 } else {
-                    if (action == MotionEvent.ACTION_MOVE) { // 2
+                    if (action == MotionEvent.ACTION_MOVE) { 
                         mouseX = Math.max(0, Math.min(CallbackBridge.physicalWidth, mouseX + x - prevX));
                         mouseY = Math.max(0, Math.min(CallbackBridge.physicalHeight, mouseY + y - prevY));
                         placeMouseAt(mouseX, mouseY);
@@ -140,11 +140,11 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             }
 
             switch (event.getActionMasked()) {
-                case MotionEvent.ACTION_UP: // 1
-                case MotionEvent.ACTION_CANCEL: // 3
-                case MotionEvent.ACTION_POINTER_UP: // 6
+                case MotionEvent.ACTION_UP: 
+                case MotionEvent.ACTION_CANCEL: 
+                case MotionEvent.ACTION_POINTER_UP: 
                     break;
-                case MotionEvent.ACTION_MOVE: // 2
+                case MotionEvent.ACTION_MOVE: 
                     sendScaledMousePosition(x + mTextureView.getX(), y);
                     break;
             }
@@ -218,12 +218,12 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     private File findModPath(List<String> argList) {
         int argsSize = argList.size();
         for(int i = 0; i < argsSize; i++) {
-            // Look for the -jar argument
+            
             if(!argList.get(i).equals("-jar")) continue;
             int pathIndex = i+1;
-            // Check if the supposed path is out of the argument bounds
+            
             if(pathIndex >= argsSize) return null;
-            // Use the path as a file
+            
             return new File(argList.get(pathIndex));
         }
         return null;
@@ -231,21 +231,21 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
     private void startModInstaller(File modFile, String javaArgs) {
         new Thread(() -> {
-            // Maybe replace with more advanced arg parsing logic later
+            
             List<String> argList = javaArgs != null ? Arrays.asList(javaArgs.split(" ")) : null;
             File selectedMod = modFile;
             if(selectedMod == null && argList != null) {
-                // If modFile is not specified directly, try to extract the -jar argument from the javaArgs
+                
                 selectedMod = findModPath(argList);
             }
             Runtime selectedRuntime;
             if(selectedMod == null || DEFAULT_PREF.getBoolean("disable_autojre_select", false)) {
-                // If we are unable to find out the path to the mod or the user explicitly desires so, we use the default runtime
+                
                 selectedRuntime = MultiRTUtils.forceReread(LauncherPreferences.PREF_DEFAULT_RUNTIME);
             }else {
-                // Autoselect it properly in the other case.
+                
                 selectedRuntime = selectRuntime(selectedMod);
-                // If the selection failed, just return. The autoselect function has already shown the dialog.
+                
                 if(selectedRuntime == null) return;
             }
             launchJavaRuntime(selectedRuntime, modFile, argList);
@@ -276,13 +276,13 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     public boolean onTouch(View v, MotionEvent e) {
         boolean isDown;
         switch (e.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN: // 0
-            case MotionEvent.ACTION_POINTER_DOWN: // 5
+            case MotionEvent.ACTION_DOWN: 
+            case MotionEvent.ACTION_POINTER_DOWN: 
                 isDown = true;
                 break;
-            case MotionEvent.ACTION_UP: // 1
-            case MotionEvent.ACTION_CANCEL: // 3
-            case MotionEvent.ACTION_POINTER_UP: // 6
+            case MotionEvent.ACTION_UP: 
+            case MotionEvent.ACTION_CANCEL: 
+            case MotionEvent.ACTION_POINTER_UP: 
                 isDown = false;
                 break;
             default:
@@ -322,7 +322,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
     @SuppressWarnings("SuspiciousNameCombination")
     void sendScaledMousePosition(float x, float y){
-        // Clamp positions to the borders of the usable view, then scale them
+        
         x = androidx.core.math.MathUtils.clamp(x, mTextureView.getX(), mTextureView.getX() + mTextureView.getWidth());
         y = androidx.core.math.MathUtils.clamp(y, mTextureView.getY(), mTextureView.getY() + mTextureView.getHeight());
 
@@ -352,7 +352,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         JREUtils.redirectAndPrintJRELog();
         try {
             List<String> javaArgList = new ArrayList<>();
-            // Enable Caciocavallo
+            
             Tools.getCacioJavaArgs(javaArgList,runtime.javaVersion == 8, this);
             if(javaArgs != null) {
                 javaArgList.addAll(javaArgs);
@@ -416,7 +416,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         }
     }
     public static int classVersionToJavaVersion(int majorVersion) {
-        if(majorVersion < 46) return 2; // there isn't even an arm64 port of jre 1.1 (or anything before 1.8 in fact)
+        if(majorVersion < 46) return 2; 
         return majorVersion - 44;
     }
 }

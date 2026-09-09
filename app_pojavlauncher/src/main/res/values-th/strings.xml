@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">เข้าสู่ระบบ</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">บัญชีนี้จะถูกลบ!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">เลือกตัวติดตั้งม็อด</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen ได้ขัดข้องโดยไม่คาดคิด</string>
     <string name="error_no_version">ไม่มีเวอร์ชัน!</string>
     <string name="error_show_more">แสดงเพิ่มเติม</string>
     <string name="error_show_less">แสดงน้อยลง</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">ต้องได้รับอนุญาตในการอ่าน/เขียนไปยังที่เก็บข้อมูล!</string>
     <string name="toast_optifine_success">ติดตั้งสำเร็จแล้ว</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">วิกิ</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">กำลังล้างแฟ้มแคช</string>
     <string name="mcl_launch_downloading">กำลังดาวน์โหลด %s</string>
     <string name="mcl_launch_downloading_progress">"กำลังดาวน์โหลด %s (%.2f MB / %.2f MB)"</string>
@@ -50,7 +48,7 @@
     <string name="mcl_setting_veroption_snapshot">ภาพรวม</string>
     <string name="mcl_setting_veroption_oldbeta">เบตาเก่า</string>
     <string name="mcl_version_clone">คัดลอก</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">แก้ไข</string>
     <string name="global_error">ผิดพลาด</string>
     <string name="global_load">โหลด</string>
@@ -65,11 +63,11 @@
     <string name="global_select">เลือก</string>
     <string name="global_retry">ลองอีกครั้ง</string>
     <string name="global_default">ค่าเรื่มต้น</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">ออกจากแอปพลิเคชัน/เกมเด้งด้วยรหัส %d โปรดตรวจสอบที่ latestlog.txt สำหรับรายละเอียดเพิ่มเติม</string>
     <string name="mcn_exit_confirm">คุณแน่ใจหรือไม่ว่าต้องการบังคับปิด?</string>
     <string name="mcn_check_fail_vulkan_support">อุปกรณ์นี้ไม่รองรับการแสดงผล Zink (Vulkan) </string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">แชต</string>
     <string name="control_debug">ดีบั๊ก</string>
     <string name="control_primary">หลัก</string>
@@ -80,22 +78,19 @@
     <string name="control_mouse">เมาส์</string>
     <string name="control_mouseoff">เมาส์: ปิด</string>
     <string name="control_mouseon">เมาส์: เปิด </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">บังคับปิด</string>
     <string name="control_viewout">ประวัติที่บันทึกไว้</string>
     <string name="control_adebug">การดีบักอินพุต</string>
     <string name="control_customkey">ส่งคำสั่งที่กำหนตเอง</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">นำเข้า ควบคุม</string>
     <string name="import_control_invalid_file">ไฟล์ไม่ถูกต้องหรือเสียหาย</string>
     <string name="import_control_import_button">นำเข้าควบคุม</string>
     <string name="import_control_verifying_file">กำลังตรวจสอบไฟล์ โปรดรอและลองอีกครั้ง</string>
     <string name="import_control_invalid_name">ชื่อหรือไฟล์ไม่ถูกต้องหรือมีอยู่แล้ว</string>
     <string name="import_control_done">นำเข้าสำเร็จ</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">ค้างไว้</string>
     <string name="customctrl_size">ขนาด</string>
     <string name="customctrl_mapping">ปุ่มที่ให้กด</string>

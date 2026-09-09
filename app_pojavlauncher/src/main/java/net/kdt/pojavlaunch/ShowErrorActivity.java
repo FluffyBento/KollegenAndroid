@@ -67,12 +67,7 @@ public class ShowErrorActivity extends Activity {
         }
     }
 
-    /**
-     * Install remote dialog handling onto a dialog. This should be used when the dialog is planned to be presented
-     * through Tools.showError or Tools.showErrorRemote as a Throwable implementing a ContextExecutorTask.
-     * @param callerActivity the activity provided by the ContextExecutorTask.executeWithActivity
-     * @param builder the alert dialog builder.
-     */
+    
     public static void installRemoteDialogHandling(Activity callerActivity, @NonNull AlertDialog.Builder builder) {
         if (callerActivity instanceof ShowErrorActivity) {
             builder.setOnDismissListener(d -> callerActivity.finish());

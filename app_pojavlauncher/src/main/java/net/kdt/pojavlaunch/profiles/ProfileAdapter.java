@@ -23,9 +23,7 @@ import java.util.Map;
 
 import fr.spse.extended_view.ExtendedTextView;
 
-/*
- * Adapter for listing launcher profiles in a Spinner
- */
+
 public class ProfileAdapter extends BaseAdapter {
     private Map<String, MinecraftProfile> mProfiles;
     private final MinecraftProfile dummy = new MinecraftProfile();
@@ -35,19 +33,12 @@ public class ProfileAdapter extends BaseAdapter {
     public ProfileAdapter(ProfileAdapterExtra[] extraEntries) {
         reloadProfiles(extraEntries);
     }
-    /*
-     * Gets how much profiles are loaded in the adapter right now
-     * @returns loaded profile count
-     */
+    
     @Override
     public int getCount() {
         return mProfileList.size() + mExtraEntires.length;
     }
-    /*
-     * Gets the profile at a given index
-     * @param position index to retreive
-     * @returns MinecraftProfile name or null
-     */
+    
     @Override
     public Object getItem(int position) {
         int profileListSize = mProfileList.size();
@@ -95,8 +86,8 @@ public class ProfileAdapter extends BaseAdapter {
         Drawable cachedIcon = ProfileIconCache.fetchIcon(v.getResources(), nm, minecraftProfile.icon);
         extendedTextView.setCompoundDrawablesRelative(cachedIcon, null, extendedTextView.getCompoundsDrawables()[2], null);
 
-        // Historically, the profile name "New" was hardcoded as the default profile name
-        // We consider "New" the same as putting no name at all
+        
+        
         String profileName = (Tools.isValidString(minecraftProfile.name) && !"New".equalsIgnoreCase(minecraftProfile.name)) ? minecraftProfile.name : null;
         String versionName = minecraftProfile.lastVersionId;
 
@@ -111,7 +102,7 @@ public class ProfileAdapter extends BaseAdapter {
             extendedTextView.setText(versionName);
         else extendedTextView.setText(String.format("%s - %s", profileName, versionName));
 
-        // Set selected background if needed
+        
         if(displaySelection){
             String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
             extendedTextView.setBackgroundColor(selectedProfile.equals(nm) ? ColorUtils.setAlphaComponent(Color.WHITE,60) : Color.TRANSPARENT);
@@ -133,7 +124,7 @@ public class ProfileAdapter extends BaseAdapter {
         }
     }
 
-    /** Reload profiles from the file */
+    
     public void reloadProfiles(){
         LauncherProfiles.load();
         mProfiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
@@ -141,7 +132,7 @@ public class ProfileAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    /** Reload profiles from the file, with additional extra entries */
+    
     public void reloadProfiles(ProfileAdapterExtra[] extraEntries) {
         if(extraEntries == null) mExtraEntires = new ProfileAdapterExtra[0];
         else mExtraEntires = extraEntries;

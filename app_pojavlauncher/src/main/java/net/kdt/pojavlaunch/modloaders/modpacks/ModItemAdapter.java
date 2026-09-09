@@ -44,16 +44,16 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static final int VIEW_TYPE_MOD_ITEM = 0;
     private static final int VIEW_TYPE_LOADING = 1;
 
-    /* Used when versions haven't loaded yet, default text to reduce layout shifting */
+    
     private final SimpleArrayAdapter<String> mLoadingAdapter = new SimpleArrayAdapter<>(Collections.singletonList("Loading"));
-    /* This my seem horribly inefficient but it is in fact the most efficient way without effectively writing a weak collection from scratch */
+    
     private final Set<ViewHolder> mViewHolderSet = Collections.newSetFromMap(new WeakHashMap<>());
     private final ModIconCache mIconCache = new ModIconCache();
     private final SearchResultCallback mSearchResultCallback;
     private ModItem[] mModItems;
     private final ModpackApi mModpackApi;
 
-    /* Cache for ever so slightly rounding the image for the corner not to stick out of the layout */
+    
     private final float mCornerDimensionCache;
 
     private Future<?> mTaskInProgress;
@@ -88,11 +88,11 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         View view;
         switch (viewType) {
             case VIEW_TYPE_MOD_ITEM:
-                // Create a new view, which defines the UI of the list item
+                
                 view = layoutInflater.inflate(R.layout.view_mod, viewGroup, false);
                 return new ViewHolder(view);
             case VIEW_TYPE_LOADING:
-                // Create a new view, which is actually just the progress bar
+                
                 view = layoutInflater.inflate(R.layout.view_loading, viewGroup, false);
                 return new LoadingViewHolder(view);
             default:
@@ -143,9 +143,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-    /**
-     * Basic viewholder with expension capabilities
-     */
+    
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ModDetail mModDetail = null;
@@ -161,7 +159,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         private ImageReceiver mImageReceiver;
         private boolean mInstallEnabled;
 
-        /* Used to display available versions of the mod(pack) */
+        
         private final SimpleArrayAdapter<String> mVersionAdapter = new SimpleArrayAdapter<>(null);
 
         public ViewHolder(View view) {
@@ -169,7 +167,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mViewHolderSet.add(this);
             view.setOnClickListener(v -> {
                 if(!hasExtended()){
-                    // Inflate the ViewStub
+                    
                     mExtendedLayout = ((ViewStub)v.findViewById(R.id.mod_limited_state_stub)).inflate();
                     mExtendedButton = mExtendedLayout.findViewById(R.id.mod_extended_select_version_button);
                     mExtendedSpinner = mExtendedLayout.findViewById(R.id.mod_extended_version_spinner);
@@ -185,35 +183,17 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     else openDetailedView();
                 }
 
-                if(isExtended() && mModDetail == null && mExtensionFuture == null) { // only reload if no reloads are in progress
+                if(isExtended() && mModDetail == null && mExtensionFuture == null) { 
                     setDetailedStateDefault();
-                    /*
-                     * Why do we do this?
-                     * The reason is simple: multithreading is difficult as hell to manage
-                     * Let me explain:
-                     */
+                    
                     mExtensionFuture = new SelfReferencingFuture(myFuture -> {
-                        /*
-                         * While we are sitting in the function below doing networking, the view might have already gotten recycled.
-                         * If we didn't use a Future, we would have extended a ViewHolder with completely unrelated content
-                         * or with an error that has never actually happened
-                         */
+                        
                         mModDetail = mModpackApi.getModDetails(mModItem);
                         System.out.println(mModDetail);
                         Tools.runOnUiThread(() -> {
-                            /*
-                             * Once we enter here, the state we're in is already defined - no view shuffling can happen on the UI
-                             * thread while we are on the UI thread ourselves. If we were cancelled, this means that the future
-                             * we were supposed to have no longer makes sense, so we return and do not alter the state (since we might
-                             * alter the state of an unrelated item otherwise)
-                             */
+                            
                             if(myFuture.isCancelled()) return;
-                            /*
-                             * We do not null the future before returning since this field might already belong to a different item with its
-                             * own Future, which we don't want to interfere with.
-                             * But if the future is not cancelled, it is the right one for this ViewHolder, and we don't need it anymore, so
-                             * let's help GC clean it up once we exit!
-                             */
+                            
                             mExtensionFuture = null;
                             setStateDetailed(mModDetail);
                         });
@@ -221,14 +201,14 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             });
 
-            // Define click listener for the ViewHolder's View
+            
             mTitle = view.findViewById(R.id.mod_title_textview);
             mDescription = view.findViewById(R.id.mod_body_textview);
             mIconView = view.findViewById(R.id.mod_thumbnail_imageview);
             mSourceView = view.findViewById(R.id.mod_source_imageview);
         }
 
-        /** Display basic info about the moditem */
+        
         public void setStateLimited(ModItem item) {
             mModDetail = null;
             if(mThumbnailBitmap != null) {
@@ -239,16 +219,13 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 mIconCache.cancelImage(mImageReceiver);
             }
             if(mExtensionFuture != null) {
-                /*
-                 * Since this method reinitializes the ViewHolder for a new mod, this Future stops being ours, so we cancel it
-                 * and null it. The rest is handled above
-                 */
+                
                 mExtensionFuture.cancel(true);
                 mExtensionFuture = null;
             }
 
             mModItem = item;
-            // here the previous reference to the image receiver will disappear
+            
             mImageReceiver = bm->{
                 mImageReceiver = null;
                 mThumbnailBitmap = bm;
@@ -266,7 +243,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
         }
 
-        /** Display extended info/interaction about a modpack */
+        
         private void setStateDetailed(ModDetail detailedItem) {
             if(detailedItem != null) {
                 setInstallEnabled(true);
@@ -286,7 +263,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mExtendedLayout.setVisibility(View.VISIBLE);
             mDescription.setMaxLines(99);
 
-            // We need to align to the longer section
+            
             int futureBottom = mDescription.getBottom() + Tools.mesureTextviewHeight(mDescription) - mDescription.getHeight();
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mExtendedLayout.getLayoutParams();
             params.topToBottom = futureBottom > mIconView.getBottom() ? R.id.mod_body_textview : R.id.mod_thumbnail_imageview;
@@ -335,9 +312,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    /**
-     * The view holder used to hold the progress bar at the end of the list
-     */
+    
     private static class LoadingViewHolder extends RecyclerView.ViewHolder {
         public LoadingViewHolder(View view) {
             super(view);

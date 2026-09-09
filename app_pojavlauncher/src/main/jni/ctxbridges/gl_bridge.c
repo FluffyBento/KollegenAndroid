@@ -14,9 +14,9 @@
 #include <unistd.h>
 #include <log.h>
 
-//
-// Created by maks on 17.09.2022.
-//
+
+
+
 
 static __thread gl_render_window_t* currentBundle;
 static EGLDisplay g_EglDisplay;
@@ -42,15 +42,15 @@ gl_render_window_t* gl_get_current() {
 static void gl4esi_get_display_dimensions(int* width, int* height) {
     if(currentBundle == NULL) goto zero;
     EGLSurface surface = currentBundle->surface;
-    // Fetch dimensions from the EGL surface - the most reliable way
+    
     EGLBoolean result_width = eglQuerySurface_p(g_EglDisplay, surface, EGL_WIDTH, width);
     EGLBoolean result_height = eglQuerySurface_p(g_EglDisplay, surface, EGL_HEIGHT, height);
     if(!result_width || !result_height) goto zero;
     return;
 
     zero:
-    // No idea what to do, but feeding gl4es incorrect or non-initialized dimensions may be
-    // a bad idea. Set to zero in case of errors.
+    
+    
     *width = 0;
     *height = 0;
 }
@@ -58,7 +58,7 @@ static void gl4esi_get_display_dimensions(int* width, int* height) {
 gl_render_window_t* gl_init_context(gl_render_window_t *share) {
     gl_render_window_t* bundle = malloc(sizeof(gl_render_window_t));
     memset(bundle, 0, sizeof(gl_render_window_t));
-    // Should fix old Angelica wanting no ES bit. It'll still get it in opengles_nothing :p
+    
     int glBit = strncmp(getenv("AMETHYST_RENDERER"), "opengles3_desktopgl", 19) ?  EGL_OPENGL_ES3_BIT : EGL_OPENGL_BIT;
     EGLint egl_attributes[] = { EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_RED_SIZE, 8, EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 24, EGL_SURFACE_TYPE, EGL_WINDOW_BIT|EGL_PBUFFER_BIT, EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, EGL_NONE };
     EGLint num_configs = 0;
@@ -74,7 +74,7 @@ gl_render_window_t* gl_init_context(gl_render_window_t *share) {
         return NULL;
     }
 
-    // Get the first matching config
+    
     eglChooseConfig_p(g_EglDisplay, egl_attributes, &bundle->config, 1, &num_configs);
     eglGetConfigAttrib_p(g_EglDisplay, bundle->config, EGL_NATIVE_VISUAL_ID, &bundle->format);
 
@@ -104,20 +104,8 @@ gl_render_window_t* gl_init_context(gl_render_window_t *share) {
 }
 
 void gl_swap_surface(gl_render_window_t* bundle) {
-    /*
-     * In some cases (see MinecraftGLSurface.start(), android kills the surface automatically for
-     * us, if we try to release/destroy it, we SIGSEGV. Check if we are -19x-19 or some other
-     * invalid value and skip the release because Android decided to handle releasing it for us.
-     * This goes against every piece of documentation I have ever seen but who actually reads those?
-     *
-     * Some drivers take forever to properly destroy the surface, they do it part at a time or
-     * some other garbage while SIGSEGVing us if we try releasing while they're in the middle of
-     * turning the surface dead. This makes the width and height make it look valid when it actually
-     * isn't so we wait for them and hope there is no race condition of both us and Android trying
-     * to release the surface. This seems driver dependent as AVD and Waydroid do not need 0.75s
-     * to set the bloody height and width to their proper values. They just do it, instantly.
-     */
-    usleep(750000); // An overkill amount of time to wait for a surface to finish dying
+    
+    usleep(750000); 
     int32_t nativeWindowWidth = ANativeWindow_getWidth(pojav_environ->pojavWindow);
     int32_t nativeWindowHeight = ANativeWindow_getHeight(pojav_environ->pojavWindow);
     if ((nativeWindowWidth > 0) || (nativeWindowHeight > 0)) {
@@ -144,7 +132,7 @@ void gl_swap_surface(gl_render_window_t* bundle) {
         const EGLint pbuffer_attrs[] = {EGL_WIDTH, 1 , EGL_HEIGHT, 1, EGL_NONE};
         bundle->surface = eglCreatePbufferSurface_p(g_EglDisplay, bundle->config, pbuffer_attrs);
     }
-    //eglMakeCurrent_p(g_EglDisplay, bundle->surface, bundle->surface, bundle->context);
+    
 }
 
 void gl_make_current(gl_render_window_t* bundle) {
@@ -163,7 +151,7 @@ void gl_make_current(gl_render_window_t* bundle) {
         hasSetMainWindow = true;
     }
     LOGI("Making current, surface=%p, nativeSurface=%p, newNativeSurface=%p", bundle->surface, bundle->nativeSurface, bundle->newNativeSurface);
-    if(bundle->surface == NULL) { //it likely will be on the first run
+    if(bundle->surface == NULL) { 
         gl_swap_surface(bundle);
     }
     if(eglMakeCurrent_p(g_EglDisplay, bundle->surface, bundle->surface, bundle->context)) {
@@ -181,7 +169,7 @@ void gl_make_current(gl_render_window_t* bundle) {
 
 void gl_swap_buffers() {
     if(currentBundle->state == STATE_RENDERER_NEW_WINDOW) {
-        eglMakeCurrent_p(g_EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT); //detach everything to destroy the old EGLSurface
+        eglMakeCurrent_p(g_EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT); 
         gl_swap_surface(currentBundle);
         eglMakeCurrent_p(g_EglDisplay, currentBundle->surface, currentBundle->surface, currentBundle->context);
         currentBundle->state = STATE_RENDERER_ALIVE;

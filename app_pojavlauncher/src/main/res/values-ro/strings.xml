@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Autentificare</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Acest cont va fi eliminat!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Selectează un instalator de mod</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen s-a oprit neașteptat</string>
     <string name="error_no_version">Fără versiune!</string>
     <string name="error_show_more">Arată mai mult</string>
     <string name="error_show_less">Arată mai puțin</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Este necesară permisiunea de citire/scriere în memorie!</string>
     <string name="toast_optifine_success">Instalare reușită</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
+    
+    
     <string name="mcl_launch_cleancache">Se șterg fișierele cache</string>
     <string name="mcl_launch_downloading">Se descarcă %s</string>
     <string name="mcl_launch_downloading_progress">"Se descarcă %s (%.2f MB / %.2f MB)"</string>
@@ -43,7 +41,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alpha-vechi</string>
     <string name="mcl_setting_veroption_oldbeta">Beta-vechi</string>
     <string name="mcl_version_clone">Clonă</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Editează</string>
     <string name="global_error">Eroare</string>
     <string name="global_load">Incarcă</string>
@@ -57,30 +55,27 @@
     <string name="global_waiting">Așteptați</string>
     <string name="global_select">Selectați</string>
     <string name="global_default">Prestabilit</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Aplicația/Jocul a fost închis cu codul %d, vezi latestlog.txt pentru mai multe detalii.</string>
     <string name="mcn_exit_confirm">Ești sigur că vrei să oprești forțat?</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Mesaje</string>
     <string name="control_debug">Depanare</string>
     <string name="control_mouseoff">Mouse: oprit</string>
     <string name="control_mouseon">Mouse: pornit </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Oprește forțat</string>
     <string name="control_viewout">Ieșire jurnal</string>
     <string name="control_adebug">Depanare intrare</string>
     <string name="control_customkey">Trimite personalizat cod cheie</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Importă controale</string>
     <string name="import_control_invalid_file">Fișier invalid sau corupt</string>
     <string name="import_control_import_button">importă controale</string>
     <string name="import_control_verifying_file">Fișierul este în curs de verificare, te rugăm să aștepți și să încerci din nou…</string>
     <string name="import_control_invalid_name">Nume invalid sau fișierul există deja</string>
     <string name="import_control_done">Importul efectuat</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Comutabil</string>
     <string name="customctrl_size">Dimensiune</string>
     <string name="customctrl_mapping">Asocieri</string>

@@ -122,8 +122,8 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
     }
 
     private void updateStickIcons() {
-        // Which stick is used for keyboard emulation depends on grab state, so we need
-        // to update the mapper UI icons accordingly
+        
+        
         int stickIcon = mGrabState ? R.drawable.stick_left : R.drawable.stick_right;
         ((RebinderButton)mSimulatedGamepadMap.DIRECTION_FORWARD).iconResourceId = stickIcon;
         ((RebinderButton)mSimulatedGamepadMap.DIRECTION_BACKWARD).iconResourceId = stickIcon;
@@ -210,7 +210,7 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
 
             int spinnerIndex;
 
-            // Populate spinners with known keycodes until we run out of keycodes
+            
             for(spinnerIndex = 0; spinnerIndex < mKeycodes.length; spinnerIndex++) {
                 Spinner keySpinner = mKeySpinners[spinnerIndex];
                 keySpinner.setEnabled(true);
@@ -220,7 +220,7 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
                 else selected = EfficientAndroidLWJGLKeycode.getIndexByValue(keyCode) + mSpecialKeycodeCount;
                 keySpinner.setSelection(selected);
             }
-            // In case if there is too much spinners, disable the rest of them
+            
             for(;spinnerIndex < mKeySpinners.length; spinnerIndex++) {
                 mKeySpinners[spinnerIndex].setEnabled(false);
             }

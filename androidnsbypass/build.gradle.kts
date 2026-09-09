@@ -15,8 +15,8 @@ android {
     }
 
     defaultConfig {
-        minSdk = 21 // This is sort of a lie, the lib turns itself off on versions below sdk24
-                    // I don't want to figure out android 4 compiling so uh, you get this.
+        minSdk = 21 
+                    
         externalNativeBuild {
             cmake {
                 cppFlags("-std=c++17")

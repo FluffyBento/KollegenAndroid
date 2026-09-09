@@ -18,23 +18,23 @@ public class CacheUtilCommons {
     static byte[] ip2ByteArray(String ip) {
         boolean ipv6Expected = false;
         if (ip.charAt(0) == '[') {
-            // This is supposed to be an IPv6 literal
+            
             if (ip.length() > 2 && ip.charAt(ip.length() - 1) == ']') {
                 ip = ip.substring(1, ip.length() - 1);
                 ipv6Expected = true;
             } else {
-                // This was supposed to be a IPv6 address, but it's not!
+                
                 throw new IllegalArgumentException(ip + INVALID_IP_V6_ADDRESS);
             }
         }
 
         if (Character.digit(ip.charAt(0), 16) != -1 || (ip.charAt(0) == ':')) {
-            // see if it is IPv4 address
+            
             byte[] address = textToNumericFormatV4(ip);
             if (address != null) return address;
 
-            // see if it is IPv6 address
-            // Check if a numeric or string zone id is present
+            
+            
             address = textToNumericFormatV6(ip);
             if (address != null) return address;
 
@@ -51,13 +51,7 @@ public class CacheUtilCommons {
     private static final int INADDR16SZ = 16;
     private static final int INT16SZ = 2;
 
-    /*
-     * Converts IPv4 address in its textual presentation form
-     * into its numeric binary form.
-     *
-     * @param src a String representing an IPv4 address in standard format
-     * @return a byte array representing the IPv4 numeric address
-     */
+    
     @SuppressWarnings("fallthrough")
     static byte[] textToNumericFormatV4(String src)
     {
@@ -71,31 +65,7 @@ public class CacheUtilCommons {
         if (len == 0 || len > 15) {
             return null;
         }
-        /*
-         * When only one part is given, the value is stored directly in
-         * the network address without any byte rearrangement.
-         *
-         * When a two part address is supplied, the last part is
-         * interpreted as a 24-bit quantity and placed in the right
-         * most three bytes of the network address. This makes the
-         * two part address format convenient for specifying Class A
-         * network addresses as net.host.
-         *
-         * When a three part address is specified, the last part is
-         * interpreted as a 16-bit quantity and placed in the right
-         * most two bytes of the network address. This makes the
-         * three part address format convenient for specifying
-         * Class B net- work addresses as 128.net.host.
-         *
-         * When four parts are specified, each is interpreted as a
-         * byte of data and assigned, from left to right, to the
-         * four bytes of an IPv4 address.
-         *
-         * We determine and parse the leading parts, if any, as single
-         * byte values in one pass directly into the resulting byte[],
-         * then the remainder is treated as a 8-to-32-bit entity and
-         * translated into the remaining bytes in the array.
-         */
+        
         for (int i = 0; i < len; i++) {
             char c = src.charAt(i);
             if (c == '.') {
@@ -131,19 +101,10 @@ public class CacheUtilCommons {
         return res;
     }
 
-    /*
-     * Convert IPv6 presentation level address to network order binary form.
-     * credit:
-     *  Converted from C code from Solaris 8 (inet_pton)
-     *
-     * Any component of the string following a per-cent % is ignored.
-     *
-     * @param src a String representing an IPv6 address in textual format
-     * @return a byte array representing the IPv6 numeric address
-     */
+    
     static byte[] textToNumericFormatV6(String src)
     {
-        // Shortest valid string is "::", hence at least 2 chars
+        
         if (src.length() < 2) {
             return null;
         }
@@ -167,7 +128,7 @@ public class CacheUtilCommons {
 
         colonp = -1;
         int i = 0, j = 0;
-        /* Leading :: requires some special handling. */
+        
         if (srcb[i] == ':')
             if (srcb[++i] != ':')
                 return null;
@@ -205,7 +166,7 @@ public class CacheUtilCommons {
             }
             if (ch == '.' && ((j + INADDR4SZ) <= INADDR16SZ)) {
                 String ia4 = src.substring(curtok, srcb_length);
-                /* check this IPv4 address has 3 dots, ie. A.B.C.D */
+                
                 int dot_count = 0, index=0;
                 while ((index = ia4.indexOf ('.', index)) != -1) {
                     dot_count ++;
@@ -222,7 +183,7 @@ public class CacheUtilCommons {
                     dst[j++] = v4addr[k];
                 }
                 saw_xdigit = false;
-                break;  /* '\0' was seen by inet_pton4(). */
+                break;  
             }
             return null;
         }
@@ -254,13 +215,7 @@ public class CacheUtilCommons {
         }
     }
 
-    /*
-     * Convert IPv4-Mapped address to IPv4 address. Both input and
-     * returned value are in network order binary form.
-     *
-     * @param src a String representing an IPv4-Mapped address in textual format
-     * @return a byte array representing the IPv4 numeric address
-     */
+    
     private static byte[] convertFromIPv4MappedAddress(byte[] addr) {
         if (isIPv4MappedAddress(addr)) {
             byte[] newAddr = new byte[INADDR4SZ];
@@ -270,13 +225,7 @@ public class CacheUtilCommons {
         return null;
     }
 
-    /**
-     * Utility routine to check if the InetAddress is an
-     * IPv4 mapped IPv6 address.
-     *
-     * @return a <code>boolean</code> indicating if the InetAddress is
-     * an IPv4 mapped IPv6 address; or false if address is IPv4 address.
-     */
+    
     private static boolean isIPv4MappedAddress(byte[] addr) {
         if (addr.length < INADDR16SZ) {
             return false;
@@ -292,22 +241,22 @@ public class CacheUtilCommons {
         }
         return false;
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Below source code is copied from commons-lang-3.12.0:
-    //
-    // https://github.com/apache/commons-lang/blob/rel/commons-lang-3.12.0/src/main/java/org/apache/commons/lang3/SystemUtils.java
-    //
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    
+    
+    
 
     @SuppressWarnings({"CommentedOutCode", "SameParameterValue"})
     private static String getSystemProperty(final String property) {
         try {
             return System.getProperty(property);
         } catch (final SecurityException ex) {
-            // we are not allowed to look at this property
-            // System.err.println("Caught a SecurityException reading the system property '" + property
-            //   + "'; the SystemUtils property value will default to null.");
+            
+            
+            
             return null;
         }
     }

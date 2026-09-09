@@ -37,7 +37,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         tools:background="@color/background_status_bar">
-        <!-- The content is inflated here -->
+        
     </com.kdt.DefocusableScrollView>
 
     <RelativeLayout
@@ -67,6 +67,6 @@
             tools:text="Confirm"
             tools:visibility="visible"
             tools:ignore="RelativeOverlap" />
-        <!-- Appears to be no way to properly fix this, and I'm not super fond of child ConstraintLayouts -->
+        
     </RelativeLayout>
 </LinearLayout>

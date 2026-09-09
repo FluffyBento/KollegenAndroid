@@ -13,30 +13,28 @@ import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
-/**
- * Fragment for any settings video related
- */
+
 public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment {
     @Override
     public void onCreatePreferences(Bundle b, String str) {
         addPreferencesFromResource(R.xml.pref_video);
         int resolution = (int) (LauncherPreferences.PREF_SCALE_FACTOR * 100);
 
-        //Disable notch checking behavior on android 8.1 and below.
+        
         requirePreference("ignoreNotch").setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && LauncherPreferences.PREF_NOTCH_SIZE > 0);
 
         CustomSeekBarPreference resolutionSeekbar = requirePreference("resolutionRatio",
                 CustomSeekBarPreference.class);
         resolutionSeekbar.setSuffix(" %");
 
-        // #724 bug fix
+        
         if (resolution < 25) {
             resolutionSeekbar.setValue(100);
         } else {
             resolutionSeekbar.setValue(resolution);
         }
 
-        // Sustained performance is only available since Nougat
+        
         SwitchPreference sustainedPerfSwitch = requirePreference("sustainedPerformance",
                 SwitchPreference.class);
         sustainedPerfSwitch.setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N);

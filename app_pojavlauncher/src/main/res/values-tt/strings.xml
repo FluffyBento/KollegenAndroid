@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_username_hint">Кулланучының исеме</string>
     <string name="login_online_login_label">Керергә</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Бу аккаунт бетереләчәк!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Мод утырткычын сайлагыз</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen сафтан көтелмичә чыкты</string>
     <string name="error_no_version">Версия юк!</string>
     <string name="error_show_more">Күбрәк күрсәтү</string>
     <string name="error_show_less">Әзрәк күрсәтү</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Саклау урыныннан уку/ясу рөхсәте кирәк!</string>
     <string name="toast_optifine_success">Утыртылды</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Вики</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Кеш-файллар бетерүе</string>
     <string name="mcl_launch_downloading">%s йөкләтүе</string>
     <string name="mcl_launch_downloading_progress">"%s йөкләтү (%.2f МБ / %.2f МБ)"</string>
@@ -41,7 +39,7 @@
     <string name="mcl_setting_veroption_oldalpha">Иске альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Иске бета</string>
     <string name="mcl_version_clone">Клонларга</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Үзгәртү</string>
     <string name="global_error">Хата</string>
     <string name="global_load">Йөкләү</string>
@@ -55,9 +53,9 @@
     <string name="global_waiting">Көтегез</string>
     <string name="global_select">Сайлау</string>
     <string name="global_default">Гадәттәге</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_confirm">Сез мәҗбүри ябырга телисезме?</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Чат</string>
     <string name="control_debug">Төзәтү</string>
     <string name="control_inventory">Инв</string>
@@ -65,17 +63,14 @@
     <string name="control_mouse">Тычкан</string>
     <string name="control_mouseoff">Тычкан: Сүнек</string>
     <string name="control_mouseon">Тычкан: Кушык </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Мәҗбүри ябу</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Кертү төзәтүе</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_invalid_file">Хаталы яки бозылган файл</string>
     <string name="import_control_done">Импортлау тәмамланды</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_size">Зурлык</string>
     <string name="customctrl_mapping">Төймәләр</string>
     <string name="customctrl_background_color">Фон төсе</string>

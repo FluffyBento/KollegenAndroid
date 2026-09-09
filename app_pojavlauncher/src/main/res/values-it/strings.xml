@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">Nome utente</string>
     <string name="login_online_login_label">Accedi</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Toccare la rotella dentata in alto al centro per aprire il menu contestuale ⚙ Toccare un pulsante per personalizzarlo: modificarlo, ridimensionarlo, rimuoverlo o cambiarne i tasti."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">L\'account sarà cancellato!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Seleziona un installer mod</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen è crashato inaspettatamente</string>
     <string name="error_no_version">Nessuna versione!</string>
     <string name="error_show_more">Mostra altro</string>
     <string name="error_show_less">Mostra meno</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Permesso di scrittura/lettura sulla memoria necessario!</string>
     <string name="toast_optifine_success">Installato con successo</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Pulizia dei file di cache in corso</string>
     <string name="mcl_launch_downloading">Scaricando %s</string>
     <string name="mcl_launch_downloading_progress">"Scaricando %s (%.2f MB / %.2f MB)"</string>
@@ -59,7 +57,7 @@
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
     <string name="mcl_version_clone">Clona</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Modifica</string>
     <string name="global_error">Errore</string>
     <string name="global_load">Carica</string>
@@ -75,12 +73,12 @@
     <string name="global_retry">Riprova</string>
     <string name="global_default">Predefinito</string>
     <string name="global_off">Off</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">L\'applicazione/gioco si è chiuso con il codice %d, controlla il lastlog.txt per più dettagli.</string>
     <string name="mcn_signal_title">Applicazione/gioco interrotto dal segnale fatale %d, controllare latestlog.txt per maggiori dettagli.</string>
     <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
     <string name="mcn_check_fail_vulkan_support">Il renderer Zink (Vulkan) non è supportato su questo dispositivo!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
     <string name="control_primary">Pri</string>
@@ -97,22 +95,19 @@
     <string name="control_mouse">Mouse</string>
     <string name="control_mouseoff">Mouse: off</string>
     <string name="control_mouseon">Mouse: on </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Chiusura forzata</string>
     <string name="control_viewout">Registro log</string>
     <string name="control_adebug">Debug input</string>
     <string name="control_customkey">Invia keycode personalizzato</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Importa controlli</string>
     <string name="import_control_invalid_file">File corrotto o non valido</string>
     <string name="import_control_import_button">importa controlli</string>
     <string name="import_control_verifying_file">Verifica del file in corso, per favore attendi e riprova…</string>
     <string name="import_control_invalid_name">Nome non valido o file già esistente</string>
     <string name="import_control_done">Importazione completata</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Attivabile</string>
     <string name="customctrl_size">Dimensione</string>
     <string name="customctrl_mapping">Mappatura</string>

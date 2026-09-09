@@ -43,15 +43,15 @@ public class ProfileFixer {
                 profileName = findProfileName(profileName, profilesArray);
                 if(modpackFixupId != null) fixupModpackProfile(profileName, modpackFixupId, profilesArray);
                 if(oldProfile != null) {
-                    if(suppressProfileCreation) profilesArray.put(profileName, oldProfile); // restore the old profile
+                    if(suppressProfileCreation) profilesArray.put(profileName, oldProfile); 
                     else {
                         String name = pickProfileName(profileName);
                         while(profilesArray.has(name)) name = pickProfileName(profileName);
-                        profilesArray.put(name, oldProfile); // restore the old profile under a new name
+                        profilesArray.put(name, oldProfile); 
                     }
                 }else{
-                    if(suppressProfileCreation) profilesArray.remove(profileName); // remove the new profile
-                    // otherwise it wont be removed
+                    if(suppressProfileCreation) profilesArray.remove(profileName); 
+                    
                 }
                 minecraftProfiles.put("profiles", profilesArray);
                 Files.write(profilesPath, minecraftProfiles.toString().getBytes(StandardCharsets.UTF_8),

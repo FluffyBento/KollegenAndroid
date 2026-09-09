@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">Uživatelské jméno</string>
     <string name="login_online_login_label">Přihlásit se</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Klikněte na ikonu ozubeného kolečka nahoře uprostřed pro otevření menu ⚙\nKlikněte na tlačítko pro přizpůsobení: editaci, škálu, odstranění či změnu kláves."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">Tento účet bude odstraněn!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Vyberte instalátor módů</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen neočekávaně spadl</string>
     <string name="error_no_version">Žádná verze!</string>
     <string name="error_show_more">Zobrazit více</string>
     <string name="error_show_less">Zobrazit méně</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Je vyžadováno oprávnění pro čtení/zápis do úložiště!</string>
     <string name="toast_optifine_success">Instalace proběhla úspěšně</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Čištění mezipaměti</string>
     <string name="mcl_launch_downloading">Stahování %s</string>
     <string name="mcl_launch_downloading_progress">"Stahování %s (%.2f MB / %.2f MB)"</string>
@@ -60,7 +58,7 @@
     <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Stará beta</string>
     <string name="mcl_version_clone">Klonovat</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Editovat</string>
     <string name="global_error">Chyba</string>
     <string name="global_load">Načíst</string>
@@ -76,12 +74,12 @@
     <string name="global_retry">Zkusit znovu</string>
     <string name="global_default">Výchozí</string>
     <string name="global_off">Vyp</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Aplikace/Hra spadla s kódem %d, zkontroluj latestlog.txt pro více informací.</string>
     <string name="mcn_signal_title">Aplikace/Hra skončila s fatálním signálem %d, zkontroluj latestlog.txt pro detaily.</string>
     <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
     <string name="mcn_check_fail_vulkan_support">Vykreslovač Zink (Vulkan) není v tomto zařízení podporován!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Chat</string>
     <string name="control_debug">Ladění</string>
     <string name="control_primary">Pri</string>
@@ -98,22 +96,19 @@
     <string name="control_mouse">Myš</string>
     <string name="control_mouseoff">Myš: vypnuta</string>
     <string name="control_mouseon">Myš: zapnuta </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Vynutit zavření</string>
     <string name="control_viewout">Záznam výstupu</string>
     <string name="control_adebug">Ladění Vstupu</string>
     <string name="control_customkey">Poslat vlastní klávesu</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Nahrát ovládací prvky</string>
     <string name="import_control_invalid_file">Neplatný nebo poškozený soubor</string>
     <string name="import_control_import_button">nahrát ovládací prvky</string>
     <string name="import_control_verifying_file">Soubor se ověřuje, počkejte a zkuste to znovu…</string>
     <string name="import_control_invalid_name">Neplatný název nebo soubor již existuje</string>
     <string name="import_control_done">Nahrávání dokončeno</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Přepnutelné</string>
     <string name="customctrl_size">Velikost</string>
     <string name="customctrl_mapping">Mapování</string>

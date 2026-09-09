@@ -28,7 +28,7 @@ public class CallbackBridge {
     public static final Choreographer sChoreographer = Choreographer.getInstance();
     private static boolean isGrabbing = false;
     private static final ArrayList<GrabListener> grabListeners = new ArrayList<>();
-    // Use a weak reference here to avoid possibly statically referencing a Context.
+    
     private static @Nullable WeakReference<DirectGamepadEnableHandler> sDirectGamepadEnableHandler;
     
     public static final int CLIPBOARD_COPY = 2000;
@@ -51,7 +51,7 @@ public class CallbackBridge {
         sChoreographer.postFrameCallbackDelayed(l -> putMouseEventWithCoords(button, false, x, y), 33);
     }
     
-    public static void putMouseEventWithCoords(int button, boolean isDown, float x, float y /* , int dz, long nanos */) {
+    public static void putMouseEventWithCoords(int button, boolean isDown, float x, float y ) {
         sendCursorPos(x, y);
         sendMouseKeycode(button, CallbackBridge.getCurrentMods(), isDown);
     }
@@ -61,7 +61,7 @@ public class CallbackBridge {
         mouseX = x;
         mouseY = y;
         nativeSendCursorPos(mouseX, mouseY);
-        // HOVER_MOVE and MOVE are equivalent in SDL
+        
         if (!MinecraftGLSurface.sdlEnabled) return;
         if (!isGrabbing)
             SDLActivity.onNativeMouse(0, MotionEvent.ACTION_MOVE, x, y, false);
@@ -69,23 +69,13 @@ public class CallbackBridge {
             SDLActivity.onNativeMouse(0, MotionEvent.ACTION_MOVE, deltaX, deltaY, true);
     }
 
-    /**
-     * Sends keycodes if keycode is populated. Used for in-game controls.
-     * Sends character if keychar is populated. Used for chat and text input.
-     * You can refer to glfwSetKeyCallback for the arguments.
-     * @param keycode LwjglGlfwKeycode
-     * @param keychar Literal char. Modifier keys does not affect this.
-     * @param scancode
-     * @param modifiers The action is one of The action is one of GLFW_PRESS, or GLFW_RELEASE.
-     *                  We don't have GLFW_REPEAT working.
-     * @param isDown If its being pressed down or not. 1 is true.
-     */
+    
     public static void sendKeycode(int keycode, char keychar, int scancode, int modifiers, boolean isDown) {
-        // TODO CHECK: This may cause input issue, not receive input!
+        
         if(keycode != 0)  nativeSendKey(keycode,scancode,isDown ? 1 : 0, modifiers);
-        // Only controlmaps goes through here, that means we need to block ISOControl or else
-        // Minecraft tries to type :TAB: as a character in chat, fails, and then ignores the key,
-        // breaking the tab autofill function in old versions. (like 1.12.2, 1.8.9).
+        
+        
+        
         if(isDown && !Character.isISOControl(keychar)) {
             nativeSendCharMods(keychar,modifiers);
             nativeSendChar(keychar);
@@ -94,8 +84,8 @@ public class CallbackBridge {
         if(isDown){
             SDLActivity.onNativeKeyDown(EfficientAndroidLWJGLKeycode.getAndroidKeycode(keycode));
         } else SDLActivity.onNativeKeyUp(EfficientAndroidLWJGLKeycode.getAndroidKeycode(keycode));
-        // If not in GUI and pressed a hotbar key, update HotbarView's last index for gesture
-        // detection. This is still faulty but should be less so.
+        
+        
         if (isGrabbing()){
             if (keycode >= LwjglGlfwKeycode.GLFW_KEY_0 && keycode <= LwjglGlfwKeycode.GLFW_KEY_9){
                 ((MainActivity) SDLActivity.getContext()).setmLastIndex(keycode - LwjglGlfwKeycode.GLFW_KEY_0);
@@ -104,9 +94,9 @@ public class CallbackBridge {
     }
 
     public static void sendChar(char keychar, int modifiers){
-        // Only an EditText goes through here, that means emojis are allowed, so no isISOControl
-        // cause we might break emoji mods then.
-        // See net/kdt/pojavlaunch/customcontrols/keyboard/TouchCharInput.java#L147 (onTextChanged)
+        
+        
+        
         nativeSendCharMods(keychar,modifiers);
         nativeSendChar(keychar);
         if (!MinecraftGLSurface.sdlEnabled) return;
@@ -140,7 +130,7 @@ public class CallbackBridge {
     }
 
     public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
-        // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
+        
         nativeSendMouseButton(button, isDown ? 1 : 0, modifiers);
         if (!MinecraftGLSurface.sdlEnabled) return;
         int aKey = -1;
@@ -154,7 +144,7 @@ public class CallbackBridge {
             case LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_MIDDLE:
                 aKey = MotionEvent.BUTTON_TERTIARY;
                 break;
-            // Yes, back and forward are flipped, for some reason it's just flipped on SDL, don't ask
+            
             case LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_5:
                 aKey = MotionEvent.BUTTON_BACK;
                 break;
@@ -162,10 +152,10 @@ public class CallbackBridge {
                 aKey = MotionEvent.BUTTON_FORWARD;
                 break;
         }
-        // This is disgusting. We need to do this weird stuff because this actually expects
-        // MotionEvent.getButtonState(), which gives a state that does not include the key that was
-        // released.
-        // This really needs to be rewritten to get the MotionEvent itself...oh well
+        
+        
+        
+        
         if (aKey != -1) {
             if (isDown) {
                 sMouseButtonState |= aKey;
@@ -192,11 +182,11 @@ public class CallbackBridge {
     }
 
     public static boolean isGrabbing() {
-        // Avoid going through the JNI each time.
+        
         return isGrabbing;
     }
 
-    // Called from JRE side
+    
     @SuppressWarnings("unused")
     @Keep
     public static @Nullable String accessAndroidClipboard(int type, String copy) {
@@ -219,17 +209,14 @@ public class CallbackBridge {
         }
     }
 
-    // Notification types
+    
     public static final int NOTIF_TYPE_SDL = 0;
 
-    // Notification actions
+    
     public static final int ACTION_INIT_LAUNCHER_INTEGRATION = 0;
     public static final int ACTION_SEND_TEXTBOX_RECT = 1;
-    /**
-     * Used for any sort of notification that needs to be given from the JRE side
-     * @return if notification successful
-     */
-    // Called from JRE side via jni
+    
+    
     @SuppressWarnings("unused")
     @Keep
     public static boolean notifyLauncher(int type, int... action) {
@@ -237,15 +224,15 @@ public class CallbackBridge {
             case NOTIF_TYPE_SDL:
                 if (action[0] == ACTION_INIT_LAUNCHER_INTEGRATION) {
                     try {
-                        // We need to load this ourselves because some mods skip loading it due to
-                        // broken logic somewhere.
+                        
+                        
                         System.loadLibrary("SDL3");
                         System.loadLibrary("SDL2");
                         org.libsdl.app.SDL.setupJNI();
                         onDirectInputEnable();
                         MinecraftGLSurface.sdlEnabled = true;
                         if (SDLActivity.getSDLSurface() != null) {
-                            // Notifies SDL of native surface res which is needed for proper input handling
+                            
                             SDLActivity.getSDLSurface().nativeResize(windowWidth, windowHeight);
                         }
                         Logger.appendToLog("Kollegen-Android: SDL support enabled!");
@@ -255,7 +242,7 @@ public class CallbackBridge {
                     }
                 }
                 if (action[0] == ACTION_SEND_TEXTBOX_RECT) {
-                    // implement
+                    
                 }
 
         }
@@ -301,7 +288,7 @@ public class CallbackBridge {
         }
     }
 
-    //Called from JRE side
+    
     @SuppressWarnings("unused")
     @Keep
     private static void onDirectInputEnable() {
@@ -311,13 +298,13 @@ public class CallbackBridge {
         sGamepadDirectInput = true;
     }
 
-    //Called from JRE side
+    
     @SuppressWarnings("unused")
     @Keep
     private static void onGrabStateChanged(final boolean grabbing) {
         isGrabbing = grabbing;
         sChoreographer.postFrameCallbackDelayed((time) -> {
-            // If the grab re-changed, skip notify process
+            
             if(isGrabbing != grabbing) return;
 
             System.out.println("Grab changed : " + grabbing);
@@ -342,28 +329,28 @@ public class CallbackBridge {
 
     public static FloatBuffer createGamepadAxisBuffer() {
         ByteBuffer axisByteBuffer = nativeCreateGamepadAxisBuffer();
-        // NOTE: hardcoded order (also in jre_lwjgl3glfw CallbackBridge)
+        
         return axisByteBuffer.order(ByteOrder.LITTLE_ENDIAN).asFloatBuffer();
     }
 
     public static void setDirectGamepadEnableHandler(DirectGamepadEnableHandler h) {
         sDirectGamepadEnableHandler = new WeakReference<>(h);
     }
-    @Keep // Used to implement glfwGetWindowContentScale for imgui-java
+    @Keep 
     private static float getAndroidDPI(){
         DisplayMetrics metrics = new DisplayMetrics();
         metrics.setToDefaults();
-        // Multiply by scale factor because we scale the resolution on this, so we also scale DPI on it
+        
         return metrics.density * LauncherPreferences.PREF_SCALE_FACTOR;
     }
 
     @Keep @CriticalNative public static native void nativeSetUseInputStackQueue(boolean useInputStackQueue);
 
     @Keep @CriticalNative private static native boolean nativeSendChar(char codepoint);
-    // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
+    
     @Keep @CriticalNative private static native boolean nativeSendCharMods(char codepoint, int mods);
     @Keep @CriticalNative private static native void nativeSendKey(int key, int scancode, int action, int mods);
-    // private static native void nativeSendCursorEnter(int entered);
+    
     @Keep @CriticalNative private static native void nativeSendCursorPos(float x, float y);
     @Keep @CriticalNative private static native void nativeSendMouseButton(int button, int action, int mods);
     @Keep @CriticalNative private static native void nativeSendScroll(double xoffset, double yoffset);

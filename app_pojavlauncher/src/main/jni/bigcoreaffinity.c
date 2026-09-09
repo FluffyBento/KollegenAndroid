@@ -1,8 +1,8 @@
-//
-// Created by maks on 19.06.2023.
-//
 
-#define _GNU_SOURCE // we are GNU GPLv3
+
+
+
+#define _GNU_SOURCE 
 
 #include <linux/limits.h>
 #include <unistd.h>

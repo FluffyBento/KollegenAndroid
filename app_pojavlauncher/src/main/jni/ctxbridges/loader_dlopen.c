@@ -1,6 +1,6 @@
-//
-// Created by maks on 26.10.2024.
-//
+
+
+
 #include <dlfcn.h>
 #include <linux/limits.h>
 #include <stdio.h>
@@ -17,15 +17,15 @@ void* loader_dlopen(char* primaryName, char* secondaryName, int flags) {
 
     dl_handle = dlopen(primaryName, flags);
     if(dl_handle != NULL) return dl_handle;
-    // Fallback to nsbypass if it didn't work
+    
     if (!app_escapeNs) {
         app_escapeNs = private_create_namespace(
                 "app-escapeNs",
                 NULL,
-                getenv("POJAV_NATIVEDIR"), // append to search path!
-                ANDROID_NAMESPACE_TYPE_SHARED, // Inherit from escapeNs paths
-                getenv("POJAV_NATIVEDIR"), // not needed, useless for non-isolate
-                get_escape_namespace(), // Inherit from escapeNs so we get the system lib paths too
+                getenv("POJAV_NATIVEDIR"), 
+                ANDROID_NAMESPACE_TYPE_SHARED, 
+                getenv("POJAV_NATIVEDIR"), 
+                get_escape_namespace(), 
                 __builtin_return_address(0));
     }
     dl_handle = linker_ns_dlopen(primaryName, RTLD_LOCAL | RTLD_LAZY, app_escapeNs);
@@ -36,15 +36,15 @@ void* loader_dlopen(char* primaryName, char* secondaryName, int flags) {
     secondary:
     dl_handle = dlopen(secondaryName, flags);
     if(dl_handle == NULL) goto dl_error;
-    // Fallback to nsbypass if it didn't work
+    
     if (!app_escapeNs) {
         app_escapeNs = private_create_namespace(
                 "app-escapeNs",
                 NULL,
-                getenv("POJAV_NATIVEDIR"), // append to search path!
-                ANDROID_NAMESPACE_TYPE_SHARED, // Inherit from escapeNs paths
-                getenv("POJAV_NATIVEDIR"), // not needed, useless for non-isolate
-                get_escape_namespace(), // Inherit from escapeNs so we get the system lib paths too
+                getenv("POJAV_NATIVEDIR"), 
+                ANDROID_NAMESPACE_TYPE_SHARED, 
+                getenv("POJAV_NATIVEDIR"), 
+                get_escape_namespace(), 
                 __builtin_return_address(0));
     }
     dl_handle = linker_ns_dlopen(secondaryName, RTLD_LOCAL | RTLD_LAZY, app_escapeNs);

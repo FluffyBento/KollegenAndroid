@@ -8,8 +8,8 @@
 #include <jni.h>
 #include <stdlib.h>
 #include <string.h>
-// WARNING: Hooking dlopen and dlsym does not work for all devices, seems to be a conflict with
-// the turnip loader, perhaps Dobby would fare better.
+
+
 typedef void *(*dlopen_func_t)(const char *, int);
 typedef void *(*dlsym_func_t)(void *, const char *);
 typedef jint (*JNI_OnLoad_t)(JavaVM *vm, void *reserved);
@@ -26,7 +26,7 @@ static const char *const redirected_libs[] = {
         SDL_LIBS,
 };
 
-// Strip the full paths of specific natives so we look inside LD_LIBRARY_PATH instead
+
 static const char *redirect_dlopen_path(const char *filename) {
     if (filename == NULL)
         return NULL;
@@ -63,7 +63,7 @@ static bool ifSdl(const char *filename) {
     return false;
 }
 
-// Skip if not in dalvik vm cause register_methods needs to be ran in android land
+
 static jint custom_sdl3_JNI_OnLoad(JavaVM *vm, void *reserved){
     if (pojav_environ->dalvikJavaVMPtr == vm) {
         return orig_sdl3_JNI_OnLoad(vm, reserved);
@@ -94,7 +94,7 @@ void *custom_dlsym(void *handle, const char *symbol) {
 
     if (sdl3_handle && handle == sdl3_handle && strcmp(symbol, "JNI_OnLoad") == 0) {
         orig_sdl3_JNI_OnLoad = (JNI_OnLoad_t) result;
-        // This outputs in the minecraft logs
+        
         LOGI("Amethyst-Android: Intercepted SDL3 JNI_OnLoad: %p", result);
         return (void *) custom_sdl3_JNI_OnLoad;
     }
@@ -102,9 +102,9 @@ void *custom_dlsym(void *handle, const char *symbol) {
 }
 
 void create_dlopen_hooks(bytehook_hook_all_t bytehook_hook_all_p) {
-    // FIXME: Hooking dlopen causes a crash with Turnip loader, so let's stop doing that entirely
+    
     bytehook_stub_t stub_dlopen = (void *)(uintptr_t)0xD15AB1ED;
-//            bytehook_hook_all_p(NULL, "dlopen", &custom_dlopen, NULL, NULL);
+
     bytehook_stub_t stub_dlsym =
             bytehook_hook_all_p(NULL, "dlsym", &custom_dlsym, NULL, NULL);
     LOGI("Successfully initialized dlopen hooks, stub: %p %p", stub_dlopen, stub_dlsym);

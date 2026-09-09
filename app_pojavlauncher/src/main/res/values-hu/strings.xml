@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Ametiszt</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">Felhasználónév</string>
     <string name="login_online_login_label">Bejelentkezés</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Nyomdd meg a felső középső fogaskereket a helyi menü megnyitáshoz ⚙\n Koppints egy gombra a testreszabáshoz: szerkesztés, méretezés, eltávolítás vagy állítsd át a a billentyűparancsot."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">Ez a fiók törölve lesz!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Válassz ki egy mod telepítőt</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">A Kollegen váratlanul kicrashelt</string>
     <string name="error_no_version">Nincs verzió!</string>
     <string name="error_show_more">Mutass többet</string>
     <string name="error_show_less">Mutass kevesebbet</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">A tárolás olvasási/írási engedély szükséges!</string>
     <string name="toast_optifine_success">Az telepítés sikeres</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">A gyorsítótárazott fájlok törlése</string>
     <string name="mcl_launch_downloading">Letöltés%s</string>
     <string name="mcl_launch_downloading_progress">"Downloading %s (%.2f MB / %.2f MB)
@@ -63,7 +61,7 @@ mcl_indítás_letöltés_folyamatban"</string>
     <string name="mcl_setting_veroption_oldalpha">Régi-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Régi-béta</string>
     <string name="mcl_version_clone">Másolás</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Szerkesztés</string>
     <string name="global_error">Hiba</string>
     <string name="global_load">Betöltés</string>
@@ -79,12 +77,12 @@ mcl_indítás_letöltés_folyamatban"</string>
     <string name="global_retry">Próbáld újra</string>
     <string name="global_default">Alapértelmezett</string>
     <string name="global_off">Ki</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Application/Game kilépett %d kóddal, nézd meg a latestlog.txt több részletért.</string>
     <string name="mcn_signal_title">Az alkalmazás kilépett %d kóddal, nézd meg a latestlog.txt több részletért.</string>
     <string name="mcn_exit_confirm">Biztosan ki akarsz lépni?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) renderelő nem támoatott ezen az eszközön!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Csevegés</string>
     <string name="control_debug">Hibakeresés</string>
     <string name="control_primary">LMB</string>
@@ -101,22 +99,19 @@ mcl_indítás_letöltés_folyamatban"</string>
     <string name="control_mouse">Egér</string>
     <string name="control_mouseoff">Egér: ki</string>
     <string name="control_mouseon">Egér: be </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Kényszerített bezárás</string>
     <string name="control_viewout">Naplókimenet</string>
     <string name="control_adebug">Bemeneti Hibakeresés</string>
     <string name="control_customkey">Saját kód küldése</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Irányítás importálása</string>
     <string name="import_control_invalid_file">Érvénytelen vagy hibás fájl</string>
     <string name="import_control_import_button">Irányítás importálása</string>
     <string name="import_control_verifying_file">A fájl igazolás alatt áll, próbáld újra késöbb…</string>
     <string name="import_control_invalid_name">Helytelen név vagy fájl már létezik</string>
     <string name="import_control_done">Importálás kész</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Átkapcsolható</string>
     <string name="customctrl_size">Méret</string>
     <string name="customctrl_mapping">Leképezés</string>

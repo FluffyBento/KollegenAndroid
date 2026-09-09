@@ -35,11 +35,11 @@ public class Agent implements AWTEventListener {
         WindowEvent windowEvent = (WindowEvent) event;
         Window window = windowEvent.getWindow();
         if(windowEvent.getID() != WindowEvent.WINDOW_OPENED) return;
-        if(forgeWindowHandled && window instanceof JDialog) { // expecting a new dialog
+        if(forgeWindowHandled && window instanceof JDialog) { 
             handleDialog(window);
             return;
         }
-        if(!forgeWindowHandled) { // false at startup, so we will handle the first window as the Forge one
+        if(!forgeWindowHandled) { 
             forgeWindowHandled =  handleMainWindow(window);
             checkComponentTimer();
         }
@@ -73,7 +73,7 @@ public class Agent implements AWTEventListener {
             return false;
         }else{
             ProfileFixer.storeProfile(optiFineInstallation ? "OptiFine" : "forge");
-            EventQueue.invokeLater(okButton::doClick); // do that after forge actually builds its window, otherwise we set the path too fast
+            EventQueue.invokeLater(okButton::doClick); 
             return true;
         }
     }
@@ -82,9 +82,9 @@ public class Agent implements AWTEventListener {
     public AbstractButton handleForgeButton(AbstractButton abstractButton) {
         switch(abstractButton.getText()) {
             case "OK":
-                return  abstractButton; // return the button, so we can press it after processing other stuff
+                return  abstractButton; 
             case "Install client":
-                abstractButton.doClick(); // It should be the default, but let's make sure
+                abstractButton.doClick(); 
         }
         return null;
     }
@@ -98,16 +98,16 @@ public class Agent implements AWTEventListener {
 
     public void handleDialog(Window window) {
         List<Component> components = new ArrayList<>();
-        insertAllComponents(components, window, new DialogFilter()); // ensure that it's a JOptionPane dialog
+        insertAllComponents(components, window, new DialogFilter()); 
         if(components.size() == 1) {
-            // another common trait of them - they only have one option pane in them,
-            // so we can discard the rest of the dialog structure
-            // also allows us to discard dialogs with progress bars which older installers use
+            
+            
+            
             JOptionPane optionPane = (JOptionPane) components.get(0);
-            if(optionPane.getMessageType() == JOptionPane.INFORMATION_MESSAGE) { // forge doesn't emit information messages for other reasons yet
+            if(optionPane.getMessageType() == JOptionPane.INFORMATION_MESSAGE) { 
                 System.out.println("The install was successful!");
                 ProfileFixer.reinsertProfile(optiFineInstallation ? "OptiFine" : "forge", modpackFixupId, suppressProfileCreation);
-                System.exit(0); // again, forge doesn't call exit for some reason, so we do that ourselves here
+                System.exit(0); 
             }
         }
     }
@@ -131,12 +131,12 @@ public class Agent implements AWTEventListener {
             modpackFixupId = findQuotedString(args);
             if(modpackFixupId != null) {
                 noProfileSuppression = args.contains("NPS") && !modpackFixupId.contains("NPS");
-                // No Profile Suppression
+                
                 optifine = args.contains("OF") && !modpackFixupId.contains("OF");
-                // OptiFine
+                
             }else {
-                noProfileSuppression = args.contains("NPS"); // No Profile Suppression
-                optifine = args.contains("OF"); // OptiFine
+                noProfileSuppression = args.contains("NPS"); 
+                optifine = args.contains("OF"); 
             }
         }
         Agent agent = new Agent(noProfileSuppression, optifine, modpackFixupId);

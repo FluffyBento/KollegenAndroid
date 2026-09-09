@@ -51,26 +51,20 @@ public class MinecraftDownloader {
     private ArrayList<DownloaderTask> mScheduledDownloadTasks;
     private ArrayList<File> mDeclaredNatives;
     private AtomicLong mProcessedFileCounter;
-    private AtomicLong mProcessedSizeCounter; // Total bytes of processed files (passed SHA1 or downloaded)
-    private AtomicLong mInternetUsageCounter; // How many bytes downloaded over Internet
+    private AtomicLong mProcessedSizeCounter; 
+    private AtomicLong mInternetUsageCounter; 
     private long mTotalFileCount;
     private long mTotalSize;
-    private File mSourceJarFile; // The source client JAR picked during the inheritance process
-    private File mTargetJarFile; // The destination client JAR to which the source will be copied to.
-    private boolean mUseFileCounter; // Whether a file counter or a size counter should be used for progress
+    private File mSourceJarFile; 
+    private File mTargetJarFile; 
+    private boolean mUseFileCounter; 
 
     private static final ThreadLocal<byte[]> sThreadLocalDownloadBuffer = new ThreadLocal<>();
 
     private boolean isLocalProfile = false;
     private boolean isOnline;
 
-    /**
-     * Start the game version download process on the global executor service.
-     * @param activity Activity, used for automatic installation of JRE 17 if needed
-     * @param version The JMinecraftVersionList.Version from the version list, if available
-     * @param realVersion The version ID (necessary)
-     * @param listener The download status listener
-     */
+    
     public void start(@Nullable Activity activity, @Nullable JMinecraftVersionList.Version version,
                       @NonNull String realVersion,
                       @NonNull AsyncMinecraftDownloader.DoneListener listener) {
@@ -87,19 +81,19 @@ public class MinecraftDownloader {
         sExecutorService.execute(() -> {
             try {
                 if(isLocalProfile || !isOnline) {
-                    String versionMessage = realVersion; // Use provided version unless we find its a modded instance
+                    String versionMessage = realVersion; 
 
-                    // See if provided version is a modded version and if that version depends on another jar, check for presence of both jar's .json.
+                    
                     try {
-                        // This reads the .json associated with the provided version. If it fails, we can assume it's not installed.
+                        
                         File providedJsonFile = new File(Tools.DIR_HOME_VERSION + "/" + realVersion + "/" + realVersion + ".json");
                         JMinecraftVersionList.Version providedJson = Tools.GLOBAL_GSON.fromJson(Tools.read(providedJsonFile.getAbsolutePath()), JMinecraftVersionList.Version.class);
 
-                        // This checks if running modded version that depends on other jars, so we use that for the error message.
+                        
                         File vanillaJsonFile = new File(Tools.DIR_HOME_VERSION + "/" + providedJson.inheritsFrom + "/" + providedJson.inheritsFrom + ".json");
                         versionMessage = providedJson.inheritsFrom != null ? providedJson.inheritsFrom : versionMessage;
 
-                        // Ensure they're both not some 0 byte corrupted json
+                        
                         if (providedJsonFile.length() == 0 || vanillaJsonFile.exists() && vanillaJsonFile.length() == 0){
                             throw new RuntimeException("Minecraft "+versionMessage+ " is needed by " +realVersion); }
 
@@ -119,16 +113,10 @@ public class MinecraftDownloader {
         });
     }
 
-    /**
-     * Download the game version.
-     * @param activity Activity, used for automatic installation of JRE 17 if needed
-     * @param verInfo The JMinecraftVersionList.Version from the version list, if available
-     * @param versionName The version ID (necessary)
-     * @throws Exception when an exception occurs in the function body or in any of the downloading threads.
-     */
+    
     private void downloadGame(Activity activity, JMinecraftVersionList.Version verInfo, String versionName) throws Exception {
-        // Put up a dummy progress line, for the activity to start the service and do all the other necessary
-        // work to keep the launcher alive. We will replace this line when we will start downloading stuff.
+        
+        
         ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.newdl_starting);
         SpeedCalculator speedCalculator = new SpeedCalculator();
 
@@ -148,8 +136,8 @@ public class MinecraftDownloader {
         ThreadPoolExecutor downloaderPool =
                 new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS, taskQueue);
 
-        // I have tried pre-filling the queue directly instead of doing this, but it didn't work.
-        // What a shame.
+        
+        
         for(DownloaderTask scheduledTask : mScheduledDownloadTasks) downloaderPool.execute(scheduledTask);
         downloaderPool.shutdown();
 
@@ -168,8 +156,8 @@ public class MinecraftDownloader {
                 extractNatives(versionName);
             }
         }catch (InterruptedException e) {
-            // Interrupted while waiting, which means that the download was cancelled.
-            // Kill all downloading threads immediately, and ignore any exceptions thrown by them
+            
+            
             downloaderPool.shutdownNow();
         }
     }
@@ -199,11 +187,7 @@ public class MinecraftDownloader {
         return new File(Tools.DIR_HOME_VERSION, versionId + File.separator + versionId + ".jar");
     }
 
-    /**
-     * Ensure that there is a copy of the client JAR file in the version folder, if a copy is
-     * needed.
-     * @throws IOException if the copy fails
-     */
+    
     private void ensureJarFileCopy() throws IOException {
         if(mSourceJarFile == null) return;
         if(mSourceJarFile.equals(mTargetJarFile)) return;
@@ -271,15 +255,7 @@ public class MinecraftDownloader {
         return downloads.get("client");
     }
 
-    /**
-     * Download (if necessary) and process a version's metadata, scheduling all downloads that this
-     * version needs.
-     * @param activity Activity, used for automatic installation of JRE 17 if needed
-     * @param verInfo The JMinecraftVersionList.Version from the version list, if available
-     * @param versionName The version ID (necessary)
-     * @return false if JRE17 installation failed, true otherwise
-     * @throws IOException if the download of any of the metadata files fails
-     */
+    
     private boolean downloadAndProcessMetadata(Activity activity, JMinecraftVersionList.Version verInfo, String versionName) throws IOException, MirrorTamperedException {
         File versionJsonFile;
         if(verInfo != null) versionJsonFile = downloadGameJson(verInfo);
@@ -307,7 +283,7 @@ public class MinecraftDownloader {
 
         if(Tools.isValidString(verInfo.inheritsFrom)) {
             JMinecraftVersionList.Version inheritedVersion = AsyncMinecraftDownloader.getListedVersion(verInfo.inheritsFrom);
-            // Infinite inheritance !?! :noway:
+            
             return downloadAndProcessMetadata(activity, inheritedVersion, verInfo.inheritsFrom);
         }
         return true;
@@ -321,13 +297,13 @@ public class MinecraftDownloader {
                                   long size, boolean skipIfFailed) throws IOException {
         FileUtils.ensureParentDirectory(targetFile);
         mTotalFileCount++;
-        // Only attempt to check size if we still use the size counter and didn't switch to file counter.
+        
         if(size <= 0 && !mUseFileCounter) {
             size = DownloadMirror.getContentLengthMirrored(downloadClass, url);
         }
         if(size < 0) {
-            // If we were unable to get the content length ourselves, we automatically fall back
-            // to tracking the progress using the file counter.
+            
+            
             size = 0;
             mUseFileCounter = true;
             Log.i("MinecraftDownloader", "Failed to determine size of "+targetFile.getName()+", switching to file counter");
@@ -339,13 +315,7 @@ public class MinecraftDownloader {
         );
     }
 
-    /**
-     * Schedule the download of an AAR library containing the required natives, for later extraction
-     * and adding to the library path.
-     * @param baseRepository the source Maven repository to download from.
-     * @param dependentLibrary the DependentLibrary to get the path from
-     * @throws IOException in case if download scheduling fails.
-     */
+    
     private void scheduleNativeLibraryDownload(String baseRepository, DependentLibrary dependentLibrary) throws IOException {
         String path = FileUtils.removeExtension(Tools.artifactToPath(dependentLibrary)) + ".aar";
         String downloadUrl = baseRepository + path;
@@ -358,9 +328,9 @@ public class MinecraftDownloader {
         Tools.preProcessLibraries(dependentLibraries);
         growDownloadList(dependentLibraries.length);
         for(DependentLibrary dependentLibrary : dependentLibraries) {
-            // Don't download lwjgl, we have our own bundled in.
+            
             if(dependentLibrary.name.startsWith("org.lwjgl")) continue;
-            // Special handling for JNA Android natives
+            
             if(dependentLibrary.name.startsWith("net.java.dev.jna:jna:")) {
                 scheduleNativeLibraryDownload(MAVEN_CENTRAL_REPO1, dependentLibrary);
             }
@@ -375,8 +345,8 @@ public class MinecraftDownloader {
                     url = artifact.url;
                     size = artifact.size;
                 } else {
-                    // If the library has a downloads section but doesn't have an artifact in
-                    // it, it is likely natives-only, which means it can be skipped.
+                    
+                    
                     Log.i("NewMCDownloader", "Skipped library " + dependentLibrary.name + " due to lack of artifact");
                     continue;
                 }
@@ -448,7 +418,7 @@ public class MinecraftDownloader {
                 minecraftClientInfo.size,
                 false
         );
-        // Store the path of the JAR to copy it into our new version folder later.
+        
         mSourceJarFile = clientJar;
     }
 
@@ -484,26 +454,20 @@ public class MinecraftDownloader {
                     mDownloadClass, mTargetUrl + ".sha1"
             );
             if(!Tools.isValidString(downloadedHash)) return null;
-            // Ensure that we don't have leading/trailing whitespaces before checking hash length
+            
             downloadedHash = downloadedHash.trim();
-            // SHA1 is made up of 20 bytes, which means 40 hexadecimal digits, which means 40 chars
+            
             if(downloadedHash.length() != 40) return null;
             return downloadedHash;
         }
 
-        /*
-         * Maven repositories usually have the hash of a library near it, like:
-         * .../libraryName-1.0.jar
-         * .../libraryName.1.0.jar.sha1
-         * Since Minecraft libraries are stored in maven repositories, try to use
-         * this when downloading libraries without hashes in the json.
-         */
+        
         private void tryGetLibrarySha1() throws IOException {
             File sha1CacheDir = new File(Tools.DIR_CACHE + "/sha1hashes");
             File cacheFile = new File(sha1CacheDir.getAbsolutePath() + FileUtils.getFileName(mTargetUrl) + ".sha");
 
-            // Only use cache when its offline. No point in having cache invalidation now!
-            if (!isOnline || !LauncherPreferences.PREF_CHECK_LIBRARY_SHA) { // Well not only offlines..this setting speeds up launch times at least!
+            
+            if (!isOnline || !LauncherPreferences.PREF_CHECK_LIBRARY_SHA) { 
                 try (BufferedReader cacheFileReader = new BufferedReader(new FileReader(cacheFile))) {
                     mTargetSha1 = cacheFileReader.readLine();
                     if (mTargetSha1 != null) {
@@ -522,7 +486,7 @@ public class MinecraftDownloader {
             String resultHash = null;
             try {
                 resultHash = downloadSha1();
-                // The hash is a 40-byte download.
+                
                 mInternetUsageCounter.getAndAdd(40);
             } catch (IOException e) {
                 Log.i("MinecraftDownloader", "Failed to download hash", e);
@@ -535,7 +499,7 @@ public class MinecraftDownloader {
                 Log.i("MinecraftDownloader", "Got hash: " + resultHash + " for " + FileUtils.getFileName(mTargetUrl));
                 mTargetSha1 = resultHash;
                 if (!sha1CacheDir.exists()) {
-                    sha1CacheDir.mkdir(); // If mkdir() fails, something went wrong with initializing /data/data/. mkdirs() isn't used on purpose
+                    sha1CacheDir.mkdir(); 
                 }
                 try (FileWriter writeHash = new FileWriter(cacheFile)) {
                     Log.i("MinecraftDownloader", "Saving hash: " + resultHash + " for " + FileUtils.getFileName(mTargetUrl) + " to " + cacheFile);
@@ -555,14 +519,14 @@ public class MinecraftDownloader {
 
         private void runCatching() throws Exception {
             if(mDownloadClass == DownloadMirror.DOWNLOAD_CLASS_LIBRARIES && !Tools.isValidString(mTargetSha1)) {
-                // If we're downloading a library, try to get sha1 since it might be available as a file
+                
                 tryGetLibrarySha1();
             }
             if(Tools.isValidString(mTargetSha1)) {
                 verifyFileSha1();
             }else {
-                mTargetSha1 = null; // Nullify SHA1 as DownloadUtils.ensureSha1 only checks for null,
-                                    // not for string validity
+                mTargetSha1 = null; 
+                                    
                 if(mTargetPath.exists()) finishWithoutDownloading();
                 else downloadFile();
             }
@@ -572,8 +536,8 @@ public class MinecraftDownloader {
             if(mTargetPath.isFile() && mTargetPath.canRead() && Tools.compareSHA1(mTargetPath, mTargetSha1)) {
                 finishWithoutDownloading();
             } else {
-                // Rely on the download function to throw an IOE in case if the file is not
-                // writable/not a file/etc...
+                
+                
                 downloadFile();
             }
         }

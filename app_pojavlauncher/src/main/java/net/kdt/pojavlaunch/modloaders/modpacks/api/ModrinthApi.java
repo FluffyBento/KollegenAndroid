@@ -39,7 +39,7 @@ public class ModrinthApi implements ModpackApi{
     public SearchResult searchMod(SearchFilters searchFilters, SearchResult previousPageResult) {
         ModrinthSearchResult modrinthSearchResult = (ModrinthSearchResult) previousPageResult;
 
-        // Fixes an issue where the offset being equal or greater than total_hits is ignored
+        
         if (modrinthSearchResult != null && modrinthSearchResult.previousOffset >= modrinthSearchResult.totalResultCount) {
             ModrinthSearchResult emptyResult = new ModrinthSearchResult();
             emptyResult.results = new ModItem[0];
@@ -49,7 +49,7 @@ public class ModrinthApi implements ModpackApi{
         }
 
 
-        // Build the facets filters
+        
         HashMap<String, Object> params = new HashMap<>();
         StringBuilder facetString = new StringBuilder();
         facetString.append("[");
@@ -121,7 +121,7 @@ public class ModrinthApi implements ModpackApi{
 
             mcNames[i] = version.get("game_versions").getAsJsonArray().get(0).getAsString();
             urls[i] = version.get("files").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString();
-            // Assume there may not be hashes, in case the API changes
+            
             JsonObject hashesMap = version.getAsJsonArray("files").get(0).getAsJsonObject()
                     .get("hashes").getAsJsonObject();
             if(hashesMap == null || hashesMap.get("sha1") == null){
@@ -155,7 +155,7 @@ public class ModrinthApi implements ModpackApi{
 
     @Override
     public ModLoader installMod(ModDetail modDetail, int selectedVersion) throws IOException{
-        //TODO considering only modpacks for now
+        
         return ModpackInstaller.installModpack(modDetail, selectedVersion, this::installMrpack);
     }
 

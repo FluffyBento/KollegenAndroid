@@ -1,6 +1,6 @@
-//
-// Created by maks on 24.09.2022.
-//
+
+
+
 
 #ifndef POJAVLAUNCHER_ENVIRON_H
 #define POJAVLAUNCHER_ENVIRON_H
@@ -9,7 +9,7 @@
 #include <stdatomic.h>
 #include <jni.h>
 
-/* How many events can be handled at the same time */
+
 #define EVENT_WINDOW_SIZE 8000
 
 typedef struct {
@@ -38,12 +38,12 @@ struct pojav_environ_s {
     basic_render_window_t* mainWindowBundle;
     int config_renderer;
     bool force_vsync;
-    atomic_size_t eventCounter; // Count the number of events to be pumped out
+    atomic_size_t eventCounter; 
     GLFWInputEvent events[EVENT_WINDOW_SIZE];
-    size_t outEventIndex; // Point to the current event that has yet to be pumped out to MC
-    size_t outTargetIndex; // Point to the newt index to stop by
-    size_t inEventIndex; // Point to the next event that has to be filled
-    size_t inEventCount; // Count registered right before pumping OUT events. Used as a cache.
+    size_t outEventIndex; 
+    size_t outTargetIndex; 
+    size_t inEventIndex; 
+    size_t inEventCount; 
     double cursorX, cursorY, cLastX, cLastY;
     jmethodID method_accessAndroidClipboard;
     jmethodID method_onGrabStateChanged;
@@ -80,4 +80,4 @@ struct pojav_environ_s {
 };
 extern struct pojav_environ_s *pojav_environ;
 
-#endif //POJAVLAUNCHER_ENVIRON_H
+#endif 

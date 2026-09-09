@@ -1,8 +1,4 @@
-/*
- * Copyright LWJGL. All rights reserved.
- * License terms: https://www.lwjgl.org/license
- * MACHINE GENERATED FILE, DO NOT EDIT
- */
+
 package org.lwjgl.sdl;
 
 import org.jspecify.annotations.*;
@@ -20,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class SDLMouse {
 
-    /** Contains the function pointers loaded from {@code SDL.getLibrary()}. */
+    
     public static final class Functions {
 
         private Functions() {}
 
-        /** Function address. */
+        
         public static final long
                 HasMouse                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_HasMouse"),
                 GetMice                    = apiGetFunctionAddress(SDL.getLibrary(), "SDL_GetMice"),
@@ -99,24 +95,24 @@ public class SDLMouse {
         throw new UnsupportedOperationException();
     }
 
-    // --- [ SDL_HasMouse ] ---
+    
 
-    /** {@code bool SDL_HasMouse(void)} */
+    
     @NativeType("bool")
     public static boolean SDL_HasMouse() {
         long __functionAddress = Functions.HasMouse;
         return invokeZ(__functionAddress);
     }
 
-    // --- [ SDL_GetMice ] ---
+    
 
-    /** {@code SDL_MouseID * SDL_GetMice(int * count)} */
+    
     public static long nSDL_GetMice(long count) {
         long __functionAddress = Functions.GetMice;
         return invokePP(count, __functionAddress);
     }
 
-    /** {@code SDL_MouseID * SDL_GetMice(int * count)} */
+    
     @NativeType("SDL_MouseID *")
     public static @Nullable IntBuffer SDL_GetMice() {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -129,39 +125,39 @@ public class SDLMouse {
         }
     }
 
-    // --- [ SDL_GetMouseNameForID ] ---
+    
 
-    /** {@code char const * SDL_GetMouseNameForID(SDL_MouseID instance_id)} */
+    
     public static long nSDL_GetMouseNameForID(int instance_id) {
         long __functionAddress = Functions.GetMouseNameForID;
         return invokeP(instance_id, __functionAddress);
     }
 
-    /** {@code char const * SDL_GetMouseNameForID(SDL_MouseID instance_id)} */
+    
     @NativeType("char const *")
     public static @Nullable String SDL_GetMouseNameForID(@NativeType("SDL_MouseID") int instance_id) {
         long __result = nSDL_GetMouseNameForID(instance_id);
         return memUTF8Safe(__result);
     }
 
-    // --- [ SDL_GetMouseFocus ] ---
+    
 
-    /** {@code SDL_Window * SDL_GetMouseFocus(void)} */
+    
     @NativeType("SDL_Window *")
     public static long SDL_GetMouseFocus() {
         long __functionAddress = Functions.GetMouseFocus;
         return invokeP(__functionAddress);
     }
 
-    // --- [ SDL_GetMouseState ] ---
+    
 
-    /** {@code SDL_MouseButtonFlags SDL_GetMouseState(float * x, float * y)} */
+    
     public static int nSDL_GetMouseState(long x, long y) {
         long __functionAddress = Functions.GetMouseState;
         return invokePPI(x, y, __functionAddress);
     }
 
-    /** {@code SDL_MouseButtonFlags SDL_GetMouseState(float * x, float * y)} */
+    
     @NativeType("SDL_MouseButtonFlags")
     public static int SDL_GetMouseState(@NativeType("float *") @Nullable FloatBuffer x, @NativeType("float *") @Nullable FloatBuffer y) {
         if (CHECKS) {
@@ -171,15 +167,15 @@ public class SDLMouse {
         return nSDL_GetMouseState(memAddressSafe(x), memAddressSafe(y));
     }
 
-    // --- [ SDL_GetGlobalMouseState ] ---
+    
 
-    /** {@code SDL_MouseButtonFlags SDL_GetGlobalMouseState(float * x, float * y)} */
+    
     public static int nSDL_GetGlobalMouseState(long x, long y) {
         long __functionAddress = Functions.GetGlobalMouseState;
         return invokePPI(x, y, __functionAddress);
     }
 
-    /** {@code SDL_MouseButtonFlags SDL_GetGlobalMouseState(float * x, float * y)} */
+    
     @NativeType("SDL_MouseButtonFlags")
     public static int SDL_GetGlobalMouseState(@NativeType("float *") @Nullable FloatBuffer x, @NativeType("float *") @Nullable FloatBuffer y) {
         if (CHECKS) {
@@ -189,15 +185,15 @@ public class SDLMouse {
         return nSDL_GetGlobalMouseState(memAddressSafe(x), memAddressSafe(y));
     }
 
-    // --- [ SDL_GetRelativeMouseState ] ---
+    
 
-    /** {@code SDL_MouseButtonFlags SDL_GetRelativeMouseState(float * x, float * y)} */
+    
     public static int nSDL_GetRelativeMouseState(long x, long y) {
         long __functionAddress = Functions.GetRelativeMouseState;
         return invokePPI(x, y, __functionAddress);
     }
 
-    /** {@code SDL_MouseButtonFlags SDL_GetRelativeMouseState(float * x, float * y)} */
+    
     @NativeType("SDL_MouseButtonFlags")
     public static int SDL_GetRelativeMouseState(@NativeType("float *") @Nullable FloatBuffer x, @NativeType("float *") @Nullable FloatBuffer y) {
         if (CHECKS) {
@@ -207,40 +203,40 @@ public class SDLMouse {
         return nSDL_GetRelativeMouseState(memAddressSafe(x), memAddressSafe(y));
     }
 
-    // --- [ SDL_WarpMouseInWindow ] ---
+    
 
-    /** {@code void SDL_WarpMouseInWindow(SDL_Window * window, float x, float y)} */
+    
     public static void SDL_WarpMouseInWindow(@NativeType("SDL_Window *") long window, float x, float y) {
         long __functionAddress = Functions.WarpMouseInWindow;
         invokePV(window, x, y, __functionAddress);
     }
 
-    // --- [ SDL_WarpMouseGlobal ] ---
+    
 
-    /** {@code bool SDL_WarpMouseGlobal(float x, float y)} */
+    
     @NativeType("bool")
     public static boolean SDL_WarpMouseGlobal(float x, float y) {
         long __functionAddress = Functions.WarpMouseGlobal;
         return invokeZ(x, y, __functionAddress);
     }
 
-    // --- [ SDL_SetRelativeMouseTransform ] ---
+    
 
-    /** {@code bool SDL_SetRelativeMouseTransform(SDL_MouseMotionTransformCallback callback, void * userdata)} */
+    
     public static boolean nSDL_SetRelativeMouseTransform(long callback, long userdata) {
         long __functionAddress = Functions.SetRelativeMouseTransform;
         return invokePPZ(callback, userdata, __functionAddress);
     }
 
-    /** {@code bool SDL_SetRelativeMouseTransform(SDL_MouseMotionTransformCallback callback, void * userdata)} */
+    
     @NativeType("bool")
     public static boolean SDL_SetRelativeMouseTransform(@NativeType("SDL_MouseMotionTransformCallback") SDL_MouseMotionTransformCallbackI callback, @NativeType("void *") long userdata) {
         return nSDL_SetRelativeMouseTransform(callback.address(), userdata);
     }
 
-    // --- [ SDL_SetWindowRelativeMouseMode ] ---
+    
 
-    /** {@code bool SDL_SetWindowRelativeMouseMode(SDL_Window * window, bool enabled)} */
+    
     @NativeType("bool")
     public static boolean SDL_SetWindowRelativeMouseMode(@NativeType("SDL_Window *") long window, @NativeType("bool") boolean enabled) {
         long __functionAddress = Functions.SetWindowRelativeMouseMode;
@@ -252,9 +248,9 @@ public class SDLMouse {
         return result;
     }
 
-    // --- [ SDL_GetWindowRelativeMouseMode ] ---
+    
 
-    /** {@code bool SDL_GetWindowRelativeMouseMode(SDL_Window * window)} */
+    
     @NativeType("bool")
     public static boolean SDL_GetWindowRelativeMouseMode(@NativeType("SDL_Window *") long window) {
         long __functionAddress = Functions.GetWindowRelativeMouseMode;
@@ -264,24 +260,24 @@ public class SDLMouse {
         return invokePZ(window, __functionAddress);
     }
 
-    // --- [ SDL_CaptureMouse ] ---
+    
 
-    /** {@code bool SDL_CaptureMouse(bool enabled)} */
+    
     @NativeType("bool")
     public static boolean SDL_CaptureMouse(@NativeType("bool") boolean enabled) {
         long __functionAddress = Functions.CaptureMouse;
         return invokeZ(enabled, __functionAddress);
     }
 
-    // --- [ SDL_CreateCursor ] ---
+    
 
-    /** {@code SDL_Cursor * SDL_CreateCursor(Uint8 const * data, Uint8 const * mask, int w, int h, int hot_x, int hot_y)} */
+    
     public static long nSDL_CreateCursor(long data, long mask, int w, int h, int hot_x, int hot_y) {
         long __functionAddress = Functions.CreateCursor;
         return invokePPP(data, mask, w, h, hot_x, hot_y, __functionAddress);
     }
 
-    /** {@code SDL_Cursor * SDL_CreateCursor(Uint8 const * data, Uint8 const * mask, int w, int h, int hot_x, int hot_y)} */
+    
     @NativeType("SDL_Cursor *")
     public static long SDL_CreateCursor(@NativeType("Uint8 const *") ByteBuffer data, @NativeType("Uint8 const *") ByteBuffer mask, int w, int h, int hot_x, int hot_y) {
         if (CHECKS) {
@@ -291,46 +287,46 @@ public class SDLMouse {
         return nSDL_CreateCursor(memAddress(data), memAddress(mask), w, h, hot_x, hot_y);
     }
 
-    // --- [ SDL_CreateColorCursor ] ---
+    
 
-    /** {@code SDL_Cursor * SDL_CreateColorCursor(SDL_Surface * surface, int hot_x, int hot_y)} */
+    
     public static long nSDL_CreateColorCursor(long surface, int hot_x, int hot_y) {
         long __functionAddress = Functions.CreateColorCursor;
         return invokePP(surface, hot_x, hot_y, __functionAddress);
     }
 
-    /** {@code SDL_Cursor * SDL_CreateColorCursor(SDL_Surface * surface, int hot_x, int hot_y)} */
+    
     @NativeType("SDL_Cursor *")
     public static long SDL_CreateColorCursor(@NativeType("SDL_Surface *") SDL_Surface surface, int hot_x, int hot_y) {
         return nSDL_CreateColorCursor(surface.address(), hot_x, hot_y);
     }
 
-    // --- [ SDL_CreateAnimatedCursor ] ---
+    
 
-    /** {@code SDL_Cursor * SDL_CreateAnimatedCursor(SDL_CursorFrameInfo * frames, int frame_count, int hot_x, int hot_y)} */
+    
     public static long nSDL_CreateAnimatedCursor(long frames, int frame_count, int hot_x, int hot_y) {
         long __functionAddress = Functions.CreateAnimatedCursor;
         return invokePP(frames, frame_count, hot_x, hot_y, __functionAddress);
     }
 
-    /** {@code SDL_Cursor * SDL_CreateAnimatedCursor(SDL_CursorFrameInfo * frames, int frame_count, int hot_x, int hot_y)} */
+    
     @NativeType("SDL_Cursor *")
     public static long SDL_CreateAnimatedCursor(@NativeType("SDL_CursorFrameInfo *") SDL_CursorFrameInfo.Buffer frames, int hot_x, int hot_y) {
         return nSDL_CreateAnimatedCursor(frames.address(), frames.remaining(), hot_x, hot_y);
     }
 
-    // --- [ SDL_CreateSystemCursor ] ---
+    
 
-    /** {@code SDL_Cursor * SDL_CreateSystemCursor(SDL_SystemCursor id)} */
+    
     @NativeType("SDL_Cursor *")
     public static long SDL_CreateSystemCursor(@NativeType("SDL_SystemCursor") int id) {
         long __functionAddress = Functions.CreateSystemCursor;
         return invokeP(id, __functionAddress);
     }
 
-    // --- [ SDL_SetCursor ] ---
+    
 
-    /** {@code bool SDL_SetCursor(SDL_Cursor * cursor)} */
+    
     @NativeType("bool")
     public static boolean SDL_SetCursor(@NativeType("SDL_Cursor *") long cursor) {
         long __functionAddress = Functions.SetCursor;
@@ -340,27 +336,27 @@ public class SDLMouse {
         return invokePZ(cursor, __functionAddress);
     }
 
-    // --- [ SDL_GetCursor ] ---
+    
 
-    /** {@code SDL_Cursor * SDL_GetCursor(void)} */
+    
     @NativeType("SDL_Cursor *")
     public static long SDL_GetCursor() {
         long __functionAddress = Functions.GetCursor;
         return invokeP(__functionAddress);
     }
 
-    // --- [ SDL_GetDefaultCursor ] ---
+    
 
-    /** {@code SDL_Cursor * SDL_GetDefaultCursor(void)} */
+    
     @NativeType("SDL_Cursor *")
     public static long SDL_GetDefaultCursor() {
         long __functionAddress = Functions.GetDefaultCursor;
         return invokeP(__functionAddress);
     }
 
-    // --- [ SDL_DestroyCursor ] ---
+    
 
-    /** {@code void SDL_DestroyCursor(SDL_Cursor * cursor)} */
+    
     public static void SDL_DestroyCursor(@NativeType("SDL_Cursor *") long cursor) {
         long __functionAddress = Functions.DestroyCursor;
         if (CHECKS) {
@@ -369,36 +365,36 @@ public class SDLMouse {
         invokePV(cursor, __functionAddress);
     }
 
-    // --- [ SDL_ShowCursor ] ---
+    
 
-    /** {@code bool SDL_ShowCursor(void)} */
+    
     @NativeType("bool")
     public static boolean SDL_ShowCursor() {
         long __functionAddress = Functions.ShowCursor;
         return invokeZ(__functionAddress);
     }
 
-    // --- [ SDL_HideCursor ] ---
+    
 
-    /** {@code bool SDL_HideCursor(void)} */
+    
     @NativeType("bool")
     public static boolean SDL_HideCursor() {
         long __functionAddress = Functions.HideCursor;
         return invokeZ(__functionAddress);
     }
 
-    // --- [ SDL_CursorVisible ] ---
+    
 
-    /** {@code bool SDL_CursorVisible(void)} */
+    
     @NativeType("bool")
     public static boolean SDL_CursorVisible() {
         long __functionAddress = Functions.CursorVisible;
         return invokeZ(__functionAddress);
     }
 
-    // --- [ SDL_BUTTON_MASK ] ---
+    
 
-    /** {@code uint32_t SDL_BUTTON_MASK(uint32_t X)} */
+    
     @NativeType("uint32_t")
     private static int SDL_BUTTON_MASK(@NativeType("uint32_t") int X) {
         return 1 << (X - 1);

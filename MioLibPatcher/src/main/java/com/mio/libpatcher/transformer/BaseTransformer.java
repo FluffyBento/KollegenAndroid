@@ -14,16 +14,12 @@ import java.util.List;
 public interface BaseTransformer extends ClassFileTransformer {
     ClassPool pool = ClassPool.getDefault();
 
-    /**
-     * 单个目标类名，点号分隔。若需要匹配多个目标类，请覆盖 {@link #getTargetClassNames()}。
-     */
+    
     default String getTargetClassName() {
         return "";
     }
 
-    /**
-     * 全部目标类名列表，默认由 {@link #getTargetClassName()} 派生。
-     */
+    
     default List<String> getTargetClassNames() {
         String name = getTargetClassName();
         if (name.isEmpty()) {

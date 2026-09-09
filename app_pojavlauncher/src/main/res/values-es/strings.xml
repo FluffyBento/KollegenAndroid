@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_username_hint">Nombre de usuario</string>
     <string name="login_online_login_label">Iniciar sesión</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">¡Esta cuenta será borrada!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Seleccione un instalador de modificaciones</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen se ha detenido de forma inesperada</string>
     <string name="error_no_version">¡No hay versiones!</string>
     <string name="error_show_more">Mostrar más</string>
     <string name="error_show_less">Mostrar menos</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">¡Se requiere el permiso de lectura/escritura al almacenamiento!</string>
     <string name="toast_optifine_success">Instalación completada</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Limpiando archivos caché</string>
     <string name="mcl_launch_downloading">Descargando %s</string>
     <string name="mcl_launch_downloading_progress">"Descargando %s (%.2f MB / %.2f MB)"</string>
@@ -54,7 +52,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alphas</string>
     <string name="mcl_setting_veroption_oldbeta">Betas</string>
     <string name="mcl_version_clone">Clonar</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Editar</string>
     <string name="global_error">Error</string>
     <string name="global_load">Cargar</string>
@@ -69,12 +67,12 @@
     <string name="global_select">Seleccionar</string>
     <string name="global_retry">Reintentar</string>
     <string name="global_default">Predeterminado</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d, mira el archivo latestlog.txt para más detalles.</string>
     <string name="mcn_signal_title">La aplicación/juego ha finalizado con código %d, revise latestlog.txt para más detalles.</string>
     <string name="mcn_exit_confirm">¿Estás seguro de que quieres forzar el cierre?</string>
     <string name="mcn_check_fail_vulkan_support">¡El renderizador Zink (Vulkan) no es compatible con este dispositivo!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Chat</string>
     <string name="control_debug">Depuración</string>
     <string name="control_secondary">Seg</string>
@@ -88,22 +86,19 @@
     <string name="control_mouse">Ratón</string>
     <string name="control_mouseoff">Ratón: Apagado</string>
     <string name="control_mouseon">Ratón: Encendido </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Forzar el cierre</string>
     <string name="control_viewout">Registro de salida</string>
     <string name="control_adebug">Ingresar Debug</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Importar controles</string>
     <string name="import_control_invalid_file">Archivo inválido o dañado</string>
     <string name="import_control_import_button">importar controles</string>
     <string name="import_control_verifying_file">El archivo está siendo verificado, por favor espere y vuelva a intentarlo…</string>
     <string name="import_control_invalid_name">El nombre es inválido o el archivo ya existe</string>
     <string name="import_control_done">Importación hecha</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Activable</string>
     <string name="customctrl_size">Tamaño</string>
     <string name="customctrl_mapping">Mapeado</string>

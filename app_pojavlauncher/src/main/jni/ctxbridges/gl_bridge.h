@@ -1,7 +1,7 @@
-//
-// Created by maks on 17.09.2022.
-//
-#include <EGL//egl.h>
+
+
+
+#include <EGL
 #include <stdbool.h>
 #ifndef POJAVLAUNCHER_GL_BRIDGE_H
 #define POJAVLAUNCHER_GL_BRIDGE_H
@@ -25,4 +25,4 @@ void gl_setup_window();
 void gl_swap_interval(int swapInterval);
 
 
-#endif //POJAVLAUNCHER_GL_BRIDGE_H
+#endif 

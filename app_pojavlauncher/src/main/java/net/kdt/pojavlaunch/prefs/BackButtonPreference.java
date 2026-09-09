@@ -31,7 +31,7 @@ public class BackButtonPreference extends Preference {
 
     @Override
     protected void onClick() {
-        // It is caught by an ExtraListener in the LauncherActivity
+        
         ExtraCore.setValue(ExtraConstants.BACK_PREFERENCE, "true");
     }
 }

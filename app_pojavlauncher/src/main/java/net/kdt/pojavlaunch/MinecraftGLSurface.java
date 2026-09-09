@@ -54,13 +54,11 @@ import fr.spse.gamepad_remapper.GamepadHandler;
 import fr.spse.gamepad_remapper.RemapperManager;
 import fr.spse.gamepad_remapper.RemapperView;
 
-/**
- * Class dealing with showing minecraft surface and taking inputs to dispatch them to minecraft
- */
+
 public class MinecraftGLSurface extends View implements GrabListener, DirectGamepadEnableHandler {
-    /* Gamepad object for gamepad inputs, instantiated on need */
+    
     private GamepadHandler mGamepadHandler;
-    /* The RemapperView.Builder object allows you to set which buttons to remap */
+    
     private final RemapperManager mInputManager = new RemapperManager(getContext(), new RemapperView.Builder(null)
             .remapA(true)
             .remapB(true)
@@ -77,13 +75,13 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
             .remapRightTrigger(true)
             .remapDpad(true));
 
-    /* Sensitivity, adjusted according to screen size */
+    
     private final double mSensitivityFactor = (1.4 * (1080f/ Tools.getDisplayMetrics((Activity) getContext()).heightPixels));
 
-    /* Surface ready listener, used by the activity to launch minecraft */
+    
     SurfaceReadyListener mSurfaceReadyListener = null;
     final Object mSurfaceReadyListenerLock = new Object();
-    /* View holding the surface, either a SurfaceView or a TextureView */
+    
     View mSurface;
     Surface mNativeSurface;
     String TAG = "MinecraftGLSurface";
@@ -115,26 +113,21 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
     private static void setupSDL(Context ctx, Surface nativeSurface, ViewGroup layout){
         SDLSurface surface = new SDLSurface(ctx);
         motionListener = SDLActivity.getMotionListener();
-        // Sets up the Java side, must be done here or else it might run on a non-looper thread
-        // which crashes the SDLCommandHandler
+        
+        
         org.libsdl.app.SDL.initialize();
         SDL.setContext((MainActivity) ctx);
         SDLActivity.externalInitialize(surface, layout, nativeSurface);
     }
 
-    /** Initialize the view and all its settings
-     * @param isAlreadyRunning set to true to tell the view that the game is already running
-     *                         (only updates the window without calling the start listener)
-     * @param touchpad the optional cursor-emulating touchpad, used for touch event processing
-     *                 when the cursor is not grabbed
-     */
+    
     public void start(boolean isAlreadyRunning, AbstractTouchpad touchpad){
         if(Tools.isAndroid8OrHigher()) setUpPointerCapture(touchpad);
         mInGUIProcessor.setAbstractTouchpad(touchpad);
-        // Kopper Zink has orientation issues on SurfaceView
-        // Angelica has some rendering issues if you tab out on SurfaceView in LWJGL3ify 2.x
-        // FIXME: LWJGL3ify 3.x does not like when surface randomly dies on SurfaceView
-        // (it doesnt swap to 1x1 pbuffer cause it uses sdl for swap instead of glfw)
+        
+        
+        
+        
         try {
             useSurfaceView = useSurfaceView && !LOCAL_RENDERER.equals("opengles3_desktopgl_zink_kopper") &&
                     !Tools.hasMods("angelica") &&
@@ -162,21 +155,15 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
 
                 @Override
                 public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
-                    // Don't use the scaled resolution, SDL doesn't work like that, it'll render offscreen instead.
-                    // The first two args go unused, you can put any garbage in em.
+                    
+                    
                     if (sdlEnabled) SDLActivity.getSDLSurface().surfaceChanged(holder, format, Tools.currentDisplayMetrics.widthPixels, Tools.currentDisplayMetrics.heightPixels);
                     refreshSize();
                 }
 
                 @Override
                 public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
-                    /*
-                    Surface recreation in SurfaceView happens very often. When tabbing back in from
-                    out, when minimizing floating window, when turning into floating window, etc.
-                    Whenever the surface isn't in view, it is destroyed. When going into floating
-                    window, it appears to automatically release the associated ANativeWindow. This
-                    can cause a crash if not handled.
-                     */
+                    
                     if (sdlEnabled) SDLActivity.getSDLSurface().surfaceDestroyed(holder);
                 }
             });
@@ -206,26 +193,22 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
 
                 @Override
                 public void onSurfaceTextureSizeChanged(@NonNull SurfaceTexture surface, int width, int height) {
-                    // Don't use the scaled resolution, SDL doesn't work like that, it'll render offscreen instead.
-                    // The first two args go unused, you can put any garbage in em.
+                    
+                    
                     if (sdlEnabled) SDLActivity.getSDLSurface().surfaceChanged(null, 0, Tools.currentDisplayMetrics.widthPixels, Tools.currentDisplayMetrics.heightPixels);
                     refreshSize();
                 }
 
                 @Override
                 public boolean onSurfaceTextureDestroyed(@NonNull SurfaceTexture surface) {
-                    /*
-                    Surface recreation in TextureView can only really happen once, when turning
-                    into a floating window. Subsequent turns to floating window no longer trigger
-                    recreation. Tabbing out and in does not trigger recreation.
-                     */
+                    
                     if (sdlEnabled) SDLActivity.getSDLSurface().surfaceDestroyed(null);
                     return true;
                 }
 
                 @Override
                 public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surface) {
-                    // TODO: Triggers on eglSwapBuffers. Add a loading message and make it end here
+                    
                 }
             });
 
@@ -235,27 +218,24 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
 
     }
 
-    /**
-     * The touch event for both grabbed an non-grabbed mouse state on the touch screen
-     * Does not cover the virtual mouse touchpad
-     */
+    
     @Override
     @SuppressWarnings("accessibility")
     public boolean onTouchEvent(MotionEvent e) {
-        // Kinda need to send this back to the layout
+        
         if(((ControlLayout)getParent()).getModifiable()) return false;
 
-        // Looking for a mouse to handle, won't have an effect if no mouse exists.
+        
         for (int i = 0; i < e.getPointerCount(); i++) {
             int toolType = e.getToolType(i);
             if(toolType == MotionEvent.TOOL_TYPE_MOUSE) {
                 if(Tools.isAndroid8OrHigher() &&
                         mPointerCapture != null) {
-                    // Can't handleAutomaticCapture if mouse isn't captured
-                    if (!CallbackBridge.isGrabbing() // Only capture if not in menu and user said so
+                    
+                    if (!CallbackBridge.isGrabbing() 
                             && !PREF_MOUSE_GRAB_FORCE) {
-                        // This returns true but we really can't consume this.
-                        // Else we don't receive ACTION_MOVE
+                        
+                        
                         return !dispatchGenericMotionEvent(e);
                     }
                     mPointerCapture.handleAutomaticCapture();
@@ -263,10 +243,10 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
                 }
             }else if(toolType != MotionEvent.TOOL_TYPE_STYLUS) continue;
 
-            // Mouse found
+            
             if(CallbackBridge.isGrabbing()) return false;
             CallbackBridge.sendCursorPos(   e.getX(i) * LauncherPreferences.PREF_SCALE_FACTOR, e.getY(i) * LauncherPreferences.PREF_SCALE_FACTOR);
-            return true; //mouse event handled successfully
+            return true; 
         }
         TouchControllerUtils.processTouchEvent(e, this);
         if (mIngameProcessor == null || mInGUIProcessor == null) return true;
@@ -281,9 +261,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         }
     }
 
-    /**
-     * The event for mouse/joystick movements
-     */
+    
     @SuppressLint("NewApi")
     @Override
     public boolean dispatchGenericMotionEvent(MotionEvent event) {
@@ -310,13 +288,13 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
 
         for(int i = 0; i < event.getPointerCount(); i++) {
             if(event.getToolType(i) != MotionEvent.TOOL_TYPE_MOUSE && event.getToolType(i) != MotionEvent.TOOL_TYPE_STYLUS ) continue;
-            // Mouse found
+            
             mouseCursorIndex = i;
             break;
         }
-        if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
+        if(mouseCursorIndex == -1) return false; 
 
-        // Make sure we grabbed the mouse if necessary
+        
         updateGrabState(CallbackBridge.isGrabbing());
         switch(event.getActionMasked()) {
             case MotionEvent.ACTION_HOVER_MOVE:
@@ -337,11 +315,11 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         }
     }
 
-    /** The event for keyboard/ gamepad button inputs */
+    
     public boolean processKeyEvent(KeyEvent event) {
-        //Log.i("KeyEvent", event.toString());
+        
 
-        //Filtering useless events by order of probability
+        
         int eventKeycode = event.getKeyCode();
         if(eventKeycode == KeyEvent.KEYCODE_UNKNOWN) return true;
         if(eventKeycode == KeyEvent.KEYCODE_VOLUME_DOWN) return false;
@@ -349,20 +327,20 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         if(event.getRepeatCount() != 0) return true;
         int action = event.getAction();
         if(action == KeyEvent.ACTION_MULTIPLE) return true;
-        // Ignore the cancelled up events. They occur when the user switches layouts.
-        // In accordance with https://developer.android.com/reference/android/view/KeyEvent#FLAG_CANCELED
+        
+        
         if(action == KeyEvent.ACTION_UP &&
                 (event.getFlags() & KeyEvent.FLAG_CANCELED) != 0) return true;
 
-        //Sometimes, key events comes from SOME keys of the software keyboard
-        //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
+        
+        
         if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD){
-            if(eventKeycode == KeyEvent.KEYCODE_ENTER) return true; //We already listen to it.
+            if(eventKeycode == KeyEvent.KEYCODE_ENTER) return true; 
             touchCharInput.dispatchKeyEvent(event);
             return true;
         }
 
-        //Sometimes, key events may come from the mouse
+        
         if(event.getDevice() != null
                 && ( (event.getSource() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE
                 ||   (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE)  ){
@@ -374,8 +352,8 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
                 return true;
             }
         }
-        // Android bundles in garbage KeyEvents for compatibility with old apps
-        // that don't have controller code so we are, checking for em.
+        
+        
         boolean isGamepadEvent = Gamepad.isGamepadEvent(event);
         if (sdlEnabled && isGamepadEvent) {
             final KeyEvent copy = new KeyEvent(event);
@@ -400,13 +378,11 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
             return true;
         }
 
-        // Some events will be generated an infinite number of times when no consumed
+        
         return (event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK;
     }
 
-    /** Convert the mouse button, then send it
-     * @return Whether the event was processed
-     */
+    
     public static boolean sendMouseButtonUnconverted(int button, boolean status) {
         int glfwButton = -256;
         switch (button) {
@@ -431,12 +407,12 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         return true;
     }
 
-    /** Called when the size need to be set at any point during the surface lifecycle **/
+    
     public void refreshSize(){
         refreshSize(false);
     }
 
-    /** Same as refreshSize, but allows you to force an immediate size update **/
+    
     public void refreshSize(boolean immediate) {
         if(isInLayout() && !immediate) {
             post(this::refreshSize);
@@ -444,9 +420,9 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         }
         int newWidth;
         int newHeight;
-        // Use the width and height of the View instead of display dimensions to avoid
-        // getting squiched/stretched due to inconsistencies between the layout and
-        // screen dimensions.
+        
+        
+        
         newWidth = Tools.getDisplayFriendlyRes(getWidth(), LauncherPreferences.PREF_SCALE_FACTOR);
         newHeight = Tools.getDisplayFriendlyRes(getHeight(), LauncherPreferences.PREF_SCALE_FACTOR);
         if (newHeight < 1 || newWidth < 1) {
@@ -476,19 +452,19 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
     }
 
     private void realStart(Surface surface){
-        // Initial size set. Request immedate refresh, otherwise the initial width and height for the game
-        // may be broken/unknown.
+        
+        
         refreshSize(true);
-        // Ensures we run at correct refresh rate (should also NOT change the resolution being used)
+        
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            float maxHz = 120f; // Set to 120 by default just to be safe
+            float maxHz = 120f; 
             for (float altHz : getDisplay().getMode().getAlternativeRefreshRates()) {
                 maxHz = Math.max(maxHz, altHz);
             }
             surface.setFrameRate(maxHz, Surface.FRAME_RATE_COMPATIBILITY_DEFAULT, Surface.CHANGE_FRAME_RATE_ONLY_IF_SEAMLESS);
         }
 
-        //Load Minecraft options:
+        
         MCOptionUtils.set("fullscreen", "off");
         MCOptionUtils.set("overrideWidth", String.valueOf(windowWidth));
         MCOptionUtils.set("overrideHeight", String.valueOf(windowHeight));
@@ -499,7 +475,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
 
         new Thread(() -> {
             try {
-                // Wait until the listener is attached
+                
                 synchronized(mSurfaceReadyListenerLock) {
                     if(mSurfaceReadyListener == null) mSurfaceReadyListenerLock.wait();
                 }
@@ -535,12 +511,12 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
             if(mGamepadHandler != null && mGamepadHandler instanceof Gamepad) {
                 ((Gamepad)mGamepadHandler).removeSelf();
             }
-            // Force gamepad recreation on next event
+            
             mGamepadHandler = null;
         });
     }
 
-    /** A small interface called when the listener is ready for the first time */
+    
     public interface SurfaceReadyListener {
         void isReady();
     }

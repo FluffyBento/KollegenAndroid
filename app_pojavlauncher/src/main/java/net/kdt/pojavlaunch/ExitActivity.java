@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 @Keep
 public class ExitActivity extends AppCompatActivity {
 
-    @SuppressLint("StringFormatInvalid") //invalid on some translations but valid on most, cant fix that atm
+    @SuppressLint("StringFormatInvalid") 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

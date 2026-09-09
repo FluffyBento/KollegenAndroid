@@ -12,8 +12,8 @@ public class GamepadKeycodes {
     public static final short GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER = 5;
     public static final short GLFW_GAMEPAD_BUTTON_BACK = 6;
     public static final short GLFW_GAMEPAD_BUTTON_START = 7;
-    // Home button, unused because Android takes the home button events
-    // for itself
+    
+    
     public static final short GLFW_GAMEPAD_BUTTON_GUIDE = 8;
     public static final short GLFW_GAMEPAD_BUTTON_LEFT_THUMB = 9;
     public static final short GLFW_GAMEPAD_BUTTON_RIGHT_THUMB = 10;

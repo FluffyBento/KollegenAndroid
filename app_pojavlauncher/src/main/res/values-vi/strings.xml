@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">Tên người dùng</string>
     <string name="login_online_login_label">Đăng nhập</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Chạm vào bánh răng ở giữa cạnh trên màn hình để mở menu ⚙\nChạm vào nút để tùy chỉnh: sửa, thay đổi kích cỡ, xoá, hoặc đổi gán phím."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">Tài khoản này sẽ bị xoá!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Chọn một trình cài đặt mod</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen đã bị thoát đột ngột</string>
     <string name="error_no_version">Không có phiên bản nào!</string>
     <string name="error_show_more">Hiện thêm</string>
     <string name="error_show_less">Thu gọn</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Yêu cầu quyền đọc/ghi bộ nhớ!</string>
     <string name="toast_optifine_success">Cài đặt thành công</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Đang làm sạch bộ nhớ đệm</string>
     <string name="mcl_launch_downloading">Đang tải %s</string>
     <string name="mcl_launch_downloading_progress">"Đang tải %s (%.2f MB / %.2f MB)"</string>
@@ -60,7 +58,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alpha cũ</string>
     <string name="mcl_setting_veroption_oldbeta">Beta cũ</string>
     <string name="mcl_version_clone">Tạo bản sao</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Sửa</string>
     <string name="global_error">Lỗi</string>
     <string name="global_load">Tải</string>
@@ -76,12 +74,12 @@
     <string name="global_retry">Thử lại</string>
     <string name="global_default">Mặc định</string>
     <string name="global_off">Tắt</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d, kiểm tra tệp latestlog.txt để biết thêm chi tiết.</string>
     <string name="mcn_signal_title">Ứng dụng/Trò chơi đã thoát với mã %d, kiểm tra nhật kí trình khởi chạy (latestlog.txt) để biết thêm chi tiết.</string>
     <string name="mcn_exit_confirm">Bạn có chắc chắn muốn buộc thoát khỏi trò chơi?</string>
     <string name="mcn_check_fail_vulkan_support">Trình kết xuất Zink (Vulkan) không được hỗ trợ trên thiết bị này!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
     <string name="control_primary">Pri</string>
@@ -98,22 +96,19 @@
     <string name="control_mouse">Chuột</string>
     <string name="control_mouseoff">Chuột: tắt</string>
     <string name="control_mouseon">Chuột: bật </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Buộc thoát ứng dụng</string>
     <string name="control_viewout">Nhật ký đầu ra</string>
     <string name="control_adebug">Gỡ lỗi đầu vào</string>
     <string name="control_customkey">Gửi mã phím tùy chỉnh</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Nhập bố cục</string>
     <string name="import_control_invalid_file">Tệp bị hỏng hoặc không hợp lệ</string>
     <string name="import_control_import_button">nhập bố cục</string>
     <string name="import_control_verifying_file">Tệp đang được xác minh, vui lòng chờ và thử lại…</string>
     <string name="import_control_invalid_name">Tên không hợp lệ hoặc tệp đã tồn tại</string>
     <string name="import_control_done">Nhập thành công</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Chuyển đổi</string>
     <string name="customctrl_size">Kích cỡ</string>
     <string name="customctrl_mapping">Sơ đồ phím</string>

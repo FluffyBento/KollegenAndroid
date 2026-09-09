@@ -37,7 +37,7 @@ public class MathQuestionPreference extends SwitchPreferenceCompat {
                         }
                     }
 
-                    // Unused callbacks
+                    
                     public void onActivityCreated(@NonNull Activity a, Bundle b) {}
                     public void onActivityStarted(@NonNull Activity a) {}
                     public void onActivityResumed(@NonNull Activity a) {}
@@ -47,7 +47,7 @@ public class MathQuestionPreference extends SwitchPreferenceCompat {
                 });
     }
 
-    // mapping hardcoded to english. we want people who can actually understand the message
+    
     private static final String[] units = {
             "zero", "one", "two", "three", "four",
             "five", "six", "seven", "eight", "nine",
@@ -64,7 +64,7 @@ public class MathQuestionPreference extends SwitchPreferenceCompat {
 
     @Override
     protected void onClick() {
-        if (isChecked()) { // Don't ask for braincells if turning off
+        if (isChecked()) { 
             super.onClick();
             return;
         }

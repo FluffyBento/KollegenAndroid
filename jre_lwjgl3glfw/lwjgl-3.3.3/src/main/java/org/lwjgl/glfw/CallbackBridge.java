@@ -19,31 +19,20 @@ public class CallbackBridge {
     
     public static final boolean INPUT_DEBUG_ENABLED;
 
-    // Notification types
+    
     public static final int SDL = 0;
-    // Notification actions
+    
     public static final int INIT = 0;
 
     public static boolean sGamepadDirectEnabled;
     
-    // TODO send grab state event to Android
+    
     
     static {
         INPUT_DEBUG_ENABLED = Boolean.parseBoolean(System.getProperty("glfwstub.debugInput", "false"));
 
         
-/*
-        if (isDebugEnabled) {
-            //try {
-                //debugEventStream = new PrintStream(new File(System.getProperty("user.dir"), "glfwstub_inputeventlog.txt"));
-		    debugEventStream = System.out;
-            //} catch (FileNotFoundException e) {
-            //    e.printStackTrace();
-            //}
-        }
-	
-	    //Quick and dirty: debul all key inputs to System.out
-*/
+
     }
 
 

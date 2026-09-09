@@ -18,19 +18,13 @@ import java.util.Map;
 import java.util.Objects;
 
 public class ProfileIconCache {
-    // Data header format: data:<mime>;<encoding>,<data>
+    
     private static final String DATA_HEADER = "data:";
     private static final String FALLBACK_ICON_NAME = "default";
     private static final Map<String, Drawable> sIconCache = new HashMap<>();
     private static final Map<String, Drawable> sStaticIconCache = new HashMap<>();
 
-    /**
-     * Fetch an icon from the cache, or load it if it's not cached.
-     * @param resources the Resources object, used for creating drawables
-     * @param key the profile key
-     * @param icon the profile icon data (stored in the icon field of MinecraftProfile)
-     * @return an icon drawable
-     */
+    
     public static @NonNull Drawable fetchIcon(Resources resources, @NonNull String key, @Nullable String icon) {
         Drawable cachedIcon = sIconCache.get(key);
         if(cachedIcon != null) return cachedIcon;
@@ -38,11 +32,7 @@ public class ProfileIconCache {
         else return fetchStaticIcon(resources, key, icon);
     }
 
-    /**
-     * Drop an icon from the icon cache. When dropped, it's Drawable will be re-read from the
-     * data string (or re-fetched from the static cache)
-     * @param key the profile key
-     */
+    
     public static void dropIcon(@NonNull String key) {
         sIconCache.remove(key);
     }

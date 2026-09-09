@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Aanmelden</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Dit account wordt verwijderd!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Selecteer een mod installatie</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen is onverwacht gecrasht</string>
     <string name="error_no_version">Geen versie!</string>
     <string name="error_show_more">Meer weergeven</string>
     <string name="error_show_less">Minder weergeven</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">De rechten om te lezen/schrijven naar opslag zijn vereist!</string>
     <string name="toast_optifine_success">Installatie geslaagd</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
+    
+    
     <string name="mcl_launch_cleancache">Cache bestanden opschonen</string>
     <string name="mcl_launch_downloading">Downloaden %s</string>
     <string name="mcl_launch_downloading_progress">"%s downloaden (%.2fMB / %.2fMB)"</string>
@@ -46,7 +44,7 @@
     <string name="mcl_setting_subtitle_javaargs">Wees voorzichtig, dit kan een spelcrash maken als het is aangepast zonder kennis.</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (alle versies, middelmatig)</string>
     <string name="mcl_version_clone">Dupliceren</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Bewerken</string>
     <string name="global_load">Lading</string>
     <string name="global_name">Naam</string>
@@ -59,31 +57,28 @@
     <string name="global_waiting">Wacht</string>
     <string name="global_retry">Probeer opnieuw</string>
     <string name="global_default">Standaard</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Applicatie/Game is afgesloten met de code %d, controleer latestlog.txt voor meer details.</string>
     <string name="mcn_exit_confirm">Weet je zeker dat je sluiting wilt forceren?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) renderer wordt niet ondersteund op dit apparaat!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_debug">Foutoplossing</string>
     <string name="control_thirdperson">3de</string>
     <string name="control_mouse">Muis</string>
     <string name="control_mouseoff">Mouse: uit</string>
     <string name="control_mouseon">Mouse: aan </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Geforceerd sluiten</string>
     <string name="control_viewout">Logboek output</string>
     <string name="control_customkey">Verstuur aangepaste sleutelcode</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Besturing importeren</string>
     <string name="import_control_invalid_file">Ongeldig of corrupt bestand</string>
     <string name="import_control_import_button">besturing importeren</string>
     <string name="import_control_verifying_file">Bestand wordt geverifieerd, wacht even en probeer het opnieuw…</string>
     <string name="import_control_invalid_name">Ongeldige naam of bestand bestaat al</string>
     <string name="import_control_done">Importeren voltooid</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Omschakelbaar</string>
     <string name="customctrl_size">Grootte</string>
     <string name="customctrl_corner_radius">Hoek radius</string>

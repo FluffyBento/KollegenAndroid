@@ -1,9 +1,7 @@
 package dev.alexytomi.androidnsbypass;
 
 
-/***
- * Extremely unsafe and thin JNI bridge in case you need it.
- ***/
+
 @SuppressWarnings("unused")
 public class NativeLib {
 

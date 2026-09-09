@@ -19,13 +19,11 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.CallbackBridge;
 
-/**
- * Class dealing with the virtual mouse
- */
+
 public class Touchpad extends View implements GrabListener, AbstractTouchpad {
-    /* Whether the Touchpad should be displayed */
+    
     private boolean mDisplayState;
-    /* Mouse pointer icon used by the touchpad */
+    
     private Drawable mMousePointerDrawable;
     private float mMouseX, mMouseY;
     public Touchpad(@NonNull Context context) {
@@ -37,18 +35,18 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
         init();
     }
 
-    /** Enable the touchpad */
+    
     private void _enable(){
         setVisibility(VISIBLE);
         placeMouseAt(currentDisplayMetrics.widthPixels / 2f, currentDisplayMetrics.heightPixels / 2f);
     }
 
-    /** Disable the touchpad and hides the mouse */
+    
     private void _disable(){
         setVisibility(GONE);
     }
 
-    /** @return The new state, enabled or disabled */
+    
     public boolean switchState(){
         mDisplayState = !mDisplayState;
         if(!CallbackBridge.isGrabbing()) {
@@ -70,9 +68,9 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
 
     private void updateMousePosition() {
         sendMousePosition();
-        // I wanted to implement a dirty rect for this, but it is ignored since API level 21
-        // (which is our min API)
-        // Let's hope the "internally calculated area" is good enough.
+        
+        
+        
         invalidate();
     }
 
@@ -83,10 +81,10 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
     }
 
     private void init(){
-        // Setup mouse pointer
+        
         mMousePointerDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_mouse_pointer, getContext().getTheme());
-        // For some reason it's annotated as Nullable even though it doesn't seem to actually
-        // ever return null
+        
+        
         assert mMousePointerDrawable != null;
         mMousePointerDrawable.setBounds(
                 0, 0,
@@ -98,7 +96,7 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
             setDefaultFocusHighlightEnabled(false);
         }
 
-        // When the game is grabbing, we should not display the mouse
+        
         disable();
         mDisplayState = false;
     }
@@ -123,7 +121,7 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
 
     @Override
     public void applyMotionVector(float x, float y) {
-        if (mDisplayState) { // Make sure no motion leaks through when disabling a moving cursor
+        if (mDisplayState) { 
             mMouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mMouseX + x * LauncherPreferences.PREF_MOUSESPEED));
             mMouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mMouseY + y * LauncherPreferences.PREF_MOUSESPEED));
             updateMousePosition();

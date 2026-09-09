@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">用戶名</string>
     <string name="login_online_login_label">登入</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"點按頂部中央齒輪以打開上下文菜單⚙\n點擊按鈕進行自訂：編輯、調整大小、刪除或更改其按鍵綁定。"</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">此帳號將被移除！</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">選擇模組安裝器</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen 意外崩潰</string>
     <string name="error_no_version">無可用版本！</string>
     <string name="error_show_more">顯示詳情</string>
     <string name="error_show_less">隱藏詳情</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">請授予存儲讀寫權限！</string>
     <string name="toast_optifine_success">安裝成功</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">正在清理快取</string>
     <string name="mcl_launch_downloading">正在下載 %s</string>
     <string name="mcl_launch_downloading_progress">"正在下載 %s（%.2f MB/%.2f MB）"</string>
@@ -60,7 +58,7 @@
     <string name="mcl_setting_veroption_oldalpha">遠古 alpha 版</string>
     <string name="mcl_setting_veroption_oldbeta">遠古 beta 版</string>
     <string name="mcl_version_clone">複製</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">編輯</string>
     <string name="global_error">錯誤</string>
     <string name="global_load">載入</string>
@@ -76,12 +74,12 @@
     <string name="global_retry">重試</string>
     <string name="global_default">預設</string>
     <string name="global_off">關</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">應用/遊戲以代碼 %d 退出，請查看記錄檔 lastestlog.txt 以瞭解詳情。</string>
     <string name="mcn_signal_title">應用/遊戲以致命信息 %d 中止，請查看記錄檔 latestlog.txt 以瞭解詳情。</string>
     <string name="mcn_exit_confirm">您確定要強制關閉？</string>
     <string name="mcn_check_fail_vulkan_support">此裝置不支援 ZInk（Vulkan）渲染器！</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">聊天</string>
     <string name="control_debug">除錯</string>
     <string name="control_primary">主</string>
@@ -98,22 +96,19 @@
     <string name="control_mouse">滑鼠</string>
     <string name="control_mouseoff">滑鼠：關</string>
     <string name="control_mouseon">滑鼠：開 </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">強制關閉</string>
     <string name="control_viewout">記錄檔輸出</string>
     <string name="control_adebug">輸入除錯</string>
     <string name="control_customkey">傳送自訂鍵碼</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">匯入控制鍵佈局</string>
     <string name="import_control_invalid_file">檔案無效或已損壞</string>
     <string name="import_control_import_button">匯入控制鍵佈局</string>
     <string name="import_control_verifying_file">正在校驗檔案，請稍後重試…</string>
     <string name="import_control_invalid_name">名稱無效或檔案已存在</string>
     <string name="import_control_done">匯入完成</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">切換觸發</string>
     <string name="customctrl_size">大小</string>
     <string name="customctrl_mapping">映射</string>

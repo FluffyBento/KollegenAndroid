@@ -20,9 +20,9 @@ import org.apache.commons.io.IOUtils;
 @SuppressWarnings("IOStreamConstructor")
 @Keep
 public class MinecraftAccount {
-    public String accessToken = "0"; // access token
-    public String clientToken = "0"; // clientID: refresh and invalidate
-    public String profileId = "00000000-0000-0000-0000-000000000000"; // profile UUID, for obtaining skin
+    public String accessToken = "0"; 
+    public String clientToken = "0"; 
+    public String profileId = "00000000-0000-0000-0000-000000000000"; 
     public String username = "Steve";
     public String selectedVersion = "1.7.10";
     public boolean isMicrosoft = false;
@@ -39,8 +39,8 @@ public class MinecraftAccount {
             
             Log.i("SkinLoader", "Update skin face success");
         } catch (IOException e) {
-            // Skin refresh limit, no internet connection, etc...
-            // Simply ignore updating skin face
+            
+            
             Log.w("SkinLoader", "Could not update skin face", e);
         }
     }
@@ -104,7 +104,7 @@ public class MinecraftAccount {
 
         File skinFaceFile = getSkinFaceFile(username);
         if (!skinFaceFile.exists()) {
-            // Legacy version, storing the head inside the json as base 64
+            
             if(skinFaceBase64 == null) return null;
             byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
             return BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);

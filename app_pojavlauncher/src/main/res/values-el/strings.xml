@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Είσοδος</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Αυτός ο λογαριασμός θα αφαιρεθεί!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Επιλέξτε ένα πρόγραμμα εγκατάστασης mod</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Ο Kollegen κατέρρευσε απροσδόκητα</string>
     <string name="error_no_version">Καμία έκδοση!</string>
     <string name="error_show_more">Εμφάνιση περισσότερων</string>
     <string name="error_show_less">Εμφάνιση λιγότερων</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Απαιτείται η ανάγνωση/εγγραφή στον χώρο αποθήκευσης!</string>
     <string name="toast_optifine_success">Επιτυχής εγκατάσταση</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
+    
+    
     <string name="mcl_launch_cleancache">Εκκαθάριση χώρου προσωρινής αποθήκευσης αρχείων</string>
     <string name="mcl_launch_downloading">Γίνεται λήψη %s</string>
     <string name="mcl_launch_downloading_progress">"Λήψη %s (%.2f MB / %.2f MB)"</string>
@@ -51,7 +49,7 @@
     <string name="mcl_setting_veroption_oldalpha">Παλιά-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Παλιά-Beta</string>
     <string name="mcl_version_clone">Κλώνος</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Επεξεργασία</string>
     <string name="global_error">Σφάλμα</string>
     <string name="global_load">Φόρτωση</string>
@@ -65,11 +63,11 @@
     <string name="global_waiting">Περιμένετε</string>
     <string name="global_retry">Δοκιμάστε ξανά</string>
     <string name="global_default">Προεπιλογή</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Η εφαρμογή/παιχνίδι τερμάτισε με τον κωδικό %d, ελέγξτε το latestlog.txt για περισσότερες λεπτομέρειες.</string>
     <string name="mcn_exit_confirm">Είστε βέβαιοι ότι θέλετε να αναγκάσετε το κλείσιμο;</string>
     <string name="mcn_check_fail_vulkan_support">Η συσκευή αναπαραγωγής Zink (Vulkan) δεν υποστηρίζεται σε αυτήν τη συσκευή!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Συνομιλία</string>
     <string name="control_debug">Αποσφαλμάτωση</string>
     <string name="control_inventory">Κατα</string>
@@ -78,22 +76,19 @@
     <string name="control_mouse">Ποντίκι</string>
     <string name="control_mouseoff">Ποντίκι: ανενεργό</string>
     <string name="control_mouseon">Ποντίκι: ενεργό </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Αναγκαστικό κλείσιμο εφαρμογής</string>
     <string name="control_viewout">Αρχείο Καταγραφής</string>
     <string name="control_adebug">Είσοδος Σφάλματος</string>
     <string name="control_customkey">Αποστολή προσαρμοσμένου κωδικού κλειδιού</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Έλεγχοι εισαγωγών</string>
     <string name="import_control_invalid_file">Κατεστραμμένο ή άκυρο αρχείο</string>
     <string name="import_control_import_button">έλεγχοι εισαγωγής</string>
     <string name="import_control_verifying_file">Το αρχείο επαληθεύεται, παρακαλώ περιμένετε και προσπαθήστε ξανά…</string>
     <string name="import_control_invalid_name">Μη έγκυρο όνομα ή το αρχείο υπάρχει ήδη</string>
     <string name="import_control_done">Ολοκλήρωση εισαγωγής</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Εναλλασσόμενο</string>
     <string name="customctrl_size">Μέγεθος</string>
     <string name="customctrl_mapping">Χαρτογράφηση</string>

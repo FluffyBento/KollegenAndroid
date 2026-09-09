@@ -37,10 +37,10 @@
     </string-array>
     
     <string-array name="renderer_values">
-        <item>opengles2</item> <!-- BZLZHH/NG-GL4ES (Krypton Wrapper) -->
+        <item>opengles2</item> 
         <item>opengles_mobileglues</item>
-        <item>opengles3_desktopgl_zink_kopper</item> <!-- Swung's Kopper Zink backport to 23.0.4 -->
-        <item>vulkan_zink</item> <!-- osmesa 23.0.4 -->
+        <item>opengles3_desktopgl_zink_kopper</item> 
+        <item>vulkan_zink</item> 
         <item>opengles3_ltw</item>
     </string-array>
     <string-array name="download_source_names">
@@ -51,7 +51,7 @@
         <item>default</item>
         <item>bmclapi</item>
     </string-array>
-    <!--TODO: Make this translatable-->
+    
     <string-array name="mg_renderer_names_angle">
         <item>Disable if possible</item>
         <item>Enable if possible</item>

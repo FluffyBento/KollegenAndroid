@@ -26,18 +26,18 @@ public class LauncherPreferenceRendererSettingsFragment extends LauncherPreferen
                 editText.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        // Nothing, its boilerplate
+                        
                     }
 
                     @Override
                     public void afterTextChanged(Editable editable) {
-                        // Nothing, its boilerplate
+                        
                     }
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        // This is just to handle the summary not updating when its above max int value
-                        // Horrible I know.
+                        
+                        
                         if (editText.getText().toString().isEmpty()) {
                             editText.setText("0");
                         }
@@ -50,7 +50,7 @@ public class LauncherPreferenceRendererSettingsFragment extends LauncherPreferen
                 });
             });
         }
-        updateGLSLCacheSummary(); // Just updates the summary with the value when user opens the menu. Yes it's out of place.
+        updateGLSLCacheSummary(); 
     }
 
     @Override

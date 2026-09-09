@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_username_hint">نام کاربری</string>
     <string name="login_online_login_label">ورود</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">این اکانت حذف خواهد شد!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">یک نصب کننده ماد را انتخاب کنید</string>
-    <!-- Error messages -->
+    
     <string name="error_no_version">بدون ورژن!</string>
     <string name="error_show_more">نمایش بیشتر</string>
     <string name="error_show_less">نمایش کمتر</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">دسترسی خواندن/نوشتن حافظه مورد نیاز است!</string>
     <string name="toast_optifine_success">نصب موفقیت آمیز بود</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">ویکی</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">پاکسازی فایل‌های کَش</string>
     <string name="mcl_launch_downloading">در حال دانلود %s</string>
     <string name="mcl_launch_downloading_progress">"درحال دانلود %s (%.2f MB / %.2f MB)"</string>
@@ -53,7 +51,7 @@
     <string name="mcl_setting_veroption_oldalpha">آلفای-قدیمی</string>
     <string name="mcl_setting_veroption_oldbeta">بتای-قدیمی</string>
     <string name="mcl_version_clone">شبیه‌سازی</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">ویرایش</string>
     <string name="global_error">خطا</string>
     <string name="global_load">بارگذاری</string>
@@ -68,11 +66,11 @@
     <string name="global_select">انتخاب</string>
     <string name="global_retry">دوباره امتحان کنید</string>
     <string name="global_default">پیش‌فرض</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">برنامه یا بازی با کد مرجوعی %d خارج شد. برای جزئیات بیشتر به lastlog.text مراجعت کنید.</string>
     <string name="mcn_exit_confirm">آیا از خروج اجباری اطمینان دارید؟</string>
     <string name="mcn_check_fail_vulkan_support">پردازشگر Zink (Vulkan) توسط این دستگاه پشتیبانی نمیشود!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">چت</string>
     <string name="control_debug">دیباگ</string>
     <string name="control_primary">LMB</string>
@@ -80,22 +78,19 @@
     <string name="control_mouse">ماوس</string>
     <string name="control_mouseoff">ماوس: خاموش</string>
     <string name="control_mouseon">ماوس: روشن </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">توقف اجباری</string>
     <string name="control_viewout">خروجی گزارش (لاگ)</string>
     <string name="control_adebug">ورودی دیباگ</string>
     <string name="control_customkey">ارسال keycode شخصی</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">کننترلر ها را وارد کنید</string>
     <string name="import_control_invalid_file">فایل نامعتبر یا آسیب دیده هست</string>
     <string name="import_control_import_button">کنترلر ها را وارد نمایید</string>
     <string name="import_control_verifying_file">فایل در حال تأیید است، لطفاً صبر کنید و دوباره امتحان کنید…</string>
     <string name="import_control_invalid_name">اسم نامعتبر است یا نام فایل از قبل وجود دارد</string>
     <string name="import_control_done">وارد کردن انجام شد</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">حالت فعال/غیرفعال</string>
     <string name="customctrl_size">اندازه</string>
     <string name="customctrl_mapping">نقشه‌برداری</string>

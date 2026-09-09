@@ -88,7 +88,7 @@ public class OptiFineDownloadTask implements Runnable, Tools.DownloaderFeedback,
     }
 
     public boolean downloadMinecraft(String minecraftVersion) {
-        // the string is always normalized
+        
         JMinecraftVersionList.Version minecraftJsonVersion = AsyncMinecraftDownloader.getListedVersion(minecraftVersion);
         if(minecraftJsonVersion == null) return false;
         try {

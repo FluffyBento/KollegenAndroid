@@ -39,7 +39,7 @@ import java.util.List;
 public class EditControlSideDialog extends SideDialogView {
 
     private final Spinner[] mKeycodeSpinners = new Spinner[4];
-    public boolean internalChanges = false; // True when we programmatically change stuff.
+    public boolean internalChanges = false; 
     private final View.OnLayoutChangeListener mLayoutChangedListener = new View.OnLayoutChangeListener() {
         @Override
         public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
@@ -71,11 +71,11 @@ public class EditControlSideDialog extends SideDialogView {
     private List<String> mSpecialArray;
     private CheckBox mDisplayInGameCheckbox, mDisplayInMenuCheckbox;
     private ControlInterface mCurrentlyEditedButton;
-    // Decorative textviews
+    
     private TextView mOrientationTextView, mMappingTextView, mNameTextView,
             mCornerRadiusTextView, mVisibilityTextView, mSizeTextview, mSizeXTextView;
 
-    // Color selector related stuff
+    
     private ColorSelector mColorSelector;
     private final ViewGroup mParent;
 
@@ -101,25 +101,17 @@ public class EditControlSideDialog extends SideDialogView {
         mColorSelector = new ColorSelector(mParent.getContext(), mParent, null);
     }
 
-    /**
-     * Slide the layout into the visible screen area
-     */
+    
     public void appearColor(boolean fromRight, int color) {
         mColorSelector.show(fromRight, color == -1 ? Color.WHITE : color);
     }
 
-    /**
-     * Slide out the layout
-     */
+    
     public void disappearColor() {
         mColorSelector.disappear(false);
     }
 
-    /**
-     * Slide out the first visible layer.
-     *
-     * @return True if the last layer is disappearing
-     */
+    
     public boolean disappearLayer() {
         if (mColorSelector.isDisplaying()) {
             disappearColor();
@@ -130,9 +122,7 @@ public class EditControlSideDialog extends SideDialogView {
         }
     }
 
-    /**
-     * Switch the panels position if needed
-     */
+    
     public void adaptPanelPosition() {
         if (mDisplaying) {
             boolean isAtRight = mCurrentlyEditedButton.getControlView().getX() + mCurrentlyEditedButton.getControlView().getWidth() / 2f < currentDisplayMetrics.widthPixels / 2f;
@@ -147,11 +137,9 @@ public class EditControlSideDialog extends SideDialogView {
         textView.setText(textView.getContext().getString(R.string.percent_format, progress));
     }
 
-    /* LOADING VALUES */
+    
 
-    /**
-     * Load values for basic control data
-     */
+    
     public void loadValues(ControlData data) {
         setDefaultVisibilitySetting();
         mOrientationTextView.setVisibility(GONE);
@@ -187,9 +175,7 @@ public class EditControlSideDialog extends SideDialogView {
         }
     }
 
-    /**
-     * Load values for extended control data
-     */
+    
     public void loadValues(ControlDrawerData data) {
         loadValues(data.properties);
 
@@ -210,9 +196,7 @@ public class EditControlSideDialog extends SideDialogView {
         mToggleSwitch.setVisibility(View.GONE);
     }
 
-    /**
-     * Load values for the joystick
-     */
+    
     public void loadJoystickValues(ControlJoystickData data) {
         loadValues(data);
 
@@ -240,13 +224,11 @@ public class EditControlSideDialog extends SideDialogView {
         mAbsoluteTrackingSwitch.setChecked(data.absolute);
     }
 
-    /**
-     * Load values for sub buttons
-     */
+    
     public void loadSubButtonValues(ControlData data, ControlDrawerData.Orientation drawerOrientation) {
         loadValues(data);
 
-        // Size linked to the parent drawer depending on the drawer settings
+        
         if(drawerOrientation != ControlDrawerData.Orientation.FREE){
             mSizeTextview.setVisibility(GONE);
             mSizeXTextView.setVisibility(GONE);
@@ -254,14 +236,14 @@ public class EditControlSideDialog extends SideDialogView {
             mHeightEditText.setVisibility(GONE);
         }
 
-        // No conditional, already depends on the parent drawer visibility
+        
         mVisibilityTextView.setVisibility(GONE);
         mDisplayInMenuCheckbox.setVisibility(GONE);
         mDisplayInGameCheckbox.setVisibility(GONE);
     }
 
     private void loadAdapter() {
-        //Initialize adapter for keycodes
+        
         mAdapter = new ArrayAdapter<>(mDialogContent.getContext(), R.layout.item_centered_textview);
         mSpecialArray = ControlData.buildSpecialButtonArray();
 
@@ -273,7 +255,7 @@ public class EditControlSideDialog extends SideDialogView {
             spinner.setAdapter(mAdapter);
         }
 
-        // Orientation spinner
+        
         ArrayAdapter<ControlDrawerData.Orientation> adapter = new ArrayAdapter<>(mDialogContent.getContext(), android.R.layout.simple_spinner_item);
         adapter.addAll(ControlDrawerData.getOrientations());
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
@@ -319,7 +301,7 @@ public class EditControlSideDialog extends SideDialogView {
         mDisplayInGameCheckbox = mDialogContent.findViewById(R.id.visibility_game_checkbox);
         mDisplayInMenuCheckbox = mDialogContent.findViewById(R.id.visibility_menu_checkbox);
 
-        //Decorative stuff
+        
         mMappingTextView = mDialogContent.findViewById(R.id.editMapping_textView);
         mOrientationTextView = mDialogContent.findViewById(R.id.editOrientation_textView);
         mNameTextView = mDialogContent.findViewById(R.id.editName_textView);
@@ -329,18 +311,14 @@ public class EditControlSideDialog extends SideDialogView {
         mSizeXTextView = mDialogContent.findViewById(R.id.editSize_x_textView);
     }
 
-    /**
-     * A long function linking all the displayed data on the popup and,
-     * the currently edited mCurrentlyEditedButton
-     * @noinspection SuspiciousNameCombination
-     */
+    
     private void setupRealTimeListeners() {
         mNameEditText.addTextChangedListener((SimpleTextWatcher) s -> {
             if (internalChanges) return;
 
             mCurrentlyEditedButton.getProperties().name = s.toString();
 
-            // Cheap and unoptimized, doesn't break the abstraction layer
+            
             mCurrentlyEditedButton.setProperties(mCurrentlyEditedButton.getProperties(), false);
         });
 
@@ -351,7 +329,7 @@ public class EditControlSideDialog extends SideDialogView {
             if (width >= 0) {
                 mCurrentlyEditedButton.getProperties().setWidth(width);
                 if (mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData) {
-                    // Joysticks are square
+                    
                      mCurrentlyEditedButton.getProperties().setHeight(width);
                 }
                 mCurrentlyEditedButton.updateProperties();
@@ -365,7 +343,7 @@ public class EditControlSideDialog extends SideDialogView {
             if (height >= 0) {
                 mCurrentlyEditedButton.getProperties().setHeight(height);
                 if (mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData) {
-                    // Joysticks are square
+                    
                     mCurrentlyEditedButton.getProperties().setWidth(height);
                 }
                 mCurrentlyEditedButton.updateProperties();
@@ -424,8 +402,8 @@ public class EditControlSideDialog extends SideDialogView {
             mKeycodeTextviews[i].setOnClickListener(v -> mKeycodeSpinners[finalI].performClick());
 
             mKeycodeSpinners[i].setOnItemSelectedListener((SimpleItemSelectedListener) (parent, view, position, id) -> {
-                // Side note, spinner listeners are fired later than all the other ones.
-                // Meaning the internalChanges bool is useless here.
+                
+                
                 if (position < mSpecialArray.size()) {
                     mCurrentlyEditedButton.getProperties().keycodes[finalI] = mKeycodeSpinners[finalI].getSelectedItemPosition() - mSpecialArray.size();
                 } else {
@@ -437,8 +415,8 @@ public class EditControlSideDialog extends SideDialogView {
 
 
         mOrientationSpinner.setOnItemSelectedListener((SimpleItemSelectedListener) (parent, view, position, id) -> {
-            // Side note, spinner listeners are fired later than all the other ones.
-            // Meaning the internalChanges bool is useless here.
+            
+            
 
             if (mCurrentlyEditedButton instanceof ControlDrawer) {
                 ((ControlDrawer) mCurrentlyEditedButton).drawerData.orientation = ControlDrawerData.intToOrientation(mOrientationSpinner.getSelectedItemPosition());
@@ -476,7 +454,7 @@ public class EditControlSideDialog extends SideDialogView {
     }
 
     private float safeParseFloat(String string) {
-        float out = -1; // -1
+        float out = -1; 
         try {
             out = Float.parseFloat(string);
         } catch (NumberFormatException e) {

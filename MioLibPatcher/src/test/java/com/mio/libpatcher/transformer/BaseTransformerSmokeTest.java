@@ -12,10 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-/**
- * 冒烟测试：用 javassist 在内存中构造模拟目标类，
- * 验证各 transformer 的 transform 不抛异常且能生成字节码。
- */
+
 class BaseTransformerSmokeTest {
 
     private static CtClass makeClass(String name, String... methodSources) throws Exception {
@@ -87,8 +84,8 @@ class BaseTransformerSmokeTest {
 
     @Test
     void halGetProcessors() throws Exception {
-        // oshi 1.x：HAL.getProcessors() 读取 /proc/cpuinfo，失败时返回 null 导致调用方 NPE。
-        // 验证替换后返回 availableProcessors 个 CentralProcessor 实例，且 getName 返回系统属性。
+        
+        
         ClassPool pool = new ClassPool(true);
         CtClass proc = pool.makeInterface("oshi.hardware.Processor");
         CtClass cpu = pool.makeClass("oshi.software.os.linux.proc.CentralProcessor");
@@ -179,14 +176,14 @@ class BaseTransformerSmokeTest {
 
     @Test
     void asm() throws Exception {
-        // 测试环境无 asm 依赖，isASM504 应返回 false 并安全跳过
+        
         CtClass cc = ClassPool.getDefault().makeClass("org.objectweb.asm.ClassVisitor");
         assertTransformSucceeds(new ASMTransformer(), cc);
     }
 
     @Test
     void asmWithPropertyOverride() throws Exception {
-        // 启动器可通过系统属性强制启用补丁，即使没有 asm 依赖也应安全执行
+        
         System.setProperty("miolibpatcher.asmBackport", "true");
         try {
             CtClass cc = ClassPool.getDefault().makeClass("org.objectweb.asm.ClassVisitor");

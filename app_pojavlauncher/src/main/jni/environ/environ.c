@@ -1,6 +1,6 @@
-//
-// Created by maks on 24.09.2022.
-//
+
+
+
 
 #include <stdlib.h>
 #include <android/log.h>

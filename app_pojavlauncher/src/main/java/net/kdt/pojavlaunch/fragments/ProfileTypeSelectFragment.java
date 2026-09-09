@@ -30,9 +30,9 @@ public class ProfileTypeSelectFragment extends Fragment {
         view.findViewById(R.id.vanilla_profile).setOnClickListener(v -> Tools.swapFragment(requireActivity(), ProfileEditorFragment.class,
                 ProfileEditorFragment.TAG, new Bundle(1)));
 
-        // NOTE: Special care needed! If you wll decide to add these to the back stack, please read
-        // the comment in FabricInstallFragment.onDownloadFinished() and amend the code
-        // in FabricInstallFragment.onDownloadFinished() and ModVersionListFragment.onDownloadFinished()
+        
+        
+        
         view.findViewById(R.id.optifine_profile).setOnClickListener(v ->
                 tryInstall(OptiFineInstallFragment.class, OptiFineInstallFragment.TAG));
         view.findViewById(R.id.modded_profile_fabric).setOnClickListener((v)->

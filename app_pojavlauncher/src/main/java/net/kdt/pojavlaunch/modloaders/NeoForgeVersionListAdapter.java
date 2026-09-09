@@ -26,11 +26,11 @@ public class NeoForgeVersionListAdapter extends BaseExpandableListAdapter implem
             String[] parts = version.split("\\.");
             String gameVersion;
             try {
-                if (Integer.parseInt(parts[1]) < 25) { // Actual logic for normal mcvers
+                if (Integer.parseInt(parts[1]) < 25) { 
                     gameVersion = "1." + parts[0] + "." + parts[1];
                 } else gameVersion = parts[0] + "." + parts[1];
             } catch (NumberFormatException ignored) {
-                // Handling for april fools version
+                
                 gameVersion = parts[0] + "." + parts[1];
             }
             List<String> versionList;
@@ -43,7 +43,7 @@ public class NeoForgeVersionListAdapter extends BaseExpandableListAdapter implem
             }
             versionList.add(version);
         }
-        // Make it latest to oldest, top to down.
+        
         Collections.reverse(mGameVersions);
         Collections.reverse(mNeoForgeVersions);
         for (List<String> mNeoForgeVersion : mNeoForgeVersions){

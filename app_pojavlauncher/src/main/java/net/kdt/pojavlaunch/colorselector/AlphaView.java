@@ -26,9 +26,9 @@ public class AlphaView extends View {
     private final RectF mViewSize = new RectF(0,0,0,0);
     private AlphaSelectionListener mAlphaSelectionListener;
     private int mSelectedAlpha;
-    private float mAlphaDiv; // for quick pos->alpha multiplication
-    private float mScreenDiv; // for quick alpha->pos multiplication
-    private float mWidthThird; // 1/3 of the view size for cursor
+    private float mAlphaDiv; 
+    private float mScreenDiv; 
+    private float mWidthThird; 
     public AlphaView(Context ctx, AttributeSet attrs) {
         super(ctx,attrs);
         mBlackPaint = new Paint();

@@ -1,6 +1,6 @@
-//
-// Created by maks on 23.01.2025.
-//
+
+
+
 
 #ifndef POJAVLAUNCHER_NATIVE_HOOKS_H
 #define POJAVLAUNCHER_NATIVE_HOOKS_H
@@ -14,4 +14,4 @@ void create_chmod_hooks(bytehook_hook_all_t bytehook_hook_all_p);
 void create_sdl_hooks(bytehook_hook_all_t bytehook_hook_all_p);
 void create_dlopen_hooks(bytehook_hook_all_t bytehook_hook_all_p);
 
-#endif //POJAVLAUNCHER_NATIVE_HOOKS_H
+#endif 

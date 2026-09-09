@@ -23,8 +23,8 @@ class DownloadImageTask implements Runnable {
         while(mRetryCount < 5 && !(wasSuccessful = runCatching())) {
             mRetryCount++;
         }
-        // restart the parent task to read the image and send it to the receiver
-        // if it wasn't cancelled. If it was, then we just die here
+        
+        
         if(wasSuccessful && !mParentTask.taskCancelled())
             mParentTask.iconCache.cacheLoaderPool.execute(mParentTask);
     }

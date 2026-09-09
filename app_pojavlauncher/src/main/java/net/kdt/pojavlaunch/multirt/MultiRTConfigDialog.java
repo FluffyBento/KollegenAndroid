@@ -15,13 +15,13 @@ public class MultiRTConfigDialog {
     private AlertDialog mDialog;
     private RecyclerView mDialogView;
 
-    /** Show the dialog, refreshes the adapter data before showing it */
+    
     public void show(){
         refresh();
         mDialog.show();
     }
 
-    @SuppressLint("NotifyDataSetChanged") //only used to completely refresh the list, it is necessary
+    @SuppressLint("NotifyDataSetChanged") 
     public void refresh() {
         RecyclerView.Adapter<?> adapter = mDialogView.getAdapter();
         if(adapter != null) adapter.notifyDataSetChanged();
@@ -31,7 +31,7 @@ public class MultiRTConfigDialog {
         return this;
     }
 
-    /** Build the dialog behavior and style */
+    
     public void prepare(Context activity, ActivityResultLauncher<Object> installJvmLauncher) {
         mDialogView = new RecyclerView(activity);
         mDialogView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
@@ -46,7 +46,7 @@ public class MultiRTConfigDialog {
                 .setNeutralButton(R.string.multirt_delete_runtime, null)
                 .create();
 
-        // Custom button behavior without dismiss
+        
         mDialog.setOnShowListener(dialog -> {
             Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
             button.setOnClickListener(view -> {

@@ -1,7 +1,7 @@
 import java.security.MessageDigest
 
-// Yes this is duplicate, no I don't care, this makes it able to live on its own
-// You, yes you! can copy paste this anywhere and it will build! (just remember to change the destinationDir).
+
+
 
 static void hashFileWithDigest(File fileToHash, MessageDigest digest){
     fileToHash.withInputStream { is ->

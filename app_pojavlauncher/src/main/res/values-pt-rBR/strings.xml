@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_username_hint">Nome de Usuário</string>
     <string name="login_online_login_label">Iniciar sessão</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Toque na engrenagem no topo da tela para abrir as configurações ⚙️\nToque em algum botão para customizar: editar, redimensionar, deletar, ou alterar o mapeamento."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">Esta conta será removida!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Selecione um instalador de mod</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">O Kollegen parou de funcionar inesperadamente</string>
     <string name="error_no_version">Nenhuma versão!</string>
     <string name="error_show_more">Mostrar mais</string>
     <string name="error_show_less">Mostrar menos</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">É necessário conceder permissão para ler/modificar armazenamento!</string>
     <string name="toast_optifine_success">Instalação concluída</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Guia</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Limpando arquivos em cache</string>
     <string name="mcl_launch_downloading">Baixando %s</string>
     <string name="mcl_launch_downloading_progress">"Baixando %s (%.2f MB / %.2f MB)"</string>
@@ -54,7 +52,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alpha antiga</string>
     <string name="mcl_setting_veroption_oldbeta">Beta antiga</string>
     <string name="mcl_version_clone">Clonar</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Editar</string>
     <string name="global_error">Erro</string>
     <string name="global_load">Carregar</string>
@@ -69,34 +67,31 @@
     <string name="global_select">Selecionar</string>
     <string name="global_retry">Tente novamente</string>
     <string name="global_default">Padrão</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Aplicativo/jogo fechou com o código %d, verifique latestlog.txt para mais detalhes.</string>
     <string name="mcn_signal_title">Aplicativo/jogo fechou com o código %d, verifique latestlog.txt para mais detalhes.</string>
     <string name="mcn_exit_confirm">Tem certeza que deseja forçar o encerramento?</string>
     <string name="mcn_check_fail_vulkan_support">O renderizador Zink (Vulkan) não é compatível com este dispositivo!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_debug">Depuração</string>
     <string name="control_primary">Esq</string>
     <string name="control_secondary">Dir</string>
     <string name="control_thirdperson">visão</string>
     <string name="control_mouseoff">Mouse: desligado</string>
     <string name="control_mouseon">Mouse: ligado </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Forçar encerramento</string>
     <string name="control_viewout">Registro de saída</string>
     <string name="control_adebug">Depuração de entrada</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Importar controles</string>
     <string name="import_control_invalid_file">Arquivo inválido ou corrompido</string>
     <string name="import_control_import_button">Importar controles</string>
     <string name="import_control_verifying_file">O arquivo está sendo verificado, por favor aguarde e tente novamente…</string>
     <string name="import_control_invalid_name">Nome inválido ou o arquivo já existe</string>
     <string name="import_control_done">Importação concluída</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Alternável</string>
     <string name="customctrl_size">Tamanho</string>
     <string name="customctrl_mapping">Mapeamento</string>

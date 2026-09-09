@@ -14,7 +14,7 @@
 
 
 
-        <!-- Vanilla like version -->
+        
 
         <TextView
             android:id="@+id/title_textview"
@@ -57,7 +57,7 @@
 
 
 
-        <!-- Modded versions -->
+        
 
         <TextView
             android:id="@+id/title_modded_textview"

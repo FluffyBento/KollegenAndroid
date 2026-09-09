@@ -128,12 +128,12 @@ public abstract class FabriclikeInstallFragment extends Fragment implements Modl
             getListenerProxy().detachListener();
             setListenerProxy(null);
             mStartButton.setEnabled(true);
-            // This works because the due to the fact that we have transitioned here
-            // without adding a transaction to the back stack, which caused the previous
-            // transaction to be amended (i guess?? thats how the back stack dump looks like)
-            // we can get back to the main fragment with just one back stack pop.
-            // For some reason that amendment causes the transaction to lose its tag
-            // so we cant use the tag here.
+            
+            
+            
+            
+            
+            
             getParentFragmentManager().popBackStackImmediate();
         });
     }
@@ -173,7 +173,7 @@ public abstract class FabriclikeInstallFragment extends Fragment implements Modl
 
     private void stopLoading() {
         mProgressBar.setVisibility(View.GONE);
-        // The "visibility on" is managed by the spinners
+        
     }
 
     private ArrayAdapter<FabricVersion> createAdapter(FabricVersion[] fabricVersions, boolean onlyStable) {

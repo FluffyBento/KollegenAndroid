@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Logg inn</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Denne kontoen blir fjernet!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Velg en mod installasjonprogram</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen har uventet krasjet</string>
     <string name="error_no_version">Ingen versjon!</string>
     <string name="error_show_more">Vis mer</string>
     <string name="error_show_less">Vis mindre</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Trenger tillatelse til å lese/skrive data!</string>
     <string name="toast_optifine_success">Installasjonen var vellykket</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
+    
+    
     <string name="mcl_launch_cleancache">Tømmer cache-filer</string>
     <string name="mcl_launch_downloading">Laster ned %s</string>
     <string name="mcl_launch_downloading_progress">"Laster ned %s (%.2f MB / %.2f MB)"</string>
@@ -38,7 +36,7 @@
     <string name="mcl_setting_subtitle_javaargs">Vær forsiktig, dette kan gjøre spillet krasj dersom det endres uten kunnskap.</string>
     <string name="mcl_setting_category_renderer">Gjengir</string>
     <string name="mcl_version_clone">Klone</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Rediger</string>
     <string name="global_error">Feil</string>
     <string name="global_load">Last inn</string>
@@ -51,9 +49,9 @@
     <string name="global_error_field_empty">Feltet kan ikke stå tomt</string>
     <string name="global_waiting">Vent</string>
     <string name="global_default">Standard</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_confirm">Er du sikker på at du vil tvinge avslutte?</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_debug">Avlusing</string>
     <string name="control_primary">LMB</string>
     <string name="control_secondary">RMB</string>
@@ -63,15 +61,12 @@
     <string name="control_mouse">Mus</string>
     <string name="control_mouseoff">Mus: av</string>
     <string name="control_mouseon">Mus: på </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Tving avslutt</string>
     <string name="control_viewout">Logg utdata</string>
     <string name="control_customkey">Send tilpasset kode</string>
-    <!-- ImportControlActivity Strings -->
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
+    
     <string name="customctrl_toggle">Byttbar</string>
     <string name="customctrl_size">Størrelse</string>
     <string name="customctrl_addbutton">Legg til knapp</string>

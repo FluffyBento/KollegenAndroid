@@ -1,59 +1,42 @@
-// Copyright (c) 2016 avs333
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-//		of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-//		to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//		copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-//		The above copyright notice and this permission notice shall be included in all
-//		copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// 		AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-
-// SPDX-License-Identifier: MIT
-
-// Derived from:
-// FastHook / enhanced_dlfcn.c
-// https://github.com/turing-technician/FastHook/blob/8fa01b7baec06034ee9c7f51f0345f1142b0f602/fasthook/src/main/cpp/enhanced_dlfcn.c
-// Originally from https://github.com/turing-technician/Enhanced_dlfunctions/blob/a642a18bb80c78ea2d57b613382612c6ff1595ed/app/src/main/cpp/enhanced_dlfcn.c
-
-// Modifications:
-// Copyright (c) 2026 alexytomi
-/* Changes:
- * - Modified to integrate into the library and renaming funcs to nsbypass as "enhanced_dlfcn"
- * isn't exactly what this does. It was used as a way to bypass the linker namespace restrictions
- * in android 7.
- * See https://source.android.com/docs/core/architecture/vndk/linker-namespace
- * Thus nsbypass would be a better name for these.
- * - Added relative file support to nsbypass_dlopen and removed looking for r-xp mapping only.
- * That addition must've been some specific case for fasthook, I can't figure out why they did that.
- * - Redirect these functions to the real implementations on Android 6 and below. This is useless
- * on below android 7 because linker namespace restrictions didn't exist and private APIs were all
- * easily accessible.
- * - Removed ctx->bias and instead assume p_offset == p_vaddr and set load_addr to start of address
- * mapping, this will break if p_offset != p_vaddr, in which case please find p_vaddr and use it
- * to subtract from load_addr instead of the p_offset obtained from /proc/self/maps. While
- * using p_offset should be better, there was likely a reason they used sh->sh_addr - sh->sh_offset
- * instead. If your usecase is broken with the new logic, simply uncomment it and remove the
- * subtraction of p_offset from load_addr
- */
 
 
-// This is not actually dlfunc. It doesn't load anything.
-// It bypasses normal linker restrictions by searching the memory for already loaded symbols.
-// It cannot access symbols that are not already loaded.
-// This way you can get your hands on function handles you otherwise can't because namespace
 
-// Not needed on Android 6 and below (namespace restrictions don't exist there).
-// See https://source.android.com/docs/core/permissions/namespaces_libraries
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #include <android/log.h>
 #include <dlfcn.h>
@@ -76,15 +59,15 @@ struct ctx {
 	void *strtab;
 	void *symtab;
     size_t symtab_num;
-//	off_t bias;
+
 };
 
 int nsbypass_dlclose(void *handle) {
 	if (is_android_6_or_lower()) return dlclose(handle);
 	if (handle) {
 		struct ctx *ctx = (struct ctx *) handle;
-		if (ctx->dynsym) free(ctx->dynsym);    /* we're saving dynsym and dynstr */
-		if (ctx->dynstr) free(ctx->dynstr);    /* from library file just in case */
+		if (ctx->dynsym) free(ctx->dynsym);    
+		if (ctx->dynstr) free(ctx->dynstr);    
 		if (ctx->symtab) free(ctx->symtab);
 		if (ctx->strtab) free(ctx->strtab);
 		free(ctx);
@@ -95,8 +78,8 @@ int nsbypass_dlclose(void *handle) {
 void *nsbypass_dlopen(const char *libPath, int flags) {
 	if (is_android_6_or_lower()) return dlopen(libPath, flags);
 	FILE *maps;
-	// Increase the buffer because we added searching for absolute file.
-	// 256 might not be enough buffer to get the whole path in.
+	
+	
 	char mapsSearchBuff[2048];
 	struct ctx *ctx = 0;
 	uintptr_t load_addr, size;
@@ -114,26 +97,26 @@ void *nsbypass_dlopen(const char *libPath, int flags) {
 
 	fclose(maps);
 
-	// If user didn't prove an absolute path we have to find the actual full path ourselves
-	// This is NOT the file path where the file lives in, so scan memory again.
+	
+	
 	if (libPath[0] != '/') {
-		// Looks through the current buffer which contains the libPath and the path
-		// mapsSearchBuff probably looks like
-		// 7a8d366000-7a8d453000 r-xp 00039000 07:60 16                             /apex/com.android.runtime/bin/linker64
-		char *libPathStart = strstr(mapsSearchBuff, libPath); // at ..bin/[l]inker64
+		
+		
+		
+		char *libPathStart = strstr(mapsSearchBuff, libPath); 
 		if (libPathStart != NULL) {
 			char *pathStart = libPathStart;
-			// Move backward until we find the spaces area.
+			
 			while (pathStart > mapsSearchBuff &&
 					pathStart[-1] != ' ' &&
 					pathStart[-1] != '\t') {
 				--pathStart;
 			}
-			// Hopefully this is the start of the path
+			
 			if (*pathStart == '/') {
 				libPath = pathStart;
-                // Remove \n or else it tries to open() a path with a newline which it sadly
-                // isn't too happy about doing.
+                
+                
                 char *pathEnd = strchr(libPath, '\n');
                 if (pathEnd != NULL) {
                     *pathEnd = '\0';
@@ -153,16 +136,11 @@ void *nsbypass_dlopen(const char *libPath, int flags) {
 
 	unsigned long p_offset;
 
-	// We have no use for the permission bits because it can be mapping multiple sections of memory
-	/*
-	    7cd416b000-7cd41a3000 r--p 00000000 07:58 16                             /apex/com.android.runtime/bin/linker64
-		7cd41a3000-7cd428b000 r-xp 00038000 07:58 16                             /apex/com.android.runtime/bin/linker64
-		7cd428b000-7cd4293000 r--p 00120000 07:58 16                             /apex/com.android.runtime/bin/linker64
-		7cd4293000-7cd4295000 rw-p 00127000 07:58 16                             /apex/com.android.runtime/bin/linker64
-	 */
+	
+	
 
-	// p_offset is the file offset, this is not necessarily the same as p_vaddr but we assume it is
-	// FIXME: This is wrong. Find p_vaddr properly.
+	
+	
 	if (sscanf(mapsSearchBuff,
 			"%" SCNxPTR "-%*" SCNxPTR " %*4s %lx",
 			&load_addr,
@@ -173,7 +151,7 @@ void *nsbypass_dlopen(const char *libPath, int flags) {
 	load_addr -= p_offset;
 
 	LOGI("%s loaded in Android at 0x%" PRIxPTR, libPath, load_addr);
-	/* Now, mmap the same library once again */
+	
 
 	fd = open(libPath, O_RDONLY);
 	if (fd < 0) fatal("failed to open %s", libPath);
@@ -205,7 +183,7 @@ void *nsbypass_dlopen(const char *libPath, int flags) {
 		switch (sh->sh_type) {
 
 			case SHT_DYNSYM:
-				if (ctx->dynsym) fatal("%s: duplicate DYNSYM sections", libPath); /* .dynsym */
+				if (ctx->dynsym) fatal("%s: duplicate DYNSYM sections", libPath); 
 				ctx->dynsym = malloc(sh->sh_size);
 				if (!ctx->dynsym) fatal("%s: no memory for .dynsym", libPath);
 				memcpy(ctx->dynsym, ((void *) elf) + sh->sh_offset, sh->sh_size);
@@ -213,7 +191,7 @@ void *nsbypass_dlopen(const char *libPath, int flags) {
 				break;
 
 			case SHT_SYMTAB:
-				if (ctx->symtab) fatal("%s: duplicate SYMTAB sections", libPath); /* .symtab */
+				if (ctx->symtab) fatal("%s: duplicate SYMTAB sections", libPath); 
 				ctx->symtab = malloc(sh->sh_size);
 				if (!ctx->symtab) fatal("%s: no memory for .symtab", libPath);
 				memcpy(ctx->symtab, ((void *) elf) + sh->sh_offset, sh->sh_size);
@@ -222,7 +200,7 @@ void *nsbypass_dlopen(const char *libPath, int flags) {
 
 			case SHT_STRTAB:
 				if(!strcmp(shstr+sh->sh_name,".dynstr")) {
-					if (ctx->dynstr) break;    /* .dynstr is guaranteed to be the first STRTAB */
+					if (ctx->dynstr) break;    
 					ctx->dynstr = malloc(sh->sh_size);
 					if (!ctx->dynstr) fatal("%s: no memory for .dynstr", libPath);
 					memcpy(ctx->dynstr, ((void *) elf) + sh->sh_offset, sh->sh_size);
@@ -233,17 +211,13 @@ void *nsbypass_dlopen(const char *libPath, int flags) {
 					memcpy(ctx->strtab, ((void *) elf) + sh->sh_offset, sh->sh_size);
 				}
 				break;
-		/*
-		 * This is the old completely wrong way fasthook tried to find the offset.
-		 * This offset was obtained here then applied in dlsym
-		 * It's been replaced with p_offset from /proc/self/maps. This is still wrong.
-		 */
-//			case SHT_PROGBITS:
-//				if (!ctx->dynstr || !ctx->dynsym || ctx->bias) break;
-//				/* won't even bother checking against the section name */
-//				ctx->bias = (off_t) sh->sh_addr - (off_t) sh->sh_offset;
-////				k = elf->e_shnum;  /* exit for */
-//				break;
+		
+
+
+
+
+
+
 		}
 	}
 
@@ -276,11 +250,10 @@ void *nsbypass_dlsym(void *handle, const char *name) {
 
 	for (k = 0; k < ctx->dynsym_num; k++, dynsym++) {
 		if (strcmp(dynstr + dynsym->st_name, name) == 0) {
-			/*  NB: sym->st_value is an offset into the section for relocatables,
-            but a VMA for shared libs or exe files, so we have to subtract the bias */
+			
 
-			// Removed bias subtraction here, we now fetch offset from /proc/self/maps
-			// and apply it to load_addr at dlopen.
+			
+			
 			void *ret = ctx->load_addr + dynsym->st_value;
 			return ret;
 		}
@@ -288,13 +261,12 @@ void *nsbypass_dlsym(void *handle, const char *name) {
 
 	if(symtab) {
 		for (k = 0; k < ctx->symtab_num; k++, symtab++) {
-			//log_info("%s found %u %s at %d", name, sym_tab->st_name,strings + sym_tab->st_name,k);
+			
 			if (strcmp(strtab + symtab->st_name, name) == 0) {
-				/*  NB: sym->st_value is an offset into the section for relocatables,
-                but a VMA for shared libs or exe files, so we have to subtract the bias */
+				
 
-				// Removed bias subtraction here, we now fetch offset from /proc/self/maps
-				// and apply it to load_addr at dlopen.
+				
+				
 				void *ret = ctx->load_addr + symtab->st_value;
 				return ret;
 			}

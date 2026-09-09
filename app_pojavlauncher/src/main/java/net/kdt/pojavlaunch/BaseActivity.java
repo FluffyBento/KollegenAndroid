@@ -22,7 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         Tools.updateWindowSize(this);
     }
 
-    /** @return Whether the activity should be set as a fullscreen one */
+    
     public boolean setFullscreen(){
         return true;
     }
@@ -31,7 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void startActivity(Intent i) {
         super.startActivity(i);
-        //new Throwable("StartActivity").printStackTrace();
+        
     }
 
     @Override
@@ -47,7 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         Tools.ignoreNotch(shouldIgnoreNotch(),this);
     }
 
-    /** @return Whether or not the notch should be ignored */
+    
     protected boolean shouldIgnoreNotch(){
         return PREF_IGNORE_NOTCH;
     }

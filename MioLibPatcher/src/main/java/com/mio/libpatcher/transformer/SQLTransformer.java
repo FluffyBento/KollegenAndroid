@@ -13,7 +13,7 @@ public class SQLTransformer implements BaseTransformer {
         list.add("dh_sqlite.util.OSInfo");
         list.add("org.rfresh.sqlite.util.OSInfo");
         list.add("org.sqlite.util.OSInfo");
-        //e4mc
+        
         list.add("io.netty.util.internal.PlatformDependent");
         return list;
     }

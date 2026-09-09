@@ -1,62 +1,15 @@
-/*
-  Simple DirectMedia Layer
-  Copyright (C) 1997-2026 Sam Lantinga <slouken@libsdl.org>
 
-  This software is provided 'as-is', without any express or implied
-  warranty.  In no event will the authors be held liable for any damages
-  arising from the use of this software.
 
-  Permission is granted to anyone to use this software for any purpose,
-  including commercial applications, and to alter it and redistribute it
-  freely, subject to the following restrictions:
 
-  1. The origin of this software must not be misrepresented; you must not
-     claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
-  2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original software.
-  3. This notice may not be removed or altered from any source distribution.
-*/
-
-/*
- * This is a simple file to encapsulate the OpenGL API headers.
- *
- * Define NO_SDL_GLEXT if you have your own version of glext.h and want
- * to disable the version included in SDL_opengl.h.
- */
 
 #ifndef SDL_opengl_h_
 #define SDL_opengl_h_
 
 #include <SDL3/SDL_platform.h>
 
-#ifndef SDL_PLATFORM_IOS  /* No OpenGL on iOS. */
+#ifndef SDL_PLATFORM_IOS  
 
-/*
- * Mesa 3-D graphics library
- *
- * Copyright (C) 1999-2006  Brian Paul   All Rights Reserved.
- * Copyright (C) 2009  VMware, Inc.  All Rights Reserved.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the "Software"),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
- * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
+
 
 
 #ifndef __gl_h_
@@ -67,44 +20,35 @@
 #endif
 
 
-/**********************************************************************
- * Begin system-specific stuff.
- */
+
 
 #if defined(_WIN32) && !defined(__CYGWIN__)
-#  if (defined(_MSC_VER) || defined(__MINGW32__)) && defined(BUILD_GL32) /* tag specify we're building mesa as a DLL */
+#  if (defined(_MSC_VER) || defined(__MINGW32__)) && defined(BUILD_GL32) 
 #    define GLAPI __declspec(dllexport)
-#  elif (defined(_MSC_VER) || defined(__MINGW32__)) && defined(_DLL) /* tag specifying we're building for DLL runtime support */
+#  elif (defined(_MSC_VER) || defined(__MINGW32__)) && defined(_DLL) 
 #    define GLAPI __declspec(dllimport)
-#  else /* for use with static link lib build of Win32 edition only */
+#  else 
 #    define GLAPI extern
-#  endif /* _STATIC_MESA support */
-#  if defined(__MINGW32__) && defined(GL_NO_STDCALL) || defined(UNDER_CE)  /* The generated DLLs by MingW with STDCALL are not compatible with the ones done by Microsoft's compilers */
+#  endif 
+#  if defined(__MINGW32__) && defined(GL_NO_STDCALL) || defined(UNDER_CE)  
 #    define GLAPIENTRY
 #  else
 #    define GLAPIENTRY __stdcall
 #  endif
-#elif defined(__CYGWIN__) && defined(USE_OPENGL32) /* use native windows opengl32 */
+#elif defined(__CYGWIN__) && defined(USE_OPENGL32) 
 #  define GLAPI extern
 #  define GLAPIENTRY __stdcall
 #elif (defined(__GNUC__) && __GNUC__ >= 4) || (defined(__SUNPRO_C) && (__SUNPRO_C >= 0x590))
 #  define GLAPI __attribute__((visibility("default")))
 #  define GLAPIENTRY
-#endif /* WIN32 && !CYGWIN */
+#endif 
 
-/*
- * WINDOWS: Include windows.h here to define APIENTRY.
- * It is also useful when applications include this file by
- * including only glut.h, since glut.h depends on windows.h.
- * Applications needing to include windows.h with parms other
- * than "WIN32_LEAN_AND_MEAN" may include windows.h before
- * glut.h or gl.h.
- */
+
 #if defined(_WIN32) && !defined(APIENTRY) && !defined(__CYGWIN__)
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN 1
 #endif
-#ifndef NOMINMAX   /* don't define min() and max(). */
+#ifndef NOMINMAX   
 #define NOMINMAX
 #endif
 #include <windows.h>
@@ -122,7 +66,7 @@
 #define APIENTRY GLAPIENTRY
 #endif
 
-/* "P" suffix to be used for a pointer to a function */
+
 #ifndef APIENTRYP
 #define APIENTRYP APIENTRY *
 #endif
@@ -135,9 +79,7 @@
 #pragma export on
 #endif
 
-/*
- * End system-specific stuff.
- **********************************************************************/
+
 
 
 
@@ -153,36 +95,32 @@ extern "C" {
 #define GL_ARB_imaging   1
 
 
-/*
- * Datatypes
- */
+
 typedef unsigned int	GLenum;
 typedef unsigned char	GLboolean;
 typedef unsigned int	GLbitfield;
 typedef void		GLvoid;
-typedef signed char	GLbyte;		/* 1-byte signed */
-typedef short		GLshort;	/* 2-byte signed */
-typedef int		GLint;		/* 4-byte signed */
-typedef unsigned char	GLubyte;	/* 1-byte unsigned */
-typedef unsigned short	GLushort;	/* 2-byte unsigned */
-typedef unsigned int	GLuint;		/* 4-byte unsigned */
-typedef int		GLsizei;	/* 4-byte signed */
-typedef float		GLfloat;	/* single precision float */
-typedef float		GLclampf;	/* single precision float in [0,1] */
-typedef double		GLdouble;	/* double precision float */
-typedef double		GLclampd;	/* double precision float in [0,1] */
+typedef signed char	GLbyte;		
+typedef short		GLshort;	
+typedef int		GLint;		
+typedef unsigned char	GLubyte;	
+typedef unsigned short	GLushort;	
+typedef unsigned int	GLuint;		
+typedef int		GLsizei;	
+typedef float		GLfloat;	
+typedef float		GLclampf;	
+typedef double		GLdouble;	
+typedef double		GLclampd;	
 
 
 
-/*
- * Constants
- */
 
-/* Boolean values */
+
+
 #define GL_FALSE				0
 #define GL_TRUE					1
 
-/* Data types */
+
 #define GL_BYTE					0x1400
 #define GL_UNSIGNED_BYTE			0x1401
 #define GL_SHORT				0x1402
@@ -195,7 +133,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_4_BYTES				0x1409
 #define GL_DOUBLE				0x140A
 
-/* Primitives */
+
 #define GL_POINTS				0x0000
 #define GL_LINES				0x0001
 #define GL_LINE_LOOP				0x0002
@@ -207,7 +145,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_QUAD_STRIP				0x0008
 #define GL_POLYGON				0x0009
 
-/* Vertex Arrays */
+
 #define GL_VERTEX_ARRAY				0x8074
 #define GL_NORMAL_ARRAY				0x8075
 #define GL_COLOR_ARRAY				0x8076
@@ -249,19 +187,19 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_T2F_C4F_N3F_V3F			0x2A2C
 #define GL_T4F_C4F_N3F_V4F			0x2A2D
 
-/* Matrix Mode */
+
 #define GL_MATRIX_MODE				0x0BA0
 #define GL_MODELVIEW				0x1700
 #define GL_PROJECTION				0x1701
 #define GL_TEXTURE				0x1702
 
-/* Points */
+
 #define GL_POINT_SMOOTH				0x0B10
 #define GL_POINT_SIZE				0x0B11
 #define GL_POINT_SIZE_GRANULARITY 		0x0B13
 #define GL_POINT_SIZE_RANGE			0x0B12
 
-/* Lines */
+
 #define GL_LINE_SMOOTH				0x0B20
 #define GL_LINE_STIPPLE				0x0B24
 #define GL_LINE_STIPPLE_PATTERN			0x0B25
@@ -270,7 +208,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_LINE_WIDTH_GRANULARITY		0x0B23
 #define GL_LINE_WIDTH_RANGE			0x0B22
 
-/* Polygons */
+
 #define GL_POINT				0x1B00
 #define GL_LINE					0x1B01
 #define GL_FILL					0x1B02
@@ -291,14 +229,14 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_POLYGON_OFFSET_LINE			0x2A02
 #define GL_POLYGON_OFFSET_FILL			0x8037
 
-/* Display Lists */
+
 #define GL_COMPILE				0x1300
 #define GL_COMPILE_AND_EXECUTE			0x1301
 #define GL_LIST_BASE				0x0B32
 #define GL_LIST_INDEX				0x0B33
 #define GL_LIST_MODE				0x0B30
 
-/* Depth buffer */
+
 #define GL_NEVER				0x0200
 #define GL_LESS					0x0201
 #define GL_EQUAL				0x0202
@@ -315,7 +253,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_DEPTH_WRITEMASK			0x0B72
 #define GL_DEPTH_COMPONENT			0x1902
 
-/* Lighting */
+
 #define GL_LIGHTING				0x0B50
 #define GL_LIGHT0				0x4000
 #define GL_LIGHT1				0x4001
@@ -351,7 +289,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_COLOR_MATERIAL_PARAMETER		0x0B56
 #define GL_NORMALIZE				0x0BA1
 
-/* User clipping planes */
+
 #define GL_CLIP_PLANE0				0x3000
 #define GL_CLIP_PLANE1				0x3001
 #define GL_CLIP_PLANE2				0x3002
@@ -359,7 +297,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_CLIP_PLANE4				0x3004
 #define GL_CLIP_PLANE5				0x3005
 
-/* Accumulation buffer */
+
 #define GL_ACCUM_RED_BITS			0x0D58
 #define GL_ACCUM_GREEN_BITS			0x0D59
 #define GL_ACCUM_BLUE_BITS			0x0D5A
@@ -371,12 +309,12 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_MULT					0x0103
 #define GL_RETURN				0x0102
 
-/* Alpha testing */
+
 #define GL_ALPHA_TEST				0x0BC0
 #define GL_ALPHA_TEST_REF			0x0BC2
 #define GL_ALPHA_TEST_FUNC			0x0BC1
 
-/* Blending */
+
 #define GL_BLEND				0x0BE2
 #define GL_BLEND_SRC				0x0BE1
 #define GL_BLEND_DST				0x0BE0
@@ -392,12 +330,12 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_ONE_MINUS_DST_COLOR			0x0307
 #define GL_SRC_ALPHA_SATURATE			0x0308
 
-/* Render Mode */
+
 #define GL_FEEDBACK				0x1C01
 #define GL_RENDER				0x1C00
 #define GL_SELECT				0x1C02
 
-/* Feedback */
+
 #define GL_2D					0x0600
 #define GL_3D					0x0601
 #define GL_3D_COLOR				0x0602
@@ -415,11 +353,11 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_FEEDBACK_BUFFER_SIZE			0x0DF1
 #define GL_FEEDBACK_BUFFER_TYPE			0x0DF2
 
-/* Selection */
+
 #define GL_SELECTION_BUFFER_POINTER		0x0DF3
 #define GL_SELECTION_BUFFER_SIZE		0x0DF4
 
-/* Fog */
+
 #define GL_FOG					0x0B60
 #define GL_FOG_MODE				0x0B65
 #define GL_FOG_DENSITY				0x0B62
@@ -431,7 +369,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_EXP					0x0800
 #define GL_EXP2					0x0801
 
-/* Logic Ops */
+
 #define GL_LOGIC_OP				0x0BF1
 #define GL_INDEX_LOGIC_OP			0x0BF1
 #define GL_COLOR_LOGIC_OP			0x0BF2
@@ -453,7 +391,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_OR_REVERSE				0x150B
 #define GL_OR_INVERTED				0x150D
 
-/* Stencil */
+
 #define GL_STENCIL_BITS				0x0D57
 #define GL_STENCIL_TEST				0x0B90
 #define GL_STENCIL_CLEAR_VALUE			0x0B91
@@ -470,13 +408,13 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_INCR					0x1E02
 #define GL_DECR					0x1E03
 
-/* Buffers, Pixel Drawing/Reading */
+
 #define GL_NONE					0
 #define GL_LEFT					0x0406
 #define GL_RIGHT				0x0407
-/*GL_FRONT					0x0404 */
-/*GL_BACK					0x0405 */
-/*GL_FRONT_AND_BACK				0x0408 */
+
+
+
 #define GL_FRONT_LEFT				0x0400
 #define GL_FRONT_RIGHT				0x0401
 #define GL_BACK_LEFT				0x0402
@@ -511,7 +449,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_RGB					0x1907
 #define GL_RGBA					0x1908
 
-/* Implementation limits */
+
 #define GL_MAX_LIST_NESTING			0x0B31
 #define GL_MAX_EVAL_ORDER			0x0D30
 #define GL_MAX_LIGHTS				0x0D31
@@ -526,7 +464,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_MAX_VIEWPORT_DIMS			0x0D3A
 #define GL_MAX_CLIENT_ATTRIB_STACK_DEPTH	0x0D3B
 
-/* Gets */
+
 #define GL_ATTRIB_STACK_DEPTH			0x0BB0
 #define GL_CLIENT_ATTRIB_STACK_DEPTH		0x0BB1
 #define GL_COLOR_CLEAR_VALUE			0x0C22
@@ -555,7 +493,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_TEXTURE_STACK_DEPTH			0x0BA5
 #define GL_VIEWPORT				0x0BA2
 
-/* Evaluators */
+
 #define GL_AUTO_NORMAL				0x0D80
 #define GL_MAP1_COLOR_4				0x0D90
 #define GL_MAP1_INDEX				0x0D91
@@ -583,7 +521,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_ORDER				0x0A01
 #define GL_DOMAIN				0x0A02
 
-/* Hints */
+
 #define GL_PERSPECTIVE_CORRECTION_HINT		0x0C50
 #define GL_POINT_SMOOTH_HINT			0x0C51
 #define GL_LINE_SMOOTH_HINT			0x0C52
@@ -593,11 +531,11 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_FASTEST				0x1101
 #define GL_NICEST				0x1102
 
-/* Scissor box */
+
 #define GL_SCISSOR_BOX				0x0C10
 #define GL_SCISSOR_TEST				0x0C11
 
-/* Pixel Mode / Transfer */
+
 #define GL_MAP_COLOR				0x0D10
 #define GL_MAP_STENCIL				0x0D11
 #define GL_INDEX_SHIFT				0x0D12
@@ -647,7 +585,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_ZOOM_X				0x0D16
 #define GL_ZOOM_Y				0x0D17
 
-/* Texture mapping */
+
 #define GL_TEXTURE_ENV				0x2300
 #define GL_TEXTURE_ENV_MODE			0x2200
 #define GL_TEXTURE_1D				0x0DE0
@@ -692,13 +630,13 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_R					0x2002
 #define GL_Q					0x2003
 
-/* Utility */
+
 #define GL_VENDOR				0x1F00
 #define GL_RENDERER				0x1F01
 #define GL_VERSION				0x1F02
 #define GL_EXTENSIONS				0x1F03
 
-/* Errors */
+
 #define GL_NO_ERROR 				0
 #define GL_INVALID_ENUM				0x0500
 #define GL_INVALID_VALUE			0x0501
@@ -707,7 +645,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_STACK_UNDERFLOW			0x0504
 #define GL_OUT_OF_MEMORY			0x0505
 
-/* glPush/PopAttrib bits */
+
 #define GL_CURRENT_BIT				0x00000001
 #define GL_POINT_BIT				0x00000002
 #define GL_LINE_BIT				0x00000004
@@ -731,7 +669,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 #define GL_ALL_ATTRIB_BITS			0x000FFFFF
 
 
-/* OpenGL 1.1 */
+
 #define GL_PROXY_TEXTURE_1D			0x8063
 #define GL_PROXY_TEXTURE_2D			0x8064
 #define GL_TEXTURE_PRIORITY			0x8066
@@ -779,9 +717,7 @@ typedef double		GLclampd;	/* double precision float in [0,1] */
 
 
 
-/*
- * Miscellaneous
- */
+
 
 #ifndef SDL_OPENGL_1_NO_PROTOTYPES
 GLAPI void GLAPIENTRY glClearIndex( GLfloat c );
@@ -839,9 +775,9 @@ GLAPI void GLAPIENTRY glDisable( GLenum cap );
 GLAPI GLboolean GLAPIENTRY glIsEnabled( GLenum cap );
 
 
-GLAPI void GLAPIENTRY glEnableClientState( GLenum cap );  /* 1.1 */
+GLAPI void GLAPIENTRY glEnableClientState( GLenum cap );  
 
-GLAPI void GLAPIENTRY glDisableClientState( GLenum cap );  /* 1.1 */
+GLAPI void GLAPIENTRY glDisableClientState( GLenum cap );  
 
 
 GLAPI void GLAPIENTRY glGetBooleanv( GLenum pname, GLboolean *params );
@@ -858,9 +794,9 @@ GLAPI void GLAPIENTRY glPushAttrib( GLbitfield mask );
 GLAPI void GLAPIENTRY glPopAttrib( void );
 
 
-GLAPI void GLAPIENTRY glPushClientAttrib( GLbitfield mask );  /* 1.1 */
+GLAPI void GLAPIENTRY glPushClientAttrib( GLbitfield mask );  
 
-GLAPI void GLAPIENTRY glPopClientAttrib( void );  /* 1.1 */
+GLAPI void GLAPIENTRY glPopClientAttrib( void );  
 
 
 GLAPI GLint GLAPIENTRY glRenderMode( GLenum mode );
@@ -876,9 +812,7 @@ GLAPI void GLAPIENTRY glFlush( void );
 GLAPI void GLAPIENTRY glHint( GLenum target, GLenum mode );
 
 
-/*
- * Depth Buffer
- */
+
 
 GLAPI void GLAPIENTRY glClearDepth( GLclampd depth );
 
@@ -889,18 +823,14 @@ GLAPI void GLAPIENTRY glDepthMask( GLboolean flag );
 GLAPI void GLAPIENTRY glDepthRange( GLclampd near_val, GLclampd far_val );
 
 
-/*
- * Accumulation Buffer
- */
+
 
 GLAPI void GLAPIENTRY glClearAccum( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha );
 
 GLAPI void GLAPIENTRY glAccum( GLenum op, GLfloat value );
 
 
-/*
- * Transformation
- */
+
 
 GLAPI void GLAPIENTRY glMatrixMode( GLenum mode );
 
@@ -939,9 +869,7 @@ GLAPI void GLAPIENTRY glTranslated( GLdouble x, GLdouble y, GLdouble z );
 GLAPI void GLAPIENTRY glTranslatef( GLfloat x, GLfloat y, GLfloat z );
 
 
-/*
- * Display Lists
- */
+
 
 GLAPI GLboolean GLAPIENTRY glIsList( GLuint list );
 
@@ -961,9 +889,7 @@ GLAPI void GLAPIENTRY glCallLists( GLsizei n, GLenum type,
 GLAPI void GLAPIENTRY glListBase( GLuint base );
 
 
-/*
- * Drawing Functions
- */
+
 
 GLAPI void GLAPIENTRY glBegin( GLenum mode );
 
@@ -1018,13 +944,13 @@ GLAPI void GLAPIENTRY glIndexd( GLdouble c );
 GLAPI void GLAPIENTRY glIndexf( GLfloat c );
 GLAPI void GLAPIENTRY glIndexi( GLint c );
 GLAPI void GLAPIENTRY glIndexs( GLshort c );
-GLAPI void GLAPIENTRY glIndexub( GLubyte c );  /* 1.1 */
+GLAPI void GLAPIENTRY glIndexub( GLubyte c );  
 
 GLAPI void GLAPIENTRY glIndexdv( const GLdouble *c );
 GLAPI void GLAPIENTRY glIndexfv( const GLfloat *c );
 GLAPI void GLAPIENTRY glIndexiv( const GLint *c );
 GLAPI void GLAPIENTRY glIndexsv( const GLshort *c );
-GLAPI void GLAPIENTRY glIndexubv( const GLubyte *c );  /* 1.1 */
+GLAPI void GLAPIENTRY glIndexubv( const GLubyte *c );  
 
 GLAPI void GLAPIENTRY glColor3b( GLbyte red, GLbyte green, GLbyte blue );
 GLAPI void GLAPIENTRY glColor3d( GLdouble red, GLdouble green, GLdouble blue );
@@ -1156,9 +1082,7 @@ GLAPI void GLAPIENTRY glRectiv( const GLint *v1, const GLint *v2 );
 GLAPI void GLAPIENTRY glRectsv( const GLshort *v1, const GLshort *v2 );
 
 
-/*
- * Vertex Arrays  (1.1)
- */
+
 
 GLAPI void GLAPIENTRY glVertexPointer( GLint size, GLenum type,
                                        GLsizei stride, const GLvoid *ptr );
@@ -1189,9 +1113,7 @@ GLAPI void GLAPIENTRY glDrawElements( GLenum mode, GLsizei count,
 GLAPI void GLAPIENTRY glInterleavedArrays( GLenum format, GLsizei stride,
                                            const GLvoid *pointer );
 
-/*
- * Lighting
- */
+
 
 GLAPI void GLAPIENTRY glShadeModel( GLenum mode );
 
@@ -1223,9 +1145,7 @@ GLAPI void GLAPIENTRY glGetMaterialiv( GLenum face, GLenum pname, GLint *params 
 GLAPI void GLAPIENTRY glColorMaterial( GLenum face, GLenum mode );
 
 
-/*
- * Raster functions
- */
+
 
 GLAPI void GLAPIENTRY glPixelZoom( GLfloat xfactor, GLfloat yfactor );
 
@@ -1264,9 +1184,7 @@ GLAPI void GLAPIENTRY glCopyPixels( GLint x, GLint y,
                                     GLsizei width, GLsizei height,
                                     GLenum type );
 
-/*
- * Stenciling
- */
+
 
 GLAPI void GLAPIENTRY glStencilFunc( GLenum func, GLint ref, GLuint mask );
 
@@ -1278,9 +1196,7 @@ GLAPI void GLAPIENTRY glClearStencil( GLint s );
 
 
 
-/*
- * Texture mapping
- */
+
 
 GLAPI void GLAPIENTRY glTexGend( GLenum coord, GLenum pname, GLdouble param );
 GLAPI void GLAPIENTRY glTexGenf( GLenum coord, GLenum pname, GLfloat param );
@@ -1341,7 +1257,7 @@ GLAPI void GLAPIENTRY glGetTexImage( GLenum target, GLint level,
                                      GLvoid *pixels );
 
 
-/* 1.1 functions */
+
 
 GLAPI void GLAPIENTRY glGenTextures( GLsizei n, GLuint *textures );
 
@@ -1397,9 +1313,7 @@ GLAPI void GLAPIENTRY glCopyTexSubImage2D( GLenum target, GLint level,
                                            GLsizei width, GLsizei height );
 
 
-/*
- * Evaluators
- */
+
 
 GLAPI void GLAPIENTRY glMap1d( GLenum target, GLdouble u1, GLdouble u2,
                                GLint stride,
@@ -1450,9 +1364,7 @@ GLAPI void GLAPIENTRY glEvalMesh1( GLenum mode, GLint i1, GLint i2 );
 GLAPI void GLAPIENTRY glEvalMesh2( GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2 );
 
 
-/*
- * Fog
- */
+
 
 GLAPI void GLAPIENTRY glFogf( GLenum pname, GLfloat param );
 
@@ -1463,9 +1375,7 @@ GLAPI void GLAPIENTRY glFogfv( GLenum pname, const GLfloat *params );
 GLAPI void GLAPIENTRY glFogiv( GLenum pname, const GLint *params );
 
 
-/*
- * Selection and Feedback
- */
+
 
 GLAPI void GLAPIENTRY glFeedbackBuffer( GLsizei size, GLenum type, GLfloat *buffer );
 
@@ -1539,9 +1449,9 @@ typedef void (APIENTRYP PFNGLDISABLEPROC) ( GLenum cap );
 typedef GLboolean (APIENTRYP PFNGLISENABLEDPROC) ( GLenum cap );
 
 
-typedef void (APIENTRYP PFNGLENABLECLIENTSTATEPROC) ( GLenum cap );  /* 1.1 */
+typedef void (APIENTRYP PFNGLENABLECLIENTSTATEPROC) ( GLenum cap );  
 
-typedef void (APIENTRYP PFNGLDISABLECLIENTSTATEPROC) ( GLenum cap );  /* 1.1 */
+typedef void (APIENTRYP PFNGLDISABLECLIENTSTATEPROC) ( GLenum cap );  
 
 
 typedef void (APIENTRYP PFNGLGETBOOLEANVPROC) ( GLenum pname, GLboolean *params );
@@ -1558,9 +1468,9 @@ typedef void (APIENTRYP PFNGLPUSHATTRIBPROC) ( GLbitfield mask );
 typedef void (APIENTRYP PFNGLPOPATTRIBPROC) ( void );
 
 
-typedef void (APIENTRYP PFNGLPUSHCLIENTATTRIBPROC) ( GLbitfield mask );  /* 1.1 */
+typedef void (APIENTRYP PFNGLPUSHCLIENTATTRIBPROC) ( GLbitfield mask );  
 
-typedef void (APIENTRYP PFNGLPOPCLIENTATTRIBPROC) ( void );  /* 1.1 */
+typedef void (APIENTRYP PFNGLPOPCLIENTATTRIBPROC) ( void );  
 
 
 typedef GLint (APIENTRYP PFNGLRENDERMODEPROC) ( GLenum mode );
@@ -1576,9 +1486,7 @@ typedef void (APIENTRYP PFNGLFLUSHPROC) ( void );
 typedef void (APIENTRYP PFNGLHINTPROC) ( GLenum target, GLenum mode );
 
 
-/*
- * Depth Buffer
- */
+
 
 typedef void (APIENTRYP PFNGLCLEARDEPTHPROC) ( GLclampd depth );
 
@@ -1589,18 +1497,14 @@ typedef void (APIENTRYP PFNGLDEPTHMASKPROC) ( GLboolean flag );
 typedef void (APIENTRYP PFNGLDEPTHRANGEPROC) ( GLclampd near_val, GLclampd far_val );
 
 
-/*
- * Accumulation Buffer
- */
+
 
 typedef void (APIENTRYP PFNGLCLEARACCUMPROC) ( GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha );
 
 typedef void (APIENTRYP PFNGLACCUMPROC) ( GLenum op, GLfloat value );
 
 
-/*
- * Transformation
- */
+
 
 typedef void (APIENTRYP PFNGLMATRIXMODEPROC) ( GLenum mode );
 
@@ -1639,9 +1543,7 @@ typedef void (APIENTRYP PFNGLTRANSLATEDPROC) ( GLdouble x, GLdouble y, GLdouble 
 typedef void (APIENTRYP PFNGLTRANSLATEFPROC) ( GLfloat x, GLfloat y, GLfloat z );
 
 
-/*
- * Display Lists
- */
+
 
 typedef GLboolean (APIENTRYP PFNGLISLISTPROC) ( GLuint list );
 
@@ -1661,9 +1563,7 @@ typedef void (APIENTRYP PFNGLCALLLISTSPROC) ( GLsizei n, GLenum type,
 typedef void (APIENTRYP PFNGLLISTBASEPROC) ( GLuint base );
 
 
-/*
- * Drawing Functions
- */
+
 
 typedef void (APIENTRYP PFNGLBEGINPROC) ( GLenum mode );
 
@@ -1718,13 +1618,13 @@ typedef void (APIENTRYP PFNGLINDEXDPROC) ( GLdouble c );
 typedef void (APIENTRYP PFNGLINDEXFPROC) ( GLfloat c );
 typedef void (APIENTRYP PFNGLINDEXIPROC) ( GLint c );
 typedef void (APIENTRYP PFNGLINDEXSPROC) ( GLshort c );
-typedef void (APIENTRYP PFNGLINDEXUBPROC) ( GLubyte c );  /* 1.1 */
+typedef void (APIENTRYP PFNGLINDEXUBPROC) ( GLubyte c );  
 
 typedef void (APIENTRYP PFNGLINDEXDVPROC) ( const GLdouble *c );
 typedef void (APIENTRYP PFNGLINDEXFVPROC) ( const GLfloat *c );
 typedef void (APIENTRYP PFNGLINDEXIVPROC) ( const GLint *c );
 typedef void (APIENTRYP PFNGLINDEXSVPROC) ( const GLshort *c );
-typedef void (APIENTRYP PFNGLINDEXUBVPROC) ( const GLubyte *c );  /* 1.1 */
+typedef void (APIENTRYP PFNGLINDEXUBVPROC) ( const GLubyte *c );  
 
 typedef void (APIENTRYP PFNGLCOLOR3BPROC) ( GLbyte red, GLbyte green, GLbyte blue );
 typedef void (APIENTRYP PFNGLCOLOR3DPROC) ( GLdouble red, GLdouble green, GLdouble blue );
@@ -1856,9 +1756,7 @@ typedef void (APIENTRYP PFNGLRECTIVPROC) ( const GLint *v1, const GLint *v2 );
 typedef void (APIENTRYP PFNGLRECTSVPROC) ( const GLshort *v1, const GLshort *v2 );
 
 
-/*
- * Vertex Arrays  (1.1)
- */
+
 
 typedef void (APIENTRYP PFNGLVERTEXPOINTERPROC) ( GLint size, GLenum type,
                                        GLsizei stride, const GLvoid *ptr );
@@ -1889,9 +1787,7 @@ typedef void (APIENTRYP PFNGLDRAWELEMENTSPROC) ( GLenum mode, GLsizei count,
 typedef void (APIENTRYP PFNGLINTERLEAVEDARRAYSPROC) ( GLenum format, GLsizei stride,
                                            const GLvoid *pointer );
 
-/*
- * Lighting
- */
+
 
 typedef void (APIENTRYP PFNGLSHADEMODELPROC) ( GLenum mode );
 
@@ -1923,9 +1819,7 @@ typedef void (APIENTRYP PFNGLGETMATERIALIVPROC) ( GLenum face, GLenum pname, GLi
 typedef void (APIENTRYP PFNGLCOLORMATERIALPROC) ( GLenum face, GLenum mode );
 
 
-/*
- * Raster functions
- */
+
 
 typedef void (APIENTRYP PFNGLPIXELZOOMPROC) ( GLfloat xfactor, GLfloat yfactor );
 
@@ -1964,9 +1858,7 @@ typedef void (APIENTRYP PFNGLCOPYPIXELSPROC) ( GLint x, GLint y,
                                     GLsizei width, GLsizei height,
                                     GLenum type );
 
-/*
- * Stenciling
- */
+
 
 typedef void (APIENTRYP PFNGLSTENCILFUNCPROC) ( GLenum func, GLint ref, GLuint mask );
 
@@ -1978,9 +1870,7 @@ typedef void (APIENTRYP PFNGLCLEARSTENCILPROC) ( GLint s );
 
 
 
-/*
- * Texture mapping
- */
+
 
 typedef void (APIENTRYP PFNGLTEXGENDPROC) ( GLenum coord, GLenum pname, GLdouble param );
 typedef void (APIENTRYP PFNGLTEXGENFPROC) ( GLenum coord, GLenum pname, GLfloat param );
@@ -2041,7 +1931,7 @@ typedef void (APIENTRYP PFNGLGETTEXIMAGEPROC) ( GLenum target, GLint level,
                                      GLvoid *pixels );
 
 
-/* 1.1 functions */
+
 
 typedef void (APIENTRYP PFNGLGENTEXTURESPROC) ( GLsizei n, GLuint *textures );
 
@@ -2097,9 +1987,7 @@ typedef void (APIENTRYP PFNGLCOPYTEXSUBIMAGE2DPROC) ( GLenum target, GLint level
                                            GLsizei width, GLsizei height );
 
 
-/*
- * Evaluators
- */
+
 
 typedef void (APIENTRYP PFNGLMAP1DPROC) ( GLenum target, GLdouble u1, GLdouble u2,
                                GLint stride,
@@ -2150,9 +2038,7 @@ typedef void (APIENTRYP PFNGLEVALMESH1PROC) ( GLenum mode, GLint i1, GLint i2 );
 typedef void (APIENTRYP PFNGLEVALMESH2PROC) ( GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2 );
 
 
-/*
- * Fog
- */
+
 
 typedef void (APIENTRYP PFNGLFOGFPROC) ( GLenum pname, GLfloat param );
 
@@ -2163,9 +2049,7 @@ typedef void (APIENTRYP PFNGLFOGFVPROC) ( GLenum pname, const GLfloat *params );
 typedef void (APIENTRYP PFNGLFOGIVPROC) ( GLenum pname, const GLint *params );
 
 
-/*
- * Selection and Feedback
- */
+
 
 typedef void (APIENTRYP PFNGLFEEDBACKBUFFERPROC) ( GLsizei size, GLenum type, GLfloat *buffer );
 
@@ -2183,9 +2067,7 @@ typedef void (APIENTRYP PFNGLPOPNAMEPROC) ( void );
 #endif
 
 
-/*
- * OpenGL 1.2
- */
+
 
 #define GL_RESCALE_NORMAL			0x803A
 #define GL_CLAMP_TO_EDGE			0x812F
@@ -2288,9 +2170,7 @@ typedef void (APIENTRYP PFNGLTEXSUBIMAGE3DPROC) (GLenum target, GLint level, GLi
 typedef void (APIENTRYP PFNGLCOPYTEXSUBIMAGE3DPROC) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
 
 
-/*
- * GL_ARB_imaging
- */
+
 
 #define GL_CONSTANT_COLOR			0x8001
 #define GL_ONE_MINUS_CONSTANT_COLOR		0x8002
@@ -2595,11 +2475,9 @@ typedef void (APIENTRYP PFNGLGETSEPARABLEFILTERPROC) ( GLenum target, GLenum for
 
 
 
-/*
- * OpenGL 1.3
- */
 
-/* multitexture */
+
+
 #define GL_TEXTURE0				0x84C0
 #define GL_TEXTURE1				0x84C1
 #define GL_TEXTURE2				0x84C2
@@ -2635,7 +2513,7 @@ typedef void (APIENTRYP PFNGLGETSEPARABLEFILTERPROC) ( GLenum target, GLenum for
 #define GL_ACTIVE_TEXTURE			0x84E0
 #define GL_CLIENT_ACTIVE_TEXTURE		0x84E1
 #define GL_MAX_TEXTURE_UNITS			0x84E2
-/* texture_cube_map */
+
 #define GL_NORMAL_MAP				0x8511
 #define GL_REFLECTION_MAP			0x8512
 #define GL_TEXTURE_CUBE_MAP			0x8513
@@ -2648,7 +2526,7 @@ typedef void (APIENTRYP PFNGLGETSEPARABLEFILTERPROC) ( GLenum target, GLenum for
 #define GL_TEXTURE_CUBE_MAP_NEGATIVE_Z		0x851A
 #define GL_PROXY_TEXTURE_CUBE_MAP		0x851B
 #define GL_MAX_CUBE_MAP_TEXTURE_SIZE		0x851C
-/* texture_compression */
+
 #define GL_COMPRESSED_ALPHA			0x84E9
 #define GL_COMPRESSED_LUMINANCE			0x84EA
 #define GL_COMPRESSED_LUMINANCE_ALPHA		0x84EB
@@ -2660,7 +2538,7 @@ typedef void (APIENTRYP PFNGLGETSEPARABLEFILTERPROC) ( GLenum target, GLenum for
 #define GL_TEXTURE_COMPRESSED			0x86A1
 #define GL_NUM_COMPRESSED_TEXTURE_FORMATS	0x86A2
 #define GL_COMPRESSED_TEXTURE_FORMATS		0x86A3
-/* multisample */
+
 #define GL_MULTISAMPLE				0x809D
 #define GL_SAMPLE_ALPHA_TO_COVERAGE		0x809E
 #define GL_SAMPLE_ALPHA_TO_ONE			0x809F
@@ -2670,12 +2548,12 @@ typedef void (APIENTRYP PFNGLGETSEPARABLEFILTERPROC) ( GLenum target, GLenum for
 #define GL_SAMPLE_COVERAGE_VALUE		0x80AA
 #define GL_SAMPLE_COVERAGE_INVERT		0x80AB
 #define GL_MULTISAMPLE_BIT			0x20000000
-/* transpose_matrix */
+
 #define GL_TRANSPOSE_MODELVIEW_MATRIX		0x84E3
 #define GL_TRANSPOSE_PROJECTION_MATRIX		0x84E4
 #define GL_TRANSPOSE_TEXTURE_MATRIX		0x84E5
 #define GL_TRANSPOSE_COLOR_MATRIX		0x84E6
-/* texture_env_combine */
+
 #define GL_COMBINE				0x8570
 #define GL_COMBINE_RGB				0x8571
 #define GL_COMBINE_ALPHA			0x8572
@@ -2698,10 +2576,10 @@ typedef void (APIENTRYP PFNGLGETSEPARABLEFILTERPROC) ( GLenum target, GLenum for
 #define GL_CONSTANT				0x8576
 #define GL_PRIMARY_COLOR			0x8577
 #define GL_PREVIOUS				0x8578
-/* texture_env_dot3 */
+
 #define GL_DOT3_RGB				0x86AE
 #define GL_DOT3_RGBA				0x86AF
-/* texture_border_clamp */
+
 #define GL_CLAMP_TO_BORDER			0x812D
 
 #ifndef SDL_OPENGL_1_NO_PROTOTYPES
@@ -2910,9 +2788,7 @@ typedef void (APIENTRYP PFNGLGETCOMPRESSEDTEXIMAGEPROC) (GLenum target, GLint le
 
 
 
-/*
- * GL_ARB_multitexture (ARB extension 1 and OpenGL 1.2.1)
- */
+
 #ifndef GL_ARB_multitexture
 #define GL_ARB_multitexture 1
 
@@ -3064,38 +2940,31 @@ typedef void (APIENTRYP PFNGLMULTITEXCOORD4IVARBPROC) (GLenum target, const GLin
 typedef void (APIENTRYP PFNGLMULTITEXCOORD4SARBPROC) (GLenum target, GLshort s, GLshort t, GLshort r, GLshort q);
 typedef void (APIENTRYP PFNGLMULTITEXCOORD4SVARBPROC) (GLenum target, const GLshort *v);
 
-#endif /* GL_ARB_multitexture */
+#endif 
 
 
 
-/*
- * Define this token if you want "old-style" header file behaviour (extensions
- * defined in gl.h).  Otherwise, extensions will be included from glext.h.
- */
+
 #if !defined(NO_SDL_GLEXT) && !defined(GL_GLEXT_LEGACY)
 #include <SDL3/SDL_opengl_glext.h>
-#endif  /* GL_GLEXT_LEGACY */
+#endif  
 
 
 
-/**********************************************************************
- * Begin system-specific stuff
- */
+
 #if defined(PRAGMA_EXPORT_SUPPORTED)
 #pragma export off
 #endif
 
-/*
- * End system-specific stuff
- **********************************************************************/
+
 
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __gl_h_ */
+#endif 
 
-#endif /* !SDL_PLATFORM_IOS */
+#endif 
 
-#endif /* SDL_opengl_h_ */
+#endif 

@@ -54,16 +54,13 @@ public class MultiRTUtils {
         return runtimes;
     }
 
-    /**
-     *
-     * @return Java versions which are not installed but are present in {@link ExternalRuntime}
-     */
+    
     public static List<ExternalRuntime> getRuntimesToDownload() {
         List<ExternalRuntime> runtimesToDownload = new ArrayList<>();
         ExternalRuntime[] downloadableRuntimes = ExternalRuntime.values();
         for (ExternalRuntime downloadableruntime : downloadableRuntimes) {
             if(getExactJreName(downloadableruntime.majorVersion) == null){
-                // x86 isn't supported anymore for JRE25
+                
                 if (!(getDeviceArchitecture() == Architecture.ARCH_X86 && downloadableruntime.majorVersion >= 21))
                     runtimesToDownload.add(downloadableruntime);
             }
@@ -110,7 +107,7 @@ public class MultiRTUtils {
             if(!ftIn.renameTo(ftOut)) throw new IOException("Failed to rename freetype");
         }
 
-        // Refresh libraries
+        
         copyDummyNativeLib("libawt_xawt.so", dest, libFolder);
     }
 
@@ -197,11 +194,7 @@ public class MultiRTUtils {
         return returnRuntime;
     }
 
-    /**
-     * Unpacks all .pack files into .jar Serves only for java 8, as java 9 brought project jigsaw
-     * @param nativeLibraryDir The native lib path, required to execute the unpack200 binary
-     * @param runtimePath The path to the runtime to walk into
-     */
+    
     private static void unpack200(String nativeLibraryDir, String runtimePath) {
 
         File basePath = new File(runtimePath);
@@ -243,19 +236,19 @@ public class MultiRTUtils {
                 new XZCompressorInputStream(tarFileInputStream)
         );
         TarArchiveEntry tarEntry = tarIn.getNextTarEntry();
-        // tarIn is a TarArchiveInputStream
+        
         while (tarEntry != null) {
 
             final String tarEntryName = tarEntry.getName();
-            // publishProgress(null, "Unpacking " + tarEntry.getName());
+            
             ProgressLayout.setProgress(ProgressLayout.UNPACK_RUNTIME, 100, R.string.global_unpacking, tarEntryName);
 
             File destPath = new File(dest, tarEntry.getName());
             net.kdt.pojavlaunch.utils.FileUtils.ensureParentDirectory(destPath);
             if (tarEntry.isSymbolicLink()) {
                 try {
-                    // android.system.Os
-                    // Libcore one support all Android versions
+                    
+                    
                     Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
                 } catch (Throwable e) {
                     Log.e("MultiRT", e.toString());

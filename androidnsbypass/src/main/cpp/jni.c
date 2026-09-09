@@ -1,5 +1,5 @@
-// SPDX-License-Identifier: MIT
-// Copyright (c) 2026 alexytomi
+
+
 
 #include <jni.h>
 #include <stdint.h>
@@ -12,7 +12,7 @@
 #define CALLER_RETURN_ADDRESS (-1)
 #define CALLER_CLASSLOADER_NAMESPACE (-2)
 
-// TODO: Guard against random NULLs because GetStringUTFChars is nullable
+
 
 const void *getCaller(jlong caller_addr);
 

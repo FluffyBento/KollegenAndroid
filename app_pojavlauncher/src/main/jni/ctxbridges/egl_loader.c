@@ -1,6 +1,6 @@
-//
-// Created by maks on 21.09.2022.
-//
+
+
+
 #include <stdlib.h>
 #include <dlfcn.h>
 #include <string.h>

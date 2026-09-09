@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Войти</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Сіи документы будутъ удалены!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Выберите установщикъ модификаціи</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen былъ остановленъ въ результатѣ курьёза</string>
     <string name="error_no_version">Нѣтъ версій!</string>
     <string name="error_show_more">Развернуть</string>
     <string name="error_show_less">Свернуть</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Требуется разрѣшеніе на чтеніе/запись въ хранилищѣ!</string>
     <string name="toast_optifine_success">Установка прошла успѣшно</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Энциклопедія \"Википедія\"</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Очистка файловъ кэша</string>
     <string name="mcl_launch_downloading">Загрузка %s</string>
     <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f МБайтъ / %.2f МБайтъ)"</string>
@@ -44,7 +42,7 @@
     <string name="mcl_setting_veroption_oldalpha">Старыя альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Старыя бета</string>
     <string name="mcl_version_clone">Раздвоить</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Править</string>
     <string name="global_error">Курьёзъ</string>
     <string name="global_load">Загрузка</string>
@@ -58,10 +56,10 @@
     <string name="global_waiting">Подождите</string>
     <string name="global_retry">Повторить</string>
     <string name="global_default">По умолчанію</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Произошла оказія съ приложеніемъ/игрой съ кодомъ %d. Осмотрите latestlog.txt, дабы получить болѣе подробную информацію.</string>
     <string name="mcn_exit_confirm">Вы увѣрены, что хотите принудительно закрыть оный?</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Бесѣда</string>
     <string name="control_debug">Отладка</string>
     <string name="control_primary">Л.К.М.</string>
@@ -71,16 +69,13 @@
     <string name="control_mouse">Мышь</string>
     <string name="control_mouseoff">Мышь: Выкл.</string>
     <string name="control_mouseon">Мышь: Вкл.</string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Принудительное закрытіе</string>
     <string name="control_viewout">Журналъ</string>
     <string name="control_adebug">Отладка ввода</string>
     <string name="control_customkey">Отправить пользовательскій кодъ кнопки</string>
-    <!-- ImportControlActivity Strings -->
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
+    
     <string name="customctrl_toggle">Переключаемый</string>
     <string name="customctrl_size">Размѣръ</string>
     <string name="customctrl_mapping">Кнопки</string>

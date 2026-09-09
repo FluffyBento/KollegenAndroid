@@ -64,23 +64,23 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     private final List<String> mAccountList = new ArrayList<>(2);
     private MinecraftAccount mSelectecAccount = null;
 
-    /* Display the head of the current profile, here just to allow bitmap recycling */
+    
     private BitmapDrawable mHeadDrawable;
 
-    /* Current animator to for the login bar, is swapped when changing step */
+    
     private ObjectAnimator mLoginBarAnimator;
     private float mLoginBarWidth = -1;
 
-    /* Paint used to display the bottom bar, to show the login progress. */
+    
     private final Paint mLoginBarPaint = new Paint();
 
-    /* When a login is performed in the background, we need to know where we are */
+    
     private final static int MAX_LOGIN_STEP = 5;
     private int mLoginStep = 0;
 
-    /* Login listeners */
+    
     private final ProgressListener mProgressListener = step -> {
-        // Animate the login bar, cosmetic purposes only
+        
         mLoginStep = step;
         if(mLoginBarAnimator != null){
             mLoginBarAnimator.cancel();
@@ -94,8 +94,8 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     private final DoneListener mDoneListener = account -> {
         Toast.makeText(getContext(), R.string.main_login_done, Toast.LENGTH_SHORT).show();
 
-        // Check if the account being added is not one that is already existing
-        // Like login twice on the same mc account...
+        
+        
         for(String mcAccountName : mAccountList){
             if(mcAccountName.equals(account.username)) return;
         }
@@ -123,7 +123,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         invalidate();
     };
 
-    /* Triggered when we need to do microsoft login */
+    
     private final ExtraListener<Uri> mMicrosoftLoginListener = (key, value) -> {
         mLoginBarPaint.setColor(getResources().getColor(R.color.minebutton_color));
         new MicrosoftBackgroundLogin(false, value.getQueryParameter("code")).performLogin(
@@ -131,9 +131,9 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         return false;
     };
 
-    /* Triggered when we need to perform mojang login */
+    
     private final ExtraListener<String[]> mMojangLoginListener = (key, value) -> {
-        if(value[1].isEmpty()){ // Test mode
+        if(value[1].isEmpty()){ 
             MinecraftAccount account = new MinecraftAccount();
             account.username = value[0];
             try {
@@ -150,12 +150,12 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     @SuppressLint("ClickableViewAccessibility")
     private void init(){
-        // Set visual properties
+        
         setBackgroundColor(getResources().getColor(R.color.background_status_bar));
         mLoginBarPaint.setColor(getResources().getColor(R.color.minebutton_color));
         mLoginBarPaint.setStrokeWidth(getResources().getDimensionPixelOffset(R.dimen._2sdp));
 
-        // Set behavior
+        
         reloadAccounts(true, 0);
         setOnItemSelectedListener(this);
 
@@ -166,7 +166,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     @Override
     public final void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(position == 0){  // Add account button
+        if(position == 0){  
             if(mAccountList.size() > 1){
                 ExtraCore.setValue(ExtraConstants.SELECT_AUTH_METHOD, true);
             }
@@ -184,7 +184,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if(mLoginBarWidth == -1) mLoginBarWidth = getWidth(); // Initial draw
+        if(mLoginBarWidth == -1) mLoginBarWidth = getWidth(); 
 
         float bottom = getHeight() - mLoginBarPaint.getStrokeWidth()/2;
         canvas.drawLine(0, bottom, mLoginBarWidth, bottom, mLoginBarPaint);
@@ -206,10 +206,10 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     @Keep
     public void setLoginBarWidth(float value){
         mLoginBarWidth = value;
-        invalidate(); // Need to redraw each time this is changed
+        invalidate(); 
     }
 
-    /** Allows checking whether we have an online account */
+    
     public boolean isAccountOnline(){
         return mSelectecAccount != null && !mSelectecAccount.accessToken.equals("0");
     }
@@ -228,27 +228,23 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     @SuppressLint("ClickableViewAccessibility")
     private void setNoAccountBehavior(){
-        // Set custom behavior when no account are present, to make it act as a button
+        
         if(mAccountList.size() != 1){
-            // Remove any touch listener
+            
             setOnTouchListener(null);
             return;
         }
 
-        // Make the spinner act like a button, since there is no item to really select
+        
         setOnTouchListener((v, event) -> {
             if(event.getAction() != MotionEvent.ACTION_UP) return false;
-            // The activity should intercept this and spawn another fragment
+            
             ExtraCore.setValue(ExtraConstants.SELECT_AUTH_METHOD, true);
             return true;
         });
     }
 
-    /**
-     * Reload the spinner, from memory or from scratch. A default account can be selected
-     * @param fromFiles Whether we use files as the source of truth
-     * @param overridePosition Force the spinner to be at this position, if not 0
-     */
+    
     private void reloadAccounts(boolean fromFiles, int overridePosition){
         if(fromFiles){
             mAccountList.clear();
@@ -267,18 +263,18 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         accountAdapter.setDropDownViewResource(R.layout.item_minecraft_account);
         setAdapter(accountAdapter);
 
-        // Pick what's available, might just be the the add account "button"
+        
         pickAccount(overridePosition == 0 ? -1 : overridePosition);
         if(mSelectecAccount != null)
             performLogin(mSelectecAccount);
 
-        // Remove or add the behavior if needed
+        
         setNoAccountBehavior();
 
     }
 
     private void performLogin(MinecraftAccount minecraftAccount){
-        // Logging in when there's no internet is useless. This should really be turned into a network callback though.
+        
         if(!Tools.isOnline(getContext())){
             return;
         }
@@ -287,7 +283,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         mLoginBarPaint.setColor(getResources().getColor(R.color.minebutton_color));
         if(minecraftAccount.isMicrosoft){
             if(System.currentTimeMillis() > minecraftAccount.expiresAt){
-                // Perform login only if needed
+                
                 new MicrosoftBackgroundLogin(true, minecraftAccount.msaRefreshToken)
                         .performLogin(mProgressListener, mDoneListener, mErrorListener);
             }
@@ -295,15 +291,15 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         }
     }
 
-    /** Pick the selected account, the one in settings if 0 is passed */
+    
     private void pickAccount(int position){
         MinecraftAccount selectedAccount;
         if(position != -1){
             PojavProfile.setCurrentProfile(getContext(), mAccountList.get(position));
             selectedAccount = PojavProfile.getCurrentProfileContent(getContext(), mAccountList.get(position));
 
-            // WORKAROUND
-            // Account file corrupted due to previous versions having improper encoding
+            
+            
             if (selectedAccount == null){
                 Context ctx = Objects.requireNonNull(getContext());
 
@@ -322,7 +318,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
             }
             setSelection(position);
         }else {
-            // Get the current profile, or the first available profile if the wanted one is unavailable
+            
             selectedAccount = PojavProfile.getCurrentProfileContent(getContext(), null);
             int spinnerPosition = selectedAccount == null
                     ? mAccountList.size() <= 1 ? 0 : 1
@@ -335,7 +331,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     }
 
     @Deprecated()
-    /* Legacy behavior, update the head image manually for the selected account */
+    
     private void setImageFromSelectedAccount(){
         BitmapDrawable oldBitmapDrawable = mHeadDrawable;
 
@@ -376,7 +372,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
             ImageView deleteButton = convertView.findViewById(R.id.delete_account_button);
             textview.setText(super.getItem(position));
 
-            // Handle the "Add account section"
+            
             if(position == 0) {
                 textview.setCompoundDrawables(ResourcesCompat.getDrawable(parent.getResources(), R.drawable.ic_add, null), null, null, null);
                 deleteButton.setVisibility(View.GONE);

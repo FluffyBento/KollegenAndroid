@@ -24,11 +24,7 @@ import net.kdt.pojavlaunch.customcontrols.handleview.EditControlSideDialog;
 
 import org.lwjgl.glfw.CallbackBridge;
 
-/**
- * Interface injecting custom behavior to a View.
- * Most of the injected behavior is editing behavior,
- * sending keys has to be implemented by sub classes.
- */
+
 public interface ControlInterface extends View.OnLongClickListener, GrabListener {
     View getControlView();
 
@@ -38,16 +34,10 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         setProperties(properties, true);
     }
 
-    /**
-     * Remove the button presence from the CustomControl object
-     * You need to use {getControlParent()} for this.
-     */
+    
     void removeButton();
 
-    /**
-     * Duplicate the data of the button and add a view with the duplicated data
-     * Relies on the ControlLayout for the implementation.
-     */
+    
     void cloneButton();
 
     default void setVisible(boolean isVisible) {
@@ -57,14 +47,12 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
 
     void sendKeyPresses(boolean isDown);
 
-    /**
-     * Load the values and hide non useful forms
-     */
+    
     void loadEditValues(EditControlSideDialog editControlDialog);
 
     @Override
     default void onGrabState(boolean isGrabbing) {
-        if (getControlLayoutParent() != null && getControlLayoutParent().getModifiable()) return; // Disable when edited
+        if (getControlLayoutParent() != null && getControlLayoutParent().getModifiable()) return; 
         setVisible(((getProperties().displayInGame && isGrabbing) || (getProperties().displayInMenu && !isGrabbing)) && getControlLayoutParent().areControlVisible());
     }
 
@@ -72,15 +60,13 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         return (ControlLayout) getControlView().getParent();
     }
 
-    /**
-     * Apply conversion steps for when the view is created
-     */
+    
     default ControlData preProcessProperties(ControlData properties, ControlLayout layout) {
-        //Size
+        
         properties.setWidth(properties.getWidth() / layout.getLayoutScale() * PREF_BUTTONSIZE);
         properties.setHeight(properties.getHeight() / layout.getLayoutScale() * PREF_BUTTONSIZE);
 
-        //Visibility
+        
         properties.isHideable = !properties.containsKeycode(ControlData.SPECIALBTN_TOGGLECTRL) && !properties.containsKeycode(ControlData.SPECIALBTN_VIRTUALMOUSE);
 
         return properties;
@@ -90,7 +76,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         setProperties(getProperties());
     }
 
-    /* This function should be overridden to store the properties */
+    
     @CallSuper
     default void setProperties(ControlData properties, boolean changePos) {
         if (changePos) {
@@ -98,7 +84,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
             getControlView().setY(properties.insertDynamicPos(getProperties().dynamicY));
         }
 
-        // Recycle layout params
+        
         ViewGroup.LayoutParams params = getControlView().getLayoutParams();
         if (params == null)
             params = new FrameLayout.LayoutParams((int) properties.getWidth(), (int) properties.getHeight());
@@ -107,9 +93,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         getControlView().setLayoutParams(params);
     }
 
-    /**
-     * Apply the background according to properties
-     */
+    
     default void setBackground() {
         GradientDrawable gd = getControlView().getBackground() instanceof GradientDrawable
                 ? (GradientDrawable) getControlView().getBackground()
@@ -121,32 +105,19 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         getControlView().setBackground(gd);
     }
 
-    /**
-     * Apply the dynamic equation on the x axis.
-     *
-     * @param dynamicX The equation to compute the position from
-     */
+    
     default void setDynamicX(String dynamicX) {
         getProperties().dynamicX = dynamicX;
         getControlView().setX(getProperties().insertDynamicPos(dynamicX));
     }
 
-    /**
-     * Apply the dynamic equation on the y axis.
-     *
-     * @param dynamicY The equation to compute the position from
-     */
+    
     default void setDynamicY(String dynamicY) {
         getProperties().dynamicY = dynamicY;
         getControlView().setY(getProperties().insertDynamicPos(dynamicY));
     }
 
-    /**
-     * Generate a dynamic equation from an absolute position, used to scale properly across devices
-     *
-     * @param x The absolute position on the horizontal axis
-     * @return The equation as a String
-     */
+    
     default String generateDynamicX(float x) {
         if (x + (getProperties().getWidth() / 2f) > CallbackBridge.physicalWidth / 2f) {
             return (x + getProperties().getWidth()) / CallbackBridge.physicalWidth + " * ${screen_width} - ${width}";
@@ -155,12 +126,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         }
     }
 
-    /**
-     * Generate a dynamic equation from an absolute position, used to scale properly across devices
-     *
-     * @param y The absolute position on the vertical axis
-     * @return The equation as a String
-     */
+    
     default String generateDynamicY(float y) {
         if (y + (getProperties().getHeight() / 2f) > CallbackBridge.physicalHeight / 2f) {
             return (y + getProperties().getHeight()) / CallbackBridge.physicalHeight + " * ${screen_height} - ${height}";
@@ -169,25 +135,14 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         }
     }
 
-    /**
-     * Regenerate and apply coordinates with supposedly modified properties
-     */
+    
     default void regenerateDynamicCoordinates() {
         getProperties().dynamicX = generateDynamicX(getControlView().getX());
         getProperties().dynamicY = generateDynamicY(getControlView().getY());
         updateProperties();
     }
 
-    /**
-     * Do a pre-conversion of an equation using values from a button,
-     * so the variables can be used for another button
-     * <p>
-     * Internal use only.
-     *
-     * @param equation The dynamic position as a String
-     * @param button   The button to get the values from.
-     * @return The pre-processed equation as a String.
-     */
+    
     default String applySize(String equation, ControlInterface button) {
         return equation
                 .replace("${right}", "(${screen_width} - ${width})")
@@ -197,20 +152,13 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
     }
 
 
-    /**
-     * Convert a corner radius percentage into a px corner radius
-     */
+    
     default float computeCornerRadius(float radiusInPercent) {
         float minSize = Math.min(getProperties().getWidth(), getProperties().getHeight());
         return (minSize / 2) * (radiusInPercent / 100);
     }
 
-    /**
-     * Passe a series of checks to determine if the ControlButton isn't available to be snapped on.
-     *
-     * @param button The button to check
-     * @return whether or not the button
-     */
+    
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     default boolean canSnap(ControlInterface button) {
         float MIN_DISTANCE = getSnapDistance();
@@ -225,16 +173,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
                 button.getControlView().getHeight() / 2f + getControlView().getHeight() / 2f) + MIN_DISTANCE);
     }
 
-    /**
-     * Try to snap, then align to neighboring buttons, given the provided coordinates.
-     * The new position is automatically applied to the View,
-     * regardless of if the View snapped or not.
-     * <p>
-     * The new position is always dynamic, thus replacing previous dynamic positions
-     *
-     * @param x Coordinate on the x axis
-     * @param y Coordinate on the y axis
-     */
+    
     default void snapAndAlign(float x, float y) {
         final float MIN_DISTANCE = getSnapDistance();
         String dynamicX = generateDynamicX(x);
@@ -244,10 +183,10 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         getControlView().setY(y);
 
         for (ControlInterface button : ((ControlLayout) getControlView().getParent()).getButtonChildren()) {
-            //Step 1: Filter unwanted buttons
+            
             if (!canSnap(button)) continue;
 
-            //Step 2: Get Coordinates
+            
             float button_top = button.getControlView().getY();
             float button_bottom = button_top + button.getControlView().getHeight();
             float button_left = button.getControlView().getX();
@@ -258,29 +197,29 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
             float left = getControlView().getX();
             float right = getControlView().getX() + getControlView().getWidth();
 
-            //Step 3: For each axis, we try to snap to the nearest
-            if (Math.abs(top - button_bottom) < MIN_DISTANCE) { // Bottom snap
+            
+            if (Math.abs(top - button_bottom) < MIN_DISTANCE) { 
                 dynamicY = applySize(button.getProperties().dynamicY, button) + applySize(" + ${height}", button) + " + ${margin}";
-            } else if (Math.abs(button_top - bottom) < MIN_DISTANCE) { //Top snap
+            } else if (Math.abs(button_top - bottom) < MIN_DISTANCE) { 
                 dynamicY = applySize(button.getProperties().dynamicY, button) + " - ${height} - ${margin}";
             }
-            if (!dynamicY.equals(generateDynamicY(getControlView().getY()))) { //If we snapped
-                if (Math.abs(button_left - left) < MIN_DISTANCE) { //Left align snap
+            if (!dynamicY.equals(generateDynamicY(getControlView().getY()))) { 
+                if (Math.abs(button_left - left) < MIN_DISTANCE) { 
                     dynamicX = applySize(button.getProperties().dynamicX, button);
-                } else if (Math.abs(button_right - right) < MIN_DISTANCE) { //Right align snap
+                } else if (Math.abs(button_right - right) < MIN_DISTANCE) { 
                     dynamicX = applySize(button.getProperties().dynamicX, button) + applySize(" + ${width}", button) + " - ${width}";
                 }
             }
 
-            if (Math.abs(button_left - right) < MIN_DISTANCE) { //Left snap
+            if (Math.abs(button_left - right) < MIN_DISTANCE) { 
                 dynamicX = applySize(button.getProperties().dynamicX, button) + " - ${width} - ${margin}";
-            } else if (Math.abs(left - button_right) < MIN_DISTANCE) { //Right snap
+            } else if (Math.abs(left - button_right) < MIN_DISTANCE) { 
                 dynamicX = applySize(button.getProperties().dynamicX, button) + applySize(" + ${width}", button) + " + ${margin}";
             }
-            if (!dynamicX.equals(generateDynamicX(getControlView().getX()))) { //If we snapped
-                if (Math.abs(button_top - top) < MIN_DISTANCE) { //Top align snap
+            if (!dynamicX.equals(generateDynamicX(getControlView().getX()))) { 
+                if (Math.abs(button_top - top) < MIN_DISTANCE) { 
                     dynamicY = applySize(button.getProperties().dynamicY, button);
-                } else if (Math.abs(button_bottom - bottom) < MIN_DISTANCE) { //Bottom align snap
+                } else if (Math.abs(button_bottom - bottom) < MIN_DISTANCE) { 
                     dynamicY = applySize(button.getProperties().dynamicY, button) + applySize(" + ${height}", button) + " - ${height}";
                 }
             }
@@ -291,9 +230,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         setDynamicY(dynamicY);
     }
 
-    /**
-     * Wrapper for multiple injections at once
-     */
+    
     default void injectBehaviors() {
         injectProperties();
         injectTouchEventBehavior();
@@ -301,9 +238,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         injectGrabListenerBehavior();
     }
 
-    /**
-     * Inject the grab listener, remove it when the view is gone
-     */
+    
     default void injectGrabListenerBehavior() {
         if (getControlView() == null) {
             Log.e(ControlInterface.class.toString(), "Failed to inject grab listener behavior !");
@@ -331,9 +266,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         getControlView().post(() -> getControlView().setTranslationZ(10));
     }
 
-    /**
-     * Inject a touch listener on the view to make editing controls straight forward
-     */
+    
     default void injectTouchEventBehavior() {
         getControlView().setOnTouchListener(new View.OnTouchListener() {
             private boolean mCanTriggerLongClick = true;
@@ -344,16 +277,16 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if (!getControlLayoutParent().getModifiable()) {
-                    // Basically, editing behavior is forced while in game behavior is specific
+                    
                     view.onTouchEvent(event);
                     return true;
                 }
 
-                /* If the button can be modified/moved */
-                //Instantiate the gesture detector only when needed
+                
+                
 
                 if (event.getActionMasked() == MotionEvent.ACTION_UP && mCanTriggerLongClick) {
-                    //TODO change this.
+                    
                     onLongClick(view);
                 }
 
@@ -388,7 +321,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
             getProperties().setHeight(bottom - top);
             setBackground();
 
-            // Re-calculate position
+            
             getControlView().setX(getControlView().getX());
             getControlView().setY(getControlView().getY());
         });

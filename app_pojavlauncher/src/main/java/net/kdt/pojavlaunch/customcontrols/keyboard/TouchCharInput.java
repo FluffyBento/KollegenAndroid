@@ -18,9 +18,7 @@ import net.kdt.pojavlaunch.R;
 
 import org.libsdl.app.SDLActivity;
 
-/**
- * This class is intended for sending characters used in chat via the virtual keyboard
- */
+
 public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText {
     public static final String TEXT_FILLER = "                              ";
     public TouchCharInput(@NonNull Context context) {
@@ -38,20 +36,14 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     private boolean mIsDoingInternalChanges = false;
     private CharacterSenderStrategy mCharacterSender;
 
-    /**
-     * When we change from app to app, the keyboard gets disabled.
-     * So, we disable the object
-     */
+    
     @Override
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         super.onWindowFocusChanged(hasWindowFocus);
         disable();
     }
 
-    /**
-     * Intercepts the back key to disable focus
-     * Does not affect the rest of the activity.
-     */
+    
     @Override
     public boolean onKeyPreIme(final int keyCode, final KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
@@ -61,9 +53,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     }
 
 
-    /**
-     * Toggle on and off the soft keyboard, depending of the state
-     */
+    
     public void switchKeyboardState(){
         if(hasFocus()){
             clear();
@@ -74,29 +64,26 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     }
 
 
-    /**
-     * Clear the EditText from any leftover inputs
-     * It does not affect the in-game input
-     */
+    
     public void clear(){
         mIsDoingInternalChanges = true;
-        // Edit the Editable directly as it doesn't affect the state
-        // of the TextView.
+        
+        
         Editable editable = getEditableText();
         editable.clear();
-        //Braille space, doesn't trigger keyboard auto-complete
+        
         editable.append(TEXT_FILLER);
         Selection.setSelection(editable, TEXT_FILLER.length());
         mIsDoingInternalChanges = false;
     }
 
-    /** Regain ability to exist, take focus and have some text being input */
+    
     public void enable(){
         if (SDLActivity.isUsingSDLTextEdit()){
             SDLActivity.enableSDLEditKeyboard();
             return;
         }
-        // Allow, regardless of whether or not a hardware keyboard is declared
+        
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
         imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT);
         setEnabled(true);
@@ -105,31 +92,31 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         requestFocus();
     }
 
-    /** Lose ability to exist, take focus and have some text being input */
+    
     public void disable(){
         if (SDLActivity.isUsingSDLTextEdit()) SDLActivity.disableSDLEditKeyboard();
         clear();
         setVisibility(GONE);
         clearFocus();
         setEnabled(false);
-        //setFocusable(false);
+        
     }
 
-    /** Send the enter key. */
+    
     private void sendEnter(){
         mCharacterSender.sendEnter();
         clear();
     }
 
-    /** Just sets the char sender that should be used. */
+    
     public void setCharacterSender(CharacterSenderStrategy characterSender){
         mCharacterSender = characterSender;
     }
 
-    /** This function deals with anything that has to be executed when the constructor is called */
+    
     private void setup(){
-        // Using TextWatcher instead of overriding onTextChanged because some Huawei firmware
-        // calls setText in constructor, causing havoc for our listener
+        
+        
         addTextChangedListener(new InputTextWatcher());
         setOnEditorActionListener((textView, i, keyEvent) -> {
             sendEnter();
@@ -146,11 +133,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
 
         }
 
-        /**
-         * We take the new chars, and send them to the game.
-         * If less chars are present, remove some.
-         * The text is always cleaned up.
-         */
+        
         @Override
         public void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
             if(mIsDoingInternalChanges) return;
@@ -169,8 +152,8 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         @Override
         public void afterTextChanged(Editable editable) {
             if(mIsDoingInternalChanges) return;
-            // Moved from onTextChanged because "It is an error to attempt to make changes to s from this callback."
-            // reference: https://developer.android.com/reference/android/text/TextWatcher#onTextChanged(java.lang.CharSequence,%20int,%20int,%20int)
+            
+            
             if(editable.length() < 1) clear();
         }
     }

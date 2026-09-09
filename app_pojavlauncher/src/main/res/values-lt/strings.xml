@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Ametistas</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_login_label">Prisijungti</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Ši paskyra bus pašalinta!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Pasirinkite modifikacijų įdiegimui</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen netikėtai išsijungė arba užlužo</string>
     <string name="error_no_version">Nėra versijos!</string>
     <string name="error_show_more">Rodyti daugiau</string>
     <string name="error_show_less">Rodyti mažiau</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Skaitymo/rašymo atmintyje leidimas yra būtinas!</string>
     <string name="toast_optifine_success">Instaliavimas sėkmingas</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
+    
+    
     <string name="mcl_launch_cleancache">Valomi nereikalingi failai</string>
     <string name="mcl_launch_downloading">Atsisiunčiama %s</string>
     <string name="mcl_launch_downloading_progress">"Atsisiunčiama %s (%.2f MB / %.2f MB)"</string>
@@ -48,7 +46,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Beta</string>
     <string name="mcl_version_clone">Klonuoti</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Redaguoti</string>
     <string name="global_error">Klaida</string>
     <string name="global_load">Įjungti</string>
@@ -63,10 +61,10 @@
     <string name="global_select">Pasirinkti</string>
     <string name="global_retry">Kartoti</string>
     <string name="global_default">Numatytasis</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Applikacija išsijungė su kodu %d, patikrinkite latestlog.txt kad gautumėte detalių.</string>
     <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Pokalbiai</string>
     <string name="control_debug">Taisyti</string>
     <string name="control_primary">Pro.</string>
@@ -76,21 +74,18 @@
     <string name="control_mouse">Pelė</string>
     <string name="control_mouseoff">Pelė: išjungta</string>
     <string name="control_mouseon">Pelė: įjungta </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Priverstinai išjungti</string>
     <string name="control_viewout">Žurnalo įrašai</string>
     <string name="control_customkey">Siųsti mygtuko kodą</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Importuoti kontroles</string>
     <string name="import_control_invalid_file">Netinkamas arba sugedęs failas</string>
     <string name="import_control_import_button">importuoti kontroles</string>
     <string name="import_control_verifying_file">Failas tikrinamas, prašome palaukti ir bandyti dar kartą…</string>
     <string name="import_control_invalid_name">Netinkamas pavadinimas arba failas jau egzistuoja</string>
     <string name="import_control_done">Importavimas baigtas</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Perjungiama</string>
     <string name="customctrl_size">Dydis</string>
     <string name="customctrl_mapping">Mygtukų sąrašas</string>

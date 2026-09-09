@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_username_hint">اسم المستخدم</string>
     <string name="login_online_login_label">تسجيل الدخول</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"أضغط على أيقونة الإعدادات في أعلى منتصف الشاشة لفتح قائمة التعديلات ⚙\nأضغط على زر للتخصيص: تغيير, تعديل الحجم، حذف، أو تعديل أزرار التحكم."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">حدد مشغل مودات لتثبيته</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">لقد توقف Kollegen بشكل غير متوقع</string>
     <string name="error_no_version">لا يوجد إصدار!</string>
     <string name="error_show_more">اظهر المزيد</string>
     <string name="error_show_less">أظهِر أقل</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">مطلوب إذن القراءة و الكتابة للتخزين!</string>
     <string name="toast_optifine_success">تم التثبيت بنجاح</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">موسوعة</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">تنظيف ملفات ذاكرة التخزين المؤقت</string>
     <string name="mcl_launch_downloading">التحميل جارٍ %s</string>
     <string name="mcl_launch_downloading_progress">"جارٍ تنزيل %s (%.2f ميغابايت / %.2f ميغابايت)"</string>
@@ -55,7 +53,7 @@
     <string name="mcl_setting_veroption_oldalpha">نسخ ألفا قديمة</string>
     <string name="mcl_setting_veroption_oldbeta">نسخ بيتا قديمة</string>
     <string name="mcl_version_clone">نسخ</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">تعديل</string>
     <string name="global_error">خطأ</string>
     <string name="global_load">تحميل</string>
@@ -70,32 +68,29 @@
     <string name="global_select">اختر</string>
     <string name="global_retry">أعد المحاولة</string>
     <string name="global_default">الافتراضي</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">تم الخروج من التطبيق/اللعبة بخلل %d، تحقق من latestlog.txt لمزيد من التفاصيل.</string>
     <string name="mcn_signal_title">تم الخروج من التطبيق/اللعبة بخلل %d، انظر في latestlog.txt لمزيد من التفاصيل.</string>
     <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد فرض الإغلاق؟</string>
     <string name="mcn_check_fail_vulkan_support">عارض الرسوميات Zink (Vulkan) غير مدعوم على هذا الجهاز!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">دردشة</string>
     <string name="control_mouse">الفأرة</string>
     <string name="control_mouseoff">وضع الفأرة: معطلة</string>
     <string name="control_mouseon">وضع الفأرة: مفعلة </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">فرض الإغلاق</string>
     <string name="control_viewout">سجل الإخراج</string>
     <string name="control_adebug">مدخل التصحيح</string>
     <string name="control_customkey">إرسال رمز مفتاحي مخصص</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">استيراد مخطط أزرار تحكم</string>
     <string name="import_control_invalid_file">المِلَفّ غير صالح أو تآلف</string>
     <string name="import_control_import_button">استيراد مخطط لأزرار التحكم</string>
     <string name="import_control_verifying_file">يتم التحقق من المِلَفّ، الرجاء الانتظار والمحاولة مرة أخرى…</string>
     <string name="import_control_invalid_name">الاسم غير صالح أو المِلَفّ موجود مسبقًا</string>
     <string name="import_control_done">تم الاستيراد</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">تبديلي</string>
     <string name="customctrl_size">الحجم</string>
     <string name="customctrl_mapping">تخطيط الأزرار</string>

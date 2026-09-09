@@ -23,7 +23,7 @@ public class OptiFineUtils {
 
     public static void addAutoInstallArgs(Intent intent, File modInstallerJar) {
         intent.putExtra("javaArgs", "-javaagent:"+ Tools.DIR_DATA+"/forge_installer/forge_installer.jar"
-                + "=OFNPS" +// No Profile Suppression
+                + "=OFNPS" +
                 " -jar "+modInstallerJar.getAbsolutePath());
     }
 

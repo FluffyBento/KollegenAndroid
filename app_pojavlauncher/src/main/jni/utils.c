@@ -101,7 +101,7 @@ JNIEXPORT jint JNICALL Java_android_os_OpenJDKNativeRegister_nativeRegisterNativ
 }
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setLdLibraryPath(JNIEnv *env, jclass clazz, jstring ldLibraryPath) {
-	// jclass exception_cls = (*env)->FindClass(env, "java/lang/UnsatisfiedLinkError");
+	
 	
 	android_update_LD_LIBRARY_PATH_t android_update_LD_LIBRARY_PATH;
 	
@@ -112,7 +112,7 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setLdLibraryPath(
 		if (updateLdLibPath == NULL) {
 			char *dl_error_c = dlerror();
 			LOGE("Error getting symbol android_update_LD_LIBRARY_PATH: %s", dl_error_c);
-			// (*env)->ThrowNew(env, exception_cls, dl_error_c);
+			
 		}
 	}
 	
@@ -127,8 +127,8 @@ JNIEXPORT jboolean JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_dlopen(JNIEnv
 	void* handle = dlopen(nameUtf, RTLD_GLOBAL | RTLD_LAZY);
 	if (!handle) {
 		LOGE("dlopen %s failed: %s", nameUtf, dlerror());
-		// If fail, attempt to use escaped namespace. This gives us access to the symbols while
-		// still tricking android into loading private API libs :p
+		
+		
 
         if(!linker_ns_dlopen(nameUtf, RTLD_GLOBAL | RTLD_LAZY, app_escapeNs)){
 			LOGE("escaped dlopen %s failed: %s", nameUtf, dlerror());
@@ -154,7 +154,7 @@ JNIEXPORT jint JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_executeBinary(JNI
 	char *exec_file_c = (char*) (*env)->GetStringUTFChars(env, execFile, 0);
 	void *exec_binary_handle = dlopen(exec_file_c, RTLD_LAZY);
 	
-	// (*env)->ReleaseStringUTFChars(env, ldLibraryPath, ld_library_path_c);
+	
 	(*env)->ReleaseStringUTFChars(env, execFile, exec_file_c);
 	
 	char *exec_error_c = dlerror();
@@ -194,21 +194,10 @@ JNIEnv* get_attached_env(JavaVM* jvm) {
     return jvm_env;
 }
 
-// METHOD 2
-/*
-JNIEXPORT jint JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_executeForkedBinary(JNIEnv *env, jclass clazz, jobjectArray cmdArgs) {
-	int x, status;
-	x = fork();
-	if (x > 0) {
-		wait(&status);
-	} else {
-		execvpe();
-	}
-	return status;
-}
-*/
 
-// WARNING: This does not release the global ref, this can be a memory leak
+
+
+
 JNIEXPORT jstring JNICALL
 Java_net_kdt_pojavlaunch_Tools_jObjectToString(JNIEnv *env, jclass clazz, jobject object) {
     if (object == NULL) {

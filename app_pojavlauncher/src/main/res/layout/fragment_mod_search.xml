@@ -10,9 +10,7 @@
 
 
 
-    <!--
-        Cosmetic layout to have a better scrolling separation
-     -->
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search_mod_overlay"
         android:layout_width="match_parent"
@@ -28,7 +26,7 @@
 
 
         >
-        <!-- Search text -->
+        
         <EditText
             android:id="@+id/search_mod_edittext"
             android:layout_width="0dp"

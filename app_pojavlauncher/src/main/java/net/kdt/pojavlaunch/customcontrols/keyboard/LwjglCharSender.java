@@ -6,7 +6,7 @@ import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 
 import org.lwjgl.glfw.CallbackBridge;
 
-/** Sends keys via the CallBackBridge */
+
 public class LwjglCharSender implements CharacterSenderStrategy {
     @Override
     public void sendBackspace() {

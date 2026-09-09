@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name" translatable="false">Kollegen</string>
 
-    <!-- Action bar part -->
+    
 
-    <!-- Languages list part -->
+    
 
-    <!-- Login strings -->
+    
     <string name="login_online_username_hint">Username</string>
     <string name="login_online_login_label">Login</string>
 
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Touch the top center cogwheel to open the context menu ⚙\nTap a button to customize: edit, resize, remove, or change its keybinds."</string>
 
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">This account will be removed!</string>
 
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Select a mod installer</string>
 
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen has unexpectedly crashed</string>
     <string name="error_no_version">No version!</string>
     <string name="error_show_more">Show more</string>
     <string name="error_show_less">Show less</string>
 
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">The read/write to storage permission is required!</string>
     <string name="toast_optifine_success">Install successful</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
+    
 
-    <!-- MCLauncherActivity: Tabs -->
+    
     <string name="mcl_tab_wiki">Wiki</string>
 
-    <!-- MCLauncherActivity: Account status -->
+    
 
-    <!-- MCLauncherActivity: Strings -->
+    
     <string name="mcl_launch_cleancache">Cleaning cache files</string>
     <string name="mcl_launch_downloading">Downloading %s</string>
     <string name="mcl_launch_downloading_progress">"Downloading %s (%.2f MB / %.2f MB)"</string>
@@ -77,7 +75,7 @@
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_version_clone">Clone</string>
 
-    <!-- Global strings -->
+    
     <string name="global_edit">Edit</string>
     <string name="global_error">Error</string>
     <string name="global_load">Load</string>
@@ -94,13 +92,13 @@
     <string name="global_default">Default</string>
     <string name="global_off">Off</string>
 
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Application/Game exited with code %d, check latestlog.txt for more details.</string>
     <string name="mcn_signal_title">Application/Game aborted by fatal signal %d, check latestlog.txt for more details.</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) renderer is not supported on this device!</string>
 
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
     <string name="control_primary">Pri</string>
@@ -118,23 +116,20 @@
     <string name="control_mouseoff">Mouse: off</string>
     <string name="control_mouseon">Mouse: on </string>
 
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Force close</string>
     <string name="control_viewout">Log output</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Send custom keycode</string>
 
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Import controls</string>
     <string name="import_control_invalid_file">Invalid or corrupted file</string>
     <string name="import_control_import_button">import controls</string>
     <string name="import_control_verifying_file">File is being verified, please wait and try again…</string>
     <string name="import_control_invalid_name">Invalid name or file already exists</string>
     <string name="import_control_done">Importation done</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
 
     <string name="customctrl_toggle">Toggleable</string>
     <string name="customctrl_size">Size</string>
@@ -492,7 +487,7 @@
     <string name="sodium_override_title">Run sodium forcefully</string>
     <string name="sodium_override_summaryOff">Using sodium may cause visual bugs and crashes. You have been warned.</string>
     <string name="sodium_override_summaryOn">Sodium is not supported. No help will be given if you encounter any issues.</string>
-    <!--  Make sure the people turning this on can read English.  -->
+    
     <string name="sodium_math_warning_title" translatable="false">Solve the math question to enable</string>
     <string name="sodium_math_warning_message" translatable="false">
     Sodium is unsupported, you are on your own. No support will be given in the discord server.\nUsing sodium may result in bugs, glitches, and crashes. No help will be given even if you lose any of your worlds or saves.\n\nNow what\'s %1$s multiplied by %2$s plus %3$s minus %4$s?

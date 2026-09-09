@@ -24,10 +24,7 @@ import androidx.core.content.res.ResourcesCompat;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 
-/**
- * The base class for side dialog views
- * A side dialog is a dialog appearing from one side of the screen
- */
+
 public abstract class SideDialogView {
 
     private final ViewGroup mParent;
@@ -39,15 +36,15 @@ public abstract class SideDialogView {
     protected final int mMargin;
     private ObjectAnimator mSideDialogAnimator;
     protected boolean mDisplaying = false;
-    /* Whether the layout is built */
+    
     private boolean mIsInstantiated = false;
 
-    /* UI elements */
+    
     private Button mStartButton, mEndButton;
     private TextView mTitleTextview;
     private View mTitleDivider;
 
-    /* Data to store when the UI element has yet to be inflated */
+    
     private @StringRes int mStartButtonStringId, mEndButtonStringId, mTitleStringId;
     private View.OnClickListener mStartButtonListener, mEndButtonListener;
 
@@ -92,7 +89,7 @@ public abstract class SideDialogView {
             return;
         }
 
-        // Inflate layouts
+        
         mDialogLayout = (ViewGroup) LayoutInflater.from(mParent.getContext()).inflate(R.layout.dialog_side_dialog, mParent, false);
         mScrollView = mDialogLayout.findViewById(R.id.side_dialog_scrollview);
         mStartButton = mDialogLayout.findViewById(R.id.side_dialog_start_button);
@@ -103,7 +100,7 @@ public abstract class SideDialogView {
         LayoutInflater.from(mParent.getContext()).inflate(mLayoutId, mScrollView, true);
         mDialogContent = mScrollView.getChildAt(0);
 
-        // Attach layouts
+        
         mParent.addView(mDialogLayout);
 
         mSideDialogAnimator = ObjectAnimator.ofFloat(mDialogLayout, "x", 0).setDuration(600);
@@ -115,17 +112,17 @@ public abstract class SideDialogView {
         mDialogLayout.setVisibility(View.VISIBLE);
         mDialogLayout.setBackground(ResourcesCompat.getDrawable(mDialogLayout.getResources(), R.drawable.background_control_editor, null));
 
-        //TODO offset better according to view width
+        
         mDialogLayout.setX(-mDialogLayout.getResources().getDimensionPixelOffset(R.dimen._280sdp));
         mIsInstantiated = true;
 
-        // Set up UI elements
+        
         if (mTitleStringId != 0) setTitle(mTitleStringId);
         if (mStartButtonStringId != 0) setStartButtonListener(mStartButtonStringId, mStartButtonListener);
         if (mEndButtonStringId != 0) setEndButtonListener(mEndButtonStringId, mEndButtonListener);
     }
 
-    /** Destroy the layout, cleanup variables */
+    
     private void deflateLayout() {
         if(!mIsInstantiated) {
             Log.w("SideDialogView", "Layout not inflated");
@@ -149,9 +146,7 @@ public abstract class SideDialogView {
     }
 
 
-    /**
-     * Slide the layout into the visible screen area
-     */
+    
     @CallSuper
     public final void appear(boolean fromRight) {
         if (!mIsInstantiated) {
@@ -159,7 +154,7 @@ public abstract class SideDialogView {
             onInflate();
         }
 
-        // To avoid UI sizing issue when the dialog is not fully inflated
+        
         onAppear();
         Tools.runOnUiThread(() -> {
             if (fromRight) {
@@ -182,11 +177,7 @@ public abstract class SideDialogView {
         return mDialogLayout.getX() > currentDisplayMetrics.widthPixels / 2f;
     }
 
-    /**
-     * Slide out the layout
-     * @param destroy Whether the layout should be destroyed after disappearing.
-     *                Recommended to be true if the layout is not going to be used anymore
-     */
+    
     @CallSuper
     public final void disappear(boolean destroy) {
         if(!mIsInstantiated) {
@@ -223,30 +214,21 @@ public abstract class SideDialogView {
         mSideDialogAnimator.start();
     }
 
-    /** @return Whether the dialog is currently displaying */
+    
     public final boolean isDisplaying(){
         return mDisplaying;
     }
 
-    /**
-     * Called when the dialog is inflated, ideal for setting up UI elements bindings
-     */
+    
     protected void onInflate() {}
 
-    /**
-     * Called after the dialog has appeared
-     */
+    
     protected void onAppear() {}
 
-    /**
-     * Called after the dialog has disappeared
-     */
+    
     protected void onDisappear() {}
 
-    /**
-     * Called before the dialog gets destroyed (removing views from parent)
-     * Ideal for cleaning up resources
-     */
+    
     protected void onDestroy() {}
 
 

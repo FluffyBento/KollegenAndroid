@@ -16,7 +16,7 @@ public class AsyncMinecraftDownloader {
 
     public static JMinecraftVersionList.Version getListedVersion(String normalizedVersionString) {
         JMinecraftVersionList versionList = (JMinecraftVersionList) ExtraCore.getValue(ExtraConstants.RELEASE_TABLE);
-        if(versionList == null || versionList.versions == null) return null; // can't have listed versions if there's no list
+        if(versionList == null || versionList.versions == null) return null; 
         for(JMinecraftVersionList.Version version : versionList.versions) {
             if(version.id.equals(normalizedVersionString)) return version;
         }

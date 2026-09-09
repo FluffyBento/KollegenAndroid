@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">Имя пользователя</string>
     <string name="login_online_login_label">Войти</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Нажмите на центральную шестерёнку ⚙, чтобы открыть меню действий.\n Выберите кнопку, чтобы удалить её или скопировать;\nизменить её свойства, размер или привязанные клавиши."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Выберите установщик мода</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen был остановлен в результате сбоя</string>
     <string name="error_no_version">Нет версий!</string>
     <string name="error_show_more">Развернуть</string>
     <string name="error_show_less">Свернуть</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Требуется разрешение на чтение/запись в хранилище!</string>
     <string name="toast_optifine_success">Установка прошла успешно</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Вики</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
     <string name="mcl_launch_downloading">Загрузка %s</string>
     <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f Мбайт / %.2f Мбайт)"</string>
@@ -59,7 +57,7 @@
     <string name="mcl_setting_veroption_oldalpha">Старые альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Старые бета</string>
     <string name="mcl_version_clone">Копировать</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Редактировать</string>
     <string name="global_error">Ошибка</string>
     <string name="global_load">Загрузка</string>
@@ -75,12 +73,12 @@
     <string name="global_retry">Обновить</string>
     <string name="global_default">По умолчанию</string>
     <string name="global_off">Выкл</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Произошёл собой приложения/игры с кодом %d. Проверьте latestlog.txt, чтобы получить больше информации.</string>
     <string name="mcn_signal_title">Произошло аварийное завершение игры с сигналом %d. Проверьте latestlog.txt, чтобы получить больше информации.</string>
     <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно завершить игру?</string>
     <string name="mcn_check_fail_vulkan_support">Визуализатор Zink (Vulkan) не поддерживается на вашем устройстве.</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Чат</string>
     <string name="control_debug">Отладка</string>
     <string name="control_primary">ЛКМ</string>
@@ -97,22 +95,19 @@
     <string name="control_mouse">Мышь</string>
     <string name="control_mouseoff">Мышь: Выкл</string>
     <string name="control_mouseon">Мышь: Вкл </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Принудительное закрытие</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Отладка ввода</string>
     <string name="control_customkey">Нажать клавишу</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Импортирование управления</string>
     <string name="import_control_invalid_file">Недопустимый или повреждённый файл</string>
     <string name="import_control_import_button">импортировать раскладку</string>
     <string name="import_control_verifying_file">Идёт проверка файла. Подождите и попробуйте еще раз.</string>
     <string name="import_control_invalid_name">Недопустимое имя файла или файл с таким именем уже существует</string>
     <string name="import_control_done">Импортирование завершено</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Переключаемый</string>
     <string name="customctrl_size">Размер</string>
     <string name="customctrl_mapping">Кнопки</string>

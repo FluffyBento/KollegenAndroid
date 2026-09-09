@@ -27,17 +27,17 @@ public class CustomControls {
 		this.scaledAt = 100f;
 	}
 	
-	// Generate default control
-	// Here for historical reasons
-	// Just admire it idk
+	
+	
+	
 	@SuppressWarnings("unused")
 	public CustomControls(Context ctx) {
 		this();
-		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[0])); // Keyboard
-		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[1])); // GUI
-		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[2])); // Primary Mouse mControlDataList
-		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[3])); // Secondary Mouse mControlDataList
-		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[4])); // Virtual mouse toggle
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[0])); 
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[1])); 
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[2])); 
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[3])); 
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[4])); 
 
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_debug, new int[]{LwjglGlfwKeycode.GLFW_KEY_F3}, "${margin}", "${margin}", false));
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_chat, new int[]{LwjglGlfwKeycode.GLFW_KEY_T}, "${margin} * 2 + ${width}", "${margin}", false));
@@ -56,13 +56,13 @@ public class CustomControls {
 		this.mControlDataList.add(shiftData);
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_jump, new int[]{LwjglGlfwKeycode.GLFW_KEY_SPACE}, "${right} - ${margin} * 2 - ${width}", "${bottom} - ${margin} * 2 - ${height}", true));
 
-		//The default controls are conform to the V3
+		
 		version = 8;
 	}
 
 	
 	public void save(String path) throws IOException {
-		//Current version is the V3.2 so the version as to be marked as 8 !
+		
 		version = 8;
 
 		Tools.write(path, Tools.GLOBAL_GSON.toJson(this));

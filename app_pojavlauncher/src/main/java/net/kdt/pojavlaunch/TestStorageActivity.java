@@ -40,12 +40,12 @@ public class TestStorageActivity extends Activity {
     }
 
     public static boolean isStorageAllowed(Context context) {
-        //Getting the permission status
+        
         int result1 = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int result2 = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
 
 
-        //If permission is granted returning true
+        
         return result1 == PackageManager.PERMISSION_GRANTED &&
                 result2 == PackageManager.PERMISSION_GRANTED;
     }
@@ -61,7 +61,7 @@ public class TestStorageActivity extends Activity {
             startActivity(new Intent(this, MissingStorageActivity.class));
             return;
         }
-        //Initialize constants (implicitly) and preferences after we confirm that we have storage.
+        
         LauncherPreferences.loadPreferences(this);
         AsyncAssetManager.unpackComponents(this);
         AsyncAssetManager.unpackSingleFiles(this);

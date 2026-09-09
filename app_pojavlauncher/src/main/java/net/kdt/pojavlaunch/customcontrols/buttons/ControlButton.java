@@ -34,7 +34,7 @@ public class ControlButton extends TextView implements ControlInterface {
     protected ControlData mProperties;
     private final ControlLayout mControlLayout;
 
-    /* Cache value from the ControlData radius for drawing purposes */
+    
     private float mComputedRadius;
 
     protected boolean mIsToggled = false;
@@ -47,12 +47,12 @@ public class ControlButton extends TextView implements ControlInterface {
         setAllCaps(LauncherPreferences.PREF_BUTTON_ALL_CAPS);
         setTextColor(Color.WHITE);
         setPadding(4, 4, 4, 4);
-        setTextSize(14); // Nullify the default size setting
-        setOutlineProvider(null); // Disable shadow casting, removing one drawing pass
+        setTextSize(14); 
+        setOutlineProvider(null); 
 
-        //setOnLongClickListener(this);
+        
 
-        //When a button is created, the width/height has yet to be processed to fit the scaling.
+        
         setProperties(preProcessProperties(properties, layout));
 
         injectBehaviors();
@@ -71,7 +71,7 @@ public class ControlButton extends TextView implements ControlInterface {
         mComputedRadius = ControlInterface.super.computeCornerRadius(mProperties.cornerRadius);
 
         if (mProperties.isToggle) {
-            //For the toggle layer
+            
             final TypedValue value = new TypedValue();
             getContext().getTheme().resolveAttribute(R.attr.colorAccent, value, true);
             mRectPaint.setColor(value.data);
@@ -96,7 +96,7 @@ public class ControlButton extends TextView implements ControlInterface {
         editControlPopup.loadValues(getProperties());
     }
 
-    /** Add another instance of the ControlButton to the parent layout */
+    
     public void cloneButton(){
         ControlData cloneData = new ControlData(getProperties());
         cloneData.dynamicX = "0.5 * ${screen_width}";
@@ -104,7 +104,7 @@ public class ControlButton extends TextView implements ControlInterface {
         ((ControlLayout) getParent()).addControlButton(cloneData);
     }
 
-    /** Remove any trace of this button from the layout */
+    
     public void removeButton() {
         getControlLayoutParent().getLayout().mControlDataList.remove(getProperties());
         getControlLayoutParent().removeView(this);
@@ -116,17 +116,17 @@ public class ControlButton extends TextView implements ControlInterface {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked()){
             case MotionEvent.ACTION_MOVE:
-                //Send the event to be taken as a mouse action
+                
                 if(getProperties().passThruEnabled && CallbackBridge.isGrabbing()){
                     View gameSurface = getControlLayoutParent().getGameSurface();
                     if(gameSurface != null) gameSurface.dispatchTouchEvent(event);
                 }
 
-                //If out of bounds
+                
                 if(event.getX() < getControlView().getLeft() || event.getX() > getControlView().getRight() ||
                         event.getY() < getControlView().getTop()  || event.getY() > getControlView().getBottom()){
                     if(getProperties().isSwipeable && !mIsPointerOutOfBounds){
-                        //Remove keys
+                        
                         if(!triggerToggle()) {
                             sendKeyPresses(false);
                         }
@@ -136,10 +136,10 @@ public class ControlButton extends TextView implements ControlInterface {
                     break;
                 }
 
-                //Else if we now are in bounds
+                
                 if(mIsPointerOutOfBounds) {
                     getControlLayoutParent().onTouch(this, event);
-                    //RE-press the button
+                    
                     if(getProperties().isSwipeable && !getProperties().isToggle){
                         sendKeyPresses(true);
                     }
@@ -147,16 +147,16 @@ public class ControlButton extends TextView implements ControlInterface {
                 mIsPointerOutOfBounds = false;
                 break;
 
-            case MotionEvent.ACTION_DOWN: // 0
-            case MotionEvent.ACTION_POINTER_DOWN: // 5
+            case MotionEvent.ACTION_DOWN: 
+            case MotionEvent.ACTION_POINTER_DOWN: 
                 if(!getProperties().isToggle){
                     sendKeyPresses(true);
                 }
                 break;
 
-            case MotionEvent.ACTION_UP: // 1
-            case MotionEvent.ACTION_CANCEL: // 3
-            case MotionEvent.ACTION_POINTER_UP: // 6
+            case MotionEvent.ACTION_UP: 
+            case MotionEvent.ACTION_CANCEL: 
+            case MotionEvent.ACTION_POINTER_UP: 
                 if(getProperties().passThruEnabled){
                     View gameSurface = getControlLayoutParent().getGameSurface();
                     if(gameSurface != null) gameSurface.dispatchTouchEvent(event);
@@ -180,7 +180,7 @@ public class ControlButton extends TextView implements ControlInterface {
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean triggerToggle(){
-        //returns true a the toggle system is triggered
+        
         if(mProperties.isToggle){
             mIsToggled = !mIsToggled;
             invalidate();

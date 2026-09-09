@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Iniciar sessão</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Esta conta será removida!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Seleciona um Instalador de mods</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">O Kollegen falhou inesperadamente</string>
     <string name="error_no_version">Não existem versões!</string>
     <string name="error_show_more">Mostrar mais</string>
     <string name="error_show_less">Mostrar menos</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">A permissão de leitura/escrita no armazenamento é necessária!</string>
     <string name="toast_optifine_success">Instalação completa com sucesso</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
+    
+    
     <string name="mcl_launch_cleancache">A limpar os ficheiros em cache</string>
     <string name="mcl_launch_downloading">A transferir %s</string>
     <string name="mcl_launch_downloading_progress">"A transferir %s (%.2f MB / %.2f MB)"</string>
@@ -50,7 +48,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alpha antiga</string>
     <string name="mcl_setting_veroption_oldbeta">Beta antiga</string>
     <string name="mcl_version_clone">Clonar</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Editar</string>
     <string name="global_error">Erro</string>
     <string name="global_load">Carregar</string>
@@ -64,33 +62,30 @@
     <string name="global_waiting">Aguarda</string>
     <string name="global_retry">Tentar outra vez</string>
     <string name="global_default">Padrão</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Aplicação/Jogo saiu com código %d, verifique latestlog.txt para mais detalhes.</string>
     <string name="mcn_exit_confirm">Tu tens a certeza que queres forçar o encerramento do jogo?</string>
     <string name="mcn_check_fail_vulkan_support">O renderizador Zink(Vulkan) não é suportado neste dispositivo!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_debug">Depuração</string>
     <string name="control_secondary">Seg</string>
     <string name="control_thirdperson">terceira</string>
     <string name="control_mouse">Rato</string>
     <string name="control_mouseoff">Rato: desligado</string>
     <string name="control_mouseon">Rato: ligado </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Forçar encerramento</string>
     <string name="control_viewout">Registro de saída</string>
     <string name="control_adebug">Inserir Depuração</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Importar Controlos</string>
     <string name="import_control_invalid_file">Ficheiro inválido ou corrompido</string>
     <string name="import_control_import_button">importar controlos</string>
     <string name="import_control_verifying_file">O ficheiro está a ser verificado, por favor aguarda e tenta outra vez…</string>
     <string name="import_control_invalid_name">Nome inválido ou o ficheiro já existe</string>
     <string name="import_control_done">Importação concluída</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Alternável</string>
     <string name="customctrl_size">Tamanho</string>
     <string name="customctrl_mapping">Mapeamento</string>

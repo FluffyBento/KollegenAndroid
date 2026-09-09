@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import java.util.Arrays;
 
 public class ModDetail extends ModItem {
-    /* A cheap way to map from the front facing name to the underlying id */
+    
     public String[] versionNames;
     public String [] mcVersionNames;
     public String[] versionUrls;
-    /* SHA 1 hashes, null if a hash is unavailable */
+    
     public String[] versionHashes;
     public String[] versionIds;
     public Dependencies[][] dependencies;
@@ -23,7 +23,7 @@ public class ModDetail extends ModItem {
         this.versionHashes = hashes;
         this.dependencies = dependencies;
 
-        // Add the mc version to the version model
+        
         for (int i=0; i<versionNames.length; i++){
             if (!versionNames[i].contains(mcVersionNames[i]))
                 versionNames[i] += " - " + mcVersionNames[i];
@@ -47,7 +47,7 @@ public class ModDetail extends ModItem {
                 '}';
     }
     public static class Dependencies{
-        public String project_id; // the main id in item.id
+        public String project_id; 
         public String version_id;
         public String file_name;
         public String dependency_type;

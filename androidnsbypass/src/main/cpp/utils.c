@@ -1,6 +1,6 @@
-//
-// Created by tom on 9/1/26.
-//
+
+
+
 
 #include <dlfcn.h>
 #include "utils.h"
@@ -18,14 +18,14 @@ int is_android_6_or_lower(void)
         if (libcHandle == NULL) {
             LOGE("Can't check device API level because libc dlopen failed: %s. "
                  "Assuming modern Android.", dlerror());
-            return 0; // false
+            return 0; 
         }
         symbol = dlsym(libcHandle, "android_get_device_api_level");
-        // android_get_device_api_level() was added in API 24. If it's not here then we are lower.
-        if (!symbol) return 1; // true
+        
+        if (!symbol) return 1; 
         api_level = ((get_device_api_level_fn) symbol)();
-        // If somehow that function failed, assume modern android did something.
-        if (!api_level) return 0; // false
+        
+        if (!api_level) return 0; 
         dlclose(libcHandle);
     }
     return api_level < 24 ? 1 : 0;

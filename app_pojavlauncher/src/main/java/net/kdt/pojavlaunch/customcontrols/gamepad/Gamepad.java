@@ -52,7 +52,7 @@ import fr.spse.gamepad_remapper.Settings;
 
 public class Gamepad implements GrabListener, GamepadHandler {
 
-    /* Sensitivity, adjusted according to screen size */
+    
     private final double mSensitivityFactor = (1.4 * (1080f/ currentDisplayMetrics.heightPixels));
 
     private final ImageView mPointerImageView;
@@ -77,12 +77,12 @@ public class Gamepad implements GrabListener, GamepadHandler {
     private boolean isGrabbing;
 
 
-    /* Choreographer with time to compute delta on ticking */
+    
     private final Choreographer mScreenChoreographer;
     private long mLastFrameTime;
 
-    /* Listen for change in gui scale */
-    @SuppressWarnings("FieldCanBeLocal") //the field is used in a WeakReference
+    
+    @SuppressWarnings("FieldCanBeLocal") 
     private final MCOptionUtils.MCOptionListener mGuiScaleListener = () -> notifyGUISizeChange(getMcScale());
 
     private final GamepadDataProvider mMapProvider;
@@ -104,7 +104,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
         mScreenChoreographer.postFrameCallback(frameCallback);
         mLastFrameTime = System.nanoTime();
 
-        /* Add the listener for the cross hair */
+        
         MCOptionUtils.addMCOptionListener(mGuiScaleListener);
 
         mLeftJoystick = new GamepadJoystick(AXIS_X, AXIS_Y, inputDevice);
@@ -142,7 +142,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
         mGameMap = mMapProvider.getGameMap();
         mMenuMap = mMapProvider.getMenuMap();
         mCurrentMap = mGameMap;
-        // Force state refresh
+        
         boolean currentGrab = CallbackBridge.isGrabbing();
         isGrabbing = !currentGrab;
         onGrabState(currentGrab);
@@ -154,7 +154,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
     }
 
     public void notifyGUISizeChange(int newSize){
-        //Change the pointer size to match UI
+        
         int size = (int) ((22 * newSize) / PREF_SCALE_FACTOR);
         mPointerImageView.post(() -> mPointerImageView.setLayoutParams(new FrameLayout.LayoutParams(size, size)));
 
@@ -202,23 +202,20 @@ public class Gamepad implements GrabListener, GamepadHandler {
         return isGamepad && GamepadDpad.isDpadEvent(event);
     }
 
-    /**
-     * Send the new mouse position, computing the delta
-     * @param frameTimeNanos The time to render the frame, used to compute mouse delta
-     */
+    
     private void tick(long frameTimeNanos){
-        //update mouse position
+        
         long newFrameTime = System.nanoTime();
         if(mLastHorizontalValue != 0 || mLastVerticalValue != 0){
 
             double acceleration = Math.pow(mMouseMagnitude, MOUSE_MAX_ACCELERATION);
             if(acceleration > 1) acceleration = 1;
 
-            // Compute delta since last tick time
+            
             float deltaX = (float) (Math.cos(mMouseAngle) * acceleration * mMouseSensitivity);
             float deltaY = (float) (Math.sin(mMouseAngle) * acceleration * mMouseSensitivity);
-            newFrameTime = System.nanoTime();  // More accurate delta
-            float deltaTimeScale = ((newFrameTime - mLastFrameTime) / 16666666f); // Scale of 1 = 60Hz
+            newFrameTime = System.nanoTime();  
+            float deltaTimeScale = ((newFrameTime - mLastFrameTime) / 16666666f); 
             deltaX *= deltaTimeScale;
             deltaY *= deltaTimeScale;
 
@@ -231,11 +228,11 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 placePointerView((int) (CallbackBridge.mouseX / PREF_SCALE_FACTOR), (int) (CallbackBridge.mouseY/ PREF_SCALE_FACTOR));
             }
 
-            //Send the mouse to the game
+            
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
         }
 
-        // Update last nano time
+        
         mLastFrameTime = newFrameTime;
     }
 
@@ -311,20 +308,20 @@ public class Gamepad implements GrabListener, GamepadHandler {
         }
     }
 
-    /** Place the pointer on the screen, offsetting the image size */
+    
     private void placePointerView(int x, int y){
         mPointerImageView.setX(x - mPointerImageView.getWidth()/2f);
         mPointerImageView.setY(y - mPointerImageView.getHeight()/2f);
     }
 
-    /** Update the grabbing state, and change the currentMap, mouse position and sensibility */
+    
     @Override
     public void onGrabState(boolean isGrabbing) {
         boolean lastGrabbingValue = this.isGrabbing;
         this.isGrabbing = isGrabbing;
         if(lastGrabbingValue == isGrabbing) return;
 
-        // Switch grabbing state then
+        
         mCurrentMap.resetPressedState();
         if(isGrabbing){
             mCurrentMap = mGameMap;
@@ -334,12 +331,12 @@ public class Gamepad implements GrabListener, GamepadHandler {
         }
 
         mCurrentMap = mMenuMap;
-        sendDirectionalKeycode(mCurrentJoystickDirection, false, mGameMap); // removing what we were doing
+        sendDirectionalKeycode(mCurrentJoystickDirection, false, mGameMap); 
 
         CallbackBridge.sendCursorPos(CallbackBridge.windowWidth/2f, CallbackBridge.windowHeight/2f);
         placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
         mPointerImageView.setVisibility(View.VISIBLE);
-        // Sensitivity in menu is MC and HARDWARE resolution dependent
+        
         mMouseSensitivity = 19 * PREF_SCALE_FACTOR / mSensitivityFactor;
     }
 
@@ -360,7 +357,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 getCurrentMap().BUTTON_Y.update(isKeyEventDown);
                 break;
 
-            //Shoulders
+            
             case KeyEvent.KEYCODE_BUTTON_L1:
                 getCurrentMap().SHOULDER_LEFT.update(isKeyEventDown);
                 break;
@@ -368,7 +365,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 getCurrentMap().SHOULDER_RIGHT.update(isKeyEventDown);
                 break;
 
-            //Triggers
+            
             case KeyEvent.KEYCODE_BUTTON_L2:
                 getCurrentMap().TRIGGER_LEFT.update(isKeyEventDown);
                 break;
@@ -376,7 +373,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 getCurrentMap().TRIGGER_RIGHT.update(isKeyEventDown);
                 break;
 
-            //L3 || R3
+            
             case KeyEvent.KEYCODE_BUTTON_THUMBL:
                 getCurrentMap().THUMBSTICK_LEFT.update(isKeyEventDown);
                 break;
@@ -384,7 +381,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 getCurrentMap().THUMBSTICK_RIGHT.update(isKeyEventDown);
                 break;
 
-            //DPAD
+            
             case KeyEvent.KEYCODE_DPAD_UP:
                 getCurrentMap().DPAD_UP.update(isKeyEventDown);
                 break;
@@ -404,7 +401,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 getCurrentMap().DPAD_DOWN.update(false);
                 break;
 
-            //Start/select
+            
             case KeyEvent.KEYCODE_BUTTON_START:
                 getCurrentMap().BUTTON_START.update(isKeyEventDown);
                 break;
@@ -412,7 +409,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 getCurrentMap().BUTTON_SELECT.update(isKeyEventDown);
                 break;
 
-            /* Now, it is time for motionEvents */
+            
             case AXIS_HAT_X:
                 getCurrentMap().DPAD_RIGHT.update(value > 0.85);
                 getCurrentMap().DPAD_LEFT.update(value < -0.85);
@@ -422,7 +419,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 getCurrentMap().DPAD_UP.update(value < -0.85);
                 break;
 
-            // Left joystick
+            
             case AXIS_X:
                 mLeftJoystick.setXAxisValue(value);
                 updateJoysticks();
@@ -432,7 +429,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 updateJoysticks();
                 break;
 
-            // Right joystick
+            
             case AXIS_Z:
                 mRightJoystick.setXAxisValue(value);
                 updateJoysticks();
@@ -442,7 +439,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 updateJoysticks();
                 break;
 
-            // Triggers
+            
             case AXIS_RTRIGGER:
                 getCurrentMap().TRIGGER_RIGHT.update(value > 0.5);
                 break;
@@ -456,10 +453,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
         }
     }
 
-    /**
-     * Stops the Gamepad and removes all traces of the Gamepad from the view hierarchy.
-     * After this call, the Gamepad is not recoverable and a new one must be made.
-     */
+    
     public void removeSelf() {
         mRemoved = true;
         mMapProvider.detachGrabListener(this);

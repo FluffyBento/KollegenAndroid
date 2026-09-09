@@ -1,6 +1,6 @@
-//
-// Created by maks on 18.10.2023.
-//
+
+
+
 
 #ifndef POJAVLAUNCHER_BRIDGE_TBL_H
 #define POJAVLAUNCHER_BRIDGE_TBL_H
@@ -42,4 +42,4 @@ void set_gl_bridge_tbl() {
     br_swap_interval = gl_swap_interval;
 }
 
-#endif //POJAVLAUNCHER_BRIDGE_TBL_H
+#endif 

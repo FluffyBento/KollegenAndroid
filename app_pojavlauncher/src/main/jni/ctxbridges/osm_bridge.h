@@ -1,6 +1,6 @@
-//
-// Created by maks on 18.10.2023.
-//
+
+
+
 #include <android/native_window.h>
 #include <stdbool.h>
 #ifndef POJAVLAUNCHER_OSM_BRIDGE_H
@@ -26,4 +26,4 @@ void osm_swap_buffers();
 void osm_setup_window();
 void osm_swap_interval(int swapInterval);
 
-#endif //POJAVLAUNCHER_OSM_BRIDGE_H
+#endif 

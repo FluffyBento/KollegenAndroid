@@ -93,10 +93,10 @@ public class LWJGL3ifyDownloadTask implements Runnable, Tools.DownloaderFeedback
 
     public String getSha1(File file) throws IOException, NoSuchAlgorithmException {
         MessageDigest algorithm = MessageDigest.getInstance("SHA-1");
-        //noinspection IOStreamConstructor It will reccomend you use an API26 function like a dumb
+        
         DigestInputStream hashingStream = new DigestInputStream(new FileInputStream(file), algorithm);
         byte[] buffer = new byte[8192];
-        while (hashingStream.read(buffer) != -1) {} // just read to update the digest
+        while (hashingStream.read(buffer) != -1) {} 
         hashingStream.close();
         byte[] digest = algorithm.digest();
         StringBuilder sb = new StringBuilder(digest.length * 2);
@@ -108,7 +108,7 @@ public class LWJGL3ifyDownloadTask implements Runnable, Tools.DownloaderFeedback
 
     public void runCatching() throws IOException {
         File modJar = tryDownloadModJar();
-        // This cannot be allowed to match the mod.jar ID otherwise conflicts occur and GLFW input breaks
+        
         String LWJGL3ifyProfileID = LWJGL3ifyUtils.getProfileID(modJar);
         if (!modJar.exists()) throw new IOException("Failed to download LWJGL3ify "+ mLWJGL3ifyMod.versionName);
         MinecraftProfile profile = LWJGL3ifyUtils.createProfile(LWJGL3ifyProfileID, mLWJGL3ifyMod.versionName, mLWJGL3ifyMod.iconUrl);

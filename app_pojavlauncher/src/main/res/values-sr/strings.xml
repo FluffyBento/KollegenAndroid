@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Пријава</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Овај налог ће бити уклоњен!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Селектујте мод инсталер</string>
-    <!-- Error messages -->
+    
     <string name="error_no_version">Нема верзије!</string>
     <string name="error_show_more">Прикажи више</string>
     <string name="error_show_less">Прикажи мање</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">ПојавЛаунчер треба пиши/читај дозволу!</string>
     <string name="toast_optifine_success">Инсталирање успјешно</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Вики</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Чишћење кеш фајлова</string>
     <string name="mcl_launch_downloading">Преузимање %s</string>
     <string name="mcl_launch_downloading_progress">"Преузимање %s (%.2f МБ / %.2f МБ)"</string>
@@ -43,7 +41,7 @@
     <string name="mcl_setting_veroption_oldalpha">Стари-Аlpha</string>
     <string name="mcl_setting_veroption_oldbeta">Стари-Бета</string>
     <string name="mcl_version_clone">Клонирај</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Измени</string>
     <string name="global_error">Грешка</string>
     <string name="global_load">Учитај</string>
@@ -55,10 +53,10 @@
     <string name="global_unpacking">Распакивање %s</string>
     <string name="global_error_field_empty">Ово поље не може остати празно</string>
     <string name="global_waiting">Чекај</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Апликација/Игра изашла је са кодом %d, провјерите latestlog.txt за више детаља.</string>
     <string name="mcn_exit_confirm">Да ли желите да форсе-изаћете?</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Чет</string>
     <string name="control_debug">Дебаг</string>
     <string name="control_primary">При</string>
@@ -69,22 +67,19 @@
     <string name="control_mouse">Миш</string>
     <string name="control_mouseoff">Миш: Искључен</string>
     <string name="control_mouseon">Миш: укључен </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Форсе затвори</string>
     <string name="control_viewout">Лог Избацивано</string>
     <string name="control_adebug">Инпут дебаг</string>
     <string name="control_customkey">Пошаљи прилагоћени типка-код</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Убаците контроле</string>
     <string name="import_control_invalid_file">Инвалид или коруптирани фајл</string>
     <string name="import_control_import_button">убаците контроле</string>
     <string name="import_control_verifying_file">Фајл се верификује, молим вас да сачекате и покушате поново…</string>
     <string name="import_control_invalid_name">Инвалид назив или фајл већ постоји</string>
     <string name="import_control_done">убацивање завршено</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Тогелабле</string>
     <string name="customctrl_size">Величина</string>
     <string name="customctrl_mapping">Мапирање</string>

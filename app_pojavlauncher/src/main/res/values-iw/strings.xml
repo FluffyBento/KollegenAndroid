@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">שם משתמש</string>
     <string name="login_online_login_label">התחבר</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"גע בגלגל השיניים העליון במרכז כדי לפתוח את תפריט ההקשר ⚙\nהקש על כפתור כדי להתאים אישית: לערוך, לשנות גודל, להסיר או לשנות את קביעות המקשים שלו."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">החשבון יוסר!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">בחר מתקין mod</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen קרס באופן בלתי צפוי</string>
     <string name="error_no_version">אין גרסה!</string>
     <string name="error_show_more">הצג עוד</string>
     <string name="error_show_less">הצג פחות</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">הרשאה לקריאה/כתיבה לאחסון נדרשת!</string>
     <string name="toast_optifine_success">ההתקנה הסתיימה בהצלחה</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">ויקי</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">מנקה קבצי מטמון</string>
     <string name="mcl_launch_downloading">מוריד %s</string>
     <string name="mcl_launch_downloading_progress">"מתקין %s (%.2f MB / %.2f MB)"</string>
@@ -59,7 +57,7 @@
     <string name="mcl_setting_veroption_oldalpha">אלפא: גרסה ישנה</string>
     <string name="mcl_setting_veroption_oldbeta">בטא: גרסה ישנה</string>
     <string name="mcl_version_clone">שכפול</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">ערוך</string>
     <string name="global_error">שגיאה</string>
     <string name="global_load">טען</string>
@@ -74,12 +72,12 @@
     <string name="global_retry">ניסיון חוזר</string>
     <string name="global_default">ברירת מחדל</string>
     <string name="global_off">כבוי</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">היישומון / המשחק קרס, עם קוד שגיאה %d, בדוק את latestlog.txt למידע נוסף.</string>
     <string name="mcn_signal_title">היישומון/המשחק הופסק על ידי אות קריטי %d, בדוק את latestlog.txt למידע נוסף.</string>
     <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) אינו נתמך במכשיר הזה!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">צ\'אט</string>
     <string name="control_debug">F3</string>
     <string name="control_primary">Pri</string>
@@ -96,22 +94,19 @@
     <string name="control_mouse">עכבר</string>
     <string name="control_mouseoff">עכבר: מושבת</string>
     <string name="control_mouseon">עכבר: פעיל </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">כפה כיבוי</string>
     <string name="control_viewout">לוג פלט</string>
     <string name="control_adebug">ניפוי שגיאות קלט</string>
     <string name="control_customkey">שלח קוד מקש מותאם אישית</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">ייבוא פקדים</string>
     <string name="import_control_invalid_file">קובץ שגוי או פגום</string>
     <string name="import_control_import_button">ייבוא פקדים</string>
     <string name="import_control_verifying_file">הקובץ נמצא באימות, בבקשה המתנ/י ונסה או נסי שוב…</string>
     <string name="import_control_invalid_name">שם שגוי או שהקובץ כבר קיים</string>
     <string name="import_control_done">ייבוא בוצע</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">מתג</string>
     <string name="customctrl_size">גודל</string>
     <string name="customctrl_mapping">מיפוי</string>

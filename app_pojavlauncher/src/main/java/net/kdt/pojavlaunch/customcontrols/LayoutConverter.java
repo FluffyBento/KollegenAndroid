@@ -20,7 +20,7 @@ public class LayoutConverter {
         try {
             JSONObject layoutJobj = new JSONObject(jsonLayoutData);
 
-            if (!layoutJobj.has("version")) { //v1 layout
+            if (!layoutJobj.has("version")) { 
                 CustomControls layout = LayoutConverter.convertV1Layout(layoutJobj);
                 layout.save(jsonPath);
                 return layout;
@@ -48,16 +48,12 @@ public class LayoutConverter {
     }
 
 
-    /**
-     * Normalize the layout to v8 from v6/7. An issue from the joystick height and position has to be fixed.
-     * @param oldLayoutJson The old layout
-     * @return The new layout with the fixed joystick height
-     */
+    
     public static CustomControls convertV6_7Layout(JSONObject oldLayoutJson) {
         CustomControls layout = Tools.GLOBAL_GSON.fromJson(oldLayoutJson.toString(), CustomControls.class);
         for (ControlJoystickData data : layout.mJoystickDataList) {
             if (data.getHeight() > data.getWidth()) {
-                // Make the size square, adjust the dynamic position related to height
+                
                 float ratio = data.getHeight() / data.getWidth();
 
                 data.dynamicX = data.dynamicX.replace("${height}", "(" + ratio + " * ${height})");
@@ -70,9 +66,7 @@ public class LayoutConverter {
         return layout;
     }
 
-    /**
-     * Normalize the layout to v6 from v3/4: The stroke width is no longer dependant on the button size
-     */
+    
     private static CustomControls convertV3_4Layout(JSONObject oldLayoutJson) {
         CustomControls layout = Tools.GLOBAL_GSON.fromJson(oldLayoutJson.toString(), CustomControls.class);
         convertStrokeWidth(layout);
@@ -180,9 +174,7 @@ public class LayoutConverter {
     }
 
 
-    /**
-     * Convert the layout stroke width to the V5 form
-     */
+    
     private static void convertStrokeWidth(CustomControls layout) {
         for (ControlData data : layout.mControlDataList) {
             data.strokeWidth = Tools.pxToDp(computeStrokeWidth(data.strokeWidth, data.getWidth(), data.getHeight()));
@@ -196,9 +188,7 @@ public class LayoutConverter {
         }
     }
 
-    /**
-     * Convert a size percentage into a px size, used by older layout versions
-     */
+    
     static int computeStrokeWidth(float widthInPercent, float width, float height) {
         float maxSize = Math.max(width, height);
         return (int) ((maxSize / 2) * (widthInPercent / 100));

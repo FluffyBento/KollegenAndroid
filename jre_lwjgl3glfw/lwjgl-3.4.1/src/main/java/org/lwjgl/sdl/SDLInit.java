@@ -1,8 +1,4 @@
-/*
- * Copyright LWJGL. All rights reserved.
- * License terms: https://www.lwjgl.org/license
- * MACHINE GENERATED FILE, DO NOT EDIT
- */
+
 package org.lwjgl.sdl;
 
 import org.jspecify.annotations.*;
@@ -20,12 +16,12 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class SDLInit {
 
-    /** Contains the function pointers loaded from {@code SDL.getLibrary()}. */
+    
     public static final class Functions {
 
         private Functions() {}
 
-        /** Function address. */
+        
         public static final long
                 Init                   = apiGetFunctionAddress(SDL.getLibrary(), "SDL_Init"),
                 InitSubSystem          = apiGetFunctionAddress(SDL.getLibrary(), "SDL_InitSubSystem"),
@@ -68,8 +64,8 @@ public class SDLInit {
         throw new UnsupportedOperationException();
     }
 
-    // --- [ SDL_Init ] ---
-    /** {@code bool SDL_Init(SDL_InitFlags flags)} */
+    
+    
     @NativeType("bool")
     public static boolean SDL_Init(@NativeType("SDL_InitFlags") int flags) {
         CallbackBridge.nativeNotifyLauncher(CallbackBridge.SDL, CallbackBridge.INIT);
@@ -77,72 +73,72 @@ public class SDLInit {
         return invokeZ(flags, __functionAddress);
     }
 
-    // --- [ SDL_InitSubSystem ] ---
+    
 
-    /** {@code bool SDL_InitSubSystem(SDL_InitFlags flags)} */
+    
     @NativeType("bool")
     public static boolean SDL_InitSubSystem(@NativeType("SDL_InitFlags") int flags) {
         long __functionAddress = Functions.InitSubSystem;
         return invokeZ(flags, __functionAddress);
     }
 
-    // --- [ SDL_QuitSubSystem ] ---
+    
 
-    /** {@code void SDL_QuitSubSystem(SDL_InitFlags flags)} */
+    
     public static void SDL_QuitSubSystem(@NativeType("SDL_InitFlags") int flags) {
         long __functionAddress = Functions.QuitSubSystem;
         invokeV(flags, __functionAddress);
     }
 
-    // --- [ SDL_WasInit ] ---
+    
 
-    /** {@code SDL_InitFlags SDL_WasInit(SDL_InitFlags flags)} */
+    
     @NativeType("SDL_InitFlags")
     public static int SDL_WasInit(@NativeType("SDL_InitFlags") int flags) {
         long __functionAddress = Functions.WasInit;
         return invokeI(flags, __functionAddress);
     }
 
-    // --- [ SDL_Quit ] ---
+    
 
-    /** {@code void SDL_Quit(void)} */
+    
     public static void SDL_Quit() {
         long __functionAddress = Functions.Quit;
         invokeV(__functionAddress);
     }
 
-    // --- [ SDL_IsMainThread ] ---
+    
 
-    /** {@code bool SDL_IsMainThread(void)} */
+    
     @NativeType("bool")
     public static boolean SDL_IsMainThread() {
         long __functionAddress = Functions.IsMainThread;
         return invokeZ(__functionAddress);
     }
 
-    // --- [ SDL_RunOnMainThread ] ---
+    
 
-    /** {@code bool SDL_RunOnMainThread(SDL_MainThreadCallback callback, void * userdata, bool wait_complete)} */
+    
     public static boolean nSDL_RunOnMainThread(long callback, long userdata, boolean wait_complete) {
         long __functionAddress = Functions.RunOnMainThread;
         return invokePPZ(callback, userdata, wait_complete, __functionAddress);
     }
 
-    /** {@code bool SDL_RunOnMainThread(SDL_MainThreadCallback callback, void * userdata, bool wait_complete)} */
+    
     @NativeType("bool")
     public static boolean SDL_RunOnMainThread(@NativeType("SDL_MainThreadCallback") SDL_MainThreadCallbackI callback, @NativeType("void *") long userdata, @NativeType("bool") boolean wait_complete) {
         return nSDL_RunOnMainThread(callback.address(), userdata, wait_complete);
     }
 
-    // --- [ SDL_SetAppMetadata ] ---
+    
 
-    /** {@code bool SDL_SetAppMetadata(char const * appname, char const * appversion, char const * appidentifier)} */
+    
     public static boolean nSDL_SetAppMetadata(long appname, long appversion, long appidentifier) {
         long __functionAddress = Functions.SetAppMetadata;
         return invokePPPZ(appname, appversion, appidentifier, __functionAddress);
     }
 
-    /** {@code bool SDL_SetAppMetadata(char const * appname, char const * appversion, char const * appidentifier)} */
+    
     @NativeType("bool")
     public static boolean SDL_SetAppMetadata(@NativeType("char const *") @Nullable ByteBuffer appname, @NativeType("char const *") @Nullable ByteBuffer appversion, @NativeType("char const *") @Nullable ByteBuffer appidentifier) {
         if (CHECKS) {
@@ -153,7 +149,7 @@ public class SDLInit {
         return nSDL_SetAppMetadata(memAddressSafe(appname), memAddressSafe(appversion), memAddressSafe(appidentifier));
     }
 
-    /** {@code bool SDL_SetAppMetadata(char const * appname, char const * appversion, char const * appidentifier)} */
+    
     @NativeType("bool")
     public static boolean SDL_SetAppMetadata(@NativeType("char const *") @Nullable CharSequence appname, @NativeType("char const *") @Nullable CharSequence appversion, @NativeType("char const *") @Nullable CharSequence appidentifier) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -170,15 +166,15 @@ public class SDLInit {
         }
     }
 
-    // --- [ SDL_SetAppMetadataProperty ] ---
+    
 
-    /** {@code bool SDL_SetAppMetadataProperty(char const * name, char const * value)} */
+    
     public static boolean nSDL_SetAppMetadataProperty(long name, long value) {
         long __functionAddress = Functions.SetAppMetadataProperty;
         return invokePPZ(name, value, __functionAddress);
     }
 
-    /** {@code bool SDL_SetAppMetadataProperty(char const * name, char const * value)} */
+    
     @NativeType("bool")
     public static boolean SDL_SetAppMetadataProperty(@NativeType("char const *") ByteBuffer name, @NativeType("char const *") ByteBuffer value) {
         if (CHECKS) {
@@ -188,7 +184,7 @@ public class SDLInit {
         return nSDL_SetAppMetadataProperty(memAddress(name), memAddress(value));
     }
 
-    /** {@code bool SDL_SetAppMetadataProperty(char const * name, char const * value)} */
+    
     @NativeType("bool")
     public static boolean SDL_SetAppMetadataProperty(@NativeType("char const *") CharSequence name, @NativeType("char const *") CharSequence value) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
@@ -203,15 +199,15 @@ public class SDLInit {
         }
     }
 
-    // --- [ SDL_GetAppMetadataProperty ] ---
+    
 
-    /** {@code char const * SDL_GetAppMetadataProperty(char const * name)} */
+    
     public static long nSDL_GetAppMetadataProperty(long name) {
         long __functionAddress = Functions.GetAppMetadataProperty;
         return invokePP(name, __functionAddress);
     }
 
-    /** {@code char const * SDL_GetAppMetadataProperty(char const * name)} */
+    
     @NativeType("char const *")
     public static @Nullable String SDL_GetAppMetadataProperty(@NativeType("char const *") ByteBuffer name) {
         if (CHECKS) {
@@ -221,7 +217,7 @@ public class SDLInit {
         return memUTF8Safe(__result);
     }
 
-    /** {@code char const * SDL_GetAppMetadataProperty(char const * name)} */
+    
     @NativeType("char const *")
     public static @Nullable String SDL_GetAppMetadataProperty(@NativeType("char const *") CharSequence name) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();

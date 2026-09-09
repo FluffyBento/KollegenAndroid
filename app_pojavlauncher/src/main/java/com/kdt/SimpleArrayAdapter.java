@@ -14,10 +14,7 @@ import androidx.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Basic adapter, expect it uses the what is passed by the code, no the resources
- * @param <T>
- */
+
 public class SimpleArrayAdapter<T> extends BaseAdapter {
     private List<T> mObjects;
     public SimpleArrayAdapter(List<T> objects) {

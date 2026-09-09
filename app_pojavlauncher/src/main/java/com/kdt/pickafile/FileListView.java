@@ -13,17 +13,17 @@ import android.os.*;
 
 public class FileListView extends LinearLayout
 {
-    //For list view:
+    
     private File fullPath;
     private ListView mainLv;
     private Context context;
 
-    //For File selected listener:
+    
     private FileSelectedListener fileSelectedListener;
     private DialogTitleListener dialogTitleListener;
     private File lockPath = new File("/");
 
-    //For filtering by file types:
+    
     private final String[] fileSuffixes;
     private boolean showFiles = true;
     private boolean showFolders = true;
@@ -66,7 +66,7 @@ public class FileListView extends LinearLayout
     }
 
     public void init(final Context context) {
-        //Main setup:
+        
         this.context = context;
 
         LayoutParams layParam = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -76,7 +76,7 @@ public class FileListView extends LinearLayout
         mainLv = new ListView(context);
 
         mainLv.setOnItemClickListener((p1, p2, p3, p4) -> {
-            // TODO: Implement this method
+            
             File mainFile = new File(p1.getItemAtPosition(p3).toString());
             if (p3 == 0 && !lockPath.equals(fullPath)) {
                 parentDir();
@@ -86,7 +86,7 @@ public class FileListView extends LinearLayout
         });
 
         mainLv.setOnItemLongClickListener((p1, p2, p3, p4) -> {
-            // TODO: Implement this method
+            
             File mainFile = new File(p1.getItemAtPosition(p3).toString());
             if (mainFile.isFile()) {
                 fileSelectedListener.onFileLongClick(mainFile, mainFile.getAbsolutePath());
@@ -98,7 +98,7 @@ public class FileListView extends LinearLayout
 
         try {
             listFileAt(Environment.getExternalStorageDirectory());
-        } catch (NullPointerException e) {} // Android 10+ disallows access to sdcard
+        } catch (NullPointerException e) {} 
     }
     public void setFileSelectedListener(FileSelectedListener listener)
     {

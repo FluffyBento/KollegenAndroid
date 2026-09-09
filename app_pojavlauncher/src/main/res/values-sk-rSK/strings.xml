@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Prihlásiť</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Tento účet bude odstránený!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Vybrať installer módu</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen neočakávane spadol</string>
     <string name="error_no_version">Žiadne verzie!</string>
     <string name="error_show_more">Zobraziť viac</string>
     <string name="error_show_less">Zobraziť menej</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Je vyžadované oprávnenie pre čítanie/zápis do úložiska!</string>
     <string name="toast_optifine_success">Inštalácia prebehla úspešne</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
+    
+    
     <string name="mcl_launch_cleancache">Čistí sa vyrovnávacia pamäť</string>
     <string name="mcl_launch_downloading">Sťahuje sa %s</string>
     <string name="mcl_launch_downloading_progress">"Sťahovanie %s (%.2f MB / %.2f MB)"</string>
@@ -49,7 +47,7 @@
     <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Stará beta</string>
     <string name="mcl_version_clone">Duplikovať</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Upraviť</string>
     <string name="global_error">Chyba</string>
     <string name="global_load">Načítať</string>
@@ -63,32 +61,29 @@
     <string name="global_waiting">Čakajte</string>
     <string name="global_retry">Skúsiť znova</string>
     <string name="global_default">Predvolené</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Hra spadla. Skontroluj latestlog.txt pre viac podrobností.</string>
     <string name="mcn_exit_confirm">Ste si istí, že chcete ukončiť hru?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) vykresľovač nie je podporovaný na tomto zariadení!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Čet</string>
     <string name="control_thirdperson">F5</string>
     <string name="control_mouse">Myš</string>
     <string name="control_mouseoff">Myš vypnutá</string>
     <string name="control_mouseon">Myš zapnutá</string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Vynútené ukončenie</string>
     <string name="control_viewout">Záznam výstupu</string>
     <string name="control_adebug">Debug vstupov</string>
     <string name="control_customkey">Poslať vlastný kláves</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Importovať ovládacie prvky</string>
     <string name="import_control_invalid_file">Neplatný alebo poškodený súbor</string>
     <string name="import_control_import_button">Importovať ovládacie prvky</string>
     <string name="import_control_verifying_file">Súbor sa overuje, počkajte a skúste to znova…</string>
     <string name="import_control_invalid_name">Neexistujúci názov súboru alebo názov súboru už existuje</string>
     <string name="import_control_done">Import ovládacích prvkov bol dokončený</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Prepnuteľné (toggle) - po ťuknutí klávesa ostane stlačená</string>
     <string name="customctrl_size">Veľkosť</string>
     <string name="customctrl_mapping">Priradenie ku klávese (bind)</string>

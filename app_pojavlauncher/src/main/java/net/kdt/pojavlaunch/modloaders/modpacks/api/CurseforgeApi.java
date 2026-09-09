@@ -36,11 +36,11 @@ import java.util.zip.ZipFile;
 public class CurseforgeApi implements ModpackApi{
     private static final Pattern sMcVersionPattern = Pattern.compile("([0-9]+)\\.([0-9]+)\\.?([0-9]+)?");
     private static final int ALGO_SHA_1 = 1;
-    // Stolen from
-    // https://github.com/AnzhiZhang/CurseForgeModpackDownloader/blob/6cb3f428459f0cc8f444d16e54aea4cd1186fd7b/utils/requester.py#L93
+    
+    
     private static final int CURSEFORGE_MINECRAFT_GAME_ID = 432;
     private static final int CURSEFORGE_MODPACK_CLASS_ID = 4471;
-    // https://api.curseforge.com/v1/categories?gameId=432 and search for "Mods" (case-sensitive)
+    
     private static final int CURSEFORGE_MOD_CLASS_ID = 6;
     private static final int CURSEFORGE_SORT_RELEVANCY = 1;
     private static final int CURSEFORGE_PAGINATION_SIZE = 50;
@@ -76,8 +76,8 @@ public class CurseforgeApi implements ModpackApi{
         for(int i = 0; i < dataArray.size(); i++) {
             JsonObject dataElement = dataArray.get(i).getAsJsonObject();
             JsonElement allowModDistribution = dataElement.get("allowModDistribution");
-            // Gson automatically casts null to false, which leans to issues
-            // So, only check the distribution flag if it is non-null
+            
+            
             if(!allowModDistribution.isJsonNull() && !allowModDistribution.getAsBoolean()) {
                 Log.i("CurseforgeApi", "Skipping modpack "+dataElement.get("name").getAsString() + " because curseforge sucks");
                 continue;
@@ -131,7 +131,7 @@ public class CurseforgeApi implements ModpackApi{
                     dependencies[i][i1] = new ModDetail.Dependencies(
                             GsonJsonUtils.getStringSafe(obj, "modId"),
                             null,
-                            null, // These two are only present on modrinth
+                            null, 
                             GsonJsonUtils.getStringSafe(obj, "relationType")
                     );
                 }
@@ -171,7 +171,7 @@ public class CurseforgeApi implements ModpackApi{
 
     @Override
     public ModLoader installMod(ModDetail modDetail, int selectedVersion) throws IOException{
-        //TODO considering only modpacks for now
+        
         return ModpackInstaller.installModpack(modDetail, selectedVersion, this::installCurseforgeZip);
     }
 
@@ -196,7 +196,7 @@ public class CurseforgeApi implements ModpackApi{
             objectList.add(fileInfo);
         }
         if(data.size() < CURSEFORGE_PAGINATION_SIZE) {
-            return CURSEFORGE_PAGINATION_END_REACHED; // we read the remainder! yay!
+            return CURSEFORGE_PAGINATION_END_REACHED; 
         }
         return index + data.size();
     }
@@ -259,18 +259,18 @@ public class CurseforgeApi implements ModpackApi{
                 break;
             default:
                 return null;
-            //TODO: Quilt is also Forge? How does that work?
+            
         }
         return new ModLoader(modLoaderTypeInt, modLoaderVersion, minecraft.version);
     }
 
     private String getDownloadUrl(long projectID, long fileID) {
-        // First try the official api endpoint
+        
         JsonObject response = mApiHandler.get("mods/"+projectID+"/files/"+fileID+"/download-url", JsonObject.class);
         if (response != null && !response.get("data").isJsonNull())
             return response.get("data").getAsString();
 
-        // Otherwise, fallback to building an edge link
+        
         JsonObject fallbackResponse = mApiHandler.get(String.format("mods/%s/files/%s", projectID, fileID), JsonObject.class);
         if (fallbackResponse != null && !fallbackResponse.get("data").isJsonNull()){
             JsonObject modData = fallbackResponse.get("data").getAsJsonObject();
@@ -282,7 +282,7 @@ public class CurseforgeApi implements ModpackApi{
     }
 
     private @Nullable String getDownloadSha1(long projectID, long fileID) {
-        // Try the api endpoint, die in the other case
+        
         JsonObject response = mApiHandler.get("mods/"+projectID+"/files/"+fileID, JsonObject.class);
         JsonObject data = GsonJsonUtils.getJsonObjectSafe(response, "data");
         if(data == null) return null;
@@ -293,7 +293,7 @@ public class CurseforgeApi implements ModpackApi{
         JsonArray hashes = GsonJsonUtils.getJsonArraySafe(object, "hashes");
         if(hashes == null) return null;
         for (JsonElement jsonElement : hashes) {
-            // The sha1 = 1; md5 = 2;
+            
             JsonObject jsonObject = GsonJsonUtils.getJsonObjectSafe(jsonElement);
             if(GsonJsonUtils.getIntSafe(
                     jsonObject,

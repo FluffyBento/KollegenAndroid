@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
+    
     <string name="login_online_login_label">Mag-login</string>
-    <!-- Hint -->
-    <!-- Warnings -->
+    
+    
     <string name="warning_remove_account">Aalisin ang account na ito!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Pumili ng mod installer</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Ang Kollegen ay hindi inaasahang nag-crash</string>
     <string name="error_no_version">Walang bersyon!</string>
     <string name="error_show_more">Tignan ang error</string>
     <string name="error_show_less">Magpakita ng kaunti</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Kinakailangan ang basahin / sumulat sa pahintulot sa pag-iimbak!</string>
     <string name="toast_optifine_success">Ang pag-install ay matagumpay</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
+    
+    
     <string name="mcl_launch_cleancache">Nililinis ang mga file ng cache</string>
     <string name="mcl_launch_downloading">Nagda-download %s</string>
     <string name="mcl_launch_downloading_progress">"Dina-download ang %s (%.2f MB / %.2f MB)"</string>
@@ -43,7 +41,7 @@
     <string name="mcl_setting_veroption_oldalpha">Lumang-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Lumang-beta</string>
     <string name="mcl_version_clone">I-Clone</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">I-Edit</string>
     <string name="global_load">Ikarga</string>
     <string name="global_name">Pangalan</string>
@@ -55,29 +53,26 @@
     <string name="global_error_field_empty">Hindi maaaring walang laman ang field na ito</string>
     <string name="global_waiting">Maghintay</string>
     <string name="global_select">Iselekta</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Lumabas ang application/Laro na may code na %d, tingnan ang latestlog.txt para sa higit pang mga detalye.</string>
     <string name="mcn_exit_confirm">Sigurado ka bang gusto mong pilitin na isara?</string>
     <string name="mcn_check_fail_vulkan_support">Hindi ipwepwedeng gamitin ang Zink (Vulkan) sa inyong kagamitan.</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Mag-usap</string>
     <string name="control_mouseoff">Mouse: naka-off</string>
     <string name="control_mouseon">Mouse: naka-on </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Piliting isara</string>
     <string name="control_viewout">Output ng log</string>
     <string name="control_customkey">Magpadala ng pasadyang keycode</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Mag Import ng mga kontrol</string>
     <string name="import_control_invalid_file">Di-wasto o sira ang file</string>
     <string name="import_control_import_button">Mag import ng mga kontrol</string>
     <string name="import_control_verifying_file">Bine-verify ang file, mangyaring maghintay at subukang muli…</string>
     <string name="import_control_invalid_name">Mayroon nang pangalan o file nito</string>
     <string name="import_control_done">Tapos na ang pag-import</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Nai-itoggle</string>
     <string name="customctrl_size">Sukat</string>
     <string name="customctrl_mapping">Pag mapa</string>

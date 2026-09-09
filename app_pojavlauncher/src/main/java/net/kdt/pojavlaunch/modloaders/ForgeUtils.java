@@ -27,18 +27,18 @@ public class ForgeUtils {
             saxParser = parserFactory.newSAXParser();
         }catch (SAXException | ParserConfigurationException e) {
             e.printStackTrace();
-            // if we cant make a parser we might as well not even try to parse anything
+            
             return null;
         }
         try {
-            //of_test();
+            
             return DownloadUtils.downloadStringCached(FORGE_METADATA_URL, "forge_versions", input -> {
                 try {
                     ForgeVersionListHandler handler = new ForgeVersionListHandler();
                     saxParser.parse(new InputSource(new StringReader(input)), handler);
                     return handler.getVersions();
-                    // IOException is present here StringReader throws it only if the parser called close()
-                    // sooner than needed, which is a parser issue and not an I/O one
+                    
+                    
                 }catch (SAXException | IOException e) {
                     throw new DownloadUtils.ParseException(e);
                 }
@@ -55,7 +55,7 @@ public class ForgeUtils {
 
     public static void addAutoInstallArgs(Intent intent, File modInstallerJar, boolean createProfile) {
         intent.putExtra("javaArgs", "-javaagent:"+ Tools.DIR_DATA+"/forge_installer/forge_installer.jar"
-                + (createProfile ? "=NPS" : "") + // No Profile Suppression
+                + (createProfile ? "=NPS" : "") + 
                 " -jar "+modInstallerJar.getAbsolutePath());
     }
     public static void addAutoInstallArgs(Intent intent, File modInstallerJar, String modpackFixupId) {

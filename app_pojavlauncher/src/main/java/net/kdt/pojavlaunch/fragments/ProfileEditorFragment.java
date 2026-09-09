@@ -70,7 +70,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Paths, which can be changed
+        
         String value = (String) ExtraCore.consumeValue(ExtraConstants.FILE_SELECTOR);
         if(value != null){
             if(mValueToConsume.equals(FileSelectorFragment.BUNDLE_SELECT_FOLDER)){
@@ -93,7 +93,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         renderList.add(view.getContext().getString(R.string.global_default));
         mDefaultRenderer.setAdapter(new ArrayAdapter<>(getContext(), R.layout.item_simple_list_1, renderList));
 
-        // Set up behaviors
+        
         mSaveButton.setOnClickListener(v -> {
             ProfileIconCache.dropIcon(mProfileKey);
             save();
@@ -120,14 +120,14 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         mControlSelectButton.setOnClickListener(controlSelectListener);
         mDefaultControl.setOnClickListener(controlSelectListener);
 
-        // Setup the expendable list behavior
+        
         View.OnClickListener versionSelectListener = getVersionSelectListener();
         mVersionSelectButton.setOnClickListener(versionSelectListener);
         mDefaultVersion.setOnClickListener(versionSelectListener);
 
         mUseANGLE.setOnClickListener(v -> mTempProfile.useANGLE = ((CheckBox) v).isChecked());
 
-        // Set up the icon change click listener
+        
         mProfileIcon.setOnClickListener(v -> CropperUtils.startCropper(mCropperLauncher));
 
         loadValues(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, ""), view.getContext());
@@ -169,14 +169,14 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         if(mTempProfile == null){
             mTempProfile = getProfile(profile);
         }
-        // TODO: Remove this jank when it's not relevant anymore
-        // Shitty hack to make OSMZink smoothly transition into kopper
+        
+        
         if ("vulkan_zink".equals(mTempProfile.pojavRendererName)) mTempProfile.pojavRendererName = "opengles3_desktopgl_zink_kopper";
         mProfileIcon.setImageDrawable(
                 ProfileIconCache.fetchIcon(getResources(), mProfileKey, mTempProfile.icon)
         );
 
-        // Runtime spinner
+        
         List<Runtime> runtimes = MultiRTUtils.getInstalledRuntimes();
         int jvmIndex = runtimes.indexOf(new Runtime("<Default>"));
         if (mTempProfile.javaDir != null) {
@@ -188,7 +188,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         if(jvmIndex == -1) jvmIndex = runtimes.size() - 1;
         mDefaultRuntime.setSelection(jvmIndex);
 
-        // Renderer spinner
+        
         int rendererIndex = mDefaultRenderer.getAdapter().getCount() - 1;
         if(mTempProfile.pojavRendererName != null) {
             int nindex = mRenderNames.indexOf(mTempProfile.pojavRendererName);
@@ -207,16 +207,16 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
     private MinecraftProfile getProfile(@NonNull String profile){
         MinecraftProfile minecraftProfile;
         if(getArguments() == null) {
-            // EDGE CASE: User leaves Pojav in background. Pojav gets terminated in the background.
-            // Current selected fragment and its arguments are saved.
-            // User returns to Pojav. Android restarts process and reinitializes fragment without
-            // going to the main screen. mainProfileJson and profiles left uninitialized, which
-            // results in a crash.
-            // Reload the profiles to avoid this edge case.
+            
+            
+            
+            
+            
+            
             LauncherProfiles.load();
             MinecraftProfile originalProfile = LauncherProfiles.mainProfileJson.profiles.get(profile);
-            // EDGE CASE: User edits the JSON, so the profile that was edited no longer exists.
-            // Create a brand new profile as a fallback for this case.
+            
+            
             if(originalProfile != null) minecraftProfile = new MinecraftProfile(originalProfile);
             else minecraftProfile = MinecraftProfile.createTemplate();
             mProfileKey = profile;
@@ -248,7 +248,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
     }
 
     private void save(){
-        //First, check for potential issues in the inputs
+        
         mTempProfile.lastVersionId = mDefaultVersion.getText().toString();
         mTempProfile.controlFile = mDefaultControl.getText().toString();
         mTempProfile.name = mDefaultName.getText().toString();
@@ -282,12 +282,12 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         try (Base64OutputStream base64OutputStream = new Base64OutputStream(byteArrayOutputStream, Base64.NO_WRAP)) {
             contentBitmap.compress(
                 Build.VERSION.SDK_INT < Build.VERSION_CODES.R ?
-                    // On Android < 30, there was no distinction between "lossy" and "lossless",
-                    // and the type is picked by the quality parameter. We set the quality to 60.
-                    // so it should be lossy,
+                    
+                    
+                    
                     Bitmap.CompressFormat.WEBP:
-                    // On Android >= 30, we can explicitly specify that we want lossy compression
-                    // with the visual quality of 60.
+                    
+                    
                     Bitmap.CompressFormat.WEBP_LOSSY,
                 60,
                 base64OutputStream

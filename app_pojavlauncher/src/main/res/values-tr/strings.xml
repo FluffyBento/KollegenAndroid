@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">Kullanıcı Adı</string>
     <string name="login_online_login_label">Giriş yap</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"\"Bağlam menüsünü açmak için orta üstteki dişli simgesine dokunun ⚙\nBir düğmeye dokunarak özelleştirin: düzenle, boyutlandır, kaldır veya tuş atamalarını değiştir."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">Bu hesap kaldırılacak!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Bir mod yükleyicisi seç</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen beklenmedik bir sebepten dolayı çöktü</string>
     <string name="error_no_version">Sürüm yok!</string>
     <string name="error_show_more">Daha fazla göster</string>
     <string name="error_show_less">Daha az göster</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Depolamaya okuma/yazma izni gerekli!</string>
     <string name="toast_optifine_success">Yükleme başarılı</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Önbellek dosyaları temizleniyor</string>
     <string name="mcl_launch_downloading">%s indiriliyor</string>
     <string name="mcl_launch_downloading_progress">"%s indiriliyor (%.2f MB / %.2f MB)"</string>
@@ -60,7 +58,7 @@
     <string name="mcl_setting_veroption_oldalpha">Eski-alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Eski-beta</string>
     <string name="mcl_version_clone">Klonla</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Düzenle</string>
     <string name="global_error">Hata</string>
     <string name="global_load">Yükle</string>
@@ -76,12 +74,12 @@
     <string name="global_retry">Tekrar deneyin</string>
     <string name="global_default">Varsayılan</string>
     <string name="global_off">Kapalı</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Uygulama/Oyundan %d koduyla çıkıldı, daha fazla bilgi için latestlog.txt\'ye bakın.</string>
     <string name="mcn_signal_title">Uygulama/Oyun, ciddi bir sinyal (%d) nedeniyle sonlandırıldı. Daha fazla bilgi için latestlog.txt dosyasını kontrol edin.</string>
     <string name="mcn_exit_confirm">Zorla kapatmak istediğinize emin misiniz?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) işleyicisi bu cihazda desteklenmiyor!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Sohbet</string>
     <string name="control_debug">Hata Ayıklama</string>
     <string name="control_primary">Pri</string>
@@ -98,22 +96,19 @@
     <string name="control_mouse">İmleç</string>
     <string name="control_mouseoff">İmleç: kapalı</string>
     <string name="control_mouseon">İmleç: açık </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Kapatmaya zorla</string>
     <string name="control_viewout">Konsol çıktısı</string>
     <string name="control_adebug">Girdi hata ayıklaması</string>
     <string name="control_customkey">Özel anahtar kodu gönder</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Kontrolleri içeri aktar</string>
     <string name="import_control_invalid_file">Geçersiz veya bozuk dosya</string>
     <string name="import_control_import_button">kontrolleri içeri aktar</string>
     <string name="import_control_verifying_file">Dosya şu anda doğrulanıyor, lütfen bekleyin ve tekrar deneyin…</string>
     <string name="import_control_invalid_name">Geçersiz isim ya da dosya zaten var</string>
     <string name="import_control_done">İçeri aktarma tamamlandı</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Değiştirilebilir</string>
     <string name="customctrl_size">Boyut</string>
     <string name="customctrl_mapping">Atama</string>

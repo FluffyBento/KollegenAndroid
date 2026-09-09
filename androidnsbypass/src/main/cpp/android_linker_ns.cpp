@@ -1,9 +1,7 @@
-// SPDX-License-Identifier: MIT
-// Copyright (c) 2026 alexytomi
 
-/*
- * Exists solely for compatibility.
- */
+
+
+
 
 #include <dlfcn.h>
 #ifdef __cplusplus
@@ -47,14 +45,14 @@ android_get_exported_namespace_t android_get_exported_namespace = private_get_ex
 android_link_namespaces_all_libs_t android_link_namespaces_all_libs = private_link_namespaces_all_libs;
 android_link_namespaces_t android_link_namespaces = private_link_namespaces;
 
-// Not 1:1 with real implementation.
-// escapeNs has SYSTEM_LIBS_PATH in default_library_path and permitted_when_isolated_path
-// Real implementation has those two fields NULL
-// This only affects SONAME look up paths so it should not break any code, if anything it should
-// fix broken code.
+
+
+
+
+
 bool linkernsbypass_link_namespace_to_default_all_libs(struct android_namespace_t *to){
-    // escapeNs should be set by constructor or the process has exited already
-    // therefore this should never return a false if you didn't pass a nullptr.
+    
+    
     return private_link_namespaces_all_libs(to, get_escape_namespace());
 }
 

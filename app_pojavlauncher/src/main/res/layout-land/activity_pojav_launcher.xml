@@ -30,7 +30,7 @@
 
 
 
-    <!-- Holding most of the dynamic content -->
+    
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container_fragment"
 

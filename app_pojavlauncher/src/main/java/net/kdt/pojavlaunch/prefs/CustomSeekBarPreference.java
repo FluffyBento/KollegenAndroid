@@ -17,13 +17,13 @@ import net.kdt.pojavlaunch.R;
 
 public class CustomSeekBarPreference extends SeekBarPreference {
 
-    /** The suffix displayed */
+    
     private String mSuffix = "";
-    /** Custom minimum value to provide the same behavior as the usual setMin */
+    
     private int mMin;
-    /** The textview associated by default to the preference */
+    
     private TextView mTextView;
-    /** Seekbar increment in case the max gets set */
+    
     private final int mIncrement;
 
 
@@ -51,7 +51,7 @@ public class CustomSeekBarPreference extends SeekBarPreference {
 
     @Override
     public void setMin(int min) {
-        //Note: since the max (setMax is a final function) is not taken into account properly, setting the min over the max may produce funky results
+        
         super.setMin(min);
         if (min != mMin) mMin = min;
     }
@@ -99,19 +99,12 @@ public class CustomSeekBarPreference extends SeekBarPreference {
         updateTextViewWithSuffix();
     }
 
-    /**
-     * Set a suffix to be appended on the TextView associated to the value
-     * @param suffix The suffix to append as a String
-     */
+    
     public void setSuffix(String suffix) {
         this.mSuffix = suffix;
     }
 
-    /**
-     * Convenience function to set both min and max at the same time.
-     * @param min The minimum value
-     * @param max The maximum value
-     */
+    
     public void setRange(int min, int max){
         setMin(min);
         setMaxKeepIncrement(max);

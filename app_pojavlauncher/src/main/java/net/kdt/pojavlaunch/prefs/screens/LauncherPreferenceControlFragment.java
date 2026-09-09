@@ -16,7 +16,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
 
     @Override
     public void onCreatePreferences(Bundle b, String str) {
-        // Get values
+        
         int longPressTrigger = LauncherPreferences.PREF_LONGPRESS_TRIGGER;
         int prefButtonSize = (int) LauncherPreferences.PREF_BUTTONSIZE;
         int mouseScale = (int) (LauncherPreferences.PREF_MOUSESCALE * 100);
@@ -27,7 +27,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         float joystickDeadzone = LauncherPreferences.PREF_DEADZONE_SCALE;
 
 
-        //Triggers a write for some reason which resets the value
+        
         addPreferencesFromResource(R.xml.pref_control);
 
         CustomSeekBarPreference seek2 = requirePreference("timeLongPressTrigger",

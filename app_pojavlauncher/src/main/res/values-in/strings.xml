@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <!-- App name part -->
+    
     <string name="app_name">Kollegen</string>
-    <!-- Action bar part -->
-    <!-- Languages list part -->
-    <!-- Login strings -->
+    
+    
+    
     <string name="login_online_username_hint">Nama pengguna</string>
     <string name="login_online_login_label">Masuk</string>
-    <!-- Hint -->
+    
     <string name="hint_control_mapping">"Sentuh roda gigi diatas tengah untuk membuka menu konteks ⚙️\nSentuh sebuah tombol untuk menyesuaikan: edit, ubah ukuran, atau ubah tombol pintasannya."</string>
-    <!-- Warnings -->
+    
     <string name="warning_remove_account">Akun ini akan dihapus!</string>
-    <!-- AlertDialog title -->
+    
     <string name="alerttitle_installmod">Pilih sebuah instaler mod</string>
-    <!-- Error messages -->
+    
     <string name="error_fatal">Kollegen tiba-tiba crash tanpa diduga</string>
     <string name="error_no_version">Tidak ada versi yang terdeteksi!</string>
     <string name="error_show_more">Selengkapnya</string>
     <string name="error_show_less">Tampilkan Sedikit</string>
-    <!-- Toast messages -->
+    
     <string name="toast_permission_denied">Izin untuk membaca/menulis ke penyimpanan dibutuhkan!</string>
     <string name="toast_optifine_success">Pemasangan berhasil</string>
-    <!--
-    <string name="toast_3">Exit</string>
-    -->
-    <!-- MCLauncherActivity: Tabs -->
+    
+    
     <string name="mcl_tab_wiki">Wiki</string>
-    <!-- MCLauncherActivity: Account status -->
-    <!-- MCLauncherActivity: Strings -->
+    
+    
     <string name="mcl_launch_cleancache">Membersihkan file cache</string>
     <string name="mcl_launch_downloading">Mengunduh %s</string>
     <string name="mcl_launch_downloading_progress">"Mengunduh %s (%.2f MB / %.2f MB)"</string>
@@ -60,7 +58,7 @@
     <string name="mcl_setting_veroption_oldalpha">Alpha-lama</string>
     <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
     <string name="mcl_version_clone">Klon</string>
-    <!-- Global strings -->
+    
     <string name="global_edit">Ubah</string>
     <string name="global_error">Eror</string>
     <string name="global_load">Muat kontrol</string>
@@ -76,12 +74,12 @@
     <string name="global_retry">Coba lagi</string>
     <string name="global_default">Default</string>
     <string name="global_off">Off</string>
-    <!-- MainActivity: strings -->
+    
     <string name="mcn_exit_title">Aplikasi/permainan keluar dengan kode %d, cek latestlog.txt untuk detail lebih lanjut.</string>
     <string name="mcn_signal_title">Aplikasi/Game keluar dengan sinyal fatal %d, cek latestlog.txt untuk detail lebih lanjut.</string>
     <string name="mcn_exit_confirm">Apa anda yakin mau tutup secara paksa?</string>
     <string name="mcn_check_fail_vulkan_support">Renderer Zink (Vulkan) tidak didukung di perangkat ini!</string>
-    <!-- MainActivity: Control buttons -->
+    
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
     <string name="control_primary">Pri</string>
@@ -98,22 +96,19 @@
     <string name="control_mouse">Mouse</string>
     <string name="control_mouseoff">Mouse: mati</string>
     <string name="control_mouseon">Mouse: nyala </string>
-    <!-- MainActivity: Menu advanced controls -->
+    
     <string name="control_forceclose">Tutup secara paksa</string>
     <string name="control_viewout">Catatan log</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Kirim keycode kustom</string>
-    <!-- ImportControlActivity Strings -->
+    
     <string name="import_control_label">Impor kontrol</string>
     <string name="import_control_invalid_file">File tidak valid atau rusak</string>
     <string name="import_control_import_button">Impor kontrol</string>
     <string name="import_control_verifying_file">File sedang diverifikasi, harap tunggu dan coba lagi…</string>
     <string name="import_control_invalid_name">Nama tidak valid atau file sudah ada</string>
     <string name="import_control_done">Impor selesai</string>
-    <!--
-    <string name="control_more3"></string>
-    <string name="control_more4"></string>
--->
+    
     <string name="customctrl_toggle">Bisa dialihkan</string>
     <string name="customctrl_size">Ukuran</string>
     <string name="customctrl_mapping">Pemetaan</string>

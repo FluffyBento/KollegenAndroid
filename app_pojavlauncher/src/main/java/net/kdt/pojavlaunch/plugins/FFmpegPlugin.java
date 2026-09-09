@@ -18,7 +18,7 @@ public class FFmpegPlugin {
             libraryPath = ffmpegPluginInfo.applicationInfo.nativeLibraryDir;
             File ffmpegExecutable = new File(libraryPath, "libffmpeg.so");
             executablePath = ffmpegExecutable.getAbsolutePath();
-            // Older plugin versions still have the old executable location
+            
             isAvailable = ffmpegExecutable.exists();
         }catch (Exception e) {
             Log.i("FFmpegPlugin", "Failed to discover plugin", e);

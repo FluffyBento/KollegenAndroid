@@ -36,8 +36,8 @@ public class DirectGamepad implements GamepadHandler {
             case KeyEvent.KEYCODE_DPAD_LEFT: gKeycode = GamepadKeycodes.GLFW_GAMEPAD_BUTTON_DPAD_LEFT; break;
             case KeyEvent.KEYCODE_DPAD_RIGHT: gKeycode = GamepadKeycodes.GLFW_GAMEPAD_BUTTON_DPAD_RIGHT; break;
             case KeyEvent.KEYCODE_DPAD_CENTER:
-                // Behave the same way as the Gamepad here, as GLFW doesn't have a keycode
-                // for the dpad center.
+                
+                
                 sGamepadButtonBuffer.put(GamepadKeycodes.GLFW_GAMEPAD_BUTTON_DPAD_UP, GamepadKeycodes.GLFW_RELEASE);
                 sGamepadButtonBuffer.put(GamepadKeycodes.GLFW_GAMEPAD_BUTTON_DPAD_DOWN, GamepadKeycodes.GLFW_RELEASE);
                 sGamepadButtonBuffer.put(GamepadKeycodes.GLFW_GAMEPAD_BUTTON_DPAD_LEFT, GamepadKeycodes.GLFW_RELEASE);

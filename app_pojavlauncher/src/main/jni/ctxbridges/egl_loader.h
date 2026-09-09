@@ -1,6 +1,6 @@
-//
-// Created by maks on 21.09.2022.
-//
+
+
+
 #include <EGL/egl.h>
 #include <stdbool.h>
 #ifndef POJAVLAUNCHER_EGL_LOADER_H
@@ -33,4 +33,4 @@ extern __eglMustCastToProperFunctionPointerType (*eglGetProcAddress_p) (const ch
 bool dlsym_EGL();
 void* getProcAddress(const char* procname);
 
-#endif //POJAVLAUNCHER_EGL_LOADER_H
+#endif 

@@ -18,7 +18,7 @@ public class LauncherProfiles {
     public static MinecraftLauncherProfiles mainProfileJson;
     private static final File launcherProfilesFile = new File(Tools.GAME_PROFILES_FILE);
 
-    /** Reload the profile from the file, creating a default one if necessary */
+    
     public static void load(){
         if (launcherProfilesFile.exists()) {
             try {
@@ -29,20 +29,20 @@ public class LauncherProfiles {
             }
         }
 
-        // Fill with default
+        
         if (mainProfileJson == null) mainProfileJson = new MinecraftLauncherProfiles();
         if (mainProfileJson.profiles == null) mainProfileJson.profiles = new HashMap<>();
         if (mainProfileJson.profiles.size() == 0)
             mainProfileJson.profiles.put(UUID.randomUUID().toString(), MinecraftProfile.getDefaultProfile());
 
-        // Normalize profile names from mod installers
+        
         if(normalizeProfileIds(mainProfileJson)){
             write();
             load();
         }
     }
 
-    /** Apply the current configuration into a file */
+    
     public static void write() {
         try {
             Tools.write(launcherProfilesFile.getAbsolutePath(), mainProfileJson.toJson());
@@ -60,18 +60,12 @@ public class LauncherProfiles {
         return profile;
     }
 
-    /**
-     * Insert a new profile into the profile map
-     * @param minecraftProfile the profile to insert
-     */
+    
     public static void insertMinecraftProfile(MinecraftProfile minecraftProfile) {
         mainProfileJson.profiles.put(getFreeProfileKey(), minecraftProfile);
     }
 
-    /**
-     * Pick an unused normalized key to store a new profile with
-     * @return an unused key
-     */
+    
     public static String getFreeProfileKey() {
         Map<String, MinecraftProfile> profileMap = mainProfileJson.profiles;
         String freeKey = UUID.randomUUID().toString();
@@ -79,16 +73,12 @@ public class LauncherProfiles {
         return freeKey;
     }
 
-    /**
-     * For all keys to be UUIDs, effectively isolating profile created by installers
-     * This avoids certain profiles to be erased by the installer
-     * @return Whether some profiles have been normalized
-     */
+    
     private static boolean normalizeProfileIds(MinecraftLauncherProfiles launcherProfiles){
         boolean hasNormalized = false;
         ArrayList<String> keys = new ArrayList<>();
 
-        // Detect denormalized keys
+        
         for(String profileKey : launcherProfiles.profiles.keySet()){
             try{
                 if(!UUID.fromString(profileKey).toString().equals(profileKey)) keys.add(profileKey);
@@ -98,7 +88,7 @@ public class LauncherProfiles {
             }
         }
 
-        // Swap the new keys
+        
         for(String profileKey : keys){
             MinecraftProfile currentProfile = launcherProfiles.profiles.get(profileKey);
             insertMinecraftProfile(currentProfile);

@@ -17,7 +17,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     private boolean mIsDestroyed = false;
     private final TextPaint mFpsPaint;
 
-    // Temporary count fps https://stackoverflow.com/a/13729241
+    
     private final LinkedList<Long> mTimes = new LinkedList<Long>(){{add(System.nanoTime());}};
     
     public AWTCanvasView(Context ctx) {
@@ -70,7 +70,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
             while (!mIsDestroyed && surface.isValid()) {
                 canvas = surface.lockCanvas(null);
                 canvas.drawRGB(0, 0, 0);
-                int[] rgbArray = JREUtils.renderAWTScreenFrame(/* canvas, mWidth, mHeight */);
+                int[] rgbArray = JREUtils.renderAWTScreenFrame();
                 boolean mDrawing = rgbArray != null;
                 if (rgbArray != null) {
                     canvas.save();
@@ -88,7 +88,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         surface.release();
     }
 
-    /** Calculates and returns frames per second */
+    
     private double fps() {
         long lastTime = System.nanoTime();
         double difference = (lastTime - mTimes.getFirst()) / NANOS;
@@ -100,7 +100,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         return difference > 0 ? mTimes.size() / difference : 0.0;
     }
 
-    /** Make the view fit the proper aspect ratio of the surface */
+    
     private void refreshSize(){
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
 

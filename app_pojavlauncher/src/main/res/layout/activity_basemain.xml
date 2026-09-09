@@ -38,9 +38,7 @@
 				android:translationZ="1dp"
 				android:visibility="gone"/>
 
-		<!-- This is a horrible hack that forces android to properly redraw ControlLayout
-			 when keyboard causes MainActivity to pan offscreen, which can cause the top part
-			 of ControLayout to just be grpahically cut out. This stops that, somehow...      -->
+		
 			<View
 				android:layout_height="match_parent"
 				android:layout_width="match_parent"

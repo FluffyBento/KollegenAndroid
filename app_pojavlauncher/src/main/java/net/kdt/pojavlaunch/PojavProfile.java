@@ -29,7 +29,7 @@ public class PojavProfile {
 
     public static String getCurrentProfileName(Context ctx) {
         String name = getPrefs(ctx).getString(PROFILE_PREF_FILE, "");
-        // A dirty fix
+        
         if (!name.isEmpty() && name.startsWith(Tools.DIR_ACCOUNT_NEW) && name.endsWith(".json")) {
             name = name.substring(0, name.length() - 5).replace(Tools.DIR_ACCOUNT_NEW, "").replace(".json", "");
             setCurrentProfile(ctx, name);
@@ -64,7 +64,7 @@ public class PojavProfile {
 		try { if (obj instanceof String) {
                 String acc = (String) obj;
 				pref.putString(PROFILE_PREF_FILE, acc);
-                //MinecraftAccount.clearTempAccount();
+                
 			} else if (obj == null) {
 				pref.putString(PROFILE_PREF_FILE, "");
 			} else {

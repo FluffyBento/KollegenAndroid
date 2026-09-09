@@ -13,11 +13,11 @@ configurations {
 dependencies {
     implementation fileTree(dir: "libs/lwjgl-$lwjglVersion", include: ['*.jar'])
     lwjglModules fileTree(dir: "libs/lwjgl-$lwjglVersion", include: ['*.jar'])
-    implementation "org.jspecify:jspecify:1.0.0" // lwjgl3.3.3 has jsr305 included as a jar
+    implementation "org.jspecify:jspecify:1.0.0" 
 }
 
 jar {
-    // Modules to copy over to the components directory instead of patching and merging
+    
     String[] excludedModules = [
             "lwjgl-lwjglx.jar",
             "lwjgl.jar",
@@ -38,13 +38,13 @@ jar {
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveBaseName.set("lwjgl-${lwjglVersion}-merged-modules")
-//    destinationDirectory.set(project(":jre_lwjgl3glfw").layout.buildDirectory.dir("libs/lwjgl-${lwjglVersion}"))
+
     destinationDirectory = file("${project(':app_pojavlauncher').layout.projectDirectory}/src/main/assets/components/lwjgl3/${lwjglVersion}")
 
     from {
-        // Ensure that the core lwjgl jar is processed first so duplicates in META-INF from other classes
-        // are ignored. This avoids InvalidModuleDescriptorException due to say, using the module-info.class
-        // from lwjgl-jemalloc.
+        
+        
+        
         def includedModules = configurations.lwjglModules.findAll { dep ->
             !excludedModules.any { it == dep.name }
         }
@@ -57,7 +57,7 @@ jar {
             it.isDirectory() ? it : zipTree(it)
         }
     }
-    // Makes the jar reproducible so the version file actually is a version file
+    
     preserveFileTimestamps = false
     reproducibleFileOrder = true
 
@@ -68,20 +68,20 @@ jar {
             configurations.lwjglModules.findAll { it.name == fileName }
         }
         copy {
-            // Copy excluded modules to the lwjgl classes dir
+            
             from excludedModulesFileList
             into archiveFile.get().asFile.parentFile
         }
         writeVersionFile([jarFile] as File[] + excludedModulesFileList, versionFile)
     }
-    // Adds the jank to outputs
+    
     outputs.file(versionFile)
     outputs.files excludedModules.collect { path -> new File(destinationDirectory.get().asFile, path) }
-////  Prints out the output.files for troubleshooting
-//    println "Task outputs:"
-//    outputs.files.each { file ->
-//        println "  ${file}"
-//    }
+
+
+
+
+
     exclude 'net/java/openjdk/cacio/ctc/**'
 }
 

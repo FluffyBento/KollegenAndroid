@@ -1,6 +1,6 @@
-//
-// Created by maks on 18.10.2023.
-//
+
+
+
 
 #ifndef POJAVLAUNCHER_COMMON_H
 #define POJAVLAUNCHER_COMMON_H
@@ -14,4 +14,4 @@ typedef struct {
     struct ANativeWindow *newNativeSurface;
 } basic_render_window_t;
 
-#endif //POJAVLAUNCHER_COMMON_H
+#endif 

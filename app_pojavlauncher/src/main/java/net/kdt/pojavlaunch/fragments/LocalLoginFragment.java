@@ -33,7 +33,7 @@ public class LocalLoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        // This is overkill but meh
+        
         if (!hasOnlineProfile()){
             Tools.swapFragment(requireActivity(), MainMenuFragment.class, MainMenuFragment.TAG, null);
         }
@@ -53,7 +53,7 @@ public class LocalLoginFragment extends Fragment {
     }
 
 
-    /** @return Whether the mail (and password) text are eligible to make an auth request  */
+    
     private boolean checkEditText(){
 
         String text = mUsernameEditText.getText().toString();
