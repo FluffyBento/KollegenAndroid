@@ -5,13 +5,13 @@ on:
   push:
     branches-ignore:
       - 'l10n_v3_openjdk'
-    tags-ignore:
-      - '**'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -57,3 +57,14 @@ jobs:
           name: kollegen-android-debug
           path: out/app-debug.*
           if-no-files-found: error
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            out/app-debug.apk
+            out/app-debug.md5
+          body: |
+            Automatisch erstellter Build dieses Tags.
+          name: Kollegen Android
