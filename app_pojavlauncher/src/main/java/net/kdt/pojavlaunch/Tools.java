@@ -118,7 +118,7 @@ public final class Tools {
 
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    public static final String URL_HOME = "https://kollegen.dev";
+    public static final String URL_HOME = "https://kollegen.me";
     public static String NATIVE_LIB_DIR;
     public static String DIR_DATA; 
     public static File DIR_CACHE;

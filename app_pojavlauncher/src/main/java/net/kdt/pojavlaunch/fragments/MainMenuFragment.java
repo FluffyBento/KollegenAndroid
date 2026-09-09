@@ -24,7 +24,6 @@ import androidx.fragment.app.Fragment;
 import com.kdt.mcgui.mcVersionSpinner;
 
 import net.kdt.pojavlaunch.CustomControlsActivity;
-import net.kdt.pojavlaunch.KollegenSocialActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
@@ -49,7 +48,7 @@ public class MainMenuFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Button mNewsButton = view.findViewById(R.id.news_button);
+        applyTheme(view);
         Button mDiscordButton = view.findViewById(R.id.discord_button);
         Button mCustomControlButton = view.findViewById(R.id.custom_control_button);
         Button mInstallJarButton = view.findViewById(R.id.install_jar_button);
@@ -60,10 +59,9 @@ public class MainMenuFragment extends Fragment {
         Button mPlayButton = view.findViewById(R.id.play_button);
         mVersionSpinner = view.findViewById(R.id.mc_version_spinner);
 
-        mNewsButton.setOnClickListener(v -> Tools.openURL(requireActivity(), Tools.URL_HOME));
         mDiscordButton.setOnClickListener(v -> Tools.openURL(requireActivity(), getString(R.string.discord_invite)));
         view.findViewById(R.id.kollegen_social_button).setOnClickListener(v ->
-                startActivity(new Intent(requireContext(), KollegenSocialActivity.class)));
+                Tools.swapFragment(requireActivity(), KollegenSocialFragment.class, KollegenSocialFragment.TAG, null));
         mCustomControlButton.setOnClickListener(v -> startActivity(new Intent(requireContext(), CustomControlsActivity.class)));
         if (hasOnlineProfile()) {
             mInstallJarButton.setOnClickListener(v -> runInstallerWithConfirmation(false));
@@ -98,12 +96,6 @@ public class MainMenuFragment extends Fragment {
             } else openPath(v.getContext(), getCurrentProfileDirectory(), false);
 
         });
-
-
-        mNewsButton.setOnLongClickListener((v)->{
-            Tools.swapFragment(requireActivity(), GamepadMapperFragment.class, GamepadMapperFragment.TAG, null);
-            return true;
-        });
     }
 
     private File getCurrentProfileDirectory() {
@@ -113,6 +105,26 @@ public class MainMenuFragment extends Fragment {
         MinecraftProfile profileObject = LauncherProfiles.mainProfileJson.profiles.get(currentProfile);
         if(profileObject == null) return new File(Tools.DIR_GAME_NEW);
         return Tools.getGameDirPath(profileObject);
+    }
+
+    private void applyTheme(View view){
+        int[] pal = net.kdt.pojavlaunch.KollegenTheme.palette();
+        view.setBackgroundColor(pal[net.kdt.pojavlaunch.KollegenTheme.BG]);
+        View bottomBar = view.findViewById(R.id._background_display_view);
+        if(bottomBar != null) bottomBar.setBackgroundColor(pal[net.kdt.pojavlaunch.KollegenTheme.PANEL2]);
+        View versionSpinner = view.findViewById(R.id.mc_version_spinner);
+        if(versionSpinner instanceof mcVersionSpinner) ((mcVersionSpinner) versionSpinner).setTextColor(pal[net.kdt.pojavlaunch.KollegenTheme.TEXT]);
+        Button playButton = view.findViewById(R.id.play_button);
+        if(playButton != null){
+            playButton.setBackground(net.kdt.pojavlaunch.KollegenTheme.buttonBackground(net.kdt.pojavlaunch.KollegenTheme.ACCENT, net.kdt.pojavlaunch.KollegenTheme.ACCENT2));
+            playButton.setTextColor(pal[net.kdt.pojavlaunch.KollegenTheme.BG]);
+        }
+        ImageButton mEditProfileButton = view.findViewById(R.id.edit_profile_button);
+        if(mEditProfileButton != null) mEditProfileButton.setColorFilter(pal[net.kdt.pojavlaunch.KollegenTheme.TEXT]);
+        Button[] menuButtons = new Button[]{view.findViewById(R.id.discord_button), view.findViewById(R.id.kollegen_social_button), view.findViewById(R.id.custom_control_button), view.findViewById(R.id.install_jar_button), view.findViewById(R.id.share_logs_button), view.findViewById(R.id.open_files_button)};
+        for(Button button : menuButtons){
+            if(button != null) button.setTextColor(pal[net.kdt.pojavlaunch.KollegenTheme.TEXT]);
+        }
     }
 
     @Override

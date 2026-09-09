@@ -205,6 +205,8 @@
     <string name="preference_java_title">Java Tweaks</string>
     <string name="preference_java_description">Java Runtimes, JVM Arguments, RAM amount and sandbox</string>
     <string name="preference_misc_title">Miscellaneous settings</string>
+    <string name="preference_kollegen_theme_title">Theme</string>
+    <string name="preference_kollegen_theme_summary">Choose the Kollegen launcher theme</string>
     <string name="preference_misc_description">Version list and libraries check</string>
     <string name="preference_experimental_description">Use things there with consideration, no support</string>
     <string name="preference_sustained_performance_title">Enable sustained performance mode</string>
@@ -425,7 +427,7 @@
     <string name="mcl_button_kollegen">Kollegen Social</string>
     <string name="ltw_render_distance_warning_msg">Your GPU is not capable of rendering above 7 render distance without Sodium or other similar mods. The render distance will be automatically reduced when you click "OK".</string>
     <string name="mcl_button_open_directory">Open game directory</string>
-    <string name="discord_invite" translatable="false">https://discord.gg/5ptqkyZxEy</string>
+    <string name="discord_invite" translatable="false">https://kollegen.me/discord</string>
     <string name="local_login_bad_username_title">Unsuitable username</string>
     <string name="local_login_bad_username_text">The username must be between 3–16 characters long, and must only contain latin letters, numbers 0–9 and underscores.</string>
     <string name="quick_setting_title">Quick settings</string>

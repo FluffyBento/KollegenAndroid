@@ -38,6 +38,7 @@ import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
 import net.kdt.pojavlaunch.fragments.MainMenuFragment;
 import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
+import net.kdt.pojavlaunch.fragments.KollegenSocialFragment;
 import net.kdt.pojavlaunch.fragments.SelectAuthFragment;
 import net.kdt.pojavlaunch.lifecycle.ContextAwareDoneListener;
 import net.kdt.pojavlaunch.lifecycle.ContextExecutor;
@@ -236,6 +237,12 @@ public class LauncherActivity extends BaseActivity {
         String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
         JMinecraftVersionList.Version mcVersion = AsyncMinecraftDownloader.getListedVersion(normalizedVersionId);
 
+        new Thread(() -> {
+            String loader = KollegenModInstaller.loaderFrom(prof.lastVersionId);
+            String mcVer = KollegenModInstaller.mcVersionFrom(prof.lastVersionId);
+            if (loader != null) KollegenModInstaller.ensureFor(prof, mcVer, loader);
+        }).start();
+
         
         if (mAccountSpinner.getSelectedAccount().isDemo()) {
             boolean isOlderThan13 = true;
@@ -290,6 +297,7 @@ public class LauncherActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pojav_launcher);
+        KollegenTheme.applyWindow(getWindow());
         FragmentManager fragmentManager = getSupportFragmentManager();
         
         if(fragmentManager.getBackStackEntryCount() < 1) {
@@ -393,6 +401,14 @@ public class LauncherActivity extends BaseActivity {
             }
         }
 
+        KollegenSocialFragment socialFragment = (KollegenSocialFragment) getVisibleFragment(KollegenSocialFragment.TAG);
+        if(socialFragment != null){
+            if(socialFragment.canGoBack()){
+                socialFragment.goBack();
+                return;
+            }
+        }
+
         
         if(getVisibleFragment("ROOT") != null){
             finish();
@@ -488,5 +504,8 @@ public class LauncherActivity extends BaseActivity {
         mSettingsButton = findViewById(R.id.setting_button);
         mAccountSpinner = findViewById(R.id.account_spinner);
         mProgressLayout = findViewById(R.id.progress_layout);
+        int[] pal = KollegenTheme.palette();
+        mAccountSpinner.setBackgroundColor(pal[KollegenTheme.PANEL]);
+        mSettingsButton.setColorFilter(pal[KollegenTheme.TEXT]);
     }
 }

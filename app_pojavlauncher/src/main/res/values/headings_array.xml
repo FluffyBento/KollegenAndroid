@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="kollegen_themes">
+        <item>Kollegen</item>
+        <item>Limit_Los</item>
+        <item>FluffyBento</item>
+        <item>T_son_</item>
+        <item>zSpicyyy</item>
+        <item>Irongirl</item>
+        <item>Zerocraft77</item>
+        <item>Erhaltunq</item>
+    </string-array>
+
     <string-array name="renderer">
         <item name="0">@string/mcl_setting_renderer_ng_gl4es</item>
         <item name="1">@string/mcl_setting_renderer_mobileglues</item>

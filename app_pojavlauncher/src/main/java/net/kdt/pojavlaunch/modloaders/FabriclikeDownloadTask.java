@@ -64,6 +64,7 @@ public class FabriclikeDownloadTask implements Runnable, Tools.DownloaderFeedbac
             fabricProfile.icon = mUtils.getIconName();
             LauncherProfiles.insertMinecraftProfile(fabricProfile);
             LauncherProfiles.write();
+            net.kdt.pojavlaunch.KollegenModInstaller.ensureFor(fabricProfile, mGameVersion, mUtils.getName());
         }
         return true;
     }

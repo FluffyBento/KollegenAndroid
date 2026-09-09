@@ -9,6 +9,15 @@
 
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
 
+    <ListPreference
+        android:key="kollegen_theme"
+        android:title="@string/preference_kollegen_theme_title"
+        android:summary="@string/preference_kollegen_theme_summary"
+        android:entries="@array/kollegen_themes"
+        android:entryValues="@array/kollegen_themes"
+        app:icon="@drawable/ic_setting_misc"
+        />
+
     <PreferenceCategory
         android:title="@string/preference_category_main_categories"
         >

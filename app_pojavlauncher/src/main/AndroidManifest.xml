@@ -110,10 +110,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".KollegenSocialActivity"
-            android:exported="false"
-            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation|uiMode" />
-        <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation|uiMode"
             android:launchMode="singleTop"

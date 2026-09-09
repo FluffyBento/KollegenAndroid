@@ -20,8 +20,8 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        view.setBackgroundColor(getResources().getColor(R.color.background_app));
         super.onViewCreated(view, savedInstanceState);
+        view.setBackgroundColor(net.kdt.pojavlaunch.KollegenTheme.color(net.kdt.pojavlaunch.KollegenTheme.BG));
     }
 
     @Override
@@ -68,6 +68,9 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
     @Override
     public void onSharedPreferenceChanged(SharedPreferences p, String s) {
         LauncherPreferences.loadPreferences(getContext());
+        if(net.kdt.pojavlaunch.KollegenTheme.PREF_KEY_THEME.equals(s)){
+            if(getActivity() != null) getActivity().recreate();
+        }
     }
 
     protected Preference requirePreference(CharSequence key) {
