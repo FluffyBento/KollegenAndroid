@@ -125,7 +125,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     
     private final ExtraListener<Uri> mMicrosoftLoginListener = (key, value) -> {
-        mLoginBarPaint.setColor(getResources().getColor(R.color.minebutton_color));
+        mLoginBarPaint.setColor(net.kdt.pojavlaunch.KollegenTheme.color(net.kdt.pojavlaunch.KollegenTheme.ACCENT));
         new MicrosoftBackgroundLogin(false, value.getQueryParameter("code")).performLogin(
                 mProgressListener, mDoneListener, mErrorListener);
         return false;
@@ -151,8 +151,9 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     @SuppressLint("ClickableViewAccessibility")
     private void init(){
         
-        setBackgroundColor(getResources().getColor(R.color.background_status_bar));
-        mLoginBarPaint.setColor(getResources().getColor(R.color.minebutton_color));
+        int[] pal = net.kdt.pojavlaunch.KollegenTheme.palette();
+        setBackgroundColor(pal[net.kdt.pojavlaunch.KollegenTheme.PANEL]);
+        mLoginBarPaint.setColor(pal[net.kdt.pojavlaunch.KollegenTheme.ACCENT]);
         mLoginBarPaint.setStrokeWidth(getResources().getDimensionPixelOffset(R.dimen._2sdp));
 
         
@@ -280,7 +281,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         }
         if(minecraftAccount.isLocal()) return;
 
-        mLoginBarPaint.setColor(getResources().getColor(R.color.minebutton_color));
+        mLoginBarPaint.setColor(net.kdt.pojavlaunch.KollegenTheme.color(net.kdt.pojavlaunch.KollegenTheme.ACCENT));
         if(minecraftAccount.isMicrosoft){
             if(System.currentTimeMillis() > minecraftAccount.expiresAt){
                 
@@ -371,6 +372,10 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
             ExtendedTextView textview = convertView.findViewById(R.id.account_item);
             ImageView deleteButton = convertView.findViewById(R.id.delete_account_button);
             textview.setText(super.getItem(position));
+            int[] pal = net.kdt.pojavlaunch.KollegenTheme.palette();
+            convertView.setBackgroundColor(pal[net.kdt.pojavlaunch.KollegenTheme.PANEL]);
+            textview.setTextColor(pal[net.kdt.pojavlaunch.KollegenTheme.TEXT]);
+            deleteButton.setColorFilter(pal[net.kdt.pojavlaunch.KollegenTheme.MUTED]);
 
             
             if(position == 0) {

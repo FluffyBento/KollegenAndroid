@@ -30,6 +30,8 @@ public class CustomControlsActivity extends BaseActivity implements EditorExitab
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_custom_controls);
+		net.kdt.pojavlaunch.KollegenTheme.applyWindow(getWindow());
+		net.kdt.pojavlaunch.KollegenTheme.applyTree(findViewById(android.R.id.content));
 
 		mControlLayout = findViewById(R.id.customctrl_controllayout);
 		mDrawerLayout = findViewById(R.id.customctrl_drawerlayout);

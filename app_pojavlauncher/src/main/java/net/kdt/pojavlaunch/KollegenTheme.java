@@ -1,9 +1,14 @@
 package net.kdt.pojavlaunch;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -84,5 +89,76 @@ public final class KollegenTheme {
         drawable.setColor(fill);
         drawable.setStroke(2, stroke);
         return drawable;
+    }
+
+    private static final int[] STATIC_COLORS = {
+            Color.parseColor("#181818"),
+            Color.parseColor("#242424"),
+            Color.parseColor("#232323"),
+            Color.parseColor("#464646"),
+            Color.parseColor("#9649b8"),
+            Color.parseColor("#131313"),
+            Color.parseColor("#272727"),
+            Color.parseColor("#909090"),
+            Color.parseColor("#FFFFFF"),
+            Color.parseColor("#B2B2B2"),
+    };
+
+    private static final int[] STATIC_MAP = {
+            BG,
+            PANEL,
+            PANEL2,
+            PANEL2,
+            ACCENT,
+            PANEL,
+            PANEL2,
+            MUTED,
+            TEXT,
+            MUTED,
+    };
+
+    public static void applyTree(View view) {
+        if (view == null) return;
+        applyView(view);
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+            for (int i = 0; i < group.getChildCount(); i++) {
+                applyTree(group.getChildAt(i));
+            }
+        }
+    }
+
+    public static void applyView(View view) {
+        if (view == null) return;
+        int[] pal = palette();
+
+        if (view instanceof EditText) {
+            EditText edit = (EditText) view;
+            edit.setBackground(rounded(pal[PANEL], pal[BORDER]));
+            edit.setTextColor(remapColor(edit.getTextColors().getDefaultColor(), TEXT));
+            edit.setHintTextColor(remapColor(edit.getCurrentHintTextColor(), MUTED));
+        } else if (view instanceof TextView) {
+            TextView text = (TextView) view;
+            text.setTextColor(remapColor(text.getTextColors().getDefaultColor(), TEXT));
+            text.setHintTextColor(remapColor(text.getCurrentHintTextColor(), MUTED));
+        }
+
+        Drawable bg = view.getBackground();
+        if (bg instanceof ColorDrawable) {
+            int color = ((ColorDrawable) bg).getColor();
+            for (int i = 0; i < STATIC_COLORS.length; i++) {
+                if (color == STATIC_COLORS[i]) {
+                    view.setBackgroundColor(pal[STATIC_MAP[i]]);
+                    break;
+                }
+            }
+        }
+    }
+
+    private static int remapColor(int color, int fallback) {
+        for (int i = 0; i < STATIC_COLORS.length; i++) {
+            if (color == STATIC_COLORS[i]) return palette()[STATIC_MAP[i]];
+        }
+        return fallback;
     }
 }

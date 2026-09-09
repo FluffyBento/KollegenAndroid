@@ -61,6 +61,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_java_gui_launcher);
+        net.kdt.pojavlaunch.KollegenTheme.applyWindow(getWindow());
+        net.kdt.pojavlaunch.KollegenTheme.applyTree(findViewById(android.R.id.content));
 
         try {
             File latestLogFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");

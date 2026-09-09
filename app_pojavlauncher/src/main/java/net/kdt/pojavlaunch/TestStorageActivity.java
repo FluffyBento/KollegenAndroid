@@ -22,6 +22,7 @@ public class TestStorageActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        KollegenTheme.applyWindow(getWindow());
         if(Build.VERSION.SDK_INT >= 23 && Build.VERSION.SDK_INT < 29 && !isStorageAllowed(this)) requestStoragePermission();
         else exit();
     }

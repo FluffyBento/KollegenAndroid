@@ -107,7 +107,7 @@ public class MainMenuFragment extends Fragment {
         return Tools.getGameDirPath(profileObject);
     }
 
-    private void applyTheme(View view){
+    public void applyTheme(View view){
         int[] pal = net.kdt.pojavlaunch.KollegenTheme.palette();
         view.setBackgroundColor(pal[net.kdt.pojavlaunch.KollegenTheme.BG]);
         View bottomBar = view.findViewById(R.id._background_display_view);

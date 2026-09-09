@@ -144,6 +144,9 @@ public class mcVersionSpinner extends ExtendedTextView {
     private void getPopupWindow(){
         mListView = (ListView) inflate(getContext(), R.layout.spinner_mc_version, null);
         mListView.setAdapter(mProfileAdapter);
+        int[] pal = net.kdt.pojavlaunch.KollegenTheme.palette();
+        mListView.setBackgroundColor(pal[net.kdt.pojavlaunch.KollegenTheme.PANEL2]);
+        mListView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         mListView.setOnItemClickListener((parent, view, position, id) -> {
             Object item = mProfileAdapter.getItem(position);
             if(item instanceof String) {

@@ -105,7 +105,11 @@ public class ProfileAdapter extends BaseAdapter {
         
         if(displaySelection){
             String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
-            extendedTextView.setBackgroundColor(selectedProfile.equals(nm) ? ColorUtils.setAlphaComponent(Color.WHITE,60) : Color.TRANSPARENT);
+            int[] pal = net.kdt.pojavlaunch.KollegenTheme.palette();
+            extendedTextView.setBackgroundColor(selectedProfile.equals(nm)
+                    ? ColorUtils.setAlphaComponent(pal[net.kdt.pojavlaunch.KollegenTheme.ACCENT], 70)
+                    : Color.TRANSPARENT);
+            extendedTextView.setTextColor(pal[net.kdt.pojavlaunch.KollegenTheme.TEXT]);
         }else extendedTextView.setBackgroundColor(Color.TRANSPARENT);
     }
 

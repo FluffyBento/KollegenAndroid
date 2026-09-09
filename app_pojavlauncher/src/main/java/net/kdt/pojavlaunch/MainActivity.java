@@ -125,6 +125,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        net.kdt.pojavlaunch.KollegenTheme.applyWindow(getWindow());
 
         minecraftProfile = LauncherProfiles.getCurrentProfile();
         Tools.useANGLE = minecraftProfile.useANGLE;

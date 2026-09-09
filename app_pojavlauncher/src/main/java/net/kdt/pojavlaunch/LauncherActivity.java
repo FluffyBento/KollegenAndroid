@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -138,7 +139,14 @@ public class LauncherActivity extends BaseActivity {
     
     private final FragmentManager.FragmentLifecycleCallbacks mFragmentCallbackListener = new FragmentManager.FragmentLifecycleCallbacks() {
         @Override
+        public void onFragmentViewCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull View v, @Nullable Bundle savedInstanceState) {
+            KollegenTheme.applyTree(v);
+            if (f instanceof MainMenuFragment) ((MainMenuFragment) f).applyTheme(v);
+        }
+
+        @Override
         public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+            if(mSettingsButton == null) return;
             mSettingsButton.setImageDrawable(ContextCompat.getDrawable(getBaseContext(), f instanceof MainMenuFragment
                     ? R.drawable.ic_menu_settings : R.drawable.ic_menu_home));
         }
@@ -299,6 +307,7 @@ public class LauncherActivity extends BaseActivity {
         setContentView(R.layout.activity_pojav_launcher);
         KollegenTheme.applyWindow(getWindow());
         FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.registerFragmentLifecycleCallbacks(mFragmentCallbackListener, false);
         
         if(fragmentManager.getBackStackEntryCount() < 1) {
             
@@ -334,6 +343,7 @@ public class LauncherActivity extends BaseActivity {
         );
         getWindow().setBackgroundDrawable(null);
         bindViews();
+        KollegenTheme.applyTree(findViewById(android.R.id.content));
         checkNotificationPermission();
         mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         ProgressKeeper.addTaskCountListener(mDoubleLaunchPreventionListener);
@@ -374,7 +384,6 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getSupportFragmentManager().registerFragmentLifecycleCallbacks(mFragmentCallbackListener, true);
     }
 
     @Override
