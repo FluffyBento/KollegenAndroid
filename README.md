@@ -1,6 +1,6 @@
 # Kollegen Launcher Android
 
-Android-Version des [Kollegen Clients](https://kollegen.dev) – ein Launcher für
+Android-Version des [Kollegen Clients](https://kollegen.dev), ein Launcher für
 Minecraft Java Edition auf Android, basiert auf [Amethyst](https://github.com/AngelAuraMC/Amethyst-Android)
 (fork of [PojavLauncher](https://github.com/PojavLauncherTeam/PojavLauncherTeam)).
 
