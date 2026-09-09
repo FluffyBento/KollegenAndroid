@@ -1,7 +1,7 @@
 
 
 
-#include <EGL
+#include <EGL//egl.h>
 #include <stdbool.h>
 #ifndef POJAVLAUNCHER_GL_BRIDGE_H
 #define POJAVLAUNCHER_GL_BRIDGE_H
