@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/koll_friends_root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="@android:color/transparent">
+
+	<LinearLayout
+		android:id="@+id/koll_friends_header"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="@dimen/padding_medium">
+
+		<Button
+			android:id="@+id/koll_friends_login"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/_44sdp"
+			android:text="@string/kollegen_login_button"
+			android:textAllCaps="false"
+			android:textSize="@dimen/_13ssp"
+			android:visibility="gone" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:layout_marginTop="@dimen/padding_medium">
+
+			<EditText
+				android:id="@+id/koll_friends_code"
+				android:layout_width="0dp"
+				android:layout_height="@dimen/_44sdp"
+				android:layout_weight="1"
+				android:hint="@string/kollegen_friend_code_hint"
+				android:inputType="textCapCharacters"
+				android:maxLines="1"
+				android:textSize="@dimen/_13ssp" />
+
+			<Button
+				android:id="@+id/koll_friends_add"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/_44sdp"
+				android:layout_marginStart="@dimen/padding_medium"
+				android:text="@string/kollegen_add_friend"
+				android:textAllCaps="false"
+				android:textSize="@dimen/_13ssp" />
+		</LinearLayout>
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/koll_friends_empty"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:padding="@dimen/padding_heavy"
+		android:text="@string/kollegen_no_friends"
+		android:textSize="@dimen/_14ssp"
+		android:visibility="gone" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/koll_friends_list"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:clipToPadding="false"
+		android:paddingBottom="@dimen/padding_medium" />
+</LinearLayout>

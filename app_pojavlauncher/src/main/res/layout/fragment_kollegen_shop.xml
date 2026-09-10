@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/koll_shop_root"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="@android:color/transparent">
+
+	<LinearLayout
+		android:id="@+id/koll_shop_header"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:padding="@dimen/padding_medium"
+		android:visibility="gone">
+
+		<TextView
+			android:id="@+id/koll_shop_header_text"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:textSize="@dimen/_15ssp" />
+
+		<Button
+			android:id="@+id/koll_shop_login"
+			android:layout_width="wrap_content"
+			android:layout_height="@dimen/_38sdp"
+			android:text="@string/kollegen_login_button"
+			android:textAllCaps="false"
+			android:textSize="@dimen/_12ssp"
+			android:visibility="gone" />
+	</LinearLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/koll_shop_list"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:clipToPadding="false"
+		android:paddingBottom="@dimen/padding_medium" />
+</LinearLayout>

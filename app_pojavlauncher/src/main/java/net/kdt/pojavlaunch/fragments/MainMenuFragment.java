@@ -28,6 +28,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
+import net.kdt.pojavlaunch.kollegen.KollegenTabHostFragment;
 import net.kdt.pojavlaunch.modloaders.LWJGL3ifyUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
@@ -61,7 +62,7 @@ public class MainMenuFragment extends Fragment {
 
         mDiscordButton.setOnClickListener(v -> Tools.openURL(requireActivity(), getString(R.string.discord_invite)));
         view.findViewById(R.id.kollegen_social_button).setOnClickListener(v ->
-                Tools.swapFragment(requireActivity(), KollegenSocialFragment.class, KollegenSocialFragment.TAG, null));
+                Tools.swapFragment(requireActivity(), KollegenTabHostFragment.class, KollegenTabHostFragment.TAG, null));
         mCustomControlButton.setOnClickListener(v -> startActivity(new Intent(requireContext(), CustomControlsActivity.class)));
         if (hasOnlineProfile()) {
             mInstallJarButton.setOnClickListener(v -> runInstallerWithConfirmation(false));

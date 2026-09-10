@@ -39,7 +39,6 @@ import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
 import net.kdt.pojavlaunch.fragments.MainMenuFragment;
 import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
-import net.kdt.pojavlaunch.fragments.KollegenSocialFragment;
 import net.kdt.pojavlaunch.fragments.SelectAuthFragment;
 import net.kdt.pojavlaunch.lifecycle.ContextAwareDoneListener;
 import net.kdt.pojavlaunch.lifecycle.ContextExecutor;
@@ -406,14 +405,6 @@ public class LauncherActivity extends BaseActivity {
         if(fragment != null){
             if(fragment.canGoBack()){
                 fragment.goBack();
-                return;
-            }
-        }
-
-        KollegenSocialFragment socialFragment = (KollegenSocialFragment) getVisibleFragment(KollegenSocialFragment.TAG);
-        if(socialFragment != null){
-            if(socialFragment.canGoBack()){
-                socialFragment.goBack();
                 return;
             }
         }
