@@ -3,9 +3,7 @@ package net.kdt.pojavlaunch.kollegen;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.webkit.CookieManager;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -60,7 +58,6 @@ public class KollegenSession {
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
-        settings.setSupportMultipleWindows(true);
         CookieManager.getInstance().setAcceptCookie(true);
         webView.setBackgroundColor(android.graphics.Color.WHITE);
         webView.setLayoutParams(new android.widget.FrameLayout.LayoutParams(
@@ -101,20 +98,18 @@ public class KollegenSession {
             }
 
             @Override
+            public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
+                if (url.contains("/api/auth/discord/callback")) {
+                    handler.post(poll[0]);
+                }
+            }
+
+            @Override
             public void onPageFinished(WebView view, String url) {
                 handler.post(poll[0]);
             }
         };
         webView.setWebViewClient(client);
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-                WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
-                transport.setWebView(view);
-                resultMsg.sendToTarget();
-                return true;
-            }
-        });
 
         AlertDialog dialog = new AlertDialog.Builder(activity)
                 .setTitle(R.string.kollegen_login_title)

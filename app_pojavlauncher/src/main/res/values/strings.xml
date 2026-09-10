@@ -457,7 +457,7 @@
     <string name="kollegen_shop_login_hint">Log in to see your points and buy items</string>
     <string name="kollegen_profile_avatar">Profile avatar</string>
     <string name="koll_friend_avatar_desc">Friend avatar</string>
-    <string name="koll_tagline">Your Minecraft community</string>
+    <string name="koll_tagline"></string>
     <string name="koll_nav_games">Games</string>
     <string name="koll_nav_social">Socials</string>
     <string name="koll_nav_settings">Settings</string>

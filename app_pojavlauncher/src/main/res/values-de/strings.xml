@@ -398,7 +398,7 @@ Um die offizielle Download-Quelle zu verwenden, drücke \"Auf offizielle Seite u
     <string name="kollegen_shop_login_hint">Melde dich an, um Punkte zu sehen und Artikel zu kaufen</string>
     <string name="kollegen_profile_avatar">Profil-Avatar</string>
     <string name="koll_friend_avatar_desc">Freundes-Avatar</string>
-    <string name="koll_tagline">Deine Minecraft-Community</string>
+    <string name="koll_tagline"></string>
     <string name="koll_nav_games">Spiele</string>
     <string name="koll_nav_social">Soziales</string>
     <string name="koll_nav_settings">Einstellungen</string>

@@ -68,8 +68,6 @@ public class KollegenRootFragment extends Fragment {
         if (mNavBar != null) mNavBar.setBackgroundColor(KollegenTheme.color(KollegenTheme.PANEL2));
         View title = view.findViewById(R.id.koll_root_title);
         if (title != null) ((android.widget.TextView) title).setTextColor(KollegenTheme.color(KollegenTheme.ACCENT));
-        View tagline = view.findViewById(R.id.koll_root_tagline);
-        if (tagline != null) ((android.widget.TextView) tagline).setTextColor(KollegenTheme.color(KollegenTheme.MUTED));
         View icon = view.findViewById(R.id.koll_root_icon);
         if (icon instanceof android.widget.ImageView) {
             ((android.widget.ImageView) icon).setColorFilter(KollegenTheme.color(KollegenTheme.ACCENT));
