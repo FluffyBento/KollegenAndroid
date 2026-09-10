@@ -5,6 +5,8 @@ on:
   push:
     branches-ignore:
       - 'l10n_v3_openjdk'
+    tags:
+      - '**'
   workflow_dispatch:
 
 jobs:
