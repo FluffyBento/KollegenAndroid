@@ -122,8 +122,8 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.customDebug
-            resValue "string", "app_name", "KollegenClient (Debug)"
-            resValue "string", "app_short_name", "Kollegen (Debug)"
+            resValue "string", "app_name", "Kollegen"
+            resValue "string", "app_short_name", "Kollegen"
             resValue 'string', 'application_package', 'dev.kollegen.client.android.debug'
             resValue 'string', 'storageProviderAuthorities', 'dev.kollegen.client.android.scoped.gamefolder.debug'
             resValue 'string', 'shareProviderAuthority', 'dev.kollegen.client.android.scoped.controlfolder.debug'
@@ -146,7 +146,7 @@ android {
             
             
             
-            resValue "string", "app_name", "KollegenClient"
+            resValue "string", "app_name", "Kollegen"
             resValue "string", "app_short_name", "Kollegen"
             resValue 'string', 'storageProviderAuthorities', 'dev.kollegen.client.android.scoped.gamefolder'
             resValue 'string', 'application_package', 'dev.kollegen.client.android'

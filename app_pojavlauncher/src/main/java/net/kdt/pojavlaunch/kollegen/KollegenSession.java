@@ -62,6 +62,12 @@ public class KollegenSession {
         settings.setDatabaseEnabled(true);
         settings.setSupportMultipleWindows(true);
         CookieManager.getInstance().setAcceptCookie(true);
+        webView.setBackgroundColor(android.graphics.Color.WHITE);
+        webView.setLayoutParams(new android.widget.FrameLayout.LayoutParams(
+                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                (int) android.util.TypedValue.applyDimension(
+                        android.util.TypedValue.COMPLEX_UNIT_DIP, 560,
+                        activity.getResources().getDisplayMetrics())));
 
         final Handler handler = new Handler(Looper.getMainLooper());
         final boolean[] running = {false};
@@ -103,12 +109,8 @@ public class KollegenSession {
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-                WebView child = new WebView(view.getContext());
-                child.getSettings().setJavaScriptEnabled(true);
-                child.getSettings().setDomStorageEnabled(true);
-                child.setWebViewClient(client);
                 WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
-                transport.setWebView(child);
+                transport.setWebView(view);
                 resultMsg.sendToTarget();
                 return true;
             }
