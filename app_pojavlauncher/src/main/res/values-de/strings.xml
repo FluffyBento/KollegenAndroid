@@ -425,6 +425,12 @@ Um die offizielle Download-Quelle zu verwenden, drücke \"Auf offizielle Seite u
     <string name="koll_settings_more">Launcher-Einstellungen</string>
     <string name="koll_settings_about">Über</string>
     <string name="koll_settings_about_text">Kollegen ist eine unabhängige Minecraft-Community und Launcher-App.</string>
+    <string name="kollegen_update_title">Update verfügbar</string>
+    <string name="kollegen_update_message">Kollegen %1$s ist verfügbar. Möchtest du es jetzt herunterladen und installieren?</string>
+    <string name="kollegen_update_install">Installieren</string>
+    <string name="kollegen_update_cancel">Später</string>
+    <string name="kollegen_update_downloading">Update wird heruntergeladen...</string>
+    <string name="kollegen_update_error">Update fehlgeschlagen: %1$s</string>
     <string name="ltw_render_distance_warning_msg">Deine GPU ist ohne Sodium oder ähnliche Mods nicht in der Lage, eine Renderdistanz von über 7 Chunks zu rendern. Solltest du auf OK tippen, wird die Renderdistanz automatisch reduziert.</string>
     <string name="mcl_button_open_directory">Spielverzeichnis öffnen</string>
     <string name="local_login_bad_username_title">Ungeeigneter Benutzername</string>

@@ -53,13 +53,13 @@ public final class KollegenModInstaller {
             return;
         }
         File cached = new File(cacheDir(), COMPANION_MOD_FILENAME);
-        if (!cached.isFile() || cached.length() == 0) {
-            try {
+        try {
+            long remoteSize = DownloadUtils.getContentLength(MOD_DOWNLOAD_URL);
+            if (remoteSize > 0 && (!cached.isFile() || cached.length() != remoteSize)) {
                 DownloadUtils.downloadFile(MOD_DOWNLOAD_URL, cached);
-            } catch (IOException e) {
-                Log.w("KollegenModInstaller", "Mod-Download fehlgeschlagen", e);
-                return;
             }
+        } catch (IOException e) {
+            Log.w("KollegenModInstaller", "Mod-Prüfung fehlgeschlagen", e);
         }
         copyToMods(cached, new File(gameDir, "mods"));
     }
