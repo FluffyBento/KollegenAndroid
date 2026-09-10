@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
@@ -22,7 +23,7 @@ public final class KollegenTheme {
     private static final Map<String, int[]> PALETTES = new LinkedHashMap<>();
 
     static {
-        PALETTES.put("Kollegen", colors("#0a0c10", "#12141d", "#161922", "#ffaa00", "#f5c518", "#ededed", "#9ca3af", "#282d3d", "#ff5b6e"));
+        PALETTES.put("Kollegen", colors("#0b0d12", "#14161f", "#1b1e28", "#f5a623", "#ffb454", "#f3e9d8", "#b9a98c", "#262a36", "#ff5b6e"));
         PALETTES.put("Limit_Los", colors("#140a0a", "#1d0f0f", "#271414", "#FF0000", "#cc0000", "#f3e9e9", "#c39b9b", "#600000", "#ff5b6e"));
         PALETTES.put("FluffyBento", colors("#0d0912", "#160f1e", "#1e1524", "#b054d8", "#7c2fa3", "#f6ecfa", "#c2a8d4", "#332050", "#ff6b9d"));
         PALETTES.put("T_son_", colors("#0c1410", "#112019", "#16271e", "#2ecc71", "#239b56", "#e8f5ee", "#9bc2ac", "#244234", "#ff5b6e"));
@@ -61,6 +62,16 @@ public final class KollegenTheme {
         return palette()[index];
     }
 
+    public static void setTheme(String name) {
+        if (PALETTES.containsKey(name)) {
+            LauncherPreferences.DEFAULT_PREF.edit().putString(PREF_KEY_THEME, name).apply();
+        }
+    }
+
+    public static String[] themeNames() {
+        return PALETTES.keySet().toArray(new String[0]);
+    }
+
     public static void applyWindow(Window window) {
         int[] pal = palette();
         window.setStatusBarColor(pal[KollegenTheme.BG]);
@@ -74,18 +85,34 @@ public final class KollegenTheme {
 
     public static StateListDrawable buttonBackground(int basePaletteIndex, int pressedIndex) {
         int[] pal = palette();
-        GradientDrawable normal = rounded(pal[basePaletteIndex], pal[BORDER]);
-        GradientDrawable pressed = rounded(pal[pressedIndex], pal[BORDER]);
+        GradientDrawable normal = rounded(pal[basePaletteIndex], pal[BORDER], 12f);
+        GradientDrawable pressed = rounded(pal[pressedIndex], pal[BORDER], 12f);
         StateListDrawable stateList = new StateListDrawable();
         stateList.addState(new int[]{android.R.attr.state_pressed}, pressed);
         stateList.addState(new int[]{}, normal);
         return stateList;
     }
 
+    public static GradientDrawable cardBackground(int fill) {
+        return rounded(fill, palette()[BORDER], 14f);
+    }
+
+    public static GradientDrawable cardBackground(int fill, int stroke) {
+        return rounded(fill, stroke, 14f);
+    }
+
+    public static GradientDrawable panelBackground() {
+        return rounded(palette()[PANEL], palette()[BORDER], 14f);
+    }
+
     public static GradientDrawable rounded(int fill, int stroke) {
+        return rounded(fill, stroke, 28f);
+    }
+
+    public static GradientDrawable rounded(int fill, int stroke, float radius) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setCornerRadius(28f);
+        drawable.setCornerRadius(radius);
         drawable.setColor(fill);
         drawable.setStroke(2, stroke);
         return drawable;
@@ -102,6 +129,15 @@ public final class KollegenTheme {
             Color.parseColor("#909090"),
             Color.parseColor("#FFFFFF"),
             Color.parseColor("#B2B2B2"),
+            Color.parseColor("#0b0d12"),
+            Color.parseColor("#14161f"),
+            Color.parseColor("#1b1e28"),
+            Color.parseColor("#262a36"),
+            Color.parseColor("#f3e9d8"),
+            Color.parseColor("#b9a98c"),
+            Color.parseColor("#f5a623"),
+            Color.parseColor("#ffb454"),
+            Color.parseColor("#ff5b6e"),
     };
 
     private static final int[] STATIC_MAP = {
@@ -115,6 +151,15 @@ public final class KollegenTheme {
             MUTED,
             TEXT,
             MUTED,
+            BG,
+            PANEL,
+            PANEL2,
+            BORDER,
+            TEXT,
+            MUTED,
+            ACCENT,
+            ACCENT2,
+            DANGER,
     };
 
     public static void applyTree(View view) {
@@ -137,9 +182,10 @@ public final class KollegenTheme {
             edit.setBackground(rounded(pal[PANEL], pal[BORDER]));
             edit.setTextColor(remapColor(edit.getTextColors().getDefaultColor(), TEXT));
             edit.setHintTextColor(remapColor(edit.getCurrentHintTextColor(), MUTED));
-        } else if (view instanceof TextView) {
+        } else if (view instanceof TextView && !(view instanceof Button)) {
             TextView text = (TextView) view;
-            text.setTextColor(remapColor(text.getTextColors().getDefaultColor(), TEXT));
+            int original = text.getTextColors().getDefaultColor();
+            text.setTextColor(remapColor(original, original));
             text.setHintTextColor(remapColor(text.getCurrentHintTextColor(), MUTED));
         }
 

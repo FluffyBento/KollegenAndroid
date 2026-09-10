@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_medium">
+
+        <TextView
+            android:id="@+id/koll_settings_section_design"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/koll_settings_design"
+            android:textColor="@color/koll_accent"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/koll_settings_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_18sdp"
+            android:background="@drawable/koll_button_bg"
+            android:text="@string/koll_settings_theme"
+            android:textColor="@color/koll_text"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/koll_settings_section_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/koll_settings_launcher"
+            android:textColor="@color/koll_accent"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/koll_settings_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_18sdp"
+            android:background="@drawable/koll_button_bg"
+            android:text="@string/koll_settings_more"
+            android:textColor="@color/koll_text" />
+
+        <TextView
+            android:id="@+id/koll_settings_section_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/koll_settings_about"
+            android:textColor="@color/koll_accent"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/koll_settings_about_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/koll_settings_about_text"
+            android:textColor="@color/koll_muted"
+            android:textSize="@dimen/_12ssp" />
+    </LinearLayout>
+</ScrollView>

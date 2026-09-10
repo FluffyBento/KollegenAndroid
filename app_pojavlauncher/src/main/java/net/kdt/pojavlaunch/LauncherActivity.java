@@ -40,6 +40,7 @@ import net.kdt.pojavlaunch.extra.ExtraListener;
 import net.kdt.pojavlaunch.fragments.MainMenuFragment;
 import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
 import net.kdt.pojavlaunch.fragments.SelectAuthFragment;
+import net.kdt.pojavlaunch.kollegen.KollegenRootFragment;
 import net.kdt.pojavlaunch.lifecycle.ContextAwareDoneListener;
 import net.kdt.pojavlaunch.lifecycle.ContextExecutor;
 import net.kdt.pojavlaunch.modloaders.LWJGL3ifyUtils;
@@ -146,6 +147,9 @@ public class LauncherActivity extends BaseActivity {
         @Override
         public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
             if(mSettingsButton == null) return;
+            boolean isRoot = f instanceof KollegenRootFragment;
+            mSettingsButton.setVisibility(isRoot ? View.GONE : View.VISIBLE);
+            if(mAccountSpinner != null) mAccountSpinner.setVisibility(isRoot ? View.GONE : View.VISIBLE);
             mSettingsButton.setImageDrawable(ContextCompat.getDrawable(getBaseContext(), f instanceof MainMenuFragment
                     ? R.drawable.ic_menu_settings : R.drawable.ic_menu_home));
         }
@@ -315,7 +319,7 @@ public class LauncherActivity extends BaseActivity {
             fragmentManager.beginTransaction()
                     .setReorderingAllowed(true)
                     .addToBackStack("ROOT")
-                    .add(R.id.container_fragment, MainMenuFragment.class, null, "ROOT").commit();
+                    .add(R.id.container_fragment, KollegenRootFragment.class, null, "ROOT").commit();
         }
 
 

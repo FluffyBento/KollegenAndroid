@@ -3,13 +3,25 @@
     <color name="control_button_color">#4CC4C4C4</color>
     <color name="control_button_pressed_color">#4D000000</color>
 
-    <color name="minebutton_color">#ffaa00</color>
-    <color name="background_app">#181818</color>
+    <color name="minebutton_color">#f5a623</color>
+    <color name="background_app">#0b0d12</color>
     <color name="divider">@color/background_overlay</color>
-    <color name="background_overlay">#464646</color>
-    <color name="background_status_bar">#242424</color>
-    <color name="background_bottom_bar">#232323</color>
+    <color name="background_overlay">#1b1e28</color>
+    <color name="background_status_bar">#0b0d12</color>
+    <color name="background_bottom_bar">#14161f</color>
 
-    <color name="primary_text">#FFFFFF</color>
-    <color name="secondary_text">#B2B2B2</color>
+    <color name="primary_text">#f3e9d8</color>
+    <color name="secondary_text">#b9a98c</color>
+
+    <color name="koll_bg">#0b0d12</color>
+    <color name="koll_panel">#14161f</color>
+    <color name="koll_panel2">#1b1e28</color>
+    <color name="koll_accent">#f5a623</color>
+    <color name="koll_accent2">#ffb454</color>
+    <color name="koll_text">#f3e9d8</color>
+    <color name="koll_muted">#b9a98c</color>
+    <color name="koll_border">#262a36</color>
+    <color name="koll_danger">#ff5b6e</color>
+    <color name="koll_green">#55d07a</color>
+    <color name="koll_blue">#5aa9ff</color>
 </resources>

@@ -1,10 +1,11 @@
 package net.kdt.pojavlaunch.kollegen;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.webkit.CookieManager;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -51,40 +52,81 @@ public class KollegenSession {
     }
 
     public static void login(Activity activity, Runnable onSuccess) {
-        WebView webView = new WebView(activity);
+        if (activity == null) return;
+        final boolean[] done = {false};
+
+        final WebView webView = new WebView(activity);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
-        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setSupportMultipleWindows(true);
         CookieManager.getInstance().setAcceptCookie(true);
-        webView.setWebViewClient(new WebViewClient() {
+
+        final Handler handler = new Handler(Looper.getMainLooper());
+        final boolean[] running = {false};
+        final boolean[] polling = {true};
+        final AlertDialog[] dialogRef = {null};
+
+        final Runnable[] poll = new Runnable[1];
+        poll[0] = () -> {
+            if (done[0] || !polling[0]) return;
+            if (running[0]) return;
+            running[0] = true;
+            check(activity, () -> {
+                running[0] = false;
+                if (done[0]) return;
+                if (isLoggedIn()) {
+                    done[0] = true;
+                    polling[0] = false;
+                    AlertDialog dialog = dialogRef[0];
+                    if (dialog != null && dialog.isShowing()) dialog.dismiss();
+                    onSuccess.run();
+                } else if (polling[0]) {
+                    handler.postDelayed(poll[0], 900);
+                }
+            });
+        };
+
+        WebViewClient client = new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (isLoggedIn()) {
-                    onSuccess.run();
-                    return true;
-                }
-                return false;
+                return done[0];
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                if (isLoggedIn()) {
-                    onSuccess.run();
-                }
+                handler.post(poll[0]);
+            }
+        };
+        webView.setWebViewClient(client);
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
+                WebView child = new WebView(view.getContext());
+                child.getSettings().setJavaScriptEnabled(true);
+                child.getSettings().setDomStorageEnabled(true);
+                child.setWebViewClient(client);
+                WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
+                transport.setWebView(child);
+                resultMsg.sendToTarget();
+                return true;
             }
         });
+
         AlertDialog dialog = new AlertDialog.Builder(activity)
                 .setTitle(R.string.kollegen_login_title)
                 .setView(webView)
                 .setNegativeButton(R.string.kollegen_close, (d, w) -> {})
                 .setOnDismissListener(d -> {
+                    polling[0] = false;
                     webView.destroy();
                 })
                 .create();
+        dialogRef[0] = dialog;
         dialog.show();
         webView.loadUrl(LOGIN_URL);
+        handler.postDelayed(poll[0], 600);
     }
 
     public static void logout(Activity activity, Runnable onDone) {

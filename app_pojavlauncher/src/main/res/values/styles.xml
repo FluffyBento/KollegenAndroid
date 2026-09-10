@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
     <style name="AppTheme" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/background_app</item>
+        <item name="android:colorBackground">@color/koll_bg</item>
         <item name="android:statusBarColor">@color/background_status_bar</item>
         <item name="android:navigationBarColor">@color/background_app</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-
         <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <item name="android:textColorHint">@color/secondary_text</item>
+        <item name="android:colorPrimary">@color/koll_panel</item>
+        <item name="android:colorAccent">@color/koll_accent</item>
+        <item name="android:colorButtonNormal">@color/koll_panel2</item>
+        <item name="android:colorControlNormal">@color/koll_muted</item>
+        <item name="android:colorControlActivated">@color/koll_accent</item>
+        <item name="android:buttonStyle">@style/KollButton</item>
+        <item name="android:alertDialogTheme">@style/AppTheme.Dialog</item>
+        <item name="android:dialogTheme">@style/AppTheme.Dialog</item>
+    </style>
 
+    <style name="KollButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/koll_button_bg</item>
+        <item name="android:textColor">@color/koll_text</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minHeight">@dimen/_42sdp</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@color/koll_panel</item>
+        <item name="android:colorBackground">@color/koll_panel</item>
+        <item name="android:textColorPrimary">@color/koll_text</item>
+        <item name="android:textColorSecondary">@color/koll_muted</item>
+        <item name="android:textColorHint">@color/koll_muted</item>
+        <item name="android:colorAccent">@color/koll_accent</item>
+        <item name="android:colorButtonNormal">@color/koll_panel2</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
 
     <style name="LauncherFragment_Divider">
@@ -21,16 +52,24 @@
 
     <style name="LauncherMenuButton" parent="Widget.AppCompat.Button">
         <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="LauncherMenuButton.Universal" parent="LauncherMenuButton">
-        <item name="android:layout_height">@dimen/_66sdp</item>
+        <item name="android:layout_height">@dimen/_52sdp</item>
+        <item name="android:textColor">@color/koll_text</item>
     </style>
 
     <style name="ThickDivider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/_1sdp</item>
         <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <style name="KollTabButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/_13ssp</item>
     </style>
 
     <item name="dimension_tracker" type="id" />

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,6 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.kollegen.KollegenTabHostFragment;
 import net.kdt.pojavlaunch.modloaders.LWJGL3ifyUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
@@ -44,7 +44,7 @@ public class MainMenuFragment extends Fragment {
     private mcVersionSpinner mVersionSpinner;
 
     public MainMenuFragment(){
-        super(R.layout.fragment_launcher);
+        super(R.layout.fragment_kollegen_minecraft);
     }
 
     @Override
@@ -61,8 +61,6 @@ public class MainMenuFragment extends Fragment {
         mVersionSpinner = view.findViewById(R.id.mc_version_spinner);
 
         mDiscordButton.setOnClickListener(v -> Tools.openURL(requireActivity(), getString(R.string.discord_invite)));
-        view.findViewById(R.id.kollegen_social_button).setOnClickListener(v ->
-                Tools.swapFragment(requireActivity(), KollegenTabHostFragment.class, KollegenTabHostFragment.TAG, null));
         mCustomControlButton.setOnClickListener(v -> startActivity(new Intent(requireContext(), CustomControlsActivity.class)));
         if (hasOnlineProfile()) {
             mInstallJarButton.setOnClickListener(v -> runInstallerWithConfirmation(false));
@@ -111,8 +109,6 @@ public class MainMenuFragment extends Fragment {
     public void applyTheme(View view){
         int[] pal = net.kdt.pojavlaunch.KollegenTheme.palette();
         view.setBackgroundColor(pal[net.kdt.pojavlaunch.KollegenTheme.BG]);
-        View bottomBar = view.findViewById(R.id._background_display_view);
-        if(bottomBar != null) bottomBar.setBackgroundColor(pal[net.kdt.pojavlaunch.KollegenTheme.PANEL2]);
         View versionSpinner = view.findViewById(R.id.mc_version_spinner);
         if(versionSpinner instanceof mcVersionSpinner) ((mcVersionSpinner) versionSpinner).setTextColor(pal[net.kdt.pojavlaunch.KollegenTheme.TEXT]);
         Button playButton = view.findViewById(R.id.play_button);
@@ -122,7 +118,13 @@ public class MainMenuFragment extends Fragment {
         }
         ImageButton mEditProfileButton = view.findViewById(R.id.edit_profile_button);
         if(mEditProfileButton != null) mEditProfileButton.setColorFilter(pal[net.kdt.pojavlaunch.KollegenTheme.TEXT]);
-        Button[] menuButtons = new Button[]{view.findViewById(R.id.discord_button), view.findViewById(R.id.kollegen_social_button), view.findViewById(R.id.custom_control_button), view.findViewById(R.id.install_jar_button), view.findViewById(R.id.share_logs_button), view.findViewById(R.id.open_files_button)};
+        View panel = view.findViewById(R.id.koll_mc_panel);
+        if(panel != null) panel.setBackground(net.kdt.pojavlaunch.KollegenTheme.panelBackground());
+        TextView title = view.findViewById(R.id.mc_title);
+        if(title != null) title.setTextColor(pal[net.kdt.pojavlaunch.KollegenTheme.ACCENT]);
+        TextView subtitle = view.findViewById(R.id.mc_subtitle);
+        if(subtitle != null) subtitle.setTextColor(pal[net.kdt.pojavlaunch.KollegenTheme.MUTED]);
+        Button[] menuButtons = new Button[]{view.findViewById(R.id.discord_button), view.findViewById(R.id.custom_control_button), view.findViewById(R.id.install_jar_button), view.findViewById(R.id.share_logs_button), view.findViewById(R.id.open_files_button)};
         for(Button button : menuButtons){
             if(button != null) button.setTextColor(pal[net.kdt.pojavlaunch.KollegenTheme.TEXT]);
         }

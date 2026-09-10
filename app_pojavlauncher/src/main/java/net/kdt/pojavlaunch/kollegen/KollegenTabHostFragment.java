@@ -59,7 +59,7 @@ public class KollegenTabHostFragment extends Fragment {
         for (int i = 0; i < tabs.length; i++) {
             if (tabs[i] == null) continue;
             tabs[i].setTextColor(pal[i == mSelectedTab ? KollegenTheme.ACCENT : KollegenTheme.MUTED]);
-            tabs[i].setBackgroundColor(pal[KollegenTheme.PANEL2]);
+            tabs[i].setBackgroundColor(i == mSelectedTab ? pal[KollegenTheme.PANEL] : pal[KollegenTheme.PANEL2]);
         }
     }
 

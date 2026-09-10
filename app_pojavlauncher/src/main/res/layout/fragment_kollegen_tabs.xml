@@ -12,39 +12,34 @@
 		android:layout_width="0dp"
 		android:layout_height="@dimen/_52sdp"
 		android:orientation="horizontal"
+		android:background="@color/koll_panel2"
 		app:layout_constraintTop_toTopOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintEnd_toEndOf="parent">
 
 		<Button
 			android:id="@+id/koll_tab_friends"
+			style="@style/KollTabButton"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
-			android:text="@string/kollegen_tab_friends"
-			android:textAllCaps="true"
-			android:textSize="@dimen/_12ssp"
-			style="@android:style/Widget.Material.Button.Borderless" />
+			android:text="@string/kollegen_tab_friends" />
 
 		<Button
 			android:id="@+id/koll_tab_profile"
+			style="@style/KollTabButton"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
-			android:text="@string/kollegen_tab_profile"
-			android:textAllCaps="true"
-			android:textSize="@dimen/_12ssp"
-			style="@android:style/Widget.Material.Button.Borderless" />
+			android:text="@string/kollegen_tab_profile" />
 
 		<Button
 			android:id="@+id/koll_tab_shop"
+			style="@style/KollTabButton"
 			android:layout_width="0dp"
 			android:layout_height="match_parent"
 			android:layout_weight="1"
-			android:text="@string/kollegen_tab_shop"
-			android:textAllCaps="true"
-			android:textSize="@dimen/_12ssp"
-			style="@android:style/Widget.Material.Button.Borderless" />
+			android:text="@string/kollegen_tab_shop" />
 	</LinearLayout>
 
 	<androidx.fragment.app.FragmentContainerView
