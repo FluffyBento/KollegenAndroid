@@ -40,6 +40,14 @@
 			android:layout_height="match_parent"
 			android:layout_weight="1"
 			android:text="@string/kollegen_tab_shop" />
+
+		<Button
+			android:id="@+id/koll_tab_groups"
+			style="@style/KollTabButton"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:text="@string/kollegen_tab_groups" />
 	</LinearLayout>
 
 	<androidx.fragment.app.FragmentContainerView

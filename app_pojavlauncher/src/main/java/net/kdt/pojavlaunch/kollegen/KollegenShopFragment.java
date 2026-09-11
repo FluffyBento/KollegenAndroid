@@ -149,6 +149,10 @@ public class KollegenShopFragment extends Fragment {
             holder.mRarity.setTextColor(rarityColor);
             holder.mPrice.setTextColor(pal[KollegenTheme.ACCENT]);
 
+            holder.mPreview.removeAllViews();
+            View preview = KollegenKit.storePreview(requireContext(), item, dp(64));
+            holder.mPreview.addView(preview);
+
             if (owned) {
                 holder.mAction.setVisibility(View.GONE);
             } else if (!loggedIn) {
@@ -205,6 +209,7 @@ public class KollegenShopFragment extends Fragment {
             final TextView mRarity;
             final TextView mPrice;
             final Button mAction;
+            final android.widget.FrameLayout mPreview;
 
             Holder(@NonNull View itemView) {
                 super(itemView);
@@ -213,7 +218,12 @@ public class KollegenShopFragment extends Fragment {
                 mRarity = itemView.findViewById(R.id.koll_shop_rarity);
                 mPrice = itemView.findViewById(R.id.koll_shop_price);
                 mAction = itemView.findViewById(R.id.koll_shop_action);
+                mPreview = itemView.findViewById(R.id.koll_shop_preview);
             }
         }
+    }
+
+    private int dp(int value) {
+        return (int) (value * getResources().getDisplayMetrics().density + 0.5f);
     }
 }

@@ -62,6 +62,12 @@
 				android:visibility="gone">
 
 				<LinearLayout
+					android:id="@+id/koll_profile_banner_holder"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" />
+
+				<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:orientation="horizontal">
@@ -150,6 +156,19 @@
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/padding_small"
 					android:textSize="@dimen/_13ssp" />
+
+				<HorizontalScrollView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/padding_small"
+					android:scrollbars="none">
+
+					<LinearLayout
+						android:id="@+id/koll_profile_equipped_row"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal" />
+				</HorizontalScrollView>
 
 				<Button
 					android:id="@+id/koll_profile_logout"

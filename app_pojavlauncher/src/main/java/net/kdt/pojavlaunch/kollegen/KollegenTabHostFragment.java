@@ -17,6 +17,7 @@ public class KollegenTabHostFragment extends Fragment {
     private Button mFriendsTab;
     private Button mProfileTab;
     private Button mShopTab;
+    private Button mGroupsTab;
     private int mSelectedTab = 0;
 
     public KollegenTabHostFragment() {
@@ -28,10 +29,12 @@ public class KollegenTabHostFragment extends Fragment {
         mFriendsTab = view.findViewById(R.id.koll_tab_friends);
         mProfileTab = view.findViewById(R.id.koll_tab_profile);
         mShopTab = view.findViewById(R.id.koll_tab_shop);
+        mGroupsTab = view.findViewById(R.id.koll_tab_groups);
 
         mFriendsTab.setOnClickListener(v -> selectTab(0));
         mProfileTab.setOnClickListener(v -> selectTab(1));
         mShopTab.setOnClickListener(v -> selectTab(2));
+        mGroupsTab.setOnClickListener(v -> selectTab(3));
 
         applyTheme(view);
         selectTab(mSelectedTab);
@@ -49,13 +52,14 @@ public class KollegenTabHostFragment extends Fragment {
         switch (index) {
             case 0: return new KollegenFriendsFragment();
             case 1: return new KollegenProfileFragment();
-            default: return new KollegenShopFragment();
+            case 2: return new KollegenShopFragment();
+            default: return new KollegenGroupsFragment();
         }
     }
 
     private void updateTabColors() {
         int[] pal = KollegenTheme.palette();
-        Button[] tabs = new Button[]{mFriendsTab, mProfileTab, mShopTab};
+        Button[] tabs = new Button[]{mFriendsTab, mProfileTab, mShopTab, mGroupsTab};
         for (int i = 0; i < tabs.length; i++) {
             if (tabs[i] == null) continue;
             tabs[i].setTextColor(pal[i == mSelectedTab ? KollegenTheme.ACCENT : KollegenTheme.MUTED]);
