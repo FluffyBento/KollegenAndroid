@@ -49,7 +49,7 @@
 			android:layout_marginTop="@dimen/padding_medium"
 			android:textSize="@dimen/_13ssp" />
 
-		<View
+		<FrameLayout
 			android:id="@+id/koll_clicker_progress_bar_bg"
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/_8sdp"
@@ -61,7 +61,7 @@
 				android:id="@+id/koll_clicker_progress_bar"
 				android:layout_width="0dp"
 				android:layout_height="match_parent" />
-		</View>
+		</FrameLayout>
 	</LinearLayout>
 
 	<LinearLayout
