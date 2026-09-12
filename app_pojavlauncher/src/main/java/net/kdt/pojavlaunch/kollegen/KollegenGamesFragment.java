@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import net.kdt.pojavlaunch.KollegenTheme;
@@ -25,24 +24,19 @@ public class KollegenGamesFragment extends Fragment {
         view.findViewById(R.id.koll_game_card_mc).setOnClickListener(v ->
                 Tools.swapFragment(requireActivity(), MainMenuFragment.class, MainMenuFragment.TAG, null));
         view.findViewById(R.id.koll_game_card_world).setOnClickListener(v ->
-                showComingSoon());
+                Tools.swapFragment(requireActivity(), KollegenWorldFragment.class, KollegenWorldFragment.TAG, null));
         view.findViewById(R.id.koll_game_card_clicker).setOnClickListener(v ->
                 showClicker());
         applyTheme(view);
     }
 
-    private void showComingSoon() {
-        new AlertDialog.Builder(requireContext())
-                .setTitle(R.string.koll_coming_soon_title)
-                .setMessage(R.string.koll_coming_soon_msg)
-                .setPositiveButton(R.string.koll_ok, (d, w) -> {})
-                .show();
-    }
-
-    @SuppressWarnings("deprecation")
     private void showClicker() {
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.koll_tab_container, new KollegenClickerFragment(), "clicker")
+        View cards = requireView().findViewById(R.id.koll_games_cards);
+        View container = requireView().findViewById(R.id.koll_game_content);
+        if (cards != null) cards.setVisibility(View.GONE);
+        container.setVisibility(View.VISIBLE);
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.koll_game_content, new KollegenClickerFragment(), "clicker")
                 .addToBackStack(null)
                 .commit();
     }
