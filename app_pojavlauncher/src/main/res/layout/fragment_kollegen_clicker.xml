@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/koll_clicker_scroll"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fillViewport="true"
+	android:background="#08090C">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="@dimen/_12sdp">
+
+		<LinearLayout
+			android:id="@+id/koll_clicker_level_panel"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:padding="@dimen/_14sdp">
+
+			<TextView
+				android:id="@+id/koll_clicker_level"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="@dimen/_14ssp"
+				android:textStyle="bold" />
+
+			<FrameLayout
+				android:id="@+id/koll_clicker_progress_bar_bg"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/_10sdp"
+				android:layout_marginTop="@dimen/_8sdp"
+				android:padding="2dp">
+
+				<View
+					android:id="@+id/koll_clicker_progress_bar"
+					android:layout_width="0dp"
+					android:layout_height="match_parent" />
+			</FrameLayout>
+
+			<TextView
+				android:id="@+id/koll_clicker_level_sub"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_6sdp"
+				android:textSize="@dimen/_11ssp" />
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/koll_clicker_count"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/_14sdp"
+			android:gravity="center"
+			android:textSize="@dimen/_24ssp"
+			android:textStyle="bold" />
+
+		<TextView
+			android:id="@+id/koll_clicker_count_label"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:text="Klicks"
+			android:textSize="@dimen/_11ssp" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/_10sdp"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<LinearLayout
+					android:id="@+id/koll_clicker_stat_balance_box"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:layout_marginEnd="@dimen/_6sdp"
+					android:orientation="vertical"
+					android:padding="@dimen/_10sdp">
+
+					<TextView
+						android:id="@+id/koll_clicker_stat_balance"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:textSize="@dimen/_14ssp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/_2sdp"
+						android:text="KOLLEGEN-KLICKS"
+						android:textSize="@dimen/_9ssp"
+						android:letterSpacing="0.05" />
+				</LinearLayout>
+
+				<LinearLayout
+					android:id="@+id/koll_clicker_stat_clickval_box"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:layout_marginStart="@dimen/_6sdp"
+					android:orientation="vertical"
+					android:padding="@dimen/_10sdp">
+
+					<TextView
+						android:id="@+id/koll_clicker_stat_clickval"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:textSize="@dimen/_14ssp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/_2sdp"
+						android:text="KLICK-WERT"
+						android:textSize="@dimen/_9ssp"
+						android:letterSpacing="0.05" />
+
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="pro Klick"
+						android:textSize="@dimen/_9ssp" />
+				</LinearLayout>
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/_6sdp"
+				android:orientation="horizontal">
+
+				<LinearLayout
+					android:id="@+id/koll_clicker_stat_cps_box"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:orientation="vertical"
+					android:padding="@dimen/_10sdp">
+
+					<TextView
+						android:id="@+id/koll_clicker_stat_cps"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:textSize="@dimen/_14ssp"
+						android:textStyle="bold" />
+
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="@dimen/_2sdp"
+						android:text="PASSIV-FLOW"
+						android:textSize="@dimen/_9ssp"
+						android:letterSpacing="0.05" />
+
+					<TextView
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="pro Sekunde"
+						android:textSize="@dimen/_9ssp" />
+				</LinearLayout>
+			</LinearLayout>
+		</LinearLayout>
+
+		<FrameLayout
+			android:id="@+id/koll_clicker_button_holder"
+			android:layout_width="@dimen/_180sdp"
+			android:layout_height="@dimen/_180sdp"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="@dimen/_12sdp"
+			android:padding="@dimen/_4sdp">
+
+			<ImageView
+				android:id="@+id/koll_clicker_button"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_margin="@dimen/_3sdp"
+				android:scaleType="centerCrop"
+				android:clickable="true"
+				android:focusable="true" />
+		</FrameLayout>
+
+		<Button
+			android:id="@+id/koll_clicker_skin_pill"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:layout_marginTop="@dimen/_8sdp"
+			android:textSize="@dimen/_12ssp"
+			android:textAllCaps="false"
+			android:insetTop="0dp"
+			android:insetBottom="0dp"
+			android:paddingStart="@dimen/_12sdp"
+			android:paddingEnd="@dimen/_12sdp"
+			android:minWidth="0dp" />
+
+		<TextView
+			android:id="@+id/koll_clicker_tip"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/_8sdp"
+			android:textSize="@dimen/_11ssp"
+			android:fontFamily="monospace" />
+
+		<LinearLayout
+			android:id="@+id/koll_clicker_tabs"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/_12sdp"
+			android:orientation="horizontal">
+
+			<Button
+				android:id="@+id/koll_clicker_tab_upgrades"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_marginEnd="@dimen/_3sdp"
+				android:textSize="@dimen/_12ssp"
+				android:textStyle="bold"
+				android:textAllCaps="false"
+				android:paddingTop="@dimen/_8sdp"
+				android:paddingBottom="@dimen/_8sdp"
+				android:insetTop="0dp"
+				android:insetBottom="0dp" />
+
+			<Button
+				android:id="@+id/koll_clicker_tab_skins"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_marginStart="@dimen/_3sdp"
+				android:layout_marginEnd="@dimen/_3sdp"
+				android:textSize="@dimen/_12ssp"
+				android:textStyle="bold"
+				android:textAllCaps="false"
+				android:paddingTop="@dimen/_8sdp"
+				android:paddingBottom="@dimen/_8sdp"
+				android:insetTop="0dp"
+				android:insetBottom="0dp" />
+
+			<Button
+				android:id="@+id/koll_clicker_tab_achievements"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:layout_marginStart="@dimen/_3sdp"
+				android:textSize="@dimen/_12ssp"
+				android:textStyle="bold"
+				android:textAllCaps="false"
+				android:paddingTop="@dimen/_8sdp"
+				android:paddingBottom="@dimen/_8sdp"
+				android:insetTop="0dp"
+				android:insetBottom="0dp" />
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/koll_clicker_content"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingTop="@dimen/_4sdp" />
+	</LinearLayout>
+</ScrollView>

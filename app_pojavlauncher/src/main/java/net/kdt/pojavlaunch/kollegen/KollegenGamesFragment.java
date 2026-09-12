@@ -27,9 +27,19 @@ public class KollegenGamesFragment extends Fragment {
                 Tools.swapFragment(requireActivity(), KollegenWebFragment.class, KollegenWebFragment.TAG,
                         KollegenWebFragment.args("/world/", getString(R.string.koll_game_world))));
         view.findViewById(R.id.koll_game_card_clicker).setOnClickListener(v ->
-                Tools.swapFragment(requireActivity(), KollegenWebFragment.class, KollegenWebFragment.TAG,
-                        KollegenWebFragment.args("/clicker", getString(R.string.koll_game_clicker))));
+                showClicker());
         applyTheme(view);
+    }
+
+    private void showClicker() {
+        View cards = requireView().findViewById(R.id.koll_games_cards);
+        View container = requireView().findViewById(R.id.koll_game_content);
+        if (cards != null) cards.setVisibility(View.GONE);
+        container.setVisibility(View.VISIBLE);
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.koll_game_content, new KollegenClickerFragment(), "clicker")
+                .addToBackStack(null)
+                .commit();
     }
 
     public void applyTheme(View view) {

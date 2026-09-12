@@ -5,12 +5,17 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <LinearLayout
-        android:id="@+id/koll_games_cards"
+    <FrameLayout
+        android:id="@+id/koll_games_root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_medium">
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/koll_games_cards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_medium">
 
         <TextView
             android:id="@+id/koll_games_title"
@@ -200,4 +205,11 @@
                 android:textSize="@dimen/_28ssp" />
         </LinearLayout>
     </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/koll_game_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </FrameLayout>
 </ScrollView>
