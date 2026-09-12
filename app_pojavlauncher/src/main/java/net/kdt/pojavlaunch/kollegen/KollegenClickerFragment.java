@@ -545,8 +545,6 @@ public class KollegenClickerFragment extends Fragment {
             buyBtn.setBackground(canBuy ? goldButton() : stoneButton());
             buyBtn.setPadding(dp(10), 0, dp(10), 0);
             buyBtn.setMinWidth(0);
-            buyBtn.setInsetTop(0);
-            buyBtn.setInsetBottom(0);
             buyBtn.setEnabled(canBuy);
             final JSONObject fU = u;
             final int fCost = cost;
@@ -860,8 +858,6 @@ public class KollegenClickerFragment extends Fragment {
         b.setBackground(goldButton());
         b.setPadding(dp(10), 0, dp(10), 0);
         b.setMinWidth(0);
-        b.setInsetTop(0);
-        b.setInsetBottom(0);
         return b;
     }
 
@@ -872,6 +868,10 @@ public class KollegenClickerFragment extends Fragment {
         t.setTextSize(12);
         t.setPadding(dp(4), dp(10), dp(4), dp(10));
         return t;
+    }
+
+    private GradientDrawable drawable(int fill, int stroke) {
+        return drawable(fill, stroke, dp(10));
     }
 
     private GradientDrawable drawable(int fill, int stroke, int radius) {
