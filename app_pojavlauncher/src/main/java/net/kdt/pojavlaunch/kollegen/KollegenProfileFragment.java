@@ -1,8 +1,10 @@
 package net.kdt.pojavlaunch.kollegen;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -124,7 +126,8 @@ public class KollegenProfileFragment extends Fragment {
             }
         }
 
-        loadAvatar(obj);
+        String bannerImageData = profile != null ? profile.optString("banner_data_url", "") : "";
+        loadAvatar(obj, bannerImageData);
 
         KollegenKit.ensureCatalog(() -> {
             if (!isAdded() || getView() == null) return;
@@ -132,6 +135,8 @@ public class KollegenProfileFragment extends Fragment {
             int accent = KollegenKit.accent(eqResolved, pal[KollegenTheme.TEXT]);
             mName.setText(KollegenKit.applyTitle(eqResolved, name.isEmpty() ? getString(R.string.kollegen_unknown_user) : name));
             mName.setTextColor(accent);
+            KollegenKit.applyNameFont(mName, KollegenKit.nameFont(eqResolved));
+            addNameDecor(eqResolved, accent);
 
             String bannerGrad = "";
             JSONObject banner = eqResolved.optJSONObject("banner");
@@ -139,7 +144,8 @@ public class KollegenProfileFragment extends Fragment {
                 JSONObject bd = banner.optJSONObject("data");
                 bannerGrad = bd != null ? bd.optString("gradient", "") : "";
             }
-            applyBanner(bannerGrad, accent);
+            applyBanner(bannerGrad, accent, bannerImageData);
+            applyProfileBg(eqResolved);
 
             StringBuilder equippedText = new StringBuilder();
             String[] textCats = {"title", "badge", "name_color", "font"};
@@ -153,16 +159,45 @@ public class KollegenProfileFragment extends Fragment {
             mEquipped.setText(equippedText.toString());
             KollegenKit.renderEquippedRow(requireContext(), mEquippedRow, eqResolved, pal, dp(48));
             applyTheme(getView());
+            mName.setTextColor(accent);
+            KollegenKit.applyNameFont(mName, KollegenKit.nameFont(eqResolved));
+            addNameDecor(eqResolved, accent);
         });
     }
 
-    private void applyBanner(String gradient, int fallback) {
+    private void addNameDecor(JSONObject eqResolved, int accent) {
+        String badge = KollegenKit.badgeIcon(eqResolved);
+        String stick = KollegenKit.stickerIcon(eqResolved);
+        String base = mName.getText() == null ? "" : mName.getText().toString();
+        StringBuilder sb = new StringBuilder();
+        if (!badge.isEmpty()) sb.append(badge).append(" ");
+        sb.append(base);
+        if (!stick.isEmpty()) sb.append(" ").append(stick);
+        mName.setText(sb.toString());
+    }
+
+    private void applyProfileBg(JSONObject eqResolved) {
+        JSONObject bg = eqResolved != null ? eqResolved.optJSONObject("profile_bg") : null;
+        if (bg == null) return;
+        JSONObject d = bg.optJSONObject("data");
+        String grad = d != null ? d.optString("gradient", "") : "";
+        if (grad.isEmpty()) return;
+        int[] pal = KollegenTheme.palette();
+        mUserBox.setBackground(KollegenKit.gradient(requireContext(), grad, pal[KollegenTheme.PANEL]));
+    }
+
+    private void applyBanner(String gradient, int fallback, String imageData) {
         if (mBannerHolder == null) return;
-        if (gradient.isEmpty() && fallback == KollegenTheme.palette()[KollegenTheme.TEXT]) {
+        if (gradient.isEmpty() && imageData.isEmpty() && fallback == KollegenTheme.palette()[KollegenTheme.TEXT]) {
             mBannerHolder.setVisibility(View.GONE);
             return;
         }
-        View banner = KollegenKit.bannerView(requireContext(), gradientObj(gradient), KollegenTheme.palette());
+        View banner;
+        if (!imageData.isEmpty()) {
+            banner = KollegenKit.bannerImage(requireContext(), imageData, KollegenTheme.palette());
+        } else {
+            banner = KollegenKit.bannerView(requireContext(), gradientObj(gradient), KollegenTheme.palette());
+        }
         mBannerHolder.addView(banner);
         mBannerHolder.setVisibility(View.VISIBLE);
     }
@@ -173,17 +208,24 @@ public class KollegenProfileFragment extends Fragment {
         return d;
     }
 
-    private void loadAvatar(JSONObject obj) {
+    private void loadAvatar(JSONObject obj, String bannerImageData) {
+        FrameLayout holder = getView() == null ? null : (FrameLayout) getView().findViewById(R.id.koll_profile_avatar_holder);
         ImageView avatar = getView() == null ? null : getView().findViewById(R.id.koll_profile_avatar);
-        if (avatar == null) return;
+        if (holder == null || avatar == null) return;
         String mcName = KollegenApi.optString(obj, "mcName");
         JSONObject profile = obj.optJSONObject("profile");
         String dataUrl = profile != null ? profile.optString("avatar_data_url", "") : "";
-        if (!dataUrl.isEmpty()) {
+        if (dataUrl.isEmpty()) {
+            KollegenAvatar.loadMcHead(avatar, mcName.isEmpty() ? "MHF_Steve" : mcName);
+        } else {
             KollegenAvatar.loadDataUrl(avatar, dataUrl);
-        } else if (!mcName.isEmpty()) {
-            KollegenAvatar.loadMcHead(avatar, mcName);
         }
+        KollegenKit.ensureCatalog(() -> {
+            if (!isAdded() || getView() == null) return;
+            JSONObject eqResolved = KollegenKit.resolveEquippedTree(obj);
+            int[] pal = KollegenTheme.palette();
+            holder.setBackground(KollegenKit.avatarBackground(requireContext(), eqResolved, pal));
+        });
     }
 
     public void applyTheme(View view) {

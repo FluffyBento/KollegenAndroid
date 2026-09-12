@@ -47,6 +47,24 @@ public class KollegenAvatar {
         });
     }
 
+    public static void loadImage(ImageView view, String urlOrData) {
+        if (view == null || urlOrData == null || urlOrData.isEmpty()) return;
+        if (urlOrData.startsWith("data:")) {
+            loadDataUrl(view, urlOrData);
+            return;
+        }
+        if (!urlOrData.startsWith("https://")) return;
+        sExecutor.execute(() -> {
+            Bitmap bmp = download(urlOrData);
+            sHandler.post(() -> {
+                if (bmp != null) {
+                    view.setImageBitmap(bmp);
+                    view.setBackground(null);
+                }
+            });
+        });
+    }
+
     private static String encodeName(String name) {
         return name.replace(" ", "_");
     }

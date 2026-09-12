@@ -242,21 +242,25 @@ public class KollegenFriendsFragment extends Fragment {
         String name = f.optString("name", "Unbekannt");
         final String did = f.optString("discordId", f.optString("id", ""));
         final String code = f.optString("code", "");
+        JSONObject prof = f.optJSONObject("profile");
+        final String bannerData = prof != null ? prof.optString("banner_data_url", "") : "";
+        final String avatarData = prof != null ? prof.optString("avatar_data_url", "") : "";
 
         LinearLayout box = new LinearLayout(requireContext());
         box.setOrientation(LinearLayout.VERTICAL);
-        box.setPadding(dp(24), dp(12), dp(24), dp(4));
+        box.setPadding(dp(24), dp(4), dp(24), dp(4));
+
+        LinearLayout bannerWrap = new LinearLayout(requireContext());
+        bannerWrap.setOrientation(LinearLayout.VERTICAL);
+        box.addView(bannerWrap);
 
         LinearLayout top = new LinearLayout(requireContext());
         top.setOrientation(LinearLayout.HORIZONTAL);
         top.setGravity(Gravity.CENTER_VERTICAL);
+        top.setPadding(0, dp(6), 0, 0);
 
-        final ImageView avatar = new ImageView(requireContext());
-        LinearLayout.LayoutParams avLp = new LinearLayout.LayoutParams(dp(56), dp(56));
-        avatar.setLayoutParams(avLp);
-        avatar.setBackground(KollegenTheme.rounded(pal[KollegenTheme.PANEL2], pal[KollegenTheme.BORDER]));
-        avatar.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        top.addView(avatar);
+        final FrameLayout avatarHold = KollegenKit.avatarHolder(requireContext(), null, 56, pal);
+        top.addView(avatarHold);
 
         LinearLayout metaCol = new LinearLayout(requireContext());
         metaCol.setOrientation(LinearLayout.VERTICAL);
@@ -282,11 +286,12 @@ public class KollegenFriendsFragment extends Fragment {
         box.addView(top);
         box.addView(bio);
 
-        KollegenAvatar.loadMcHead(avatar, "MHF_Steve");
-        JSONObject prof = f.optJSONObject("profile");
+        if (!avatarData.isEmpty()) {
+            KollegenAvatar.loadDataUrl((ImageView) avatarHold.getChildAt(0), avatarData);
+        } else {
+            KollegenAvatar.loadMcHead((ImageView) avatarHold.getChildAt(0), f.optString("uuid", "MHF_Steve"));
+        }
         if (prof != null) {
-            String avatarData = prof.optString("avatar_data_url", "");
-            if (!avatarData.isEmpty()) KollegenAvatar.loadDataUrl(avatar, avatarData);
             String bioText = prof.optString("bio", "").trim();
             if (!bioText.isEmpty()) bio.setText(bioText);
         }
@@ -296,21 +301,64 @@ public class KollegenFriendsFragment extends Fragment {
         equippedRow.setPadding(0, dp(10), 0, 0);
         box.addView(equippedRow);
 
-        JSONObject eq = f.optJSONObject("equipped");
+        final boolean online = f.optBoolean("online", false);
+        final int level = f.optInt("level", 0);
+        final boolean isFriend = f.optBoolean("isFriend", true);
         KollegenKit.ensureCatalog(() -> {
             if (!isAdded() || getActivity() == null) return;
             JSONObject eqResolved = KollegenKit.resolveEquippedTree(f);
             int accent = KollegenKit.accent(eqResolved, pal[KollegenTheme.ACCENT]);
-            boolean online = f.optBoolean("online", false);
+
+            avatarHold.setBackground(KollegenKit.avatarBackground(requireContext(), eqResolved, pal));
+
+            JSONObject pbg = eqResolved.optJSONObject("profile_bg");
+            if (pbg != null) {
+                JSONObject pd = pbg.optJSONObject("data");
+                String pbGrad = pd != null ? pd.optString("gradient", "") : "";
+                if (!pbGrad.isEmpty()) {
+                    box.setBackground(KollegenKit.gradient(requireContext(), pbGrad, pal[KollegenTheme.PANEL]));
+                }
+            }
+
+            String badge = KollegenKit.badgeIcon(eqResolved);
+            String stick = KollegenKit.stickerIcon(eqResolved);
+            StringBuilder nm = new StringBuilder();
+            if (!badge.isEmpty()) nm.append(badge).append(" ");
+            nm.append(KollegenKit.applyTitle(eqResolved, name));
+            if (!stick.isEmpty()) nm.append(" ").append(stick);
+            title.setText(nm.toString());
+            title.setTextColor(accent);
+            if (!badge.isEmpty()) title.setTextColor(KollegenKit.badgeColor(eqResolved, accent));
+            KollegenKit.applyNameFont(title, KollegenKit.nameFont(eqResolved));
+
+            String server = f.optString("server", "");
             StringBuilder sb = new StringBuilder();
-            sb.append(online ? getString(R.string.kollegen_online) : getString(R.string.kollegen_offline));
-            int level = f.optInt("level", 0);
-            if (level > 0) sb.append(" \u00b7 ").append(getString(R.string.kollegen_level)).append(" ").append(level);
-            if (!code.isEmpty()) sb.append(" \u00b7 ").append(code);
+            if (online) {
+                sb.append(getString(R.string.kollegen_online));
+                if (!server.isEmpty()) sb.append(" \u00b7 ").append(server);
+            } else {
+                sb.append(getString(R.string.kollegen_offline));
+            }
+            if (level > 0) sb.append(" \u00b7 ").append(getString(R.string.kollegen_level, level));
+            if (!code.isEmpty()) sb.append(" \u00b7 ").append(getString(R.string.kollegen_friend_code_chip, code));
+            if (isFriend) sb.append(" \u00b7 ").append(getString(R.string.kollegen_friend_chip));
             meta.setText(sb.toString());
             meta.setTextColor(pal[online ? KollegenTheme.ACCENT : KollegenTheme.MUTED]);
-            title.setText(KollegenKit.applyTitle(eqResolved, name));
-            title.setTextColor(accent);
+
+            String bannerGrad = "";
+            JSONObject banner = eqResolved.optJSONObject("banner");
+            if (banner != null) {
+                JSONObject bd = banner.optJSONObject("data");
+                bannerGrad = bd != null ? bd.optString("gradient", "") : "";
+            }
+            if (!bannerData.isEmpty()) {
+                bannerWrap.addView(KollegenKit.bannerImage(requireContext(), bannerData, pal));
+            } else if (!bannerGrad.isEmpty()) {
+                bannerWrap.addView(KollegenKit.bannerView(requireContext(), gradientObj(bannerGrad), pal));
+            } else {
+                bannerWrap.setVisibility(View.GONE);
+            }
+
             boolean hasPreview = KollegenKit.renderEquippedRow(requireContext(), equippedRow, eqResolved, pal, dp(42));
             if (!hasPreview) addEquippedText(equippedRow, eqResolved);
         });
@@ -332,7 +380,7 @@ public class KollegenFriendsFragment extends Fragment {
         call.setOnClickListener(v -> KollegenCall.startDirect(requireContext(), did, name));
 
         Button inv = KollegenKit.tinyButton(requireContext(), getString(R.string.kollegen_inventory));
-        inv.setOnClickListener(v -> showInventory(did, name));
+        inv.setOnClickListener(v -> showInventory(code, name));
 
         actions.addView(dm);
         actions.addView(call);
@@ -346,6 +394,12 @@ public class KollegenFriendsFragment extends Fragment {
         if (dlg.getWindow() != null) dlg.getWindow().setBackgroundDrawable(KollegenTheme.rounded(pal[KollegenTheme.PANEL], pal[KollegenTheme.BORDER]));
         dlg.show();
         mDialog = dlg;
+    }
+
+    private static JSONObject gradientObj(String gradient) {
+        JSONObject d = new JSONObject();
+        try { d.put("gradient", gradient); } catch (Exception ignored) {}
+        return d;
     }
 
     private void addEquippedText(LinearLayout row, JSONObject eqResolved) {
@@ -370,29 +424,15 @@ public class KollegenFriendsFragment extends Fragment {
         row.addView(t);
     }
 
-    private void showInventory(String did, String name) {
-        KollegenApi.get("/api/profil/profile-view?code=" + KollegenApi.encode(did), new KollegenApi.Callback() {
+    private void showInventory(String code, String name) {
+        if (code.isEmpty()) {
+            Toast.makeText(requireContext(), R.string.kollegen_inventory_empty, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        KollegenApi.get("/api/profil/profile-view?code=" + KollegenApi.encode(code), new KollegenApi.Callback() {
             @Override
             public void onResult(Object json) {
                 if (!isAdded()) return;
-                List<String> names = new ArrayList<>();
-                if (json instanceof JSONObject) {
-                    JSONObject u = (JSONObject) json;
-                    String pn = u.optString("name", name);
-                    JSONArray owned = u.optJSONArray("owned");
-                    if (owned != null) {
-                        for (int i = 0; i < owned.length(); i++) {
-                            JSONObject o = owned.optJSONObject(i);
-                            if (o == null) continue;
-                            String cat = o.optString("category", "");
-                            String full = cat.isEmpty() ? o.optString("id", "") : cat + ": " + o.optString("id", "");
-                            names.add(full);
-                        }
-                    }
-                    if (names.isEmpty()) names.add(getString(R.string.kollegen_inventory_empty));
-                } else {
-                    names.add(getString(R.string.kollegen_inventory_empty));
-                }
                 int[] pal = KollegenTheme.palette();
                 LinearLayout box = new LinearLayout(requireContext());
                 box.setOrientation(LinearLayout.VERTICAL);
@@ -409,14 +449,11 @@ public class KollegenFriendsFragment extends Fragment {
                 l.setTextSize(13);
                 l.setPadding(0, 0, 0, dp(8));
                 box.addView(l);
-                for (String n : names) {
-                    TextView row = new TextView(requireContext());
-                    row.setText(n);
-                    row.setTextColor(pal[KollegenTheme.MUTED]);
-                    row.setTextSize(13);
-                    row.setPadding(0, dp(4), 0, 0);
-                    box.addView(row);
-                }
+                KollegenKit.ensureCatalog(() -> {
+                    if (!isAdded()) return;
+                    JSONArray owned = json instanceof JSONObject ? ((JSONObject) json).optJSONArray("owned") : null;
+                    KollegenKit.renderInventory(requireContext(), box, null, owned, pal, 56, getString(R.string.kollegen_inventory_empty));
+                });
                 new AlertDialog.Builder(requireContext())
                         .setView(box)
                         .setNegativeButton(R.string.kollegen_close, null)
@@ -460,7 +497,7 @@ public class KollegenFriendsFragment extends Fragment {
             int level = item.optInt("level", 0);
             final boolean online = item.optBoolean("online", false);
             String metaText = online ? getString(R.string.kollegen_online) : getString(R.string.kollegen_offline);
-            if (level > 0) metaText += " \u00b7 " + getString(R.string.kollegen_level) + " " + level;
+            if (level > 0) metaText += " \u00b7 " + getString(R.string.kollegen_level, level);
             holder.mMeta.setText(metaText);
             holder.mLevel.setText(level > 0 ? "Lv " + level : "");
             int[] pal = KollegenTheme.palette();

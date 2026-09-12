@@ -315,6 +315,175 @@ public final class KollegenKit {
         return box;
     }
 
+    public static GradientDrawable avatarBackground(Context c, JSONObject eqResolved, int[] pal) {
+        GradientDrawable gd = new GradientDrawable();
+        gd.setShape(GradientDrawable.RECTANGLE);
+        gd.setCornerRadius(dp(c, 22));
+        JSONObject theme = eqResolved != null ? eqResolved.optJSONObject("avatar_theme") : null;
+        String grad = "";
+        String c1 = "";
+        String c2 = "";
+        if (theme != null) {
+            JSONObject d = theme.optJSONObject("data");
+            if (d != null) {
+                grad = d.optString("gradient", "");
+                c1 = d.optString("color1", "");
+                c2 = d.optString("color2", c1);
+            }
+        }
+        if (!grad.isEmpty()) {
+            gd = gradient(c, grad, pal[KollegenTheme.PANEL2]);
+            gd.setCornerRadius(dp(c, 22));
+        } else if (!c1.isEmpty()) {
+            int a = parseColor(c1, pal[KollegenTheme.PANEL2]);
+            int b = parseColor(c2, a);
+            gd = new GradientDrawable(GradientDrawable.Orientation.TL_BR, new int[]{a, b});
+            gd.setCornerRadius(dp(c, 22));
+        } else {
+            gd.setColor(pal[KollegenTheme.PANEL2]);
+        }
+        JSONObject frame = eqResolved != null ? eqResolved.optJSONObject("avatar_frame") : null;
+        String f1 = "";
+        int fw = 4;
+        if (frame != null) {
+            JSONObject d = frame.optJSONObject("data");
+            if (d != null) {
+                f1 = d.optString("color1", "");
+                fw = Math.max(2, d.optInt("width", 4));
+            }
+        }
+        if (!f1.isEmpty()) {
+            gd.setStroke(dp(c, fw), parseColor(f1, pal[KollegenTheme.ACCENT]));
+        }
+        return gd;
+    }
+
+    public static FrameLayout avatarHolder(Context c, JSONObject eqResolved, int sizeDp, int[] pal) {
+        int size = dp(c, sizeDp);
+        FrameLayout holder = new FrameLayout(c);
+        holder.setLayoutParams(new FrameLayout.LayoutParams(size, size));
+        holder.setBackground(avatarBackground(c, eqResolved, pal));
+        ImageView av = new ImageView(c);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(size, size, Gravity.CENTER);
+        av.setLayoutParams(lp);
+        av.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        holder.addView(av);
+        return holder;
+    }
+
+    public static View bannerImage(Context c, String dataUrl, int[] pal) {
+        FrameLayout b = new FrameLayout(c);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(c, 48));
+        lp.setMargins(0, dp(c, 8), 0, 0);
+        b.setLayoutParams(lp);
+        b.setBackground(gradient(c, "", pal[KollegenTheme.PANEL2]));
+        if (dataUrl != null && !dataUrl.isEmpty()) {
+            ImageView iv = new ImageView(c);
+            iv.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            KollegenAvatar.loadImage(iv, dataUrl);
+            b.addView(iv);
+        }
+        TextView t = new TextView(c);
+        t.setText("Banner");
+        t.setTextColor(Color.parseColor("#0a0d13"));
+        t.setTypeface(Typeface.DEFAULT_BOLD);
+        t.setGravity(Gravity.CENTER);
+        b.addView(t);
+        return b;
+    }
+
+    public static String badgeIcon(JSONObject eqResolved) {
+        JSONObject it = eqResolved != null ? eqResolved.optJSONObject("badge") : null;
+        JSONObject d = it != null ? it.optJSONObject("data") : null;
+        return d != null ? d.optString("icon", "") : "";
+    }
+
+    public static int badgeColor(JSONObject eqResolved, int fallback) {
+        JSONObject it = eqResolved != null ? eqResolved.optJSONObject("badge") : null;
+        JSONObject d = it != null ? it.optJSONObject("data") : null;
+        return d != null ? parseColor(d.optString("color", ""), fallback) : fallback;
+    }
+
+    public static String stickerIcon(JSONObject eqResolved) {
+        JSONObject it = eqResolved != null ? eqResolved.optJSONObject("sticker") : null;
+        JSONObject d = it != null ? it.optJSONObject("data") : null;
+        return d != null ? d.optString("icon", "") : "";
+    }
+
+    public static int stickerColor(JSONObject eqResolved, int fallback) {
+        JSONObject it = eqResolved != null ? eqResolved.optJSONObject("sticker") : null;
+        JSONObject d = it != null ? it.optJSONObject("data") : null;
+        return d != null ? parseColor(d.optString("color", ""), fallback) : fallback;
+    }
+
+    public static String nameFont(JSONObject eqResolved) {
+        JSONObject it = eqResolved != null ? eqResolved.optJSONObject("font") : null;
+        JSONObject d = it != null ? it.optJSONObject("data") : null;
+        return d != null ? d.optString("font", "") : "";
+    }
+
+    public static void applyNameFont(TextView t, String font) {
+        if (font == null || font.isEmpty()) return;
+        try {
+            String f = font.toLowerCase().trim();
+            if (f.contains("serif")) t.setTypeface(Typeface.SERIF);
+            else if (f.contains("mono")) t.setTypeface(Typeface.MONOSPACE);
+            else if (f.contains("sans") || f.contains("sans-serif")) t.setTypeface(Typeface.SANS_SERIF);
+        } catch (Exception ignored) {}
+    }
+
+    public static void renderInventory(Context c, LinearLayout box, JSONObject eqResolved, JSONArray owned, int[] pal, int sizeDp, String emptyText) {
+        List<JSONObject> entries = new ArrayList<>();
+        if (owned != null) {
+            for (int i = 0; i < owned.length(); i++) {
+                JSONObject o = owned.optJSONObject(i);
+                if (o == null) continue;
+                String id = o.optString("id", "");
+                String cat = o.optString("category", "");
+                JSONObject ci = catalogItem(id);
+                if (ci == null) continue;
+                JSONObject wrap = new JSONObject();
+                try {
+                    wrap.put("id", id);
+                    wrap.put("category", ci.optString("category", cat));
+                    wrap.put("name", ci.optString("name", id));
+                    wrap.put("data", ci.optJSONObject("data"));
+                } catch (Exception ignored) {}
+                entries.add(wrap);
+            }
+        }
+        if (entries.isEmpty()) {
+            TextView t = new TextView(c);
+            t.setText(emptyText);
+            t.setTextColor(pal[KollegenTheme.MUTED]);
+            t.setTextSize(13);
+            t.setPadding(0, dp(c, 8), 0, 0);
+            box.addView(t);
+            return;
+        }
+        LinearLayout strip = new LinearLayout(c);
+        strip.setOrientation(LinearLayout.HORIZONTAL);
+        strip.setPadding(0, dp(c, 8), 0, 0);
+        box.addView(strip);
+        int perRow = Math.max(4, c.getResources().getDisplayMetrics().widthPixels / (dp(c, sizeDp + 10)));
+        int count = 0;
+        for (JSONObject it : entries) {
+            if (count > 0 && count % perRow == 0) {
+                strip = new LinearLayout(c);
+                strip.setOrientation(LinearLayout.HORIZONTAL);
+                strip.setPadding(0, dp(c, 8), 0, 0);
+                box.addView(strip);
+            }
+            View pv = storePreview(c, it, dp(c, sizeDp));
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(dp(c, sizeDp), dp(c, sizeDp));
+            lp.setMargins(0, 0, dp(c, 6), 0);
+            pv.setLayoutParams(lp);
+            strip.addView(pv);
+            count++;
+        }
+    }
+
     public static Button tinyButton(Context c, String text) {
         int[] pal = KollegenTheme.palette();
         Button b = new Button(c);

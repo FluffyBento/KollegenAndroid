@@ -419,6 +419,8 @@ Um die offizielle Download-Quelle zu verwenden, drücke \"Auf offizielle Seite u
     <string name="kollegen_no_messages">Noch keine Nachrichten.</string>
     <string name="kollegen_inventory">Inventar</string>
     <string name="kollegen_inventory_empty">Keine Gegenstände</string>
+    <string name="kollegen_friend_chip">★ Freund</string>
+    <string name="kollegen_friend_code_chip">Code %1$s</string>
     <string name="kollegen_ok">OK</string>
     <string name="kollegen_widget_loading">Lädt …</string>
     <string name="kollegen_widget_not_logged_in">Nicht angemeldet</string>

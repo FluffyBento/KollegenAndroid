@@ -54,7 +54,7 @@ public class KollegenWidgetProvider extends AppWidgetProvider {
                 views.setTextViewText(R.id.koll_widget_name, name.isEmpty() ? context.getString(R.string.app_name) : name);
                 int points = me.optInt("points", 0);
                 int level = me.optInt("level", 0);
-                String meta = context.getString(R.string.kollegen_level) + " " + level + " \u00b7 " + context.getString(R.string.kollegen_points, points);
+                String meta = context.getString(R.string.kollegen_level, level) + " \u00b7 " + context.getString(R.string.kollegen_points, points);
                 views.setTextViewText(R.id.koll_widget_meta, meta);
             }
             appWidgetManager.updateAppWidget(ids, views);

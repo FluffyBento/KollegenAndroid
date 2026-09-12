@@ -1,15 +1,7 @@
 package net.kdt.pojavlaunch.kollegen;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.CookieManager;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,53 +41,10 @@ public class KollegenGamesFragment extends Fragment {
 
     @SuppressWarnings("deprecation")
     private void showClicker() {
-        Dialog dialog = new Dialog(requireContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        LinearLayout root = new LinearLayout(requireContext());
-        root.setOrientation(LinearLayout.VERTICAL);
-        root.setBackgroundColor(KollegenTheme.color(KollegenTheme.BG));
-
-        LinearLayout header = new LinearLayout(requireContext());
-        header.setOrientation(LinearLayout.HORIZONTAL);
-        header.setPadding(dp(12), dp(8), dp(12), dp(8));
-        header.setBackgroundColor(KollegenTheme.color(KollegenTheme.PANEL));
-
-        TextView title = new TextView(requireContext());
-        title.setText("🎮 Clicker");
-        title.setTextColor(KollegenTheme.color(KollegenTheme.TEXT));
-        title.setTextSize(16);
-        title.setTypeface(null, android.graphics.Typeface.BOLD);
-        header.addView(title, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-
-        Button closeBtn = new Button(requireContext());
-        closeBtn.setText("✕");
-        closeBtn.setTextColor(KollegenTheme.color(KollegenTheme.MUTED));
-        closeBtn.setBackgroundColor(android.graphics.Color.TRANSPARENT);
-        closeBtn.setOnClickListener(v -> dialog.dismiss());
-        header.addView(closeBtn, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-        root.addView(header, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-        WebView webView = new WebView(requireContext());
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setDomStorageEnabled(true);
-        settings.setDatabaseEnabled(true);
-        CookieManager.getInstance().setAcceptCookie(true);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://kollegen.me/clicker");
-
-        root.addView(webView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-
-        dialog.setContentView(root);
-        dialog.setOnDismissListener(d -> {
-            webView.stopLoading();
-            webView.destroy();
-        });
-        dialog.show();
-    }
-
-    private int dp(int value) {
-        return (int) (value * getResources().getDisplayMetrics().density + 0.5f);
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.koll_tab_container, new KollegenClickerFragment(), "clicker")
+                .addToBackStack(null)
+                .commit();
     }
 
     public void applyTheme(View view) {
