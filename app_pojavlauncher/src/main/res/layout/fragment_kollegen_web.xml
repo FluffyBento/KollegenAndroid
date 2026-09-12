@@ -14,7 +14,7 @@
 		android:background="@color/koll_panel2">
 
 		<Button
-			android:id="@+id/koll_world_close"
+			android:id="@+id/koll_web_close"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="&#8592;"
@@ -30,7 +30,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="@string/koll_game_world"
+			android:id="@+id/koll_web_title"
 			android:textColor="@color/koll_accent"
 			android:textSize="@dimen/_18ssp"
 			android:textStyle="bold"
@@ -38,7 +38,7 @@
 	</LinearLayout>
 
 	<WebView
-		android:id="@+id/koll_world_web"
+		android:id="@+id/koll_web_dom"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1" />
