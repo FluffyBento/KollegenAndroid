@@ -1071,6 +1071,21 @@ public class KollegenClickerFragment extends Fragment {
                 JSONObject res = (JSONObject) json;
                 JSONObject state = res.optJSONObject("state");
                 if (state == null) return;
+                if (res.optBoolean("cheatClamped", false)) {
+                    mClicks = (long) res.optDouble("serverClicks", state.optDouble("clicks", mClicks));
+                    mTotalClicks = (long) res.optDouble("serverTotalClicks", state.optDouble("totalClicks", mTotalClicks));
+                    JSONObject up = res.optJSONObject("upgrades");
+                    if (up != null) {
+                        mUpgrades.clear();
+                        java.util.Iterator<String> it = up.keys();
+                        while (it.hasNext()) {
+                            String k = it.next();
+                            mUpgrades.put(k, up.optInt(k, 0));
+                        }
+                    }
+                    updateStats();
+                    return;
+                }
                 long serverClicks = (long) state.optDouble("clicks", 0);
                 if (serverClicks > mClicks) mClicks = serverClicks;
                 long serverTotal = (long) state.optDouble("totalClicks", 0);
