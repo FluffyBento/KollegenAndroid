@@ -47,6 +47,16 @@
             android:text="@string/koll_settings_more"
             android:textColor="@color/koll_text" />
 
+        <Button
+            android:id="@+id/koll_settings_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_18sdp"
+            android:background="@drawable/koll_button_bg"
+            android:text="@string/koll_settings_update_check"
+            android:textColor="@color/koll_text"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/koll_settings_section_about"
             android:layout_width="wrap_content"

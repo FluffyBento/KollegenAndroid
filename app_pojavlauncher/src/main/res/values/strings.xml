@@ -440,6 +440,9 @@ Um die offizielle Download-Quelle zu verwenden, drücke \"Auf offizielle Seite u
     <string name="kollegen_update_cancel">Später</string>
     <string name="kollegen_update_downloading">Update wird heruntergeladen...</string>
     <string name="kollegen_update_error">Update fehlgeschlagen: %1$s</string>
+    <string name="koll_settings_update_check">Nach Updates suchen</string>
+    <string name="koll_settings_update_uptodate">Du nutzt bereits die neueste Version.</string>
+    <string name="koll_settings_update_error">Update-Check fehlgeschlagen. Bitte versuche es später erneut.</string>
     <string name="ltw_render_distance_warning_msg">Deine GPU ist ohne Sodium oder ähnliche Mods nicht in der Lage, eine Renderdistanz von über 7 Chunks zu rendern. Solltest du auf OK tippen, wird die Renderdistanz automatisch reduziert.</string>
     <string name="mcl_button_open_directory">Spielverzeichnis öffnen</string>
     <string name="local_login_bad_username_title">Ungeeigneter Benutzername</string>

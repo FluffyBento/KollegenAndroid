@@ -40,19 +40,37 @@ public final class KollegenUpdater {
         SharedPreferences prefs = activity.getSharedPreferences(PREFS, 0);
         if (now - prefs.getLong(KEY_LAST_CHECK, 0) < CHECK_INTERVAL_MS) return;
         prefs.edit().putLong(KEY_LAST_CHECK, now).apply();
+        performCheck(activity, false);
+    }
 
+    public static void checkNow(final Activity activity) {
+        if (activity == null) return;
+        performCheck(activity, true);
+    }
+
+    private static void performCheck(final Activity activity, final boolean notifyResult) {
         Thread thread = new Thread(() -> {
             try {
                 final UpdateInfo update = fetchLatest();
-                if (update == null) return;
+                if (update == null) {
+                    if (notifyResult) new Handler(Looper.getMainLooper()).post(() -> toast(activity, R.string.koll_settings_update_error));
+                    return;
+                }
                 final int[] current = parseVersion(BuildConfig.VERSION_NAME);
                 final int[] latest = parseVersion(update.tag);
-                if (current == null || latest == null || !isNewer(latest, current)) return;
+                if (current == null || latest == null || !isNewer(latest, current)) {
+                    if (notifyResult) new Handler(Looper.getMainLooper()).post(() -> toast(activity, R.string.koll_settings_update_uptodate));
+                    return;
+                }
                 new Handler(Looper.getMainLooper()).post(() -> showPrompt(activity, update));
             } catch (Exception ignored) {
             }
         }, "kollegen-update-check");
         thread.start();
+    }
+
+    private static void toast(Activity activity, int resId) {
+        Toast.makeText(activity, activity.getString(resId), Toast.LENGTH_LONG).show();
     }
 
     private static UpdateInfo fetchLatest() throws Exception {

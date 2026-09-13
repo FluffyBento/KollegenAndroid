@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import net.kdt.pojavlaunch.KollegenTheme;
+import net.kdt.pojavlaunch.KollegenUpdater;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
@@ -26,6 +27,8 @@ public class KollegenSettingsFragment extends Fragment {
         view.findViewById(R.id.koll_settings_theme).setOnClickListener(v -> openThemeDialog());
         view.findViewById(R.id.koll_settings_more).setOnClickListener(v ->
                 Tools.swapFragment(requireActivity(), LauncherPreferenceFragment.class, "kollegen_prefs", null));
+        view.findViewById(R.id.koll_settings_update).setOnClickListener(v ->
+                KollegenUpdater.checkNow(requireActivity()));
         applyTheme(view);
     }
 
@@ -61,6 +64,7 @@ public class KollegenSettingsFragment extends Fragment {
         }
         Button theme = view.findViewById(R.id.koll_settings_theme);
         Button more = view.findViewById(R.id.koll_settings_more);
+        Button update = view.findViewById(R.id.koll_settings_update);
         if (theme != null) {
             theme.setBackground(KollegenTheme.buttonBackground(KollegenTheme.PANEL2, KollegenTheme.ACCENT2));
             theme.setTextColor(KollegenTheme.color(KollegenTheme.TEXT));
@@ -68,6 +72,10 @@ public class KollegenSettingsFragment extends Fragment {
         if (more != null) {
             more.setBackground(KollegenTheme.buttonBackground(KollegenTheme.PANEL2, KollegenTheme.ACCENT2));
             more.setTextColor(KollegenTheme.color(KollegenTheme.TEXT));
+        }
+        if (update != null) {
+            update.setBackground(KollegenTheme.buttonBackground(KollegenTheme.PANEL2, KollegenTheme.ACCENT2));
+            update.setTextColor(KollegenTheme.color(KollegenTheme.TEXT));
         }
         TextView about = view.findViewById(R.id.koll_settings_about_text);
         if (about != null) about.setTextColor(KollegenTheme.color(KollegenTheme.MUTED));
