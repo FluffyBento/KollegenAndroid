@@ -494,8 +494,7 @@ public class KollegenClickerFragment extends Fragment {
                 ll.setBackground(drawable(Color.parseColor("#E612141D"), C_GOLD, dp(12)));
                 FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 lp.gravity = Gravity.BOTTOM | Gravity.END;
-                lp.bottomMargin = dp(16);
-                lp.marginEnd = dp(12);
+                lp.setMargins(dp(12), 0, dp(12), dp(16));
                 ll.setPadding(dp(14), dp(8), dp(14), dp(8));
                 ll.setLayoutParams(lp);
                 TextView t1 = new TextView(requireContext());
