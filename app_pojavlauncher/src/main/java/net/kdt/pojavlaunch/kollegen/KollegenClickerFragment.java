@@ -495,7 +495,7 @@ public class KollegenClickerFragment extends Fragment {
                 FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 lp.gravity = Gravity.BOTTOM | Gravity.END;
                 lp.bottomMargin = dp(16);
-                lp.endMargin = dp(12);
+                lp.marginEnd = dp(12);
                 ll.setPadding(dp(14), dp(8), dp(14), dp(8));
                 ll.setLayoutParams(lp);
                 TextView t1 = new TextView(requireContext());
