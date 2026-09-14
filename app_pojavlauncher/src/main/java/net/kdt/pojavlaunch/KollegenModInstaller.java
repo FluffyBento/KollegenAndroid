@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Locale;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public final class KollegenModInstaller {
     public static final String COMPANION_MOD_FILENAME = "kollegen-client-mod.jar";
@@ -45,27 +47,76 @@ public final class KollegenModInstaller {
         return null;
     }
 
+    private static final String[] RENDERER_JARS = {
+            "VulkanMod.jar", "sodium.jar", "iris.jar", "beryl.jar"
+    };
+
     public static void ensureFor(MinecraftProfile profile, String version, String loader) {
         if (profile == null) return;
         File gameDir = Tools.getGameDirPath(profile);
+        File modsDir = new File(gameDir, "mods");
+        removeCorruptJars(modsDir);
         if (!isCompatible(version, loader)) {
-            removeIncompatible(new File(gameDir, "mods"));
+            removeIncompatible(modsDir);
             return;
         }
         File cached = new File(cacheDir(), COMPANION_MOD_FILENAME);
         try {
             long remoteSize = DownloadUtils.getContentLength(MOD_DOWNLOAD_URL);
-            if (remoteSize > 0 && (!cached.isFile() || cached.length() != remoteSize)) {
+            if (!isValidMod(cached, true) || (remoteSize > 0 && cached.length() != remoteSize)) {
                 DownloadUtils.downloadFile(MOD_DOWNLOAD_URL, cached);
+            }
+            if (!isValidMod(cached, true) && !cached.delete()) {
+                Log.w("KollegenModInstaller", "Ungueltige Mod-Datei konnte nicht geloescht werden");
             }
         } catch (IOException e) {
             Log.w("KollegenModInstaller", "Mod-Prüfung fehlgeschlagen", e);
+            if (!isValidMod(cached, true)) {
+                cached.delete();
+            }
         }
-        copyToMods(cached, new File(gameDir, "mods"));
+        copyToMods(cached, modsDir);
+    }
+
+    private static boolean isValidMod(File file, boolean requireDescriptor) {
+        if (file == null || !file.isFile() || file.length() == 0) return false;
+        try (ZipFile zip = new ZipFile(file)) {
+            if (requireDescriptor) {
+                ZipEntry entry = zip.getEntry("fabric.mod.json");
+                if (entry == null) return false;
+            }
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+    private static void removeCorruptJars(File modsDir) {
+        if (modsDir == null || !modsDir.isDirectory()) return;
+        File[] files = modsDir.listFiles();
+        if (files == null) return;
+        for (File file : files) {
+            if (!file.isFile() || !isRendererJar(file.getName())) continue;
+            if (!isValidMod(file, false)) {
+                file.delete();
+                Log.w("KollegenModInstaller", "Korrupte Renderer-Mod entfernt: " + file.getName());
+                File disabled = new File(modsDir, file.getName() + ".disabled");
+                if (disabled.isFile() && !isValidMod(disabled, false)) {
+                    disabled.delete();
+                }
+            }
+        }
+    }
+
+    private static boolean isRendererJar(String name) {
+        for (String renderer : RENDERER_JARS) {
+            if (renderer.equalsIgnoreCase(name)) return true;
+        }
+        return false;
     }
 
     private static void copyToMods(File cached, File modsDir) {
-        if (!cached.isFile() || cached.length() == 0) return;
+        if (!isValidMod(cached, true)) return;
         if (!modsDir.isDirectory() && !modsDir.mkdirs()) return;
         try {
             Files.copy(cached.toPath(), new File(modsDir, COMPANION_MOD_FILENAME).toPath(),
